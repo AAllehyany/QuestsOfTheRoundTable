@@ -13,7 +13,7 @@ public class Player {
 	
 	public Player(Integer id) {
 		this.id = id;
-		shields = 0;
+		shields = 10;
 		rank = Rank.Squire;
 		battlePoints = 5;
 		requiredShields = 5;
@@ -39,15 +39,22 @@ public class Player {
 		return requiredShields;
 	}
 	
-	public void addShields(Integer shields) {
-		Integer remaining = (this.shields + shields) - requiredShields;
-		
-		if(remaining >= 0) {
-			// Upgrade Rank??
-			// Set new required shields??
-		}
-		
+	public void addShields(Integer shields) {		
 		this.shields += shields;
+		this.updateRank();
 	}
 	
+	
+	private void updateRank() {
+		if(this.shields < 15) {
+			this.rank = Rank.Squire;
+		}
+		else if(this.shields >= 15 && this.shields < 22) {
+			this.rank = Rank.Knight;
+		}
+		else if(this.shields >= 22 && this.shields < 32) {
+			this.rank = Rank.ChampionKnight;
+		}
+		else { this.rank = Rank.KnightOfTheRoundTable; }
+	}
 }
