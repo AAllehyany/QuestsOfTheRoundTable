@@ -1,5 +1,8 @@
 package group52.comp3004.players;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import group52.comp3004.Hand;
 
 public class Player {
@@ -9,6 +12,7 @@ public class Player {
 	private Rank rank;
 	private Integer battlePoints;
 	private Integer requiredShields;
+	private List<Integer> weapons;
 	//private Hand hand;
 	
 	public Player(Integer id) {
@@ -17,6 +21,7 @@ public class Player {
 		rank = Rank.Squire;
 		battlePoints = 5;
 		requiredShields = 15;
+		weapons = new ArrayList<Integer>();
 		//hand = new Hand();
 	}
 	
@@ -33,11 +38,19 @@ public class Player {
 	}
 	
 	public Integer getBattlePoints() {
-		return battlePoints;
+		return battlePoints + weapons.stream().mapToInt(Integer::intValue).sum();
+	}
+	
+	public void clearWeapons() {
+		this.weapons.clear();
 	}
 
 	public Integer getRequiredShields() {
 		return requiredShields;
+	}
+	
+	public void addWeapon(Integer weapon) {
+		this.weapons.add(weapon);
 	}
 	
 	public void addShields(Integer shields) {		
@@ -53,10 +66,12 @@ public class Player {
 		if(rank == Rank.Squire) {
 			requiredShields = 22;
 			rank = Rank.Knight;
+			battlePoints = 10;
 		}
 		else if(rank == Rank.Knight) {
 			requiredShields = 32;
 			rank = Rank.ChampionKnight;
+			battlePoints = 20;
 		}
 		else if(rank == Rank.ChampionKnight) {
 			rank = Rank.KnightOfTheRoundTable;
