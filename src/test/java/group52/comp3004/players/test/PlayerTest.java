@@ -10,25 +10,50 @@ import group52.comp3004.players.Rank;
 public class PlayerTest {
 
 	@Test
-	public void testGetsCorrectRank() {
+	public void testShieldsNeverGoBelowZero() {
 		Player p = new Player(5);
 		
+		p.addShields(-19);
+		
+		assertEquals(0, (int) p.getShields());
+	}
+	
+	@Test
+	public void testRanksUpCorrectly() {
+		Player p = new Player(109);
+		
 		assertEquals(Rank.Squire, p.getRank());
 		
-		p.addShields(1);
-		
+		p.addShields(2);
 		assertEquals(Rank.Squire, p.getRank());
 		
-		p.addShields(5);
+		p.addShields(6);
 		assertEquals(Rank.Knight, p.getRank());
 		
-		p.addShields(20);
+		
+		p.addShields(10);
+		assertEquals(Rank.ChampionKnight, p.getRank());
+		
+		p.addShields(4);
 		assertEquals(Rank.KnightOfTheRoundTable, p.getRank());
+	}
+	
+	@Test
+	public void testRankDoesNotGoDownAfterLosingShields() {
+		Player p = new Player(100000);
 		
+		assertEquals(Rank.Squire, p.getRank());
 		
-		Player p2 = new Player(2);
+		p.addShields(10);
+		assertEquals(Rank.Knight, p.getRank());
 		
-		p2.addShields(13);
-		assertEquals(Rank.ChampionKnight, p2.getRank());
+		p.addShields(-6);
+		assertEquals(Rank.Knight, p.getRank());
+		
+		p.addShields(8);
+		assertEquals(Rank.ChampionKnight, p.getRank());
+		
+		p.addShields(-2);
+		assertEquals(Rank.ChampionKnight, p.getRank());
 	}
 }
