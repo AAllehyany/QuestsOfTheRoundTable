@@ -56,4 +56,15 @@ public class PlayerTest {
 		p.addShields(-2);
 		assertEquals(Rank.ChampionKnight, p.getRank());
 	}
+	
+	@Test
+	public void testAddsWeaponPowerToBattlePoints() {
+		Player p = new Player(1337);
+		
+		assertEquals(5, (int) p.getBattlePoints());
+		
+		p.addWeapon(12);
+		
+		assertEquals(17, (int) p.getBattlePoints());
+	}
 }
