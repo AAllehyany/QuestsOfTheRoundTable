@@ -1,5 +1,7 @@
 package group52.comp3004.players;
 
+import group52.comp3004.Hand;
+
 public class Player {
 	
 	private Integer id;
@@ -7,16 +9,15 @@ public class Player {
 	private Rank rank;
 	private Integer battlePoints;
 	private Integer requiredShields;
-	
-	//TODO: hand cards and equipped weapons
-	//TODO: Possibly the field of the current player? Or make that in the game state?
+	//private Hand hand;
 	
 	public Player(Integer id) {
 		this.id = id;
 		shields = 10;
 		rank = Rank.Squire;
 		battlePoints = 5;
-		requiredShields = 5;
+		requiredShields = 15;
+		//hand = new Hand();
 	}
 	
 	public Integer getId() {
@@ -41,20 +42,24 @@ public class Player {
 	
 	public void addShields(Integer shields) {		
 		this.shields += shields;
-		this.updateRank();
+		if(this.shields < 0) this.shields = 0;
+		if(this.shields >= this.requiredShields) {
+			updateRank();
+		}
 	}
 	
 	
 	private void updateRank() {
-		if(this.shields < 15) {
-			this.rank = Rank.Squire;
+		if(rank == Rank.Squire) {
+			requiredShields = 22;
+			rank = Rank.Knight;
 		}
-		else if(this.shields >= 15 && this.shields < 22) {
-			this.rank = Rank.Knight;
+		else if(rank == Rank.Knight) {
+			requiredShields = 32;
+			rank = Rank.ChampionKnight;
 		}
-		else if(this.shields >= 22 && this.shields < 32) {
-			this.rank = Rank.ChampionKnight;
+		else if(rank == Rank.ChampionKnight) {
+			rank = Rank.KnightOfTheRoundTable;
 		}
-		else { this.rank = Rank.KnightOfTheRoundTable; }
 	}
 }
