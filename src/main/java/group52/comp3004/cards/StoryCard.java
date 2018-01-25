@@ -1,18 +1,9 @@
-package group52.comp3004;
+package group52.comp3004.cards;
 
-public class StoryCard extends NewCard{
-	private String description;
-	public StoryCard(CardType name) {
+public class StoryCard extends Card{
+	public StoryCard(String name) {
 		super(name);
-		this.description =description;
 		// TODO Auto-generated constructor stub
 	}
-	
-	public void setDes(String description) {
-		this.description=description;
-		
-	}
-	public String getDes() {
-		return this.description;
-	}
+
 }

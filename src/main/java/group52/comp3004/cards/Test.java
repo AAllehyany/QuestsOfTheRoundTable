@@ -1,23 +1,16 @@
-package group52.comp3004;
+package group52.comp3004.cards;
 
 public class Test extends AdventureCard {
 
-	private int bid, minimalBid;
-	public Test(CardType name) {
+	private final int minimalBid;
+	
+	public Test(String name, int minimalBid) {
 		super(name);
-		bid=0;
-		minimalBid=0;
+		this.minimalBid = minimalBid;
 		// TODO Auto-generated constructor stub
 	}
-	public void setBid(int bid) {
-		this.bid=bid;
-	}
-	public void setMinBid(int minimalBid) {
-		this.minimalBid=minimalBid;
-	}
-	public int getBid() {
-		return this.bid;
-	}
+
+	
 	public int getMinBid() {
 		return this.minimalBid;
 	}

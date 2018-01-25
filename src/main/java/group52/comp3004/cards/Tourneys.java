@@ -1,20 +1,16 @@
-package group52.comp3004;
+package group52.comp3004.cards;
 
 public class Tourneys extends StoryCard{
 
 
-	private int bonusShield;
-	public Tourneys(CardType name) {
+	private final int bonusShields;
+	public Tourneys(String name, int bonusShields) {
 		super(name);
-		bonusShield =0;
+		this.bonusShields = bonusShields;
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void setReward(int bonusShield) {
-		this.bonusShield= bonusShield;
-	}
-
-	public int getReward() {
-		return this.bonusShield;
+	public int getShields() {
+		return this.bonusShields;
 	}
 }

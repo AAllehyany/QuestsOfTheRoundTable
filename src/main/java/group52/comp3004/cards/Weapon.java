@@ -1,6 +1,4 @@
-package group52.comp3004;
-
-import group52.comp3004.cards.AdventureCard;
+package group52.comp3004.cards;
 
 public class Weapon extends AdventureCard{
 	private final int battlePoint;
