@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="group52.comp3004.players.test.PlayerTest" time="0.058" errors="0" skipped="0">
+<testsuite tests="4" failures="0" name="group52.comp3004.players.test.PlayerTest" time="0.04" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_101\jre\bin"/>
     <property name="java.vm.version" value="25.101-b13"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="C:\Users\AhmadAllehyany\eclipse-workspace\Group52-Comp3004"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\AhmadAllehyany\git\QuestsOfTheRoundTable"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=";"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\AhmadAllehyany\eclipse-workspace\Group52-Comp3004"/>
+    <property name="user.dir" value="C:\Users\AhmadAllehyany\git\QuestsOfTheRoundTable"/>
     <property name="java.runtime.version" value="1.8.0_101-b13"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_101\jre\lib\endorsed"/>
@@ -27,7 +27,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 10"/>
-    <property name="classworlds.conf" value="C:\Users\AhmadAllehyany\eclipse-workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf3945150668368415891.tmp"/>
+    <property name="classworlds.conf" value="C:\Users\AhmadAllehyany\eclipse-workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf7038994465258627917.tmp"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_101\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jre1.8.0_101/bin/server;C:/Program Files/Java/jre1.8.0_101/bin;C:/Program Files/Java/jre1.8.0_101/lib/amd64;C:\Program Files\Haskell\bin;C:\Program Files\Haskell Platform\8.2.1\lib\extralibs\bin;C:\Program Files\Haskell Platform\8.2.1\bin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32\mpirt;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\ia32\compiler;C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Users\AhmadAllehyany\AppData\Local\Microsoft\WindowsApps;C:\Users\AhmadAllehyany\AppData\Local\atom\bin;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\erl8.0\bin;&quot;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin&quot;;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\Redis\;C:\Program Files\dotnet\;C:\Program Files (x86)\Yarn\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Haskell Platform\8.2.1\mingw\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Go\bin;C:\Program Files\PuTTY\;C:\Users\AhmadAllehyany\AppData\Roaming\cabal\bin;C:\Users\AhmadAllehyany\AppData\Roaming\local\bin;C:\Users\AhmadAllehyany\AppData\Local\Programs\Python\Python36-32\Scripts\;C:\Users\AhmadAllehyany\AppData\Local\Programs\Python\Python36-32\;C:\Users\AhmadAllehyany\.cargo\bin;C:\Users\AhmadAllehyany\scoop\shims;C:\Users\AhmadAllehyany\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Java\jdk1.8.0_101\bin;C:\Program Files\apache-maven-3.3.9\bin;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin;C:\Program Files\nodejs;C:\Program Files\PostgreSQL\9.6\bin;C:\Program Files\Microsoft VS Code\bin;C:\Users\AhmadAllehyany\AppData\Local\Yarn\bin;C:\Users\AhmadAllehyany\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Heroku\bin;C:\Users\AhmadAllehyany\AppData\Roaming\npm;C:\WINDOWS\system32;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -53,7 +53,7 @@
     <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_101\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_101\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_101\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_101\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_101\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_101\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_101\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_101\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_101\jre\classes"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="maven.home" value="C:\Users\AhmadAllehyany\eclipse-workspace\Group52-Comp3004\EMBEDDED"/>
+    <property name="maven.home" value="C:\Users\AhmadAllehyany\git\QuestsOfTheRoundTable\EMBEDDED"/>
     <property name="file.separator" value="\"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -61,5 +61,8 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="group52.comp3004.players.test.PlayerTest" name="group52.comp3004.players.test.PlayerTest.testGetsCorrectRank" time="0.058"/>
+  <testcase classname="group52.comp3004.players.test.PlayerTest" name="group52.comp3004.players.test.PlayerTest.testRankDoesNotGoDownAfterLosingShields" time="0.024"/>
+  <testcase classname="group52.comp3004.players.test.PlayerTest" name="group52.comp3004.players.test.PlayerTest.testAddsWeaponPowerToBattlePoints" time="0.016"/>
+  <testcase classname="group52.comp3004.players.test.PlayerTest" name="group52.comp3004.players.test.PlayerTest.testShieldsDoNotGoBelowRank" time="0"/>
+  <testcase classname="group52.comp3004.players.test.PlayerTest" name="group52.comp3004.players.test.PlayerTest.testRanksUpCorrectly" time="0"/>
 </testsuite>

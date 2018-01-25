@@ -1,17 +1,16 @@
 package group52.comp3004;
 
+import group52.comp3004.cards.AdventureCard;
+
 public class Weapon extends AdventureCard{
-private int battlePoint;
-	public Weapon(CardType name) {
+	private final int battlePoint;
+	
+	public Weapon(String name, int bp) {
 		super(name);
-		this.battlePoint= 0;
+		this.battlePoint= bp;
 		// TODO Auto-generated constructor stub
 	}
 
-	public void setBP(int battlePoint) {
-		this.battlePoint= battlePoint;
-	}
-	
 	public int getBP() {
 		return this.battlePoint;
 	}

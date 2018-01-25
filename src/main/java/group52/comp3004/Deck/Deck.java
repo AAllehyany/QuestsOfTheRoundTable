@@ -1,3 +1,5 @@
+package group52.comp3004.Deck;
+
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.Random;
@@ -20,7 +22,7 @@ public class Deck<Card>{
         }
     }
 
-    public Card add(Card c){
+    public void add(Card c){
         this.deck.add(c);
         this.size++;
     }
@@ -31,7 +33,7 @@ public class Deck<Card>{
         Random rnd = new Random();
         if(this.size<num){
             while(this.size>0){
-                cards.add(this.deck.remove(rnd.nextInt(this.size));
+                cards.add(this.deck.remove(rnd.nextInt(this.size)));
                 this.size--;
                 num--;
             }
