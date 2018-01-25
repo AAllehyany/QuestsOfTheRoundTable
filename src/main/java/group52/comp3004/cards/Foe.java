@@ -1,18 +1,18 @@
-package group52.comp3004;
+package group52.comp3004.cards;
 
 public class Foe extends AdventureCard{
-	private int highBP;
-	public Foe(CardType name) {
+
+	private final int bp;
+	private final int highBp;
+	
+	public Foe(String name, int bp, int highBp) {
 		super(name);
-		highBP = 0;
+		this.bp = bp;
+		this.highBp = highBp;
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void setHighBP(int highBP) {
-		this.highBP= highBP;
-	}
-	
-	public int getHighBP() {
-		return this.highBP;
+	public int getBp() {
+		return this.highBp;
 	}
 }
