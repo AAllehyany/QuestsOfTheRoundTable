@@ -13,6 +13,7 @@ public class Player {
 	private Integer battlePoints;
 	private Integer requiredShields;
 	private List<Integer> weapons;
+	private int minShields;
 	//private Hand hand;
 	
 	public Player(Integer id) {
@@ -21,6 +22,7 @@ public class Player {
 		rank = Rank.Squire;
 		battlePoints = 5;
 		requiredShields = 15;
+		minShields = 10;
 		weapons = new ArrayList<Integer>();
 		//hand = new Hand();
 	}
@@ -55,7 +57,7 @@ public class Player {
 	
 	public void addShields(Integer shields) {		
 		this.shields += shields;
-		if(this.shields < 0) this.shields = 0;
+		if(this.shields < minShields) this.shields = minShields;
 		if(this.shields >= this.requiredShields) {
 			updateRank();
 		}
@@ -63,6 +65,7 @@ public class Player {
 	
 	
 	private void updateRank() {
+		minShields = requiredShields;
 		if(rank == Rank.Squire) {
 			requiredShields = 22;
 			rank = Rank.Knight;
