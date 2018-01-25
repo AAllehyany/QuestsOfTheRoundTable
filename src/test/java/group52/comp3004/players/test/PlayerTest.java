@@ -10,12 +10,13 @@ import group52.comp3004.players.Rank;
 public class PlayerTest {
 
 	@Test
-	public void testShieldsNeverGoBelowZero() {
+	public void testShieldsDoNotGoBelowRank() {
 		Player p = new Player(5);
 		
 		p.addShields(-19);
 		
-		assertEquals(0, (int) p.getShields());
+		assertEquals(10, (int) p.getShields());
+		
 	}
 	
 	@Test
@@ -42,18 +43,23 @@ public class PlayerTest {
 	public void testRankDoesNotGoDownAfterLosingShields() {
 		Player p = new Player(100000);
 		
+		assertEquals(10, (int)  p.getShields());
 		assertEquals(Rank.Squire, p.getRank());
 		
 		p.addShields(10);
+		assertEquals(20, (int)  p.getShields());
 		assertEquals(Rank.Knight, p.getRank());
 		
 		p.addShields(-6);
+		assertEquals(15, (int)  p.getShields());
 		assertEquals(Rank.Knight, p.getRank());
 		
 		p.addShields(8);
+		assertEquals(23, (int)  p.getShields());
 		assertEquals(Rank.ChampionKnight, p.getRank());
 		
 		p.addShields(-2);
+		assertEquals(22, (int)  p.getShields());
 		assertEquals(Rank.ChampionKnight, p.getRank());
 	}
 	
