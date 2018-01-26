@@ -9,6 +9,7 @@ public class GameState {
 	private List<Player> players;
 	private int currentTurn;
 	private int currentPlayer;
+	private Phase phase;
 	/**
 	 * @param players
 	 */
@@ -17,6 +18,7 @@ public class GameState {
 		this.players = players;
 		this.currentTurn = 0;
 		this.currentPlayer = 0;
+		phase = Phase.TurnStart;
 	}
 	
 	
