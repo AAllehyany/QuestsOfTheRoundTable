@@ -13,6 +13,6 @@ public class Foe extends AdventureCard{
 	}
 	
 	public int getBp() {
-		return this.highBp;
+		return this.bp;
 	}
 }
