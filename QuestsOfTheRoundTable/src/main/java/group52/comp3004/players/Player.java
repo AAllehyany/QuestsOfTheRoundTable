@@ -1,5 +1,10 @@
 package group52.comp3004.players;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import group52.comp3004.Hand;
+
 public class Player {
 	
 	private Integer id;
@@ -7,16 +12,19 @@ public class Player {
 	private Rank rank;
 	private Integer battlePoints;
 	private Integer requiredShields;
-	
-	//TODO: hand cards and equipped weapons
-	//TODO: Possibly the field of the current player? Or make that in the game state?
+	private List<Integer> weapons;
+	private int minShields;
+	//private Hand hand;
 	
 	public Player(Integer id) {
 		this.id = id;
 		shields = 10;
 		rank = Rank.Squire;
 		battlePoints = 5;
-		requiredShields = 5;
+		requiredShields = 15;
+		minShields = 10;
+		weapons = new ArrayList<Integer>();
+		//hand = new Hand();
 	}
 	
 	public Integer getId() {
@@ -32,29 +40,44 @@ public class Player {
 	}
 	
 	public Integer getBattlePoints() {
-		return battlePoints;
+		return battlePoints + weapons.stream().mapToInt(Integer::intValue).sum();
+	}
+	
+	public void clearWeapons() {
+		this.weapons.clear();
 	}
 
 	public Integer getRequiredShields() {
 		return requiredShields;
 	}
 	
+	public void addWeapon(Integer weapon) {
+		this.weapons.add(weapon);
+	}
+	
 	public void addShields(Integer shields) {		
 		this.shields += shields;
-		this.updateRank();
+		if(this.shields < minShields) this.shields = minShields;
+		if(this.shields >= this.requiredShields) {
+			updateRank();
+		}
 	}
 	
 	
 	private void updateRank() {
-		if(this.shields < 15) {
-			this.rank = Rank.Squire;
+		minShields = requiredShields;
+		if(rank == Rank.Squire) {
+			requiredShields = 22;
+			rank = Rank.Knight;
+			battlePoints = 10;
 		}
-		else if(this.shields >= 15 && this.shields < 22) {
-			this.rank = Rank.Knight;
+		else if(rank == Rank.Knight) {
+			requiredShields = 32;
+			rank = Rank.ChampionKnight;
+			battlePoints = 20;
 		}
-		else if(this.shields >= 22 && this.shields < 32) {
-			this.rank = Rank.ChampionKnight;
+		else if(rank == Rank.ChampionKnight) {
+			rank = Rank.KnightOfTheRoundTable;
 		}
-		else { this.rank = Rank.KnightOfTheRoundTable; }
 	}
 }
