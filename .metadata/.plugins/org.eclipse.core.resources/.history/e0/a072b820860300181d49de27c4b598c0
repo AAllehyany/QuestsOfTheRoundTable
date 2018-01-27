@@ -1,0 +1,25 @@
+package group52.comp3004;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+public class View{
+	Stage stage;
+	
+	//Constructor
+	public View(Model model, Stage myStage) {
+		initView();
+	}
+	
+	public void initView() {
+		
+	}
+	
+	public void render() {
+		
+	}
+}

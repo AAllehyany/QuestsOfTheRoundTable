@@ -1,0 +1,28 @@
+package group52.comp3004;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+public class View{
+	Stage stage;
+	
+	//Constructor
+	public View(Model model) {
+		initView();
+	}
+	
+	public void initView() {
+		JFrame frame = new JFrame("Quests of the Round Table");
+		frame.setSize(500, 500);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+	}
+	
+	public void render() {
+		
+	}
+}

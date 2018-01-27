@@ -1,0 +1,22 @@
+package group52.comp3004;
+
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class Game extends Application{
+	//MVC classes
+	private Model model;
+	private View view;
+	private Controller controller;
+	
+	 // need to create these two arrays for use later
+    
+	//constructor
+	
+    
+    //main class
+    public static void main(String[] args) {
+    	launch(args);
+    	System.out.println("Hello");
+    }
+}
