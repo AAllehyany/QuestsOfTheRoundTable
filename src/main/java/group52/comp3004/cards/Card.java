@@ -26,4 +26,8 @@ public class Card {
 		}
 		return str;
 	}
+    
+    public boolean equals(Card card2){
+        return this.getName().equals(card2.getName());
+    }
 }
