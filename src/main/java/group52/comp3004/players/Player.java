@@ -1,3 +1,4 @@
+
 package group52.comp3004.players;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class Player {
 	private Integer battlePoints;
 	private Integer requiredShields;
 	private HashSet<Weapon> weapons;
+	private List <Foes> foes;
 	private int minShields;
 	//private Hand hand;
 	
@@ -47,6 +49,18 @@ public class Player {
 			weaponsBP += itr.next().getBP();
 		}
 		return battlePoints + weaponsBP;
+	}
+	
+	public void addFoes(Foe addedFoe){
+		return this.foes.add(addedFoe);
+	}
+	
+	public void removeFoe(Foe removedFoe){
+		return this.foes.remove(foes.indexOf(removedFoe));	
+	}
+	
+	public void clearFoes(){
+		return this.foes.clear();	
 	}
 	
 	public void clearWeapons() {
