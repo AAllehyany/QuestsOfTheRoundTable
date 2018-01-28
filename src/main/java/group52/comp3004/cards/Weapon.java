@@ -12,4 +12,8 @@ public class Weapon extends AdventureCard{
 	public int getBP() {
 		return this.battlePoint;
 	}
+
+    public boolean equals(Weapon weapon2){
+        return super.getName().equals(weapon2.super.getName());
+    }
 }
