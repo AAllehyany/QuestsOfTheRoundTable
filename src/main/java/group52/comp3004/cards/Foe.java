@@ -25,14 +25,12 @@ public class Foe extends AdventureCard{
 		return this.bp + weaponsBP;
 	}
 
-    public Weapon addWeapon(Weapon wep){
-		boolean added = this.weapons.add(wep);
-		if(!added){
-			System.out.println("FOE ALREADY HAS THIS WEAPON!\n");
-			return wep;
-		}else{
-			return null;
-		}
+    public boolean hasWeapon(Weapon wep){
+        return this.weapons.contains(wep);
+    }
+
+    public boolean addWeapon(Weapon wep){
+		return this.weapons.add(wep);
     }
 
     public void clearWeapons(){
