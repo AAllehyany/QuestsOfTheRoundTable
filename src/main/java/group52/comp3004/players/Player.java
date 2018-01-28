@@ -60,16 +60,14 @@ public class Player {
 	public Integer getRequiredShields() {
 		return requiredShields;
 	}
-	
-	public Weapon addWeapon(Weapon wep) {
-		boolean added = this.weapons.add(wep);
-		if(!added){
-			System.out.println("PLAYER ALREADY HAS THIS WEAPON!\n");
-			return wep;
-		}else{
-			return null;
-		}
+
+	public boolean hasWeapon(Weapon wep){
+		return this.weapons.contains(wep);
 	}
+	
+	 public boolean addWeapon(Weapon wep){
+		return this.weapons.add(wep);
+    }
 	
 	public void addShields(Integer shields) {		
 		this.shields += shields;
