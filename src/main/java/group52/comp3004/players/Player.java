@@ -2,6 +2,7 @@ package group52.comp3004.players;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashSet;
 
 import group52.comp3004.Hand;
 
@@ -12,7 +13,7 @@ public class Player {
 	private Rank rank;
 	private Integer battlePoints;
 	private Integer requiredShields;
-	private List<Integer> weapons;
+	private HashSet<Weapon> weapons;
 	private int minShields;
 	//private Hand hand;
 	
@@ -23,7 +24,7 @@ public class Player {
 		battlePoints = 5;
 		requiredShields = 15;
 		minShields = 10;
-		weapons = new ArrayList<Integer>();
+		weapons = new HashSet<Weapon>();
 		//hand = new Hand();
 	}
 	
@@ -40,10 +41,19 @@ public class Player {
 	}
 	
 	public Integer getBattlePoints() {
-		return battlePoints + weapons.stream().mapToInt(Integer::intValue).sum();
+		Iterator<Weapon> itr = this.weapons.iterator();
+		int weaponsBP = 0;
+		while(itr.hasNext()){
+			weaponsBP += itr.next().getBP();
+		}
+		return battlePoints + weaponsBP;
 	}
 	
 	public void clearWeapons() {
+		Iterator<Weapon> itr = this.weapon.iterator();
+		while(itr.hasNext()){
+			adventureDeck.discard(itr.next());
+		}
 		this.weapons.clear();
 	}
 
@@ -51,8 +61,14 @@ public class Player {
 		return requiredShields;
 	}
 	
-	public void addWeapon(Integer weapon) {
-		this.weapons.add(weapon);
+	public Weapon addWeapon(Weapon wep) {
+		boolean added = this.weapons.add(wep);
+		if(!added){
+			System.out.println("PLAYER ALREADY HAS THIS WEAPON!\n");
+			return wep;
+		}else{
+			return null;
+		}
 	}
 	
 	public void addShields(Integer shields) {		
