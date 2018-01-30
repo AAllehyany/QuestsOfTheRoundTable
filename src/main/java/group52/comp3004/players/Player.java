@@ -1,4 +1,5 @@
 
+
 package group52.comp3004.players;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class Player {
 	private Integer battlePoints;
 	private Integer requiredShields;
 	private HashSet<Weapon> weapons;
-	private List <Foes> foes;
+	private List <Foe> foes;
 	private int minShields;
 	//private Hand hand;
 	
@@ -26,6 +27,7 @@ public class Player {
 		battlePoints = 5;
 		requiredShields = 15;
 		minShields = 10;
+		foes = new Arraylist<Foe>();
 		weapons = new HashSet<Weapon>();
 		//hand = new Hand();
 	}
