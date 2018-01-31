@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.Label?>
+
+<GridPane fx:id="gamepane" 
+	fx:controller="group52.comp3004.controllers.GameController"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<columnConstraints>
+		<ColumnConstraints minWidth="100" hgrow="NEVER"/>
+		<ColumnConstraints minWidth="100" hgrow="NEVER"/>
+		<ColumnConstraints minWidth="100" hgrow="NEVER"/>
+		<ColumnConstraints minWidth="100" hgrow="NEVER"/>
+		<ColumnConstraints minWidth="100" hgrow="NEVER"/>
+		<ColumnConstraints minWidth="100" hgrow="NEVER"/>
+	</columnConstraints>
+	<rowConstraints>
+		<RowConstraints minHeight="100" vgrow="NEVER"/>
+		<RowConstraints minHeight="100" vgrow="NEVER"/>
+		<RowConstraints minHeight="100" vgrow="NEVER"/>
+		<RowConstraints minHeight="100" vgrow="NEVER"/>
+		<RowConstraints minHeight="100" vgrow="NEVER"/>
+		<RowConstraints minHeight="100" vgrow="NEVER"/>
+	</rowConstraints>
+	
+</GridPane>
+
