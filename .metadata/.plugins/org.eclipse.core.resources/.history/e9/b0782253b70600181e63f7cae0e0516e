@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<GridPane fx:id="gamepane" 
+	fx:controller="group52.comp3004.controllers.GameController"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<Rectangle fx:id="rect1" width="100" height="100" fill="Color.RED"/>
+	<Rectangle fx:id="rect1" width="100" height="100" fill="Color.GREEN"/>
+	<Rectangle fx:id="rect1" width="100" height="100" fill="Color.BLUE"/>
+</GridPane>
+

@@ -1,25 +1,22 @@
 package group52.comp3004;
 
+import group52.comp3004.GUI.View;
+import group52.comp3004.controllers.GameController;
+import group52.comp3004.game.GameState;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 
 public class Game extends Application{
 	//MVC classes
-	private Model model;
+	private GameState model;
 	private View view;
-	private Controller controller;
+	private GameController controller;
 	
 	@Override
-	public void start(Stage myStage) {
-		model = new Model();
+	public void start(Stage myStage) throws Exception {
+		model = new GameState();
 		view = new View(model, myStage);
-		controller = new Controller(model, view);
 	}
     
     //main class

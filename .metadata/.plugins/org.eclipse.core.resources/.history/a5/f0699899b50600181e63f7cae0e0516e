@@ -1,0 +1,52 @@
+package group52.comp3004.controllers;
+
+import java.net.URL;
+
+import javax.annotation.Resources;
+
+import group52.comp3004.game.GameState;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.fxml.FXML;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
+public class GameController {
+	@FXML
+	private GridPane gamepane;
+	private DoubleProperty stageSize = new SimpleDoubleProperty();
+	
+	GameState model;
+	
+	//Constructor
+	public GameController() {
+		stageSize.set(0);
+	}
+	
+	@FXML
+	protected void initialize(URL location, Resources resource) {
+		//Create static grid for game elements
+		ColumnConstraints col = new ColumnConstraints(10);
+	    gamepane.getColumnConstraints().addAll(col, col, col, col, col, col);
+	    
+	    RowConstraints row = new RowConstraints(10);
+	    gamepane.getRowConstraints().addAll(row, row, row, row, row, row);
+	    
+	    Rectangle rect = new Rectangle(4, 4);
+	    rect.setFill(Color.RED);
+	    GridPane.setConstraints(rect, 0, 0);
+	    gamepane.getChildren().add(rect);
+	    gamepane.setGridLinesVisible(true);
+	    //gamepane.
+	    
+	}
+	
+	public DoubleProperty stageSizeProperty() {
+		return stageSize;
+	}
+	
+	
+}

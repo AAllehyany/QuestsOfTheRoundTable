@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:controller="group52.comp3004.GUI.KappaController" xmlns:fx="http://javafx.com/fxml/1">
+	<Text fx:id="text1" text="hello" />
+	<Button fx:id="btn2" text="helloo" />
+</AnchorPane>
+
