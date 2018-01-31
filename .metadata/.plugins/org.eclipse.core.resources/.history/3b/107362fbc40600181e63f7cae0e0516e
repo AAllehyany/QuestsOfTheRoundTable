@@ -1,0 +1,14 @@
+package group52.comp3004.GUI;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.Pane;
+
+public class HandArea {
+Pane hand;
+	
+	//Constructor
+	public HandArea() throws Exception{
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/hand_area.fxml"));
+		hand = loader.load();
+	}
+}

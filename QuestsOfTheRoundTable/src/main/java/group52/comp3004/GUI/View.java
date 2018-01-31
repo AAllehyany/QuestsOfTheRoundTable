@@ -38,15 +38,14 @@ public class View{
 		w_size.set(600);
 		css = getClass().getResource("/css/view.css").toExternalForm();
 		
+		//Load top level fxml document
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/game_field.fxml"));
 		root = loader.load();
 		GameController gameController = loader.getController();
 		gameController.stageSizeProperty().bind(w_size);
-		/*Rectangle rect1 = new Rectangle(5, 5);
-	    rect1.setFill(Color.RED);
-	    GridPane.setConstraints(rect1, 6, 6);
-	    root.getChildren().add(rect1);
-	    root.setGridLinesVisible(true);*/
+		//load player area
+		PlayerArea player1 = new PlayerArea(root);
+		
 	    
 		//tutorialPart1();
 		//tutorialPart2();
@@ -109,6 +108,7 @@ public class View{
 		stage.setScene(t2Scene);
 		stage.show();
 	}
+	
 	public void initView() {
 		Scene scene = new Scene(root, 600, 600);
 		stage.setTitle("Quest of the Round Table");

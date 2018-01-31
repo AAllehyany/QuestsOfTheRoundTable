@@ -1,0 +1,19 @@
+package group52.comp3004.GUI;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.Pane;
+
+public class PlayerArea {
+	Pane area;
+	
+	//Constructor
+	public PlayerArea() throws Exception{
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/player_area.fxml"));
+		area = loader.load();
+		
+		//Add the subfields
+		FieldArea field = new FieldArea();
+		//HandArea hand = new HandArea();
+		//PortraitArea portrait = new PortraitArea();
+	}
+}

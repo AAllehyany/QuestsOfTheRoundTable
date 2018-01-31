@@ -1,0 +1,16 @@
+package group52.comp3004.GUI;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.Pane;
+
+public class FieldArea {
+Pane field;
+	
+	//Constructor
+	public FieldArea() throws Exception{
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/field_area.fxml"));
+		field = loader.load();
+		
+		System.out.println("Player area created");
+	}
+}
