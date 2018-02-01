@@ -26,5 +26,7 @@
 		<RowConstraints minHeight="100" vgrow="NEVER"/>
 	</rowConstraints>
 	
+	<fx:include fx:id="playerArea" source="player_area.fxml" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="5"/>
+	
 </GridPane>
 

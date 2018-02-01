@@ -1,6 +1,7 @@
 package group52.comp3004.controllers;
 
 import java.net.URL;
+import java.util.ResourceBundle;
 
 import javax.annotation.Resources;
 
@@ -8,13 +9,10 @@ import group52.comp3004.game.GameState;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
-import javafx.scene.layout.ColumnConstraints;
+import javafx.fxml.Initializable;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
-public class GameController {
+public class GameController implements Initializable {
 	@FXML
 	private GridPane gamepane;
 	private DoubleProperty stageSize = new SimpleDoubleProperty();
@@ -25,14 +23,16 @@ public class GameController {
 	public GameController() {
 		stageSize.set(0);
 	}
-	
-	@FXML
-	protected void initialize(URL location, Resources resource) {
-			    
-	}
+
 	
 	public DoubleProperty stageSizeProperty() {
 		return stageSize;
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
