@@ -1,8 +1,6 @@
 group52\comp3004\cards\AdventureCard.class
-CardType.class
-group52\comp3004\cards\Card.class
-group52\comp3004\cards\QuestCard.class
-group52\comp3004\Weapon.class
-group52\comp3004\Deck\DeckType.class
 group52\comp3004\Deck\Deck.class
+group52\comp3004\cards\Card.class
 group52\comp3004\cards\StoryCard.class
+group52\comp3004\cards\QuestCard.class
+group52\comp3004\Deck\DeckType.class

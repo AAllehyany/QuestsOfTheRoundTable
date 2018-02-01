@@ -13,6 +13,7 @@ public class GameState {
 	/**
 	 * @param players
 	 */
+	
 	public GameState(List<Player> players) {
 		super();
 		this.players = players;
@@ -21,7 +22,13 @@ public class GameState {
 		phase = Phase.TurnStart;
 	}
 	
-	
+	public GameState() {
+		super();
+	}
+
+
+
+
 	public void nextTurn() {
 		currentTurn = (currentTurn + 1) % players.size();
 		currentPlayer = currentTurn;
