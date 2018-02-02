@@ -1,25 +1,58 @@
 package group52.comp3004.controllers;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javax.annotation.Resources;
-
+import group52.comp3004.cards.AdventureCard;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 
 public class PlayerAreaController implements Initializable{
 	
 	
 	@FXML
 	private FieldAreaController fieldAreaController;
+	
+	@FXML
+	private HandAreaController handAreaController;
+	
+	@FXML
+	private Button addCardBtn;
+	
+	private SimpleStringProperty prop;
+	
 	//Constructor
-	public PlayerAreaController() {}
+	public PlayerAreaController() {
+		prop = new SimpleStringProperty("lol");
+	}
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		System.out.println("player area loaded");
+	}
+
+
+	public void setField(ArrayList<AdventureCard> cards) {
+		this.fieldAreaController.updateCards(cards);
 		
+	}
+	
+	public void setHand(ArrayList<AdventureCard> cards) {
+		this.handAreaController.updateCards(cards);
+		
+	}
+
+
+	public void update(ArrayList<AdventureCard> hand, ArrayList<AdventureCard> field) {
+		setField(field);
+		setHand(hand);
+	}
+	
+	public void setHandClickBehaviour(CardClickBehaviour behaviour) {
+		handAreaController.setClickBehaviour(behaviour);
 	}
 }
