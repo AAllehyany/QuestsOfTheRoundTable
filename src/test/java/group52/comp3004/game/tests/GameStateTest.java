@@ -59,4 +59,32 @@ public class GameStateTest {
 		gs.nextPlayer();
 		assertEquals(3, gs.getCurrentPlayer());
 	}
+	
+	@Test
+	public void testDeals12CardsToAllPlayers() {
+		GameState gs = new GameState();
+		Player p1 = new Player(123);
+		Player p2 = new Player(1234);
+		Player p3 = new Player(1247);
+		Player p4 = new Player(1468);
+		
+		gs.addPlayer(p1);
+		gs.addPlayer(p2);
+		gs.addPlayer(p3);
+		gs.addPlayer(p4);
+		
+		assertEquals(0, p1.getHand().size());
+		assertEquals(0, p2.getHand().size());
+		assertEquals(0, p3.getHand().size());
+		assertEquals(0, p4.getHand().size());
+		
+		gs.dealCardsToPlayers();
+		
+		assertEquals(12, p1.getHand().size());
+		assertEquals(12, p2.getHand().size());
+		assertEquals(12, p3.getHand().size());
+		assertEquals(12, p4.getHand().size());
+	}
+	
+	
 }
