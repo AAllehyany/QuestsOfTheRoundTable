@@ -1,23 +1,47 @@
 package group52.comp3004.controllers;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
-import javax.annotation.Resources;
-
+import group52.comp3004.GUI.cards.GameCard;
+import group52.comp3004.cards.AdventureCard;
+import group52.comp3004.cards.Card;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class FieldAreaController implements Initializable{
-	
+
+	@FXML
+	private VBox fieldContainer;
+
+
+	/**
+	 * 
+	 */
 	public FieldAreaController() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		System.out.println("Field area crated");
+	}
+	
+	
+	public void updateCards(ArrayList<AdventureCard> cards2) {
+		fieldContainer.getChildren().clear();
+		fieldContainer.getChildren().addAll(cards2.stream().map(card -> new GameCard(card)).collect(Collectors.toList()));
 	}
 }
