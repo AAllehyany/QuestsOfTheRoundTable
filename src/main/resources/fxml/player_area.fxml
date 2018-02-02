@@ -10,5 +10,6 @@
 	xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: red;">
 	
 	<fx:include fx:id="fieldArea" source="field_area.fxml"/>
+	<fx:include fx:id="handArea" source="hand_area.fxml"/>
 </AnchorPane>
 
