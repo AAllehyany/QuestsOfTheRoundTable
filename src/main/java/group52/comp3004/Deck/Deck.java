@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.Random;
 
-public class Deck<Card>{
+public class Deck<T>{
 
     public DeckType type; // denote if the deck is the story deck or adventure deck
     private int size = 0; // store the number of cards in the deck
-    public ArrayList<Card> deck = new ArrayList<Card>();    // store cards in the deck
-    public ArrayList<Card> discard = new ArrayList<Card>(); // store cards in a discard pile ready to be shuffled back into the deck
+    public ArrayList<T> deck = new ArrayList<T>();    // store cards in the deck
+    public ArrayList<T> discard = new ArrayList<T>(); // store cards in a discard pile ready to be shuffled back into the deck
     
     public Deck(DeckType t){
         this.type = t;
@@ -22,14 +22,14 @@ public class Deck<Card>{
         }
     }
 
-    public void add(Card c){
+    public void add(T c){
         this.deck.add(c);
         this.size++;
     }
 
     // draw a number of cards from the top of the deck and returns the card that is drawn
-    public ArrayList<Card> draw(int num){
-        ArrayList<Card> cards = new ArrayList<Card>();
+    public ArrayList<T> draw(int num){
+        ArrayList<T> cards = new ArrayList<T>();
         Random rnd = new Random();
         if(this.size<num){
             while(this.size>0){
@@ -37,7 +37,7 @@ public class Deck<Card>{
                 this.size--;
                 num--;
             }
-            this.deck = new ArrayList<Card>(this.discard);
+            this.deck = new ArrayList<T>(this.discard);
             this.discard.clear();
             while(num>0){
                 cards.add(this.deck.remove(rnd.nextInt(this.size)));
@@ -56,7 +56,7 @@ public class Deck<Card>{
 
     /* play a card and place it in a deck's discard pile. Also to be used at the beginning of the game to
     create the deck */
-    public Card discard(Card c){
+    public T discard(T c){
         this.discard.add(c);
         return c;
     }
