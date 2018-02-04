@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import group52.comp3004.cards.AdventureCard;
+import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Weapon;
 
 public class Deck<T> {
@@ -52,20 +53,18 @@ public class Deck<T> {
 	
 	
 	public static ArrayList<AdventureCard> createAdventureDeck() {
-		
-		
-		
+			
 		ArrayList<AdventureCard> cards = new ArrayList<>(Arrays.asList(
-				new AdventureCard("Sir Galahad"),
-				new AdventureCard("Sir Lancelot"),
-				new AdventureCard("King Arthut"),
-				new AdventureCard("Sir Tristan"),
-				new AdventureCard("Sir Pellinore"),
-				new AdventureCard("Sir Gawain"),
-				new AdventureCard("Sir Percival"),
-				new AdventureCard("Queen Guinever"),
-				new AdventureCard("Queen Iseult"),
-				new AdventureCard("Merlin")));
+				new Ally("Sir Galahad", 15),
+				new Ally("Sir Lancelot", 15),
+				new Ally("King Arthut", 10),
+				new Ally("Sir Tristan", 10),
+				new Ally("Sir Pellinore", 10),
+				new Ally("Sir Gawain",10),
+				new Ally("Sir Percival", 5),
+				new Ally("Queen Guinever", 0),
+				new Ally("Queen Iseult",0),
+				new Ally("Merlin",0)));
 		
 		Weapon excalibur = new Weapon("Excalibur", 30);
 		Weapon lance = new Weapon("Lance", 30);
