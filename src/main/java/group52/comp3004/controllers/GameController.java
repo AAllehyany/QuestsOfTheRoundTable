@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 import group52.comp3004.cards.AdventureCard;
+import group52.comp3004.cards.Ally;
 import group52.comp3004.game.GameState;
 import group52.comp3004.players.Player;
 import javafx.beans.property.DoubleProperty;
@@ -80,6 +81,9 @@ public class GameController implements Initializable {
 		
 		Random rand = new Random();
 		
+		this.model.dealCardsToPlayers();
+		this.updateAll();
+		
 		dealtoplayer1.setOnAction(e -> dealPlayer(rand.nextInt(this.model.numPlayers())));
 	}
 	
@@ -88,8 +92,9 @@ public class GameController implements Initializable {
 	}
 	
 	public void handCardOnClick(AdventureCard card, int index) {
+		if(!(card instanceof Ally)) return;
 		Player player = this.model.getPlayerByIndex(index);
-		player.playCardToField(card);
+		player.playCardToField((Ally) card);
 		this.playerControllers.get(index).update(player.getHand(),player.getField());
 	}
 	
@@ -97,6 +102,13 @@ public class GameController implements Initializable {
 		this.model.dealToPlayer(index);
 		Player player = this.model.getPlayerByIndex(index);
 		this.playerControllers.get(index).update(player.getHand(),player.getField());
+	}
+	
+	public void updateAll() {
+		for(int i = 0; i < this.playerControllers.size(); i++) {
+			Player player = this.model.getPlayerByIndex(i);
+			this.playerControllers.get(i).update(player.getHand(),player.getField());
+		}
 	}
 	
 	
