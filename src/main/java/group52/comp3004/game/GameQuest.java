@@ -44,6 +44,10 @@ public class GameQuest {
 		return stages;
 	}
 	
+	public boolean canAddStage() {
+		return this.stages.size() < quest.getStages();
+	}
+	
 	public boolean addStage(Stage stage) {
 		Stage highestStage = stages.stream().max( (s1, s2) -> Integer.compare(s1.getTotalPower(), s2.getTotalPower())).orElse(null);
 		
@@ -68,11 +72,14 @@ public class GameQuest {
 	}
 	
 	public void addPlayer(Player player) {
-		this.players.add(player);
+		if(!this.players.contains(player) && player.getQuest() == null) {
+			this.players.add(player);
+			player.setQuest(this);
+		}
 	}
 	
 	public void playStage() {
-		if(over) return;
+		if(over || this.players.size() == 0) return;
 		this.players = players.stream().filter(p -> p.getBattlePoints() >= stages.get(currentStage).getTotalPower()).collect(Collectors.toList());
 		if(currentStage == (quest.getStages() - 1)) this.over = true;
 		advanceStage();	
@@ -92,6 +99,11 @@ public class GameQuest {
 	
 	public boolean isOver() {
 		return this.over;
+	}
+
+	public boolean isPlayer(Player player) {
+		// TODO Auto-generated method stub
+		return this.players.contains(player) || player == sponsor;
 	}
 	
 	
