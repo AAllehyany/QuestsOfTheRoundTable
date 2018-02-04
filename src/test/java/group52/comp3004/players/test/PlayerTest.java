@@ -2,8 +2,14 @@ package group52.comp3004.players.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 
+import group52.comp3004.cards.AdventureCard;
+import group52.comp3004.cards.Ally;
+import group52.comp3004.cards.Weapon;
 import group52.comp3004.players.Player;
 import group52.comp3004.players.Rank;
 
@@ -64,13 +70,36 @@ public class PlayerTest {
 	}
 	
 	@Test
-	public void testAddsWeaponPowerToBattlePoints() {
+	public void testGetsBPCorrectly() {
 		Player p = new Player(1337);
 		
 		assertEquals(5, (int) p.getBattlePoints());
 		
-		p.addWeapon(12);
+		p.addField(new Ally("Hello", 15));
 		
-		assertEquals(17, (int) p.getBattlePoints());
+		assertEquals(20, (int) p.getBattlePoints());
+		
+		p.addTemp(new Ally("Hello", 15));
+		p.addTemp(new Weapon("Horse", 10));
+		
+		assertEquals(45, (int) p.getBattlePoints());
+	}
+	
+	@Test
+	public void testDoesNotPlayCardNotInHand() {
+		Player p = new Player(1337);
+		
+		Ally c = new Ally("hey", 16);
+		
+		p.playCardToField(c);
+		
+		assertEquals(new ArrayList<AdventureCard>(), p.getField());
+		
+		p.addCardToHand(c);
+		p.playCardToField(c);
+		
+		assertEquals(Arrays.asList(c), p.getField());
+		
+		
 	}
 }
