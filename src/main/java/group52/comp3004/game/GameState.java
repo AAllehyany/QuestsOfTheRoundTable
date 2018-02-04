@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group52.comp3004.cards.AdventureCard;
+import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.QuestCard;
 import group52.comp3004.cards.StoryCard;
 import group52.comp3004.decks.Deck;
@@ -69,6 +70,11 @@ public class GameState {
 	
 	public void nextPlayer() {
 		currentPlayer = (currentPlayer + 1) % players.size();
+		
+		while(phase == Phase.SetupQuest 
+				&& this.currentQuest != null && !this.currentQuest.isPlayer(this.players.get(currentPlayer))) {
+			currentPlayer = (currentPlayer + 1) % players.size();
+		}
 	}
 	
 	public int getCurrentTurn() {
@@ -93,7 +99,7 @@ public class GameState {
 		return this.players.size();
 	}
 	public void joinQuest() {
-		if(currentQuest != null) currentQuest.addPlayer(getPlayerByIndex(currentPlayer));
+		if(currentQuest != null && currentSponsor != currentPlayer) currentQuest.addPlayer(getPlayerByIndex(currentPlayer));
 	}
 	
 	public void setQuest() {
@@ -101,8 +107,32 @@ public class GameState {
 		{
 			currentSponsor = currentPlayer;
 			currentQuest = new GameQuest((QuestCard) revealedCard, getPlayerByIndex(currentSponsor));
+			this.players.get(currentPlayer).setQuest(currentQuest);
+			this.revealedCard = null;
+			this.phase = Phase.SponsorQuest;
 		}
 	}
+	
+	public boolean setUpQuestStage(Foe foe) {
+		if(currentQuest != null && currentQuest.canAddStage() && currentSponsor == currentPlayer
+				&& phase == Phase.SetupQuest) {
+			currentQuest.addStage(new Stage(foe));
+			return true;
+		}
+		
+		return false;
+			
+	}
+	
+	public boolean playCardToTemp(AdventureCard card) {
+		if(currentPlayer == currentSponsor && phase != Phase.SetupQuest) return false;
+		if(!currentQuest.isPlayer(this.players.get(currentPlayer))) return false;
+		
+		Player p = this.players.get(currentPlayer);
+		p.playToTemp(card);
+		return true;
+	}
+	
 	
 	public void endQuest() {
 		currentSponsor = -1;
@@ -111,11 +141,33 @@ public class GameState {
 		// remove all allies and all cards and make people draw (call quest end)
 	}
 	
+	public StoryCard getRevealed() {
+		return this.revealedCard;
+	}
+	
 	public void playCurrentQuestStage() {
 		if(currentQuest != null) currentQuest.playStage();
 	}
 	
+	public Player getCurrentSponsor() {
+		if(currentSponsor != -1) return this.players.get(currentSponsor);
+		return null;
+	}
+	
 	public GameQuest getCurrentQuest() {
 		return this.currentQuest;
+	}
+	
+	public void setRevealedCard(StoryCard card) {
+		this.revealedCard = card;
+	}
+
+	public void setPhase(Phase phase) {
+		this.phase = phase;
+		
+	}
+	
+	public Phase getPhase() {
+		return this.phase;
 	}
 }
