@@ -34,6 +34,7 @@ public class HandAreaController implements Initializable{
 	
 	
 	public void updateCards(ArrayList<AdventureCard> cards2) {
+		System.out.println("hello");
 		handContainer.getChildren().clear();
 		handContainer.getChildren().addAll(cards2.stream().map(c -> makeGameCard(c)).collect(Collectors.toList()));
 	}

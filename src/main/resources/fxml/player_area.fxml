@@ -11,5 +11,6 @@
 	
 	<fx:include fx:id="fieldArea" source="field_area.fxml"/>
 	<fx:include fx:id="handArea" source="hand_area.fxml"/>
+	<fx:include fx:id="portraitArea" source="portrait_area.fxml"/>
 </AnchorPane>
 

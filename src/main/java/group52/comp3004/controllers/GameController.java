@@ -80,9 +80,9 @@ public class GameController implements Initializable {
 		}
 		
 		Random rand = new Random();
-		
+		this.updateInfo();
 		this.model.dealCardsToPlayers();
-		this.updateAll();
+			this.updateAll();
 		
 		dealtoplayer1.setOnAction(e -> dealPlayer(rand.nextInt(this.model.numPlayers())));
 	}
@@ -102,6 +102,13 @@ public class GameController implements Initializable {
 		this.model.dealToPlayer(index);
 		Player player = this.model.getPlayerByIndex(index);
 		this.playerControllers.get(index).update(player.getHand(),player.getField());
+	}
+	
+	public void updateInfo() {
+		for(int i = 0; i < model.numPlayers(); i++) {
+			Player player = this.model.getPlayerByIndex(i);
+			this.playerControllers.get(i).updateIn(player);
+		}
 	}
 	
 	public void updateAll() {

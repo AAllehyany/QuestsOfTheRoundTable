@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import group52.comp3004.cards.AdventureCard;
+import group52.comp3004.players.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +19,9 @@ public class PlayerAreaController implements Initializable{
 	
 	@FXML
 	private HandAreaController handAreaController;
+	
+	@FXML
+	private PortraitAreaController portraitAreaController;
 	
 	@FXML
 	private Button addCardBtn;
@@ -42,8 +46,18 @@ public class PlayerAreaController implements Initializable{
 	}
 	
 	public void setHand(ArrayList<AdventureCard> cards) {
+		System.out.println(this.handAreaController);
 		this.handAreaController.updateCards(cards);
 		
+	}
+	
+	public void setPortraitArea(Player player) {
+		System.out.println(this.portraitAreaController);
+			this.portraitAreaController.playerInfo(player);
+	}
+	
+	public void updateIn(Player player) {
+		setPortraitArea(player);
 	}
 
 
