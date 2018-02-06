@@ -22,7 +22,7 @@ public class PortraitAreaController implements Initializable {
 	public PortraitAreaController() {
 		
 	}
-
+//create portraitarea
     public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
     	System.out.println("PORTRAIT AREA");
