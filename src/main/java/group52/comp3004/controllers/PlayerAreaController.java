@@ -46,13 +46,11 @@ public class PlayerAreaController implements Initializable{
 	}
 	
 	public void setHand(ArrayList<AdventureCard> cards) {
-		System.out.println(this.handAreaController);
 		this.handAreaController.updateCards(cards);
 		
 	}
 	
 	public void setPortraitArea(Player player) {
-		System.out.println(this.portraitAreaController);
 			this.portraitAreaController.playerInfo(player);
 	}
 	
