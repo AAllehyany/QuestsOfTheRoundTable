@@ -75,11 +75,11 @@ public class PlayerTest {
 		
 		assertEquals(5, (int) p.getBattlePoints());
 		
-		p.addField(new Ally("Hello", 15));
+		p.addField(new Ally("Hello", 15, 0));
 		
 		assertEquals(20, (int) p.getBattlePoints());
 		
-		p.addTemp(new Ally("Hello", 15));
+		p.addTemp(new Ally("Hello", 15, 0));
 		p.addTemp(new Weapon("Horse", 10));
 		
 		assertEquals(45, (int) p.getBattlePoints());
@@ -89,7 +89,7 @@ public class PlayerTest {
 	public void testDoesNotPlayCardNotInHand() {
 		Player p = new Player(1337);
 		
-		Ally c = new Ally("hey", 16);
+		Ally c = new Ally("hey", 16, 0);
 		
 		p.playCardToField(c);
 		
