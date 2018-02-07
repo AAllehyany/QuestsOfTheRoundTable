@@ -7,6 +7,10 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane fx:controller="group52.comp3004.controllers.PlayerAreaController"
-	xmlns:fx="http://javafx.com/fxml/1">
+	xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: red;">
+	
+	<fx:include fx:id="fieldArea" source="field_area.fxml"/>
+	<fx:include fx:id="handArea" source="hand_area.fxml"/>
+	<fx:include fx:id="portraitArea" source="portrait_area.fxml"/>
 </AnchorPane>
 

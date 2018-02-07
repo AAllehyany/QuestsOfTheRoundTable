@@ -5,9 +5,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:controller="group52.comp3004.controllers.FieldAreaController"
-	xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:controller="group52.comp3004.controllers.FieldAreaController"
+	xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: white" spacing="10" fx:id="fieldContainer">
 	
-</AnchorPane>
+</VBox>
 
