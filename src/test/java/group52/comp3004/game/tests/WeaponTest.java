@@ -1,4 +1,4 @@
-package group52.comp3004.cards.test;
+package group52.comp3004.game.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,21 +21,21 @@ class WeaponTest {
 
 	@Test
 	void playerAddWeapon() {
-		p1.addWeapon(excalibur);
+		p1.addTemp(excalibur);
 		assertEquals(35, (int) p1.getBattlePoints());
 	}
 	
 	@Test
 	void playerAddSameWeapon() {
-		boolean result = p1.addWeapon(excalibur);
+		boolean result = p1.canPlayWeapon(excalibur);
 		assertEquals(false, (boolean) result);
 		assertEquals(35, (int) p1.getBattlePoints());
 	}
 	
 	@Test
 	void playerAddMultipleWeapons() {
-		p1.addWeapon(horse);
-		p1.addWeapon(dagger);
+		p1.addTemp(horse);
+		p1.addTemp(dagger);
 		assertEquals(40, (int) p1.getBattlePoints());
 	}
 	
@@ -48,26 +48,26 @@ class WeaponTest {
 	@Test
 	void foeAddWeapon() {
 		giant.addWeapon(dagger);
-		assertEquals(45, (int) giant.getBP());
+		assertEquals(45, (int) giant.getBp());
 	}
 	
 	@Test
 	void foeAddSameWeapon() {
 		boolean result = giant.addWeapon(dagger);
 		assertEquals(false, (boolean) result);
-		assertEquals(45, (int) giant.getBP());
+		assertEquals(45, (int) giant.getBp());
 	}
 	
 	@Test
 	void foeAddMultipleWeapon() {
 		giant.addWeapon(lance);
 		giant.addWeapon(battleax);
-		assertEquals(80, (int) giant.getBP());
+		assertEquals(80, (int) giant.getBp());
 	}
 
 	@Test
 	void foeClearWeapon() {
 		giant.clearWeapons();
-		assertEquals(40, (int) giant.getBP());
+		assertEquals(40, (int) giant.getBp());
 	}
 }
