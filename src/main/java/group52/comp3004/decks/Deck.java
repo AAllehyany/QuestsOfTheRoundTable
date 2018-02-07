@@ -55,16 +55,16 @@ public class Deck<T> {
 	public static ArrayList<AdventureCard> createAdventureDeck() {
 			
 		ArrayList<AdventureCard> cards = new ArrayList<>(Arrays.asList(
-				new Ally("Sir Galahad", 15),
-				new Ally("Sir Lancelot", 15),
-				new Ally("King Arthut", 10),
-				new Ally("Sir Tristan", 10),
-				new Ally("Sir Pellinore", 10),
-				new Ally("Sir Gawain",10),
-				new Ally("Sir Percival", 5),
-				new Ally("Queen Guinever", 0),
-				new Ally("Queen Iseult",0),
-				new Ally("Merlin",0)));
+				new Ally("Sir Galahad", 15, 0),
+				new Ally("Sir Lancelot", 15, 0),
+				new Ally("King Arthut", 10, 0),
+				new Ally("Sir Tristan", 10, 0),
+				new Ally("Sir Pellinore", 10, 0),
+				new Ally("Sir Gawain",10, 0),
+				new Ally("Sir Percival", 5, 0),
+				new Ally("Queen Guinever", 0, 0),
+				new Ally("Queen Iseult",0, 0),
+				new Ally("Merlin",0, 0)));
 		
 		Weapon excalibur = new Weapon("Excalibur", 30);
 		Weapon lance = new Weapon("Lance", 30);
