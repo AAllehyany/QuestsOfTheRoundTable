@@ -3,7 +3,11 @@ package group52.comp3004.players;
 import java.util.ArrayList;
 import java.util.List;
 
-import group52.comp3004.Hand;
+import group52.comp3004.cards.AdventureCard;
+import group52.comp3004.cards.Ally;
+import group52.comp3004.cards.Weapon;
+import group52.comp3004.game.GameQuest;
+import group52.comp3004.game.GameState;
 
 public class Player {
 	
@@ -14,7 +18,11 @@ public class Player {
 	private Integer requiredShields;
 	private List<Integer> weapons;
 	private int minShields;
-	//private Hand hand;
+	private ArrayList<AdventureCard> hand;
+	private ArrayList<AdventureCard> field;
+	private ArrayList<AdventureCard> temp;
+	private GameState game;
+	private GameQuest quest;
 	
 	public Player(Integer id) {
 		this.id = id;
@@ -24,7 +32,10 @@ public class Player {
 		requiredShields = 15;
 		minShields = 10;
 		weapons = new ArrayList<Integer>();
-		//hand = new Hand();
+		hand = new ArrayList<>();
+		field = new ArrayList<>();
+		temp = new ArrayList<>();
+		quest = null;
 	}
 	
 	public Integer getId() {
@@ -39,8 +50,25 @@ public class Player {
 		return rank;
 	}
 	
+	public void setGame(GameState game) {
+		this.game = game;
+	}
+	
+	public GameState getGame() {
+		return this.game;
+	}
+	
+	public GameQuest getQuest() {
+		return this.quest;
+	}
+	
+	public void setQuest(GameQuest quest) {
+		this.quest = quest;
+		//quest.addPlayer(this);
+	}
+	
 	public Integer getBattlePoints() {
-		return battlePoints + weapons.stream().mapToInt(Integer::intValue).sum();
+		return battlePoints + temp.stream().mapToInt(c -> c.getBp()).sum() + field.stream().mapToInt(c -> c.getBp()).sum();
 	}
 	
 	public void clearWeapons() {
@@ -64,6 +92,52 @@ public class Player {
 	}
 	
 	
+	public ArrayList<AdventureCard> getHand() {
+		return hand;
+	}
+	
+	public void setHand(ArrayList<AdventureCard> hand) {
+		this.hand = hand;
+	}
+	
+	public void addCardToHand(AdventureCard card) {
+		this.hand.add(card);
+	}
+	
+	public boolean canPlayWeapon(Weapon weapon) {
+		return !this.field.contains(weapon);
+	}
+	
+	public boolean hasCardInHand(AdventureCard card) {
+		return this.hand.contains(card);
+	}
+	
+	public void playCardToField(Ally card) {
+		if(!hasCardInHand(card)) return;
+		this.field.add(card);
+		this.hand.remove(card);
+	}
+	
+	public void playToTemp(AdventureCard card) {
+		if(!this.hasCardInHand(card)) return;
+		if(card instanceof Weapon && !canPlayWeapon((Weapon) card)) return;
+		
+		this.temp.add(card);
+		this.hand.remove(card);
+	}
+	
+	public void addField(Ally card) {
+		this.field.add(card);
+	}
+	
+	public void addTemp(AdventureCard card) {
+		this.temp.add(card);
+	}
+	
+	public void clearTemp() {
+		
+	}
+
 	private void updateRank() {
 		minShields = requiredShields;
 		if(rank == Rank.Squire) {
@@ -79,5 +153,15 @@ public class Player {
 		else if(rank == Rank.ChampionKnight) {
 			rank = Rank.KnightOfTheRoundTable;
 		}
+	}
+
+	public ArrayList<AdventureCard> getField() {
+		// TODO Auto-generated method stub
+		return this.field;
+	}
+
+	public ArrayList<AdventureCard> getTemp() {
+		// TODO Auto-generated method stub
+		return this.temp;
 	}
 }

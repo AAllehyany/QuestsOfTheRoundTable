@@ -44,7 +44,7 @@ public class View{
 		GameController gameController = loader.getController();
 		gameController.stageSizeProperty().bind(w_size);
 		//load player area
-		PlayerArea player1 = new PlayerArea(root);
+		//PlayerArea player1 = new PlayerArea(root);
 		
 	    
 		//tutorialPart1();

@@ -1,16 +1,18 @@
 package group52.comp3004.cards;
 
-import java.util.ArrayList;
-import java.util.List;
+import javafx.scene.shape.Rectangle;
 public class Card {
 	
 	//attributes that a card has
 	private String name;
 	private boolean isFacedUp;
+	private Rectangle cardFace;
 	
 	public Card(String name) {
 		this.name= name;
 		isFacedUp = false;
+		//test
+		boolean stuff = true;
 	}
 	
 	public String getName() {

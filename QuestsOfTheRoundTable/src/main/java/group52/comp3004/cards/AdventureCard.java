@@ -3,6 +3,8 @@ package group52.comp3004.cards;
 public class AdventureCard extends Card{
 
 	private String description;
+	protected int bp;
+	
 	public AdventureCard(String name) {
 		super(name);
 		this.description = null;
@@ -15,6 +17,10 @@ public class AdventureCard extends Card{
 	
 	public String getDes() {
 		return this.description;
+	}
+	
+	public int getBp() {
+		return this.bp;
 	}
 
 }

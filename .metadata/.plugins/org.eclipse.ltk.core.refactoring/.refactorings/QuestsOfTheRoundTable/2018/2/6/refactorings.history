@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 5 elements from project &apos;QuestsOfTheRoundTable&apos;&#x0D;&#x0A;- Original project: &apos;QuestsOfTheRoundTable&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     linen-texture.jpg&#x0D;&#x0A;     PlayerArea.fxml&#x0D;&#x0A;     portrait_area.fxml&#x0D;&#x0A;     table-background.jpg&#x0D;&#x0A;     view.css" description="Delete elements" element1="src/main/resources/table-background.jpg" element2="src/main/resources/portrait_area.fxml" element3="src/main/resources/view.css" element4="src/main/resources/PlayerArea.fxml" element5="src/main/resources/linen-texture.jpg" elements="0" flags="589830" id="org.eclipse.jdt.ui.delete" resources="5" stamp="1518022847127" subPackages="false" version="1.0"/>
+</session>
