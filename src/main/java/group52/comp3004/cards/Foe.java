@@ -17,13 +17,13 @@ public class Foe extends AdventureCard{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public int getBP() {
-        Iterator<Weapon> itr = this.weapons.iterator();
-        int weaponsBP = 0;
-        while(itr.hasNext()){
-            weaponsBP += itr.next().getBP();
-        }
-		return this.bp + weaponsBP;
+	public int getBp() {
+//        Iterator<Weapon> itr = this.weapons.iterator();
+//        int weaponsBP = 0;
+//        while(itr.hasNext()){
+//            weaponsBP += itr.next().getBp();
+//        }
+		return this.bp + weapons.stream().mapToInt(w -> w.getBp()).sum();
 	}
 
     public boolean hasWeapon(Weapon wep){
