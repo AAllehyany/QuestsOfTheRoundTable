@@ -133,6 +133,10 @@ public class GameState {
 		return true;
 	}
 	
+	public List<Player> getAllPlayers() {
+		return this.players;
+	}
+	
 	
 	public void endQuest() {
 		currentSponsor = -1;
