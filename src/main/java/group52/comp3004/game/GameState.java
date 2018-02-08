@@ -95,6 +95,11 @@ public class GameState {
 			this.players.get(index).addCardToHand(card);
 	}
 	
+	public int getSponsorIndex()
+	{
+		return this.currentSponsor;
+	}
+	
 	public int numPlayers() {
 		return this.players.size();
 	}
