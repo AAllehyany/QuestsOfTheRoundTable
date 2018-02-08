@@ -25,4 +25,8 @@ public class Stage {
 		return testStage;
 	}
 	
+	public int totalCardsPlayed() {
+		return 1 + this.foe.getWeapons().size();
+	}
+	
 }
