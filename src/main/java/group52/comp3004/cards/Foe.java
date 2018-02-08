@@ -37,4 +37,8 @@ public class Foe extends AdventureCard{
     public void clearWeapons(){
         this.weapons.clear();
     }
+
+	public HashSet<Weapon> getWeapons() {
+		return weapons;
+	}
 }
