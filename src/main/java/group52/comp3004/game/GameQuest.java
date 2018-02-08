@@ -16,6 +16,7 @@ public class GameQuest {
 	private int currentStage;
 	private Player sponsor;
 	private boolean over;
+
 	
 	/**
 	 * @param quest
@@ -105,6 +106,18 @@ public class GameQuest {
 		// TODO Auto-generated method stub
 		return this.players.contains(player) || player == sponsor;
 	}
+	
+	public int getNumCardsPlayedBySponsor() {
+		return this.getStages().stream().mapToInt(s -> s.totalCardsPlayed()).sum();
+	}
+	
+	public void dealCardsToSponsor() {
+		for(int i = 0; i< getNumCardsPlayedBySponsor(); i++)
+			sponsor.getGame().dealToPlayer(sponsor.getGame().getSponsorIndex());
+	}
+	
+	
+	public void end() { this.over = true; }
 	
 	
 }
