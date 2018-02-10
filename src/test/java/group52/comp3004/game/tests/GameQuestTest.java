@@ -157,8 +157,10 @@ public class GameQuestTest {
 		GameState g = new GameState();
 		journey = new QuestCard("LOL Quest", 3);
 		Player sponsor = new Player(1);
+		sponsor.setGame(g);
 		g.addPlayer(sponsor);
 		quest = new GameQuest(journey, sponsor);
+		
 		
 		Foe theGoodGuy = new Foe("I AM GOOD GUY", 2, 20);
 		Foe theBadBoy = new Foe("I AM BAD", 2, 1999);
@@ -178,10 +180,6 @@ public class GameQuestTest {
 		
 		theGoodGuy.addWeapon(new Weapon("goodweapon", 28));
 		assertEquals(4, quest.getNumCardsPlayedBySponsor());
-		
-		quest.dealCardsToSponsor();
-		
-		assertEquals(4, sponsor.getHand().size());
 		
 	}
 }
