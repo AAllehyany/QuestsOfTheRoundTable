@@ -19,7 +19,7 @@ public class PlayerArea {
 		HandArea hand = new HandArea(root);
 		PortraitArea portrait = new PortraitArea(root);
 		root.add(field.getPane(), 2, 4, 2, 1); //first set is col/row location 2nd is colspan/rowspan
-		root.add(hand.getPane(), 2, 5, 2, 1);
+		root.add(hand.getPane(), 2, 5, 2, 1); //bug:hand doesnt move to different columns if changed
 		root.add(portrait.getPane(), 1, 5);
 		
 		System.out.println("Player area created");

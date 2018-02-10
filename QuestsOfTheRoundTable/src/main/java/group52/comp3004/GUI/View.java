@@ -1,5 +1,6 @@
 package group52.comp3004.GUI;
 
+import group52.comp3004.cards.Card;
 import group52.comp3004.controllers.GameController;
 import group52.comp3004.game.GameState;
 import javafx.beans.property.DoubleProperty;
@@ -17,8 +18,6 @@ import javafx.scene.control.TextField;
 //tutorial imports 
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -51,6 +50,7 @@ public class View{
 		//tutorialPart2();
 		initView();
 	}
+	
 	public void tutorialPart1() {
 		//JavaFX tutorials
         GridPane grid = new GridPane();
@@ -111,10 +111,9 @@ public class View{
 	
 	public void initView() {
 		Scene scene = new Scene(root, 600, 600);
+		scene.getStylesheets().addAll(css);
 		stage.setTitle("Quest of the Round Table");
 		stage.setScene(scene);
-		
-		
         
         stage.show();
 	}

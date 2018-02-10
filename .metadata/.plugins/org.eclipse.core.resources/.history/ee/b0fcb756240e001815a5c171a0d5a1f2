@@ -1,0 +1,11 @@
+package group52.comp3004;
+
+
+/*DESCRIPTION: Storage class for of all Images and ImagePatterns we need
+ * 			   Can reference  
+ */
+public class ResourceManager {
+	//Resources
+	Image AdventureFront;
+	Image AdventureBack;
+}

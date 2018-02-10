@@ -8,9 +8,9 @@ import java.util.ResourceBundle;
 
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
+import group52.comp3004.cards.Card;
 import group52.comp3004.game.GameState;
 import group52.comp3004.players.Player;
-
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
@@ -62,7 +62,7 @@ public class GameController implements Initializable {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/player_area.fxml"));
 				AnchorPane player = loader.load();
 				PlayerAreaController controller = loader.getController();
-				controller.setHandClickBehaviour(card -> handCardOnClick(card, index));
+				controller.setHandClickBehaviour(card -> handCardOnClick((AdventureCard) card, index));
 				this.playerControllers.add(controller);
 				if(index == 0) gamepane.add(player, 1, 5, 4, 1);
 				else if(index == 1) {
@@ -88,30 +88,37 @@ public class GameController implements Initializable {
 		dealtoplayer1.setOnAction(e -> dealPlayer(rand.nextInt(this.model.numPlayers())));
 	}
 	
+	
 	public void playCard(AdventureCard card) {
 		
 	}
 	
+	//CLICK EVENT: A card in the hand has been clicked
 	public void handCardOnClick(AdventureCard card, int index) {
+		System.out.println("Clicked card: " + card.getName());
 		if(!(card instanceof Ally)) return;
 		Player player = this.model.getPlayerByIndex(index);
 		player.playCardToField((Ally) card);
 		this.playerControllers.get(index).update(player.getHand(),player.getField());
 	}
 	
+	//CLICK EVENT: Adventure Deck has been clicked
 	public void dealPlayer(int index) {
+		System.out.println("Dealt card");
 		this.model.dealToPlayer(index);
 		Player player = this.model.getPlayerByIndex(index);
 		this.playerControllers.get(index).update(player.getHand(),player.getField());
 	}
 	
+	//
 	public void updateInfo() {
 		for(int i = 0; i < model.numPlayers(); i++) {
 			Player player = this.model.getPlayerByIndex(i);
 			this.playerControllers.get(i).updateIn(player);
 		}
 	}
-	
+
+	//Update the hand and field arraylists of the areas to match the player's
 	public void updateAll() {
 		for(int i = 0; i < this.playerControllers.size(); i++) {
 			Player player = this.model.getPlayerByIndex(i);

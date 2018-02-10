@@ -1,0 +1,17 @@
+package group52.comp3004;
+
+import javafx.scene.image.Image;
+
+/*DESCRIPTION: Storage class for of all Images and ImagePatterns we need
+ * 			   Can reference this for each
+ */
+public class ResourceManager {
+	//Resources
+	private Image AdventureFront;
+	private Image AdventureBack;
+	private Image StoryFront;
+	private Image StoryBack;
+	
+	private ArrayList<Images> frontAdventureImg;
+	private ArrayList<Images> frontStoryImg;
+}

@@ -1,0 +1,31 @@
+package group52.comp3004;
+
+import java.util.HashMap;
+
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+
+/*DESCRIPTION: Storage class for of all Images and ImagePatterns we need
+ * 			   Can reference this for each
+ *FORM: Image-> thingImg
+ *		ImagePattern(turns image into a paint for fill)-> thing
+ */
+public class ResourceManager {
+	//Resources
+	private String url = "/image/Cards/";
+	private Image        adventureBackImg;
+	private ImagePattern adventureBack;
+	private Image        storyBackImg;
+	private ImagePattern storyBack;
+	
+	private HashMap<String, Image> frontAdventureImg;
+	private HashMap<String, ImagePattern> frontAdventure;
+	
+	public ResourceManager() {
+		adventureBackImg = new Image(url+"/Backs/adventure_back.jpg");
+		adventureBack = new ImagePattern(adventureBackImg);
+		
+		storyBackImg = new Image(url+"/Backs/story_back.jpg");
+		storyBack = new ImagePattern(storyBackImg);
+	}
+}

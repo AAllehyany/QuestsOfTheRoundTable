@@ -105,7 +105,7 @@ public class Player {
 	}
 	
 	public boolean canPlayWeapon(Weapon weapon) {
-		return !this.field.contains(weapon);
+		return !this.temp.contains(weapon);
 	}
 	
 	public boolean hasCardInHand(AdventureCard card) {
