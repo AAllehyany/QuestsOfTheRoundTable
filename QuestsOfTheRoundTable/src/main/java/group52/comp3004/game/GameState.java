@@ -7,6 +7,7 @@ import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.QuestCard;
 import group52.comp3004.cards.StoryCard;
+import group52.comp3004.controllers.CardClickBehaviour;
 import group52.comp3004.decks.Deck;
 import group52.comp3004.players.Player;
 
@@ -20,6 +21,7 @@ public class GameState {
 	private Deck<AdventureCard> adventureDeck;
 	private GameQuest currentQuest;
 	private StoryCard revealedCard;
+	private CardClickBehaviour clickBehaviour;
 	/**
 	 * @param players
 	 */

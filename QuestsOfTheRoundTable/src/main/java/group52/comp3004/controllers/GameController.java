@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
-import group52.comp3004.cards.Card;
 import group52.comp3004.game.GameState;
 import group52.comp3004.players.Player;
 import javafx.beans.property.DoubleProperty;
@@ -16,8 +15,10 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 
 public class GameController implements Initializable {
 	@FXML
@@ -56,6 +57,11 @@ public class GameController implements Initializable {
 		System.out.println("Game controller created");
 		//add decks
 		AdventureCard adventureDeck = new AdventureCard("Adventure deck card");
+		adventureDeck.setX(80);
+		adventureDeck.setY(100);
+		StackPane deckPane = new StackPane();
+		deckPane.getChildren().add(adventureDeck);
+		deckPane.setAlignment(adventureDeck, Pos.CENTER_RIGHT);//how to centre the deck
 		gamepane.add(adventureDeck, 0, 5);
 		for(int i = 0; i < model.numPlayers(); i++) {
 			final int index = i;
@@ -67,7 +73,7 @@ public class GameController implements Initializable {
 				this.playerControllers.add(controller);
 				
 				//add the player areas to the 
-				if(index == 0) gamepane.add(player, 1, 5, 4, 2);
+				if(index == 0) gamepane.add(player, 1, 6, 4, 2);
 				else if(index == 1) {
 					gamepane.add(player, 0, 1, 1, 4);
 				}

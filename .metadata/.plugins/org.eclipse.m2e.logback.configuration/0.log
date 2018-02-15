@@ -1802,3 +1802,91 @@
 2018-02-15 14:27:34,864 [Worker-50] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 54 resources
 2018-02-15 14:27:34,876 [Worker-50] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
 2018-02-15 14:27:34,884 [Worker-50] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 14:48:14,344 [Worker-60] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 14:48:14,351 [Worker-60] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2018-02-15 14:48:14,360 [Worker-60] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 14:48:14,370 [Worker-60] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 14:48:47,615 [Worker-62] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 14:48:47,624 [Worker-62] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2018-02-15 14:48:47,632 [Worker-62] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 14:48:47,640 [Worker-62] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 14:51:10,561 [Worker-58] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 14:51:10,575 [Worker-58] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 2 resources
+2018-02-15 14:51:10,588 [Worker-58] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 14:51:10,602 [Worker-58] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 14:52:53,994 [Worker-48] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 14:52:54,025 [Worker-48] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 54 resources
+2018-02-15 14:52:54,025 [Worker-48] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 14:52:54,041 [Worker-48] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 14:53:08,274 [Worker-61] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 14:53:08,274 [Worker-61] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 54 resources
+2018-02-15 14:53:08,296 [Worker-61] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 14:53:08,306 [Worker-61] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 14:53:17,742 [Worker-61] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 14:53:17,757 [Worker-61] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 54 resources
+2018-02-15 14:53:17,757 [Worker-61] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 14:53:17,773 [Worker-61] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 14:55:17,207 [Worker-56] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 14:55:17,222 [Worker-56] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 54 resources
+2018-02-15 14:55:17,238 [Worker-56] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 14:55:17,254 [Worker-56] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 14:59:11,267 [Worker-63] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 14:59:11,283 [Worker-63] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 54 resources
+2018-02-15 14:59:11,298 [Worker-63] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 14:59:11,314 [Worker-63] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 14:59:42,327 [Worker-60] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 14:59:42,358 [Worker-60] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 54 resources
+2018-02-15 14:59:42,373 [Worker-60] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 14:59:42,389 [Worker-60] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 15:00:22,281 [Worker-60] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:00:22,297 [Worker-60] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 54 resources
+2018-02-15 15:00:22,312 [Worker-60] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:00:22,312 [Worker-60] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 15:01:13,185 [Worker-63] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:01:13,216 [Worker-63] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 54 resources
+2018-02-15 15:01:13,232 [Worker-63] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:01:13,247 [Worker-63] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 15:03:18,609 [Worker-57] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:03:18,624 [Worker-57] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2018-02-15 15:03:18,624 [Worker-57] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:03:18,640 [Worker-57] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 15:03:34,004 [Worker-40] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:03:34,020 [Worker-40] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2018-02-15 15:03:34,020 [Worker-40] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:03:34,035 [Worker-40] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 15:14:28,677 [Worker-67] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:14:28,693 [Worker-67] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 54 resources
+2018-02-15 15:14:28,709 [Worker-67] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:14:28,724 [Worker-67] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 15:15:13,595 [Worker-71] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:15:13,611 [Worker-71] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 54 resources
+2018-02-15 15:15:13,627 [Worker-71] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:15:13,642 [Worker-71] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 15:17:24,018 [Worker-67] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:17:24,031 [Worker-67] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 54 resources
+2018-02-15 15:17:24,041 [Worker-67] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:17:24,050 [Worker-67] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 15:21:26,140 [Worker-79] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:21:26,154 [Worker-79] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 54 resources
+2018-02-15 15:21:26,164 [Worker-79] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:21:26,173 [Worker-79] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 15:24:53,919 [Worker-82] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:24:53,934 [Worker-82] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 54 resources
+2018-02-15 15:24:53,944 [Worker-82] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:24:53,953 [Worker-82] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 15:26:41,146 [Worker-82] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:26:41,160 [Worker-82] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 54 resources
+2018-02-15 15:26:41,170 [Worker-82] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:26:41,178 [Worker-82] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 15:28:14,478 [Worker-90] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:28:14,493 [Worker-90] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 54 resources
+2018-02-15 15:28:14,503 [Worker-90] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:28:14,512 [Worker-90] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 15:33:09,260 [Worker-78] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:33:09,272 [Worker-78] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 54 resources
+2018-02-15 15:33:09,282 [Worker-78] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:33:09,290 [Worker-78] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-15 15:33:21,873 [Worker-78] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:33:21,887 [Worker-78] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 54 resources
+2018-02-15 15:33:21,896 [Worker-78] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-02-15 15:33:21,905 [Worker-78] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources

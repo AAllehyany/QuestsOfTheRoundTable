@@ -6,7 +6,7 @@
 }
 
 #handContainer{
-	
+	-fx-background-color: #FF0000;	
 }
 
 #fieldContainer{
@@ -14,7 +14,7 @@
 }
 
 #fieldArea{
-	
+	-fx-background-color: #00FF00;	
 }
 .root{
 	

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane fx:controller="group52.comp3004.controllers.PlayerAreaController"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<columnConstraints>
+		<ColumnConstraints minWidth="100" hgrow="NEVER"/>
+		<ColumnConstraints minWidth="100" hgrow="NEVER"/>
+		<ColumnConstraints minWidth="100" hgrow="NEVER"/>
+		<ColumnConstraints minWidth="100" hgrow="NEVER"/>
+	</columnConstraints>
+	<rowConstraints>
+		<RowConstraints minHeight="100" vgrow="NEVER"/>
+		<RowConstraints minHeight="100" vgrow="NEVER"/>
+		<RowConstraints minHeight="100" vgrow="NEVER"/>
+		<RowConstraints minHeight="100" vgrow="NEVER"/>
+	</rowConstraints>
+	<fx:include fx:id="portraitArea" source="portrait_area.fxml" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+	<fx:include id="fieldArea" fx:id="fieldArea" source="field_area.fxml" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+	<fx:include fx:id="handArea" source="hand_area.fxml" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="3"/>
+</GridPane>
+

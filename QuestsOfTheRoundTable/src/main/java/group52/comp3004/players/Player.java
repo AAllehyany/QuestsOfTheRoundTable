@@ -124,12 +124,35 @@ public class Player {
 	
 	public void addCardToHand(AdventureCard card) {
 		System.out.println("Adding "+card.getName()+" to hand");
-		card.setOnMousePressed(new EventHandler<MouseEvent>() {
+		card.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
+				card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
 				System.out.println(card.getName()+ " clicked");
+				//change so card click behaviour changes based on the phase
+				/*
+				 if(game.getPhase() == SetupQuest){
+				 	//add foes and weapons to quest
+				 	hand.remove(card);
+				 	controller.updateAll();	
+				 }
+				 else if(game.getPhase() == RunQuest){
+				 	//add weapons and allies
+				 	field.add(card);
+					hand.remove(card);	
+					controller.updateAll();	
+				 }
+				 else if(game.getPhase() == RunTourney){
+				 	//add weapons to tourney
+				 	hand.remove(card);	
+					controller.updateAll();	
+				 }
+				 else{
+				 	//do nothing
+				 }
+				 */
 				field.add(card);
 				hand.remove(card);	
-				controller.updateAll();				
+				controller.updateAll();	
 			}
 		});
 		this.hand.add(card);
