@@ -34,7 +34,7 @@ public class GameController implements Initializable {
 	//Constructor
 	public GameController() {
 		model = new GameState();
-		Player demo = new Player(1234, this);
+		Player demo = new Player(1234);
 		//Player demow = new Player(1234);
 		//Player demoww = new Player(1234);
 		//Player demowww= new Player(1234);

@@ -42,7 +42,7 @@ public class Player {
 		field = new ArrayList<>();
 		temp = new ArrayList<>();
 		quest = null;
-		controller = gc;
+		controller
 	}
 	
 	public Player(Integer id) {
@@ -133,6 +133,10 @@ public class Player {
 			}
 		});
 		this.hand.add(card);
+		System.out.println("Field cards");
+		for(int i=0; i < field.size(); i++) {
+			System.out.println("    "+field.get(i).getName()+" ");}
+		if(field.size() == 0) System.out.println("empty field");
 	}
 	
 	public boolean canPlayWeapon(Weapon weapon) {
