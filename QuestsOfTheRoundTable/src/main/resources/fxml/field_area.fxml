@@ -7,8 +7,8 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:controller="group52.comp3004.controllers.FieldAreaController"
+<HBox fx:controller="group52.comp3004.controllers.FieldAreaController"
 	xmlns:fx="http://javafx.com/fxml/1" spacing="10" fx:id="fieldContainer" id="fieldContainer">
 	
-</VBox>
+</HBox>
 

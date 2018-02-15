@@ -3,11 +3,14 @@ package group52.comp3004.players;
 import java.util.ArrayList;
 import java.util.List;
 
+import group52.comp3004.GUI.PlayerArea;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Weapon;
 import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 
 public class Player {
 	
@@ -100,8 +103,21 @@ public class Player {
 		this.hand = hand;
 	}
 	
+	
 	public void addCardToHand(AdventureCard card) {
+		System.out.println("Adding "+card.getName()+" to hand");
+		card.setOnMousePressed(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent e) {
+				System.out.println(card.getName()+ " clicked");
+				field.add(card);
+				hand.remove(card);			
+			}
+		});
 		this.hand.add(card);
+		System.out.println("Field cards");
+		for(int i=0; i < field.size(); i++) {
+			System.out.println("    "+field.get(i).getName()+" ");}
+		if(field.size() == 0) System.out.println("empty field");
 	}
 	
 	public boolean canPlayWeapon(Weapon weapon) {
@@ -112,13 +128,13 @@ public class Player {
 		return this.hand.contains(card);
 	}
 	
-	public void playCardToField(Ally card) {
+	public void playCardToField(Ally card) {//why only Ally
 		if(!hasCardInHand(card)) return;
 		this.field.add(card);
 		this.hand.remove(card);
 	}
 	
-	public void playToTemp(AdventureCard card) {
+	public void playToTemp(AdventureCard card) {//whats this for
 		if(!this.hasCardInHand(card)) return;
 		if(card instanceof Weapon && !canPlayWeapon((Weapon) card)) return;
 		

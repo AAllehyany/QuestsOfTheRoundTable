@@ -16,11 +16,6 @@ public class HandAreaController implements Initializable{
 	@FXML
 	private HBox handContainer;
 
-	
-	private CardClickBehaviour clickBehaviour;
-	/**
-	 * 
-	 */
 	public HandAreaController() {
 		super();
 	}
@@ -31,23 +26,8 @@ public class HandAreaController implements Initializable{
 		System.out.println("Field area crated");
 	}
 	
-	
-	public void updateCards(ArrayList<AdventureCard> cards2) {
-		System.out.println("hello");
+	public void updateCards(ArrayList<AdventureCard> cards) {
 		handContainer.getChildren().clear();
-		handContainer.getChildren().addAll(cards2.stream().map(c -> makeGameCard(c)).collect(Collectors.toList()));
-	}
-
-
-	private GameCard makeGameCard(AdventureCard c) {
-		GameCard gameCard = new GameCard(c);
-		gameCard.setOnMouseClicked(e -> clickBehaviour.handClick((AdventureCard) gameCard.getCard()));
-		
-		return gameCard;
-	}
-
-
-	public void setClickBehaviour(CardClickBehaviour clickBehaviour) {
-		this.clickBehaviour = clickBehaviour;
+		handContainer.getChildren().addAll(cards);
 	}
 }

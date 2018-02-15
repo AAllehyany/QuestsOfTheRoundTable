@@ -9,6 +9,7 @@ import javafx.scene.paint.ImagePattern;
  * 			   Can reference this for each
  *FORM: Image-> thingImg
  *		ImagePattern(turns image into a paint for fill)-> thing
+ *Author: Sandy
  */
 public class ResourceManager {
 	//Resources

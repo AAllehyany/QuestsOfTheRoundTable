@@ -1,0 +1,13 @@
+package group52.comp3004.game;
+
+public enum Phase {
+	TurnStart, //start of a players turn
+	RevealStory, //story is added to field
+	TurnEnd,
+	
+	SponsorQuest,
+	SetupQuest,
+	QuestNotSponsored
+	
+
+}

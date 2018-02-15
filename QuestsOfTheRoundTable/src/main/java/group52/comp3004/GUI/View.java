@@ -25,6 +25,7 @@ public class View{
 	//Variables
 	Stage stage;
 	GameState model;
+	Scene scene;
 	//window size
 	DoubleProperty w_size = new SimpleDoubleProperty();
 	private String css;
@@ -110,11 +111,15 @@ public class View{
 	}
 	
 	public void initView() {
-		Scene scene = new Scene(root, 600, 600);
+		scene = new Scene(root, 600, 600);
 		scene.getStylesheets().addAll(css);
 		stage.setTitle("Quest of the Round Table");
 		stage.setScene(scene);
         
         stage.show();
+	}
+	
+	public Scene getScene() {
+		return scene;
 	}
 }

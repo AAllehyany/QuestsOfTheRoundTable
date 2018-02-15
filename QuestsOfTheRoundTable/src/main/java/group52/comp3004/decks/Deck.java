@@ -66,19 +66,12 @@ public class Deck<T> {
 				new Ally("Queen Iseult",0, 0),
 				new Ally("Merlin",0, 0)));
 		
-		Weapon excalibur = new Weapon("Excalibur", 30);
-		Weapon lance = new Weapon("Lance", 30);
-		Weapon battleAx = new Weapon("Battle Ax", 30);
-		Weapon horse = new Weapon("Horse", 10);
-		Weapon sword = new Weapon("Sword", 10);
-		Weapon dagger = new Weapon("Dagger", 5);
-		
-		for(int i = 0; i < 2; i++) cards.add(excalibur);
-		for(int i = 0; i < 6; i++) cards.add(lance);
-		for(int i = 0; i < 8; i++) cards.add(battleAx);
-		for(int i = 0; i < 16; i++) cards.add(sword);
-		for(int i = 0; i < 11; i++) cards.add(horse);
-		for(int i = 0; i < 6; i++) cards.add(dagger);
+		for(int i = 0; i < 2; i++) cards.add(new Weapon("Excalibur", 30));
+		for(int i = 0; i < 6; i++) cards.add(new Weapon("Lance", 30));
+		for(int i = 0; i < 8; i++) cards.add(new Weapon("Battle Ax", 30));
+		for(int i = 0; i < 16; i++) cards.add(new Weapon("Sword", 10));
+		for(int i = 0; i < 11; i++) cards.add(new Weapon("Horse", 10));
+		for(int i = 0; i < 6; i++) cards.add(new Weapon("Dagger", 5));
 		
 		return cards;
 	}

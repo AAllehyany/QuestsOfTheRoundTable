@@ -17,6 +17,8 @@ public class Card extends Rectangle{
 	protected ImagePattern front;
 	protected ImagePattern back;
 	
+	protected CardClickBehaviour clickBehaviour;
+	
 	//DESCRIPTION: representation of a player's card
 	//			   extends Rectangle to make it easier to deal with (no get/sets needed)
 	//			   Only subclasses should be created
@@ -24,12 +26,16 @@ public class Card extends Rectangle{
 	public Card(String name) {
 		super(50,75);
 		this.name= name;
-		isFaceUp = true; //used to determine with face to show front/back
+		isFaceUp = false; //used to determine with face to show front/back
 		this.setArcHeight(20);
 		this.setArcWidth(10);
 	
 		front = null;
 		back = null;
+		
+		Image adventureBackImg = new Image("/image/Cards/Backs/adventure_back.jpg");
+		back = new ImagePattern(adventureBackImg);
+		this.setFill(back);
 	}
 
 	public String getName() {

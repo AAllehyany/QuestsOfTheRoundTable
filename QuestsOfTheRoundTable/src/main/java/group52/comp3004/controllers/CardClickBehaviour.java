@@ -5,5 +5,5 @@ import group52.comp3004.cards.Card;
 @FunctionalInterface
 public interface CardClickBehaviour {
 
-	void handClick(Card card);
+	void handle();
 }

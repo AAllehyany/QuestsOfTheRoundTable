@@ -15,7 +15,7 @@ public class AdventureCard extends Card{
 		//get face resources
 		//front = resman.getFront(name, 'a'); //need to fix names
 		//back = resman.getAdventureBack();
-		Image adventureBackImg = new Image("/image/Cards/Backs/adventure_back.jpg");
+		//Image adventureBackImg = new Image("/image/Cards/Backs/adventure_back.jpg");
 		//back = new ImagePattern(adventureBackImg);
 	}
 	
