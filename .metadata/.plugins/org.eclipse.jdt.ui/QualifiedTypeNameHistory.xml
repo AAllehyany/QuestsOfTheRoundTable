@@ -20,4 +20,6 @@
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="javafx.scene.input.MouseEvent"/>
 <fullyQualifiedTypeName name="javafx.event.EventHandler"/>
+<fullyQualifiedTypeName name="group52.comp3004.controllers.GameController"/>
+<fullyQualifiedTypeName name="javafx.geometry.Pos"/>
 </qualifiedTypeNameHistroy>
