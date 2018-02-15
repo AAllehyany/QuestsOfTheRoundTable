@@ -51,7 +51,6 @@ public class Deck<T> {
 		return card;
 	}
 	
-	
 	public static ArrayList<AdventureCard> createAdventureDeck() {
 			
 		ArrayList<AdventureCard> cards = new ArrayList<>(Arrays.asList(

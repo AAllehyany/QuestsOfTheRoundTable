@@ -182,4 +182,8 @@ public class GameState {
 	public Phase getPhase() {
 		return this.phase;
 	}
+	
+	public Deck<AdventureCard> getAdventureDeck() {
+		return adventureDeck;
+	}
 }

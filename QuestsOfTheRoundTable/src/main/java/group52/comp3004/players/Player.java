@@ -129,7 +129,7 @@ public class Player {
 				System.out.println(card.getName()+ " clicked");
 				field.add(card);
 				hand.remove(card);	
-				controller.updateAll();
+				controller.updateAll();				
 			}
 		});
 		this.hand.add(card);

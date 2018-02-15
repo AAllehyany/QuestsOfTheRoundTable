@@ -31,8 +31,8 @@ public class FieldAreaController implements Initializable{
 	}
 	
 	
-	public void updateCards(ArrayList<AdventureCard> cards2) {
+	public void updateCards(ArrayList<AdventureCard> cards) {
 		fieldContainer.getChildren().clear();
-		fieldContainer.getChildren().addAll(cards2.stream().map(card -> new GameCard(card)).collect(Collectors.toList()));
+		fieldContainer.getChildren().addAll(cards);
 	}
 }
