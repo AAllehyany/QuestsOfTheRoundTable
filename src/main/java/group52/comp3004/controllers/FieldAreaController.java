@@ -7,23 +7,14 @@ import java.util.stream.Collectors;
 
 import group52.comp3004.GUI.cards.GameCard;
 import group52.comp3004.cards.AdventureCard;
-import group52.comp3004.cards.Card;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
+import javafx.scene.layout.HBox;
 
 public class FieldAreaController implements Initializable{
 
 	@FXML
-	private VBox fieldContainer;
+	private HBox fieldContainer;
 
 
 	/**
@@ -40,8 +31,8 @@ public class FieldAreaController implements Initializable{
 	}
 	
 	
-	public void updateCards(ArrayList<AdventureCard> cards2) {
+	public void updateCards(ArrayList<AdventureCard> cards) {
 		fieldContainer.getChildren().clear();
-		fieldContainer.getChildren().addAll(cards2.stream().map(card -> new GameCard(card)).collect(Collectors.toList()));
+		fieldContainer.getChildren().addAll(cards);
 	}
 }

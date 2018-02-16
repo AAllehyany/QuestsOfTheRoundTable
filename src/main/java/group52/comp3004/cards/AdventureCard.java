@@ -1,14 +1,21 @@
 package group52.comp3004.cards;
 
+import group52.comp3004.ResourceManager;
+import group52.comp3004.players.Player;
+
 public class AdventureCard extends Card{
 
 	private String description;
 	protected int bp;
 	
-	public AdventureCard(String name) {
-		super(name);
+	public AdventureCard(String name, ResourceManager rm ) {
+		super(name, rm);
 		this.description = null;
-		// TODO Auto-generated constructor stub
+		
+		//get face resources
+		front = resman.getFront(name, 'a');
+		back = resman.getAdventureBack();
+		this.setFill(front);
 	}
 	
 	public void setDes(String description) {

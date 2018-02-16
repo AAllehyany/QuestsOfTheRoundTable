@@ -10,8 +10,7 @@ public class PortraitArea {
 	public PortraitArea(Pane parent) throws Exception{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/portrait_area.fxml"));
 		area = loader.load();
-
-		area.setStyle("-fx-background-color: #0000FF");
+		
 		System.out.println("Portrait area created");
 	}
 	

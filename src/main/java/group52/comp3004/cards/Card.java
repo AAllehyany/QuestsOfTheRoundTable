@@ -1,16 +1,53 @@
 package group52.comp3004.cards;
 
-import java.util.ArrayList;
-import java.util.List;
-public class Card {
+import group52.comp3004.ResourceManager;
+import group52.comp3004.controllers.CardClickBehaviour;
+import group52.comp3004.players.Player;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
+
+public class Card extends Rectangle{
 	
 	//attributes that a card has
 	private String name;
-	private boolean isFacedUp;
+	private boolean isFaceUp;
+
+	//card face variables
+	protected ResourceManager resman;
+	protected ImagePattern front;
+	protected ImagePattern back;
 	
-	public Card(String name) {
+	protected CardClickBehaviour clickBehaviour;
+	
+	//DESCRIPTION: representation of a player's card
+	//			   extends Rectangle to make it easier to deal with (no get/sets needed)
+	//			   Only subclasses should be created
+	//			   ERROR: If a card is solid black it likely means it is a Card not a subclass
+	public Card(String name, ResourceManager rm) {
+		super(50,75);
 		this.name= name;
-		isFacedUp = false;
+		//System.out.println("RM before");
+		resman = rm;
+		//System.out.println("RM after");
+		isFaceUp = true; //used to determine which face to show front/back
+		this.setArcHeight(20);
+		this.setArcWidth(10);
+		
+		//card faces
+		resman = new ResourceManager();
+		front = null;
+		back = null;
+	}
+	
+	public void flipCard() {
+		if(isFaceUp) {
+			isFaceUp = false;
+			this.setFill(back);
+		}
+		else {
+			isFaceUp = true;
+			this.setFill(front);
+		}
 	}
 	
 	public String getName() {
@@ -19,7 +56,7 @@ public class Card {
 	
 	public String toString() {
 		String str ="";
-		if(isFacedUp) {
+		if(isFaceUp) {
 			str+= name;
 		}else {
 			str = "face down";
