@@ -31,19 +31,21 @@ public class Ally extends AdventureCard
 		this.bonus = bonus;
 	}
 	
-	public boolean bonusQuestSatisfied(GameState state) {
+	// should only be used for Merlin
+	public Ally(String name, ResourceManager rm) {
+		super(name, rm);
+		if(name.equals("Merlin")) this.merlin = true;
+	}
+	
+	// determine if an ally's special ability is satisfied
+	public boolean bonusSatisfied(GameState state) {
 		if(this.prereq==null) return false;
 		if(this.prereq.equals(state.getCurrentQuest().getQuest().getName())) {
 			return true;
 		}
-		return false;
-	}
-	
-	public boolean bonusAllySatisfied(GameState state) {
-		if(this.prereq==null) return false;
-		for(int i=0;i<state.numPlayers();i++) {
-			Player p = state.getPlayerByIndex(i);
-			ArrayList<AdventureCard> field = p.getField();
+		ArrayList<Player> players = new ArrayList<Player>(state.getAllPlayers());
+		for(int i=0;i<players.size();i++) {
+			ArrayList<AdventureCard> field = players.get(i).getField();
 			for(int j=0;j<field.size();j++) {
 				if(field.get(j).getName().equals(this.prereq)) {
 					return true;
@@ -51,6 +53,41 @@ public class Ally extends AdventureCard
 			}
 		}
 		return false;
+	}
+	
+	// spaghetti code to start Merlin's special ability
+	public ArrayList<AdventureCard> StartMerlinSpecial(GameState state, int stage) {
+		ArrayList<AdventureCard> cards = new ArrayList<AdventureCard>();
+		if(!this.merlin) {
+			System.out.println("NOT MERLIN\n");
+			return null;
+		}
+		GameQuest q = state.getCurrentQuest();
+		if(stage>=q.getNumStages()) {
+			System.out.println("INVALID STAGE");
+			return null;
+		}
+		Stage s = q.getStage(stage-1);
+		if(s.isTestStage()) {
+			return cards;
+		}else {
+			Foe f = s.getFoe();
+			cards.add(f);
+			cards.addAll(f.getWeapons());
+			for(int i=0;i<cards.size();i++) {
+				cards.get(i).setFaceUp();
+			}
+			return cards;
+		}
+	}
+	
+	// spaghetti code to end Merlin's special ability
+	public boolean EndMerlinSpecial(ArrayList<AdventureCard> cards) {
+		if(!this.merlin) return false;
+		for(int i=0;i<cards.size();i++) {
+			cards.get(i).setFaceDown();
+		}
+		return true;
 	}
 
 	public int getBp() {
