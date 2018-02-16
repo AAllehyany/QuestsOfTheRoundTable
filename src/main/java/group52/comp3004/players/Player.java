@@ -190,6 +190,17 @@ public class Player {
 	}
 	
 	public void clearTemp() {
+		final Amour amour;
+		
+		this.temp.forEach(card -> {
+			if(card instanceof Ally) {
+				this.field.add(card);
+			}else if(card instanceof Amour) {
+				amour = (Amour) card;
+			}
+		});
+		this.temp.clear();
+		if(amour!=null)this.temp.add(amour);
 		
 	}
 
