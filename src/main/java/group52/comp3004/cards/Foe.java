@@ -43,4 +43,23 @@ public class Foe extends AdventureCard{
 	public HashSet<Weapon> getWeapons() {
 		return weapons;
 	}
+	
+	// spaghetti code to implement Mordred's special ability
+    public boolean MordredSpecial(GameState state, int player, Ally ally, Deck<AdventureCard> adventureDeck) {
+    	if(!this.getName().equals("Mordred")) {
+    		System.out.println("NOT MORDRED\n");
+    		return false;
+    	}
+    	if(player>state.numPlayers()) {
+    		System.out.println("INVALID PLAYER\n");
+    		return false;
+    	}
+    	if(!state.getPlayerByIndex(player).getField().contains(ally)) {
+    		System.out.println("INVALID ALLY\n");
+    		return false;
+    	}
+    	adventureDeck.discard(state.getPlayerByIndex(player).removeAlly(ally));
+    	adventureDeck.discard(this);
+    	return true;
+    }
 }
