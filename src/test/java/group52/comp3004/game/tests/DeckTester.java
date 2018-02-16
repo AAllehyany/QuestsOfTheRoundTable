@@ -1,24 +1,26 @@
-package group52.comp3004.Deck.tests;
+package group52.comp3004.game.tests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.Test;
+
+import group52.comp3004.ResourceManager;
 import group52.comp3004.Deck.Deck;
 import group52.comp3004.Deck.DeckType;
 import group52.comp3004.cards.Card;
 import group52.comp3004.cards.Weapon;
 
 class DeckTester {
+	private ResourceManager resman = new ResourceManager();
 	
-	Card excalibur = new Weapon("Excalibur", 30);
-	Card horse = new Weapon("Horse", 10);
-	Card sword = new Weapon("Sword", 10);
-	Card dagger = new Weapon("Dagger", 5);
-	Card lance = new Weapon("Lance", 20);
-	Card battleax = new Weapon("Battle-ax", 15);
+	Card excalibur = new Weapon("Excalibur", resman, 30);
+	Card horse = new Weapon("Horse", resman, 10);
+	Card sword = new Weapon("Sword", resman, 10);
+	Card dagger = new Weapon("Dagger", resman, 5);
+	Card lance = new Weapon("Lance", resman, 20);
+	Card battleax = new Weapon("Battle-ax", resman, 15);
 
 	@Test
 	public void createDeck() {

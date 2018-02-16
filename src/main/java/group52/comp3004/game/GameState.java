@@ -3,10 +3,12 @@ package group52.comp3004.game;
 import java.util.ArrayList;
 import java.util.List;
 
+import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.QuestCard;
 import group52.comp3004.cards.StoryCard;
+import group52.comp3004.controllers.CardClickBehaviour;
 import group52.comp3004.decks.Deck;
 import group52.comp3004.players.Player;
 
@@ -20,28 +22,33 @@ public class GameState {
 	private Deck<AdventureCard> adventureDeck;
 	private GameQuest currentQuest;
 	private StoryCard revealedCard;
+	private ResourceManager resman;
 	/**
 	 * @param players
 	 */
 	
-	public GameState(List<Player> players) {
+	public GameState(List<Player> players) {//<- Issue model loading twice?
 		super();
+		resman = new ResourceManager();
 		this.players = players;
 		this.currentTurn = 0;
 		this.currentPlayer = 0;
 		phase = Phase.TurnStart;
+		System.out.println("Model loaded (players)");
 	}
 	
 	public GameState() {
 		super();
+		resman = new ResourceManager();
 		this.players = new ArrayList<>();
 		this.currentTurn = 0;
 		this.currentPlayer = 0;
 		this.currentSponsor = -1;
-		phase = Phase.TurnStart;
-		adventureDeck = new Deck<AdventureCard>(Deck.createAdventureDeck());
+		phase = Phase.TurnStart;		
+		adventureDeck = new Deck<AdventureCard>(Deck.createAdventureDeck(resman));
 		currentQuest = null;
 		revealedCard = null;
+		System.out.println("Model loaded (void)");
 	}
 	
 	
@@ -49,9 +56,11 @@ public class GameState {
 		dealCardsToPlayers();
 	}
 	
+	//initial cards to deal to player
 	public void dealCardsToPlayers() {
 		this.players.forEach(player -> {
 			for(int i = 0; i < 12; i++) {
+				System.out.println("Card "+i+" dealt");
 				player.addCardToHand(adventureDeck.drawCard());
 			}
 		});
@@ -89,6 +98,7 @@ public class GameState {
 		return this.players.get(index);
 	}
 	
+	//Deals a new adventure cards to player
 	public void dealToPlayer(int index) {
 		AdventureCard card = adventureDeck.drawCard();
 		if(card != null)
@@ -178,5 +188,12 @@ public class GameState {
 	
 	public Phase getPhase() {
 		return this.phase;
+	}
+	
+	public ResourceManager getResourceManager() {
+		return resman;
+	}
+	public Deck<AdventureCard> getAdventureDeck() {
+		return adventureDeck;
 	}
 }

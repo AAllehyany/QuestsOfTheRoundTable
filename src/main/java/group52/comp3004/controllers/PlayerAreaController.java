@@ -39,12 +39,13 @@ public class PlayerAreaController implements Initializable{
 		System.out.println("player area loaded");
 	}
 
-
+	//update card that are in the field
 	public void setField(ArrayList<AdventureCard> cards) {
 		this.fieldAreaController.updateCards(cards);
 		
 	}
 	
+	//update cards that are in the hand
 	public void setHand(ArrayList<AdventureCard> cards) {
 		this.handAreaController.updateCards(cards);
 		
@@ -62,9 +63,5 @@ public class PlayerAreaController implements Initializable{
 	public void update(ArrayList<AdventureCard> hand, ArrayList<AdventureCard> field) {
 		setField(field);
 		setHand(hand);
-	}
-	
-	public void setHandClickBehaviour(CardClickBehaviour behaviour) {
-		handAreaController.setClickBehaviour(behaviour);
 	}
 }

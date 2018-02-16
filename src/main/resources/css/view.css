@@ -1,5 +1,23 @@
+#portrait{
+	-fx-background-image: url(/image/Cards/Rank/Squire.jpg);
+	-fx-background-size: cover;	
+	-fx-font-size: 12px;
+	-fx-font-fill: #FFFFFF
+}
+
+#handContainer{
+	-fx-background-color: #FF0000;	
+}
+
+#fieldContainer{
+	
+}
+
+#fieldArea{
+	-fx-background-color: #00FF00;	
+}
 .root{
-	-fx-background-image: url(linen-texture.jpg);
+	
 }
 
 .label{

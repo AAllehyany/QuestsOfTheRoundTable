@@ -2,37 +2,36 @@ package group52.comp3004;
 
 import java.io.IOException;
 
+import group52.comp3004.game.GameState;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.scene.Group;
-import javafx.scene.paint.*;
-import javafx.scene.shape.*;
-import javafx.stage.Stage;
-import javafx.fxml.*;
-
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 //tutorial imports 
-import javafx.scene.layout.*;
-import javafx.geometry.*;
-import javafx.scene.*;
-import javafx.scene.text.*;
-import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class View{
 	//Variables
 	Stage stage;
-	Model model;
+	GameState model;
 	//window size
 	double w_size = 600;
 	private String css;
 	Parent root;
 	
 	//Constructor
-	public View(Model myModel, Stage myStage) {
-		model = myModel;
+	public View(GameState myGameState, Stage myStage) {
+		model = myGameState;
 		stage = myStage;
 		css = getClass().getResource("/view.css").toExternalForm();
 		try {

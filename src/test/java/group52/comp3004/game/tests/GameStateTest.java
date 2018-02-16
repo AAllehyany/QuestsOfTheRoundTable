@@ -107,9 +107,9 @@ public class GameStateTest {
 	
 	
 	@Test
-	public void testPlaysQuestProperly() {
-		QuestCard quest = new QuestCard("The Quest", 3);
+	public void testPlaysQuestProperly() {	
 		GameState gs = new GameState();
+		QuestCard quest = new QuestCard("The Quest", gs.getResourceManager(), 3);
 		
 		Player p1 = new Player(123);
 		Player p2 = new Player(1234);
@@ -176,22 +176,22 @@ public class GameStateTest {
 		
 
 		
-		gs.playCardToTemp(new Weapon("Horse", 10));
+		gs.playCardToTemp(new Weapon("Horse", gs.getResourceManager(), 10));
 		assertEquals(0, p2.getTemp().size());
 		
 		gs.setPhase(Phase.SetupQuest);
-		gs.setUpQuestStage(new Foe("Foe", 10, 15));
+		gs.setUpQuestStage(new Foe("Foe", gs.getResourceManager(), 10, 15));
 		
 		assertEquals(1, gs.getCurrentQuest().getStages().size());
 		
-		gs.setUpQuestStage(new Foe("Foe1", 20, 15));
-		gs.setUpQuestStage(new Foe("Foe3", 15, 15)); // test foes increasing power
+		gs.setUpQuestStage(new Foe("Foe1", gs.getResourceManager(), 20, 15));
+		gs.setUpQuestStage(new Foe("Foe3", gs.getResourceManager(), 15, 15)); // test foes increasing power
 		assertEquals(2, gs.getCurrentQuest().getStages().size());
 		
-		gs.setUpQuestStage(new Foe("Foe4", 26, 15));
+		gs.setUpQuestStage(new Foe("Foe4", gs.getResourceManager(), 26, 15));
 		assertEquals(3, gs.getCurrentQuest().getStages().size());
 		
-		gs.setUpQuestStage(new Foe("Foe4", 27, 15));
+		gs.setUpQuestStage(new Foe("Foe4", gs.getResourceManager(), 27, 15));
 		assertEquals(3, gs.getCurrentQuest().getStages().size()); // test only set up up to stage nums
 		
 		// test in quest player turns
@@ -205,7 +205,7 @@ public class GameStateTest {
 		assertEquals(p2, gs.getPlayerByIndex(gs.getCurrentPlayer()));
 		
 		//TODO: test players playing
-		
+	
 		
 		
 		
