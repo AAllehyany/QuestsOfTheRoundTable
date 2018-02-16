@@ -30,7 +30,7 @@ public class Player {
 	private GameController controller;
 	
 	//this needs to be fixed - wrecks the testing
-	public Player(Integer id, GameController gc) {
+	public Player(Integer id, GameController gc, GameState gs) {
 		this.id = id;
 		shields = 10;
 		rank = Rank.Squire;
@@ -43,6 +43,7 @@ public class Player {
 		temp = new ArrayList<>();
 		quest = null;
 		controller = gc;
+		game = gs;
 	}
 	
 	public Player(Integer id) {

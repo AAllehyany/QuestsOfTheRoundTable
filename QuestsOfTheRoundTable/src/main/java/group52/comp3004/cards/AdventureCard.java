@@ -1,22 +1,21 @@
 package group52.comp3004.cards;
 
-import javafx.scene.image.Image;
-import javafx.scene.paint.ImagePattern;
+import group52.comp3004.ResourceManager;
+import group52.comp3004.players.Player;
 
 public class AdventureCard extends Card{
 
 	private String description;
 	protected int bp;
 	
-	public AdventureCard(String name) {
-		super(name);
+	public AdventureCard(String name, ResourceManager rm ) {
+		super(name, rm);
 		this.description = null;
 		
 		//get face resources
-		//front = resman.getFront(name, 'a'); //need to fix names
-		//back = resman.getAdventureBack();
-		//Image adventureBackImg = new Image("/image/Cards/Backs/adventure_back.jpg");
-		//back = new ImagePattern(adventureBackImg);
+		front = resman.getFront(name, 'a');
+		back = resman.getAdventureBack();
+		this.setFill(front);
 	}
 	
 	public void setDes(String description) {

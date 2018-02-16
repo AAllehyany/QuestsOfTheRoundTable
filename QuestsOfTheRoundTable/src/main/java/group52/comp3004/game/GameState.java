@@ -3,6 +3,7 @@ package group52.comp3004.game;
 import java.util.ArrayList;
 import java.util.List;
 
+import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.QuestCard;
@@ -21,29 +22,33 @@ public class GameState {
 	private Deck<AdventureCard> adventureDeck;
 	private GameQuest currentQuest;
 	private StoryCard revealedCard;
-	private CardClickBehaviour clickBehaviour;
+	private ResourceManager resman;
 	/**
 	 * @param players
 	 */
 	
-	public GameState(List<Player> players) {
+	public GameState(List<Player> players) {//<- Issue model loading twice?
 		super();
+		resman = new ResourceManager();
 		this.players = players;
 		this.currentTurn = 0;
 		this.currentPlayer = 0;
 		phase = Phase.TurnStart;
+		System.out.println("Model loaded (players)");
 	}
 	
 	public GameState() {
 		super();
+		resman = new ResourceManager();
 		this.players = new ArrayList<>();
 		this.currentTurn = 0;
 		this.currentPlayer = 0;
 		this.currentSponsor = -1;
-		phase = Phase.TurnStart;
-		adventureDeck = new Deck<AdventureCard>(Deck.createAdventureDeck());
+		phase = Phase.TurnStart;		
+		adventureDeck = new Deck<AdventureCard>(Deck.createAdventureDeck(resman));
 		currentQuest = null;
 		revealedCard = null;
+		System.out.println("Model loaded (void)");
 	}
 	
 	
@@ -185,6 +190,9 @@ public class GameState {
 		return this.phase;
 	}
 	
+	public ResourceManager getResourceManager() {
+		return resman;
+	}
 	public Deck<AdventureCard> getAdventureDeck() {
 		return adventureDeck;
 	}

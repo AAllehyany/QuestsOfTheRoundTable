@@ -2,6 +2,7 @@ package group52.comp3004.cards;
 
 import java.util.ArrayList;
 
+import group52.comp3004.ResourceManager;
 import group52.comp3004.game.GameState;
 import group52.comp3004.players.Player;
 
@@ -14,16 +15,16 @@ public class Ally extends AdventureCard
 	
 	// TODO special abilities
 	
-	public Ally(String name, int bp, int bids) {
+	public Ally(String name, ResourceManager rm, int bp, int bids) {
 		
-		super(name);
+		super(name, rm);
 		this.bp = bp;
 		this.bids = bids;
 		
 	}
 	
-	public Ally(String name, int bp, int bids, String prereq, int bonus) {
-		super(name);
+	public Ally(String name, ResourceManager rm, int bp, int bids, String prereq, int bonus) {
+		super(name, rm);
 		this.bp = bp;
 		this.bids = bids;
 		this.prereq = prereq;

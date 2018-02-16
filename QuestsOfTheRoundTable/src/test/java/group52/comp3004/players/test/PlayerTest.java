@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Weapon;
@@ -14,7 +15,8 @@ import group52.comp3004.players.Player;
 import group52.comp3004.players.Rank;
 
 public class PlayerTest {
-
+	ResourceManager resman = new ResourceManager();
+	
 	@Test
 	public void testShieldsDoNotGoBelowRank() {
 		Player p = new Player(5);
@@ -75,12 +77,12 @@ public class PlayerTest {
 		
 		assertEquals(5, (int) p.getBattlePoints());
 		
-		p.addField(new Ally("Hello", 15, 0));
+		p.addField(new Ally("Hello", resman, 15, 0));
 		
 		assertEquals(20, (int) p.getBattlePoints());
 		
-		p.addTemp(new Ally("Hello", 15, 0));
-		p.addTemp(new Weapon("Horse", 10));
+		p.addTemp(new Ally("Hello", resman, 15, 0));
+		p.addTemp(new Weapon("Horse", resman, 10));
 		
 		assertEquals(45, (int) p.getBattlePoints());
 	}
@@ -89,7 +91,7 @@ public class PlayerTest {
 	public void testDoesNotPlayCardNotInHand() {
 		Player p = new Player(1337);
 		
-		Ally c = new Ally("hey", 16, 0);
+		Ally c = new Ally("hey", resman, 16, 0);
 		
 		p.playCardToField(c);
 		

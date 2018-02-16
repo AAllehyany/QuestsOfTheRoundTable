@@ -30,12 +30,12 @@ public class GameController implements Initializable {
 	
 	@FXML
 	private Button dealtoplayer1;
-	GameState model;
+	private GameState model;
 	
 	//Constructor
 	public GameController() {
 		model = new GameState();
-		Player demo = new Player(1234, this);
+		Player demo = new Player(1234, this, model);
 		//Player demow = new Player(1234);
 		//Player demoww = new Player(1234);
 		//Player demowww= new Player(1234);
@@ -56,13 +56,13 @@ public class GameController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources)  {
 		System.out.println("Game controller created");
 		//add decks
-		AdventureCard adventureDeck = new AdventureCard("Adventure deck card");
+		/*AdventureCard adventureDeck = new AdventureCard("Adventure deck card", model.getResourceManager());
 		adventureDeck.setX(80);
 		adventureDeck.setY(100);
 		StackPane deckPane = new StackPane();
 		deckPane.getChildren().add(adventureDeck);
 		deckPane.setAlignment(adventureDeck, Pos.CENTER_RIGHT);//how to centre the deck
-		gamepane.add(adventureDeck, 0, 5);
+		gamepane.add(adventureDeck, 0, 5);*/
 		for(int i = 0; i < model.numPlayers(); i++) {
 			final int index = i;
 			try {
@@ -133,8 +133,5 @@ public class GameController implements Initializable {
 			Player player = this.model.getPlayerByIndex(i);
 			this.playerControllers.get(i).update(player.getHand(),player.getField());
 		}
-	}
-	
-	
-	
+	}	
 }

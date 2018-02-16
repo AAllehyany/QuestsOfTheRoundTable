@@ -1,10 +1,10 @@
 package group52.comp3004.cards;
 
-import javafx.scene.image.Image;
+import group52.comp3004.ResourceManager;
+import group52.comp3004.controllers.CardClickBehaviour;
+import group52.comp3004.players.Player;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import group52.comp3004.ResourceManager;
-import group52.comp3004.controllers.*;
 
 public class Card extends Rectangle{
 	
@@ -23,21 +23,33 @@ public class Card extends Rectangle{
 	//			   extends Rectangle to make it easier to deal with (no get/sets needed)
 	//			   Only subclasses should be created
 	//			   ERROR: If a card is solid black it likely means it is a Card not a subclass
-	public Card(String name) {
+	public Card(String name, ResourceManager rm) {
 		super(50,75);
 		this.name= name;
-		isFaceUp = false; //used to determine with face to show front/back
+		//System.out.println("RM before");
+		resman = rm;
+		//System.out.println("RM after");
+		isFaceUp = true; //used to determine which face to show front/back
 		this.setArcHeight(20);
 		this.setArcWidth(10);
-	
+		
+		//card faces
+		resman = new ResourceManager();
 		front = null;
 		back = null;
-		
-		Image adventureBackImg = new Image("/image/Cards/Backs/adventure_back.jpg");
-		back = new ImagePattern(adventureBackImg);
-		this.setFill(back);
 	}
-
+	
+	public void flipCard() {
+		if(isFaceUp) {
+			isFaceUp = false;
+			this.setFill(back);
+		}
+		else {
+			isFaceUp = true;
+			this.setFill(front);
+		}
+	}
+	
 	public String getName() {
 		return name;
 	}

@@ -11,9 +11,9 @@ import javafx.scene.paint.ImagePattern;
  *		ImagePattern(turns image into a paint for fill)-> thing
  *Author: Sandy
  */
-public class ResourceManager {
+public class ResourceManager {//ISSSUE: multiple resource managers are being made?
 	//Resources
-	private String url = "/image/Cards";
+	private String url = "image/Cards/";
 	private Image        adventureBackImg;
 	private ImagePattern adventureBack;
 	private Image        storyBackImg;
@@ -28,6 +28,10 @@ public class ResourceManager {
 		
 		storyBackImg = new Image(url+"/Backs/story_back.jpg");
 		storyBack = new ImagePattern(storyBackImg);
+		
+		frontsImg = new HashMap<String, Image>();
+		fronts = new HashMap<String, ImagePattern>();
+		//System.out.println("Resource manager loaded");
 	}
 	
 	public ImagePattern getAdventureBack() {
@@ -42,19 +46,20 @@ public class ResourceManager {
 	//if the image pattern doesnt yet exist then it loads it and returns the pattern
 	//type values: STORY->s ADVENTURE->a
 	public ImagePattern getFront(String name, char type) {//need to find out how names are found
-		if(fronts.containsKey(name)) {
+		System.out.println("Looking for face: " + name);
+		if(fronts.containsKey(name)) {	
+			System.out.println("Pattern found: "+ name);
 			return fronts.get(name);
 		}
 		else {
-			Image img = null;
+			System.out.println("Pattern not found");
+			Image img = new Image("image/linen-texture.jpg");
 			if(type == 'a' || type == 'A') {
-				img = new Image(url+"Adventure/"+name);
+				System.out.println(url+"Adventure/"+name+".jpg");
+				img = new Image(url+"Adventure/"+name+".jpg");
 			}
 			else if(type == 's' || type == 'S') {
-				img = new Image(url+"Story/"+name);
-			}
-			else {
-				img = new Image("image/linen-texture.jpg");
+				img = new Image(url+"Story/"+name+".jpg");
 			}
 			ImagePattern pattern = new ImagePattern(img);
 			fronts.put(name, pattern);

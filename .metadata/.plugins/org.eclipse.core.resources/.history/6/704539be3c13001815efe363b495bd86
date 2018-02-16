@@ -1,0 +1,54 @@
+package group52.comp3004.cards;
+
+import group52.comp3004.ResourceManager;
+import group52.comp3004.controllers.CardClickBehaviour;
+import group52.comp3004.game.GameState;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
+
+public class Card extends Rectangle{
+	
+	//attributes that a card has
+	private String name;
+	private boolean isFaceUp;
+
+	//card face variables
+	protected ResourceManager resman;
+	protected ImagePattern front;
+	protected ImagePattern back;
+	
+	protected CardClickBehaviour clickBehaviour;
+	protected GameState game;
+	
+	//DESCRIPTION: representation of a player's card
+	//			   extends Rectangle to make it easier to deal with (no get/sets needed)
+	//			   Only subclasses should be created
+	//			   ERROR: If a card is solid black it likely means it is a Card not a subclass
+	public Card(String name, GameState gs) {
+		super(50,75);
+		this.name= name;
+		game = gs;
+		isFaceUp = false; //used to determine with face to show front/back
+		this.setArcHeight(20);
+		this.setArcWidth(10);
+		
+		//card faces
+		resman = new ResourceManager();
+		front = null;
+		back = null;
+	}
+
+	public String getName() {
+		return name;
+	}
+	
+	public String toString() {
+		String str ="";
+		if(isFaceUp) {
+			str+= name;
+		}else {
+			str = "face down";
+		}
+		return str;
+	}
+}

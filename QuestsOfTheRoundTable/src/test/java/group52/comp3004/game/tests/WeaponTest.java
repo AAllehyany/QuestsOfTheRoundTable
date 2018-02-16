@@ -4,20 +4,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import group52.comp3004.players.Player;
 import group52.comp3004.cards.Weapon;
+import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.Foe;
 
 import org.junit.jupiter.api.Test;
 
 class WeaponTest {
+	ResourceManager resman = new ResourceManager();
 	
 	Player p1 = new Player(1);
-	Weapon excalibur = new Weapon("Excalibur", 30);
-	Weapon horse = new Weapon("Horse", 10);
-	Weapon sword = new Weapon("Sword", 10);
-	Weapon dagger = new Weapon("Dagger", 5);
-	Weapon lance = new Weapon("Lance", 20);
-	Weapon battleax = new Weapon("Battle-ax", 15);
-	Foe giant = new Foe("Giant", 40, 40);
+	Weapon excalibur = new Weapon("Excalibur", resman, 30);
+	Weapon horse = new Weapon("Horse", resman, 10);
+	Weapon sword = new Weapon("Sword", resman, 10);
+	Weapon dagger = new Weapon("Dagger", resman, 5);
+	Weapon lance = new Weapon("Lance", resman, 20);
+	Weapon battleax = new Weapon("Battle-ax", resman, 15);
+	Foe giant = new Foe("Giant", resman, 40, 40);
 
 	@Test
 	void playerAddWeapon() {
