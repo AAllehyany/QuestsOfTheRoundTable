@@ -13,6 +13,7 @@ import group52.comp3004.cards.Weapon;
 public class Deck<T> {
 	
 	List<T> cards;
+	public ArrayList<T> discard = new ArrayList<T>();
 	int size;
 	
 	public Deck() {
@@ -51,6 +52,11 @@ public class Deck<T> {
 		
 		return card;
 	}
+	
+	public T discard(T c){
+		this.discard.add(c);
+		return c;
+   	}
 	
 	public static ArrayList<AdventureCard> createAdventureDeck(ResourceManager resman) {
 			
