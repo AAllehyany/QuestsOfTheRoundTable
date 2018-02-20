@@ -190,17 +190,17 @@ public class Player {
 	}
 	
 	public void clearTemp() {
-		final Amour amour;
+		ArrayList<AdventureCard> amour = new ArrayList<AdventureCard>();
 		
-		this.temp.forEach(card -> {
-			if(card instanceof Ally) {
-				this.field.add(card);
-			}else if(card instanceof Amour) {
-				amour = (Amour) card;
+		for(int i=0;i<this.temp.size();i++){
+			if(this.temp.get(i) instanceof Ally){
+				this.field.add(this.temp.get(i));
+			}else if(this.temp.get(i) instanceof Amour){
+				amour.add(this.temp.get(i));
 			}
-		});
+		}
 		this.temp.clear();
-		if(amour!=null)this.temp.add(amour);
+		if(!amour.isEmpty()) this.temp.add(amour.get(0));
 		
 	}
 
