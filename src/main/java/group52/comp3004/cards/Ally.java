@@ -12,6 +12,7 @@ public class Ally extends AdventureCard
 	private int bids;
 	private String prereq;
 	private int bonus;
+	private boolean merlin = false;
 	
 	// TODO special abilities
 	
