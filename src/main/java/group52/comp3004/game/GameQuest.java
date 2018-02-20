@@ -16,6 +16,7 @@ public class GameQuest {
 	private int currentStage;
 	private Player sponsor;
 	private boolean over;
+	private int bonusShields;
 
 	
 	/**
@@ -116,8 +117,12 @@ public class GameQuest {
 			sponsor.getGame().dealToPlayer(sponsor.getGame().getSponsorIndex());
 	}
 	
+	public void end() { this.over = true; this.bonusShields=0;}
 	
-	public void end() { this.over = true; }
+	public void setBonusShields(int bonus) {
+		this.bonusShields=bonus;
+	}
+
 	
 	
 }
