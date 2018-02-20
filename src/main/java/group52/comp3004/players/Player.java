@@ -10,6 +10,7 @@ import group52.comp3004.cards.Weapon;
 import group52.comp3004.controllers.GameController;
 import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
+import group52.comp3004.game.GameTourney;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
@@ -27,6 +28,7 @@ public class Player {
 	private ArrayList<AdventureCard> temp;
 	private GameState game;
 	private GameQuest quest;
+	private GameTourney tourney;
 	private GameController controller;
 	
 	//this needs to be fixed - wrecks the testing
@@ -113,6 +115,13 @@ public class Player {
 		}
 	}
 	
+	public void setTourney(GameTourney tourney) {
+		this.tourney = tourney;
+	}
+	
+	public GameTourney getTourney() {
+		return this.tourney;
+	}
 	
 	public ArrayList<AdventureCard> getHand() {
 		return hand;
