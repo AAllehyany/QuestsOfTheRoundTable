@@ -3,7 +3,9 @@ package group52.comp3004.cards;
 import java.util.ArrayList;
 
 import group52.comp3004.ResourceManager;
+import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
+import group52.comp3004.game.Stage;
 import group52.comp3004.players.Player;
 
 public class Ally extends AdventureCard
@@ -12,7 +14,7 @@ public class Ally extends AdventureCard
 	private int bids;
 	private String prereq;
 	private int bonus;
-	private boolean merlin = false;
+	private boolean merlin;
 	
 	// TODO special abilities
 	
@@ -68,7 +70,7 @@ public class Ally extends AdventureCard
 			System.out.println("INVALID STAGE");
 			return null;
 		}
-		Stage s = q.getStage(stage-1);
+		Stage s = q.getStages().get(stage-1);
 		if(s.isTestStage()) {
 			return cards;
 		}else {
