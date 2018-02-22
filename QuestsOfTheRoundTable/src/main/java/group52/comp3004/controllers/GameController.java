@@ -103,6 +103,8 @@ public class GameController implements Initializable {
 	//PURPOSE: Execute TurnStart Phase
 	//		*placeholder if we want to add future behaviour
 	public void startTurn() {
+		
+		//move to next phase
 		model.setPhase(Phase.RevealStory);
 		this.revealStory();
 	}
@@ -131,50 +133,72 @@ public class GameController implements Initializable {
 	}
 	//PURPOSE: Execute HandleEvent Phase
 	public void handleEvent() {
+		
+		//move to next phase
 		model.setPhase(Phase.TurnEnd);
 		this.endTurn();
 	}
 	//PURPOSE: Execute SponsorTourney Phase
 	public void sponsorTourney() {
+		
+		//move to next phase
 		model.setPhase(Phase.JoinTourney);
 		this.joinTourney();
 	}
 	//PURPOSE: Execute JoinTourney Phase
 	public void joinTourney() {
+		
+		//move to next phase
 		model.setPhase(Phase.RunTourney);
 		this.runTourney();
 	}
 	//PURPOSE: Execute RunTourney Phase
 	public void runTourney() {
+		
+		//move to next phase
 		model.setPhase(Phase.TurnEnd);
 		this.endTurn();
 	}
 	//PURPOSE: Execute SponsorQuest Phase
 	public void sponsorQuest() {
+		
+		//move to next phase
 		model.setPhase(Phase.SetupQuest);
 		this.setupQuest();
 	}
 	//PURPOSE: Execute SetupQuest Phase
 	public void setupQuest() {
+		
+		//move to next phase
 		model.setPhase(Phase.RunQuest);
 		this.runQuest();
 	}
 	//PURPOSE: Execute RunQuest Phase
 	public void runQuest() {
+		
+		//move to next phase
 		model.setPhase(Phase.EndQuest);
 		this.endQuest();
 	}
 	//PURPOSE: Execute EndQuest Phase
 	public void endQuest() {
+		
+		//move to next phase
 		model.setPhase(Phase.TurnEnd);
 		this.endTurn();
 	}
 	//PURPOSE: Execute TurnEnd Phase
 	public void endTurn() {
+		
+		//move to next phase
 		model.setPhase(Phase.TurnStart);
 		this.startTurn();
 	}	
-	
+	//PURPOSE: Execute GameOver Phase
+		public void endGame() {
+			
+		}
+		
 	/*********************************************************************************************/
 	//UTILITY METHODS
 	/*********************************************************************************************/
@@ -220,7 +244,9 @@ public class GameController implements Initializable {
 		middleController.setStoryCard(model.getRevealedCard());
 	}	
 	
-	//Start Game->Initialization Methods
+	/*********************************************************************************************/
+	//GUI Initialization Methods
+	/*********************************************************************************************/
 	//PURPOSE: Load in the FXML files for the middle area
 	public void createMiddleArea() {
 		try {
