@@ -3,7 +3,7 @@ package group52.comp3004.cards;
 import java.util.HashSet;
 
 import group52.comp3004.ResourceManager;
-import group52.comp3004.Deck.Deck;
+import group52.comp3004.decks.Deck;
 import group52.comp3004.game.GameState;
 
 public class Foe extends AdventureCard{
@@ -59,8 +59,8 @@ public class Foe extends AdventureCard{
     		System.out.println("INVALID ALLY\n");
     		return false;
     	}
-    	adventureDeck.discard(state.getPlayerByIndex(player).removeAlly(ally)); //dont have a removeAlly method
-    	adventureDeck.discard(this);
+    	//adventureDeck.discard(state.getPlayerByIndex(player).removeAlly(ally)); //dont have a removeAlly method
+    	//adventureDeck.discard(this);
     	return true;
     }
 }

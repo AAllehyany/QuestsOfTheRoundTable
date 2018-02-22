@@ -2,6 +2,8 @@ package group52.comp3004.game;
 
 //PURPOSE: Stores the various states that the game can exist in
 public enum Phase {
+	Intro, //Intro screen for the game
+	
 	TurnStart, //Start of a new round
 	RevealStory, //story is added to field
 	TurnEnd, //Resets the board for the next round
@@ -16,4 +18,6 @@ public enum Phase {
 	SponsorTourney, //Player choose to sponsor the quest
 	JoinTourney, //Players play their adventure cards for tourneys
 	RunTourney, //Compare bids and hand out shields to the winner
+	
+	Broken //The game is broken, despair
 }

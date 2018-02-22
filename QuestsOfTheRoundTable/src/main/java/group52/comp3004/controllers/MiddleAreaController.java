@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.AdventureCard;
+import group52.comp3004.cards.Card;
 import group52.comp3004.cards.StoryCard;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,7 +28,7 @@ public class MiddleAreaController implements Initializable{
 		super();
 		//temp
 		rm = new ResourceManager();
-		storyCard = new StoryCard("York", rm);
+		//storyCard = new StoryCard("York", rm);
 		questContainer = new HBox();
 		questContainer.setAlignment(Pos.CENTER);
 	}
@@ -36,12 +37,21 @@ public class MiddleAreaController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		//middlePane.getChildren().add(storyCard);
 		middlePane.getChildren().add(questContainer);
-		questContainer.getChildren().add(storyCard);
+		//questContainer.getChildren().add(storyCard);
 		System.out.println("Middle area crated");
 	}
 	
 	public void updateCards(ArrayList<AdventureCard> cards) {
 		questContainer.getChildren().clear();
 		questContainer.getChildren().addAll(cards);
+	}
+	
+	//PURPOSE: add the dealt story card to play
+	public void addStory(StoryCard card) {
+		
+	}
+	public void setStoryCard(StoryCard card) {
+		storyCard = null;
+		storyCard = card;
 	}
 }

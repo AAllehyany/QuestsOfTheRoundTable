@@ -9,6 +9,7 @@ import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.EventCard;
+import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.QuestCard;
 import group52.comp3004.cards.StoryCard;
 import group52.comp3004.cards.Tourneys;
@@ -56,6 +57,7 @@ public class Deck<T> {
 		return card;
 	}
 	
+	//PURPOSE: Builds the adventure deck
 	public static ArrayList<AdventureCard> createAdventureDeck(ResourceManager resman) {
 			
 		ArrayList<AdventureCard> cards = new ArrayList<>(Arrays.asList(
@@ -80,6 +82,8 @@ public class Deck<T> {
 		return cards;
 	}
 	
+	//PURPOSE: Builds the story deck
+	//	->Missing: not sure how event behaviour works so events aren't added
 	public static ArrayList<StoryCard> createStoryDeck(ResourceManager resman){
 		ArrayList<StoryCard> cards= new ArrayList<>(Arrays.asList(
 				//missing event behaviours
