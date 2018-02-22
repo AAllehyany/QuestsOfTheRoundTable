@@ -28,5 +28,9 @@ public class Stage {
 	public int totalCardsPlayed() {
 		return 1 + this.foe.getWeapons().size();
 	}
+
+	public Foe getFoe() {
+		return foe;
+	}
 	
 }

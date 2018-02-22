@@ -118,6 +118,4 @@ public class GameQuest {
 	
 	
 	public void end() { this.over = true; }
-	
-	
 }

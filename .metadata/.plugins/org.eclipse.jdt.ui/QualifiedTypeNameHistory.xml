@@ -1,25 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="group52.comp3004.Deck.Deck"/>
+<fullyQualifiedTypeName name="group52.comp3004.game.Stage"/>
 <fullyQualifiedTypeName name="javafx.fxml.FXMLLoader"/>
-<fullyQualifiedTypeName name="java.io.IOException"/>
-<fullyQualifiedTypeName name="java.net.URL"/>
-<fullyQualifiedTypeName name="javafx.scene.control.Button"/>
-<fullyQualifiedTypeName name="javafx.scene.text.Text"/>
-<fullyQualifiedTypeName name="javafx.scene.layout.ColumnConstraints"/>
-<fullyQualifiedTypeName name="javafx.scene.layout.RowConstraints"/>
-<fullyQualifiedTypeName name="javafx.beans.property.DoubleProperty"/>
-<fullyQualifiedTypeName name="javafx.beans.property.SimpleDoubleProperty"/>
-<fullyQualifiedTypeName name="group52.comp3004.controllers.PlayerAreaController"/>
-<fullyQualifiedTypeName name="javafx.scene.Group"/>
-<fullyQualifiedTypeName name="javafx.scene.Node"/>
-<fullyQualifiedTypeName name="javafx.scene.paint.Color"/>
-<fullyQualifiedTypeName name="javafx.scene.shape.Rectangle"/>
-<fullyQualifiedTypeName name="javafx.scene.image.Image"/>
-<fullyQualifiedTypeName name="javafx.scene.paint.ImagePattern"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
-<fullyQualifiedTypeName name="javafx.scene.input.MouseEvent"/>
-<fullyQualifiedTypeName name="javafx.event.EventHandler"/>
-<fullyQualifiedTypeName name="group52.comp3004.controllers.GameController"/>
 <fullyQualifiedTypeName name="javafx.geometry.Pos"/>
+<fullyQualifiedTypeName name="javafx.scene.shape.Rectangle"/>
 </qualifiedTypeNameHistroy>

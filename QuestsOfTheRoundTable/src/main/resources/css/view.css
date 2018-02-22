@@ -16,10 +16,12 @@
 #fieldArea{
 	-fx-background-color: #00FF00;	
 }
+#middleContainer{
+	-fx-background-color: #0000FF;	
+}
 .root{
 	
 }
-
 .label{
 	-fx-font-size: 12px;
 	-fx-font-weight: bold;

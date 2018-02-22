@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+
+<StackPane fx:controller="group52.comp3004.controllers.MiddleAreaController"
+	xmlns:fx="http://javafx.com/fxml/1" fx:id="middleContainer" id="middleContainer">
+	<HBox fx:id=" questContainer"/>
+	<StackPane fx:id="storyCard"/> 
+</StackPane>

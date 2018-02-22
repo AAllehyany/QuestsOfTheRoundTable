@@ -22,14 +22,14 @@ public class GameState {
 	private Deck<AdventureCard> adventureDeck;
 	private GameQuest currentQuest;
 	private StoryCard revealedCard;
-	private ResourceManager resman;
+	private static ResourceManager resman = null;
 	/**
 	 * @param players
 	 */
 	
-	public GameState(List<Player> players) {//<- Issue model loading twice?
+	public GameState(List<Player> players) {
 		super();
-		resman = new ResourceManager();
+		if(resman == null) resman = new ResourceManager();
 		this.players = players;
 		this.currentTurn = 0;
 		this.currentPlayer = 0;
@@ -37,9 +37,9 @@ public class GameState {
 		System.out.println("Model loaded (players)");
 	}
 	
-	public GameState() {
+	public GameState() {//<- Issue model loading twice?
 		super();
-		resman = new ResourceManager();
+		if(resman == null) resman = new ResourceManager();
 		this.players = new ArrayList<>();
 		this.currentTurn = 0;
 		this.currentPlayer = 0;

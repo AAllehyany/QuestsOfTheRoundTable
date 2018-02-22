@@ -9,14 +9,15 @@ import javafx.stage.Stage;
 
 public class Game extends Application{
 	//MVC classes
-	private GameState model;
+	//private GameState model;
 	private View view;
 	private GameController controller;
 	
 	@Override
 	public void start(Stage myStage) throws Exception {
-		model = new GameState();
-		view = new View(model, myStage);
+		System.out.println("Starting");
+		//model = new GameState();
+		view = new View(myStage);
 	}
     
     //main class

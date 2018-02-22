@@ -15,7 +15,7 @@ import group52.comp3004.players.Player;
 import group52.comp3004.players.Rank;
 
 public class PlayerTest {
-	ResourceManager resman = new ResourceManager();
+	private ResourceManager resman = new ResourceManager();
 	
 	@Test
 	public void testShieldsDoNotGoBelowRank() {

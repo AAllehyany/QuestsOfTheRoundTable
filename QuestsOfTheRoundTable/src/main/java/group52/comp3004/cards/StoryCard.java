@@ -9,6 +9,6 @@ public class StoryCard extends Card{
 		//get face resources
 		//front = resman.getFront(name, 's');
 		back = resman.getStoryBack();
+		System.out.println("Story Card made");
 	}
-
 }

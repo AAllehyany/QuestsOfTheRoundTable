@@ -24,7 +24,6 @@ import javafx.stage.Stage;
 public class View{
 	//Variables
 	Stage stage;
-	GameState model;
 	Scene scene;
 	//window size
 	DoubleProperty w_size = new SimpleDoubleProperty();
@@ -32,8 +31,7 @@ public class View{
 	GridPane root;
 	
 	//Constructor
-	public View(GameState myModel, Stage myStage) throws Exception {
-		model = myModel;
+	public View(Stage myStage) throws Exception {
 		stage = myStage;
 		w_size.set(600);
 		css = getClass().getResource("/css/view.css").toExternalForm();
@@ -45,10 +43,7 @@ public class View{
 		gameController.stageSizeProperty().bind(w_size);
 		//load player area
 		//PlayerArea player1 = new PlayerArea(root);
-		
-	    
-		//tutorialPart1();
-		//tutorialPart2();
+
 		initView();
 	}
 	

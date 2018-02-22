@@ -20,7 +20,7 @@ class DeckTester {
 	Card sword = new Weapon("Sword", resman, 10);
 	Card dagger = new Weapon("Dagger", resman, 5);
 	Card lance = new Weapon("Lance", resman, 20);
-	Card battleax = new Weapon("Battle-ax", resman, 15);
+	Card battleax = new Weapon("Battle_Ax", resman, 15);
 
 	@Test
 	public void createDeck() {

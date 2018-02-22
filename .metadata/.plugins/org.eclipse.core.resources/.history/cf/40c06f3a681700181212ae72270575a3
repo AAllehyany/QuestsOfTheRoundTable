@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<GridPane fx:id="gamepane" 
+	fx:controller="group52.comp3004.controllers.GameController"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<columnConstraints>
+		<ColumnConstraints minWidth="100" hgrow="NEVER"/>
+		<ColumnConstraints minWidth="100" hgrow="NEVER"/>
+		<ColumnConstraints minWidth="100" hgrow="NEVER"/>
+		<ColumnConstraints minWidth="100" hgrow="NEVER"/>
+		<ColumnConstraints minWidth="100" hgrow="NEVER"/>
+		<ColumnConstraints minWidth="100" hgrow="NEVER"/>
+	</columnConstraints>
+	<rowConstraints>
+		<RowConstraints minHeight="100" vgrow="NEVER"/>
+		<RowConstraints minHeight="100" vgrow="NEVER"/>
+		<RowConstraints minHeight="100" vgrow="NEVER"/>
+		<RowConstraints minHeight="100" vgrow="NEVER"/>
+		<RowConstraints minHeight="100" vgrow="NEVER"/>
+		<RowConstraints minHeight="100" vgrow="NEVER"/>
+	</rowConstraints>
+	
+	<!-- <fx:include fx:id="player1Area" source="player_area.fxml" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.columnSpan="4"/> -->
+	<Button fx:id="dealtoplayer1" text="playrandomcardforplayer" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="4" />
+	<!--  --><fx:include fx:id="middleArea" id = middleArea source="middle_area.fxml" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.columnSpan="2" GridPane.rowSpan="2"/>-->
+</GridPane>
+

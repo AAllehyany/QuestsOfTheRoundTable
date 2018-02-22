@@ -39,6 +39,7 @@ public class ResourceManager {//ISSSUE: multiple resource managers are being mad
 	}
 	
 	public ImagePattern getStoryBack() {
+		System.out.println("sending story back");
 		return storyBack;
 	}
 	
@@ -46,16 +47,16 @@ public class ResourceManager {//ISSSUE: multiple resource managers are being mad
 	//if the image pattern doesnt yet exist then it loads it and returns the pattern
 	//type values: STORY->s ADVENTURE->a
 	public ImagePattern getFront(String name, char type) {//need to find out how names are found
-		System.out.println("Looking for face: " + name);
+		//System.out.println("Looking for face: " + name);
 		if(fronts.containsKey(name)) {	
-			System.out.println("Pattern found: "+ name);
+			//System.out.println("Pattern found: "+ name);
 			return fronts.get(name);
 		}
 		else {
-			System.out.println("Pattern not found");
+			//System.out.println("Pattern not found");
 			Image img = new Image("image/linen-texture.jpg");
 			if(type == 'a' || type == 'A') {
-				System.out.println(url+"Adventure/"+name+".jpg");
+				//System.out.println(url+"Adventure/"+name+".jpg");
 				img = new Image(url+"Adventure/"+name+".jpg");
 			}
 			else if(type == 's' || type == 'S') {

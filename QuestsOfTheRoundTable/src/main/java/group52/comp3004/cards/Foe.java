@@ -1,9 +1,10 @@
 package group52.comp3004.cards;
 
 import java.util.HashSet;
-import java.util.Iterator;
 
 import group52.comp3004.ResourceManager;
+import group52.comp3004.Deck.Deck;
+import group52.comp3004.game.GameState;
 
 public class Foe extends AdventureCard{
 
@@ -43,4 +44,23 @@ public class Foe extends AdventureCard{
 	public HashSet<Weapon> getWeapons() {
 		return weapons;
 	}
+	
+	// spaghetti code to implement Mordred's special ability
+    public boolean MordredSpecial(GameState state, int player, Ally ally, Deck<AdventureCard> adventureDeck) {
+    	if(!this.getName().equals("Mordred")) {
+    		System.out.println("NOT MORDRED\n");
+    		return false;
+    	}
+    	if(player>state.numPlayers()) {
+    		System.out.println("INVALID PLAYER\n");
+    		return false;
+    	}
+    	if(!state.getPlayerByIndex(player).getField().contains(ally)) {
+    		System.out.println("INVALID ALLY\n");
+    		return false;
+    	}
+    	adventureDeck.discard(state.getPlayerByIndex(player).removeAlly(ally)); //dont have a removeAlly method
+    	adventureDeck.discard(this);
+    	return true;
+    }
 }
