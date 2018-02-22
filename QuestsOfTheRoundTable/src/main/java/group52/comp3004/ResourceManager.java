@@ -39,7 +39,7 @@ public class ResourceManager {//ISSSUE: multiple resource managers are being mad
 	}
 	
 	public ImagePattern getStoryBack() {
-		System.out.println("sending story back");
+		//System.out.println("sending story back");
 		return storyBack;
 	}
 	

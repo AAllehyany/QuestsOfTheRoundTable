@@ -20,6 +20,7 @@ public class GameState {
 	private int currentSponsor;
 	private Phase phase;
 	private Deck<AdventureCard> adventureDeck;
+	private Deck<StoryCard> storyDeck;
 	private GameQuest currentQuest;
 	private StoryCard revealedCard;
 	private static ResourceManager resman = null;
@@ -46,6 +47,7 @@ public class GameState {
 		this.currentSponsor = -1;
 		phase = Phase.TurnStart;		
 		adventureDeck = new Deck<AdventureCard>(Deck.createAdventureDeck(resman));
+		storyDeck = new Deck<StoryCard>(Deck.createStoryDeck(resman));
 		currentQuest = null;
 		revealedCard = null;
 		System.out.println("Model loaded (void)");

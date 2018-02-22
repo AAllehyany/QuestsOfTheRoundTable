@@ -18,7 +18,7 @@ public class MiddleAreaController implements Initializable{
 	@FXML
 	private StackPane middlePane;
 	private HBox questContainer;
-	private StoryCard storyCard, card2, card3;
+	private StoryCard storyCard;
 	
 	//temp
 	private ResourceManager rm;
@@ -28,8 +28,6 @@ public class MiddleAreaController implements Initializable{
 		//temp
 		rm = new ResourceManager();
 		storyCard = new StoryCard("York", rm);
-		card2 = new StoryCard("Pox", rm);
-		card3 = new StoryCard("Pox", rm);
 		questContainer = new HBox();
 		questContainer.setAlignment(Pos.CENTER);
 	}

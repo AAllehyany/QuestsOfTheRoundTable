@@ -7,8 +7,9 @@ public class StoryCard extends Card{
 		super(name, rm);
 		
 		//get face resources
-		//front = resman.getFront(name, 's');
+		front = resman.getFront(name, 's');
 		back = resman.getStoryBack();
-		System.out.println("Story Card made");
+		this.setFill(front);
+		//System.out.println("Story Card made");
 	}
 }
