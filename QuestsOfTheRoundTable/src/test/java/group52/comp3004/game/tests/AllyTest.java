@@ -38,6 +38,10 @@ public class AllyTest {
 		assertEquals(true, (boolean) a1.bonusSatisfied(state));
 		assertEquals(false, (boolean) a2.bonusSatisfied(state));
 		assertEquals(false, (boolean) a3.bonusSatisfied(state));
+		assertEquals(30, (int) a1.getBp(state));
+		assertEquals(10, (int) a2.getBp(state));
+		assertEquals(2, (int) a2.getBids(state));
+		assertEquals(0, (int) a3.getBids(state));
 	}
 	
 	@Test
