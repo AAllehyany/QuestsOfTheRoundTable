@@ -25,6 +25,10 @@ public class AdventureCard extends Card{
 	public String getDes() {
 		return this.description;
 	}
+		
+	public int getBp(GameState state) {
+		return this.bp;
+	}
 	
 	public int getBp() {
 		return this.bp;
