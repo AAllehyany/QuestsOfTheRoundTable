@@ -36,6 +36,6 @@ public class FieldAreaController implements Initializable{
 		fieldContainer.getChildren().addAll(cards);
 		
 		// Change offset depending on hand size
-		fieldContainer.setSpacing((200-cards.size()*50)/(cards.size()-1));
+		if(cards.size()>1) fieldContainer.setSpacing((200-cards.size()*50)/(cards.size()-1));
 	}
 }

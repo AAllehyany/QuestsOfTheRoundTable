@@ -31,6 +31,6 @@ public class HandAreaController implements Initializable{
 		handContainer.getChildren().addAll(cards);
 		
 		// Change offset depending on hand size
-		handContainer.setSpacing((400-cards.size()*50)/(cards.size()-1));
+		if(cards.size()>1) handContainer.setSpacing((400-cards.size()*50)/(cards.size()-1));
 	}
 }
