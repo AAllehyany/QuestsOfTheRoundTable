@@ -8,10 +8,11 @@ import java.util.Random;
 import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
-import group52.comp3004.cards.EventCard;
+import group52.comp3004.cards.Amour;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.QuestCard;
 import group52.comp3004.cards.StoryCard;
+import group52.comp3004.cards.Test;
 import group52.comp3004.cards.Tourneys;
 import group52.comp3004.cards.Weapon;
 
@@ -93,6 +94,22 @@ public class Deck<T> {
 		for(int i = 0; i < 16; i++) cards.add(new Weapon("Sword", resman, 10));
 		for(int i = 0; i < 11; i++) cards.add(new Weapon("Horse", resman, 10));
 		for(int i = 0; i < 6; i++) cards.add(new Weapon("Dagger", resman, 5));
+		for(int i = 0; i < 1; i++) cards.add(new Foe("Dragon", resman, 50, 70, ""));
+		for(int i = 0; i < 2; i++) cards.add(new Foe("Giant", resman, 40));
+		for(int i = 0; i < 4; i++) cards.add(new Foe("Mordred", resman, 30));
+		for(int i = 0; i < 2; i++) cards.add(new Foe("Green_Knight", resman, 25, 40, "Green_Knight"));
+		for(int i = 0; i < 3; i++) cards.add(new Foe("Black_Knight", resman, 25, 35, "Rescue_Maiden"));
+		for(int i = 0; i < 6; i++) cards.add(new Foe("Evil_Knight", resman, 20, 30, "Enchanted_Forest"));
+		for(int i = 0; i < 8; i++) cards.add(new Foe("Saxon_Knight", resman, 15, 25, "Repel_Saxon_Raiders"));
+		for(int i = 0; i < 7; i++) cards.add(new Foe("Robber_Knight", resman, 15));
+		for(int i = 0; i < 5; i++) cards.add(new Foe("Saxons", resman, 10, 20, "Repel_Saxon_Raiders"));
+		for(int i = 0; i < 4; i++) cards.add(new Foe("Boar", resman, 5, 15, "Boar_Hunt"));
+		for(int i = 0; i < 8; i++) cards.add(new Foe("Thieves", resman, 5));
+		for(int i = 0; i < 2; i++) cards.add(new Test("Valor", resman, 3));
+		for(int i = 0; i < 2; i++) cards.add(new Test("Temptation", resman, 3));
+		for(int i = 0; i < 2; i++) cards.add(new Test("Morgan_Le_Fey", resman, 3));
+		for(int i = 0; i < 2; i++) cards.add(new Test("Questing_Beast", resman, 4));
+		for(int i = 0; i < 8; i++) cards.add(new Amour("Amour", resman, 10, 2));
 		
 		return cards;
 	}
