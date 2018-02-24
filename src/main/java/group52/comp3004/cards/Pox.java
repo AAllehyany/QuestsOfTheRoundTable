@@ -7,7 +7,7 @@ public class Pox implements EventBehaviour{
 	public void handle(GameState gamestate) {
 		for(int i=0;i<gamestate.numPlayers();i++) {
 			if(i != gamestate.getCurrentPlayer()) {
-				gamestate.getPlayerByIndex(i).removeShield(1);
+//				gamestate.getPlayerByIndex(i).removeShield(1);
 			}
 		}
 		

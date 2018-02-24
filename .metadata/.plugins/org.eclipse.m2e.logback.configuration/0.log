@@ -2980,3 +2980,5 @@
 2018-02-22 17:51:43,485 [Worker-80] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 69 resources
 2018-02-22 17:51:43,497 [Worker-80] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
 2018-02-22 17:51:43,501 [Worker-80] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Sandy\Documents\GitHub\COMP3004-Personal\QuestsOfTheRoundTable\src\test\resources
+2018-02-24 15:32:46,530 [Worker-6] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2018-02-24 15:35:15,479 [Worker-5] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
