@@ -14,7 +14,7 @@ public class StageTest {
 	
 	@Test
 	public void testHasCorrectBp() {
-		Foe theNicefoe = new Foe("XD", resman, 10, 20);
+		Foe theNicefoe = new Foe("XD", resman, 10, 20, "Hi");
 		Stage stage = new Stage(theNicefoe);
 		assertEquals(10, stage.getTotalPower());
 	}
@@ -22,7 +22,7 @@ public class StageTest {
 	@Test
 	public void testNumCardsPlayed() {
 		
-		Foe theEvilFoe = new Foe("IM EVIL", resman, 16, 16);
+		Foe theEvilFoe = new Foe("IM EVIL", resman, 16, 16, "Hi");
 		Weapon goodWeapon = new Weapon("Weapon Good", resman, 16);
 		
 		

@@ -48,9 +48,9 @@ public class GameQuestTest {
 		journey = new QuestCard("LOL Quest", resman, 3);
 		quest = new GameQuest(journey, new Player(1));
 		
-		Foe theGoodGuy = new Foe("I AM GOOD GUY", resman, 10, 20);
-		Foe theBadBoy = new Foe("I AM BAD", resman, 2, 1999);
-		Foe extremelyNiceFoe = new Foe("EXTREMELY NICE FOE", resman, 103, 200);
+		Foe theGoodGuy = new Foe("I AM GOOD GUY", resman, 10, 20, "Hi");
+		Foe theBadBoy = new Foe("I AM BAD", resman, 2, 1999, "Hi");
+		Foe extremelyNiceFoe = new Foe("EXTREMELY NICE FOE", resman, 103, 200, "Hi");
 		
 		Stage stage1 = new Stage(theGoodGuy);
 		Stage stage2 = new Stage(theBadBoy);
@@ -70,9 +70,9 @@ public class GameQuestTest {
 		journey = new QuestCard("LOL Quest", resman, 3);
 		quest = new GameQuest(journey, new Player(1));
 		
-		Foe theGoodGuy = new Foe("I AM GOOD GUY", resman, 2, 20);
-		Foe theBadBoy = new Foe("I AM BAD", resman, 2, 1999);
-		Foe extremelyNiceFoe = new Foe("EXTREMELY NICE FOE", resman, 6, 200);
+		Foe theGoodGuy = new Foe("I AM GOOD GUY", resman, 2, 20, "Hi");
+		Foe theBadBoy = new Foe("I AM BAD", resman, 2, 1999, "Hi");
+		Foe extremelyNiceFoe = new Foe("EXTREMELY NICE FOE", resman, 6, 200, "Hi");
 		
 		Stage stage1 = new Stage(theGoodGuy);
 		Stage stage2 = new Stage(theBadBoy);
@@ -117,9 +117,9 @@ public class GameQuestTest {
 		journey = new QuestCard("LOL Quest", resman, 3);
 		quest = new GameQuest(journey, new Player(1));
 		
-		Foe theGoodGuy = new Foe("I AM GOOD GUY", resman, 2, 20);
-		Foe theBadBoy = new Foe("I AM BAD", resman, 2, 1999);
-		Foe extremelyNiceFoe = new Foe("EXTREMELY NICE FOE", resman, 6, 200);
+		Foe theGoodGuy = new Foe("I AM GOOD GUY", resman, 2, 20, "Hi");
+		Foe theBadBoy = new Foe("I AM BAD", resman, 2, 1999, "Hi");
+		Foe extremelyNiceFoe = new Foe("EXTREMELY NICE FOE", resman, 6, 200, "Hi");
 		
 		Stage stage1 = new Stage(theGoodGuy);
 		Stage stage2 = new Stage(theBadBoy);
@@ -159,9 +159,9 @@ public class GameQuestTest {
 		g.addPlayer(sponsor);
 		quest = new GameQuest(journey, sponsor);
 		
-		Foe theGoodGuy = new Foe("I AM GOOD GUY", g.getResourceManager(), 2, 20);
-		Foe theBadBoy = new Foe("I AM BAD", g.getResourceManager(), 2, 1999);
-		Foe extremelyNiceFoe = new Foe("EXTREMELY NICE FOE", g.getResourceManager(), 6, 200);
+		Foe theGoodGuy = new Foe("I AM GOOD GUY", g.getResourceManager(), 2, 20, "Hi");
+		Foe theBadBoy = new Foe("I AM BAD", g.getResourceManager(), 2, 1999, "Hi");
+		Foe extremelyNiceFoe = new Foe("EXTREMELY NICE FOE", g.getResourceManager(), 6, 200, "Hi");
 		
 		Stage stage1 = new Stage(theGoodGuy);
 		Stage stage2 = new Stage(theBadBoy);

@@ -180,18 +180,18 @@ public class GameStateTest {
 		assertEquals(0, p2.getTemp().size());
 		
 		gs.setPhase(Phase.SetupQuest);
-		gs.setUpQuestStage(new Foe("Foe", gs.getResourceManager(), 10, 15));
+		gs.setUpQuestStage(new Foe("Foe", gs.getResourceManager(), 10, 15, "Hi"));
 		
 		assertEquals(1, gs.getCurrentQuest().getStages().size());
 		
-		gs.setUpQuestStage(new Foe("Foe1", gs.getResourceManager(), 20, 15));
-		gs.setUpQuestStage(new Foe("Foe3", gs.getResourceManager(), 15, 15)); // test foes increasing power
+		gs.setUpQuestStage(new Foe("Foe1", gs.getResourceManager(), 20, 15, "Hi"));
+		gs.setUpQuestStage(new Foe("Foe3", gs.getResourceManager(), 15, 15, "Hi")); // test foes increasing power
 		assertEquals(2, gs.getCurrentQuest().getStages().size());
 		
-		gs.setUpQuestStage(new Foe("Foe4", gs.getResourceManager(), 26, 15));
+		gs.setUpQuestStage(new Foe("Foe4", gs.getResourceManager(), 26, 15, "Hi"));
 		assertEquals(3, gs.getCurrentQuest().getStages().size());
 		
-		gs.setUpQuestStage(new Foe("Foe4", gs.getResourceManager(), 27, 15));
+		gs.setUpQuestStage(new Foe("Foe4", gs.getResourceManager(), 27, 15, "Hi"));
 		assertEquals(3, gs.getCurrentQuest().getStages().size()); // test only set up up to stage nums
 		
 		// test in quest player turns

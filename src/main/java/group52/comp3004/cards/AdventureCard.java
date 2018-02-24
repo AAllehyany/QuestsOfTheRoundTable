@@ -1,7 +1,7 @@
 package group52.comp3004.cards;
 
 import group52.comp3004.ResourceManager;
-import group52.comp3004.players.Player;
+import group52.comp3004.game.GameState;
 
 public class AdventureCard extends Card{
 
@@ -24,6 +24,10 @@ public class AdventureCard extends Card{
 	
 	public String getDes() {
 		return this.description;
+	}
+		
+	public int getBp(GameState state) {
+		return this.bp;
 	}
 	
 	public int getBp() {

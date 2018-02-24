@@ -64,6 +64,10 @@ public class Card extends Rectangle{
 		return str;
 	}
 	
+	public boolean getFlipped() {
+		return this.isFaceUp;
+	}
+	
 	public void setFaceUp() {
 		this.isFaceUp = true;
 		return;

@@ -10,7 +10,7 @@ import group52.comp3004.cards.Foe;
 import org.junit.jupiter.api.Test;
 
 class WeaponTest {
-	private ResourceManager resman = new ResourceManager();
+	public ResourceManager resman = new ResourceManager();
 	
 	Player p1 = new Player(1);
 	Weapon excalibur = new Weapon("Excalibur", resman, 30);
@@ -19,7 +19,7 @@ class WeaponTest {
 	Weapon dagger = new Weapon("Dagger", resman, 5);
 	Weapon lance = new Weapon("Lance", resman, 20);
 	Weapon battleax = new Weapon("Battle_Ax", resman, 15);
-	Foe giant = new Foe("Giant", resman, 40, 40);
+	Foe giant = new Foe("Giant", resman, 40);
 
 	@Test
 	void playerAddWeapon() {

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="WORKBENCH_SETTINGS">
@@ -9,3 +10,11 @@
 		<item value="341" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="C:\Users\kwen\git\QuestsOfTheRoundTable"/>
+	</list>
+</section>
+>>>>>>> 2805f1e778de157a71176ad0916bf5dacfc7390d

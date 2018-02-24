@@ -1,10 +1,12 @@
 package group52.comp3004.game;
 
 import group52.comp3004.cards.Foe;
+import group52.comp3004.cards.Test;
 
 public class Stage {
 	
 	private final Foe foe;
+	private final Test test;
 	
 	private final boolean testStage;
 	
@@ -14,7 +16,15 @@ public class Stage {
 	public Stage(Foe foe) {
 		super();
 		this.foe = foe;
+		this.test = null;
 		testStage = false;
+	}
+	
+	public Stage(Test test) {
+		super();
+		this.foe = null;
+		this.test = test;
+		testStage = true;
 	}
 	
 	public int getTotalPower() {

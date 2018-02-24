@@ -1,11 +1,15 @@
 package group52.comp3004.players;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Amour;
+import group52.comp3004.cards.CardComparator;
+import group52.comp3004.cards.Foe;
+import group52.comp3004.cards.Test;
 import group52.comp3004.cards.Weapon;
 import group52.comp3004.controllers.GameController;
 import group52.comp3004.game.GameQuest;
@@ -87,6 +91,10 @@ public class Player {
 	public void setQuest(GameQuest quest) {
 		this.quest = quest;
 		//quest.addPlayer(this);
+	}
+	
+	public Integer getBattlePoints(GameState state) {
+		return battlePoints + temp.stream().mapToInt(c -> c.getBp()).sum() + field.stream().mapToInt(c -> c.getBp(state)).sum();
 	}
 	
 	public Integer getBattlePoints() {
@@ -233,5 +241,115 @@ public class Player {
 	public AdventureCard removeAlly(Ally ally) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void sortHand(GameState state) {
+		ArrayList<AdventureCard> foes = new ArrayList<AdventureCard>();
+		ArrayList<AdventureCard> tests = new ArrayList<AdventureCard>();
+		ArrayList<AdventureCard> weps = new ArrayList<AdventureCard>();
+		ArrayList<AdventureCard> Am = new ArrayList<AdventureCard>();
+		ArrayList<AdventureCard> Al = new ArrayList<AdventureCard>();
+		for(int i=0;i<this.hand.size();i++) {
+			if(this.hand.get(i) instanceof Foe) foes.add(this.hand.get(i));
+			else if(this.hand.get(i) instanceof Test) tests.add(this.hand.get(i));
+			else if(this.hand.get(i) instanceof Weapon) weps.add(this.hand.get(i));
+			else if(this.hand.get(i) instanceof Amour) Am.add(this.hand.get(i));
+			else Al.add(this.hand.get(i));
+		}
+		foes.sort(new CardComparator(state));
+		weps.sort(new CardComparator());
+		Am.sort(new CardComparator());
+		Al.sort(new CardComparator(state));
+		this.hand.clear();
+		this.hand.addAll(Al);
+		this.hand.addAll(Am);
+		this.hand.addAll(weps);
+		this.hand.addAll(foes);
+		this.hand.addAll(tests);
+	}
+	
+	public ArrayList<AdventureCard> getDuplicates(){
+		ArrayList<AdventureCard> dupes = new ArrayList<AdventureCard>();
+		HashSet<AdventureCard> cards = new HashSet<AdventureCard>();
+		for(int i=0;i<this.hand.size();i++) {
+			if(!cards.add(this.hand.get(i))) dupes.add(this.hand.get(i));
+		}
+		return dupes;
+	}
+	
+	public boolean hasTest() {
+		for(int i=0;i<this.hand.size();i++) {
+			if(this.hand.get(i) instanceof Test) return true;
+		}
+		return false;
+	}
+	
+	public int countFoes() {
+		int count = 0;
+		for(int i=0;i<this.hand.size();i++) {
+			if(this.hand.get(i) instanceof Foe) count++;
+		}
+		return count;
+	}
+	
+	public int countFoes(int bp) {
+		int count =0;
+		for(int i=0;i<this.hand.size();i++) {
+			if(this.hand.get(i) instanceof Foe && this.hand.get(i).getBp()<bp) count++;
+		}
+		return count;
+	}
+	
+	public ArrayList<AdventureCard> getFoes(int bp){
+		ArrayList<AdventureCard> foes = new ArrayList<AdventureCard>();
+		for(int i=0;i<this.hand.size();i++) {
+			if(this.hand.get(i) instanceof Foe && this.hand.get(i).getBp()<bp) {
+				foes.add(this.hand.get(i));
+			}
+		}
+		return foes;
+	}
+	
+	public ArrayList<AdventureCard> getUniqueFoes(GameState state){
+		ArrayList<AdventureCard> uFoes = new ArrayList<AdventureCard>();
+		HashSet<Integer> bps = new HashSet<Integer>();
+		for(int i=0;i<this.hand.size();i++) {
+			if(this.hand.get(i) instanceof Foe) {
+				Foe f;
+				f = (Foe) this.hand.get(i);
+				if(bps.add(f.getBp(state))) uFoes.add(this.hand.get(i));
+			}
+		}
+		return uFoes;
+	}
+	
+	public int numUniqueFoes(GameState state) {
+		int numUFoes = 0;
+		HashSet<Integer> bps = new HashSet<Integer>();
+		for(int i=0;i<this.hand.size();i++) {
+			if(this.hand.get(i) instanceof Foe) {
+				Foe f = (Foe) this.hand.get(i);
+				if(bps.add(f.getBp(state))) numUFoes++;
+			}
+		}
+		return numUFoes;
+	}
+	
+	public int getBPInHand(GameState state) {
+		int total = 0;
+		for(int i=0;i<this.hand.size();i++) {
+			if(!(this.hand.get(i) instanceof Test || this.hand.get(i) instanceof Foe)) {
+				if(this.hand.get(i) instanceof Ally) total += this.hand.get(i).getBp(state);
+				else total += this.hand.get(i).getBp();
+			}
+		}
+		return total;
+	}
+	
+	public boolean hasAmour() {
+		for(int i=0;i<this.temp.size();i++) {
+			if (this.temp.get(i) instanceof Amour) return true;
+		}
+		return false;
 	}
 }
