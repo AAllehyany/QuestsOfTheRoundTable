@@ -116,15 +116,15 @@ public class GameController implements Initializable {
 		middleController.addStory(model.dealStoryCard());
 		if(model.getRevealedCard() instanceof EventCard) {
 			model.setPhase(Phase.HandleEvent);
-			this.handleEvent();
+			//this.handleEvent();
 		}
 		else if(model.getRevealedCard() instanceof Tourneys) {
 			model.setPhase(Phase.SponsorTourney);
-			this.sponsorTourney();
+			//this.sponsorTourney();
 		}
 		else if(model.getRevealedCard() instanceof QuestCard) {
 			model.setPhase(Phase.SponsorQuest);
-			this.sponsorQuest();
+			//this.sponsorQuest();
 		}
 		else {
 			System.out.println("Unknown card type added to story");
