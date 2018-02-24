@@ -13,7 +13,7 @@ public class Foe extends AdventureCard{
 	private HashSet<Weapon> weapons;
 	private HashSet<String> quests = new HashSet<String>();
 	
-	public Foe(String name, int bp) {
+	public Foe(String name, ResourceManager rm, int bp) {
 		super(name);
 		this.bp = bp;
 		this.highBp = 0;
@@ -22,7 +22,7 @@ public class Foe extends AdventureCard{
 		quests.add("Queens_Honor");
 	}
 	
-	public Foe(String name, int bp, int highBp, String quest) {
+	public Foe(String name, ResourceManager rm, int bp, int highBp, String quest) {
 		super(name);
 		this.bp = bp;
 		this.highBp = highBp;
