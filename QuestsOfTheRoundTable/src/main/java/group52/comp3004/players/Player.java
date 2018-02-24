@@ -89,6 +89,10 @@ public class Player {
 		//quest.addPlayer(this);
 	}
 	
+	public Integer getBattlePoints(GameState state) {
+		return battlePoints + temp.stream().mapToInt(c -> c.getBp()).sum() + field.stream().mapToInt(c -> c.getBp(state)).sum();
+	}
+	
 	public Integer getBattlePoints() {
 		return battlePoints + temp.stream().mapToInt(c -> c.getBp()).sum() + field.stream().mapToInt(c -> c.getBp()).sum();
 	}
