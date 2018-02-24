@@ -94,7 +94,7 @@ public class Deck<T> {
 		for(int i = 0; i < 16; i++) cards.add(new Weapon("Sword", resman, 10));
 		for(int i = 0; i < 11; i++) cards.add(new Weapon("Horse", resman, 10));
 		for(int i = 0; i < 6; i++) cards.add(new Weapon("Dagger", resman, 5));
-		for(int i = 0; i < 1; i++) cards.add(new Foe("Dragon", resman, 50, 70, ""));
+		for(int i = 0; i < 1; i++) cards.add(new Foe("Dragon", resman, 50, 70, "Slay_the_Dragon"));
 		for(int i = 0; i < 2; i++) cards.add(new Foe("Giant", resman, 40));
 		for(int i = 0; i < 4; i++) cards.add(new Foe("Mordred", resman, 30));
 		for(int i = 0; i < 2; i++) cards.add(new Foe("Green_Knight", resman, 25, 40, "Green_Knight"));
