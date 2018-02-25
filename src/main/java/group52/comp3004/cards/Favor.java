@@ -10,7 +10,7 @@ public class Favor implements EventBehaviour{
 	private Rank lowestRank;
 	@Override
 	public void handle(GameState gamestate) {
-		// TODO Auto-generated method stub
+		System.out.println("		->Favor");
 		for(int i=0;i<gamestate.numPlayers();i++) {
 			if(gamestate.getPlayerByIndex(i).getRank()== Rank.Squire){
 				lowestRank = Rank.Squire;

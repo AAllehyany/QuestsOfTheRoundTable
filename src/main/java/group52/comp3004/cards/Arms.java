@@ -8,7 +8,7 @@ public class Arms implements EventBehaviour{
 	private Rank highestRank;
 	@Override
 	public void handle(GameState gamestate) {
-		// TODO Auto-generated method stub
+		System.out.println("		->Arms");
 		for(int i=0;i<gamestate.numPlayers();i++) {
 			if(gamestate.getPlayerByIndex(i).getRank()== Rank.ChampionKnight){
 				highestRank = Rank.ChampionKnight;
