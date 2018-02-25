@@ -16,8 +16,10 @@ import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
 import group52.comp3004.game.Phase;
 import group52.comp3004.players.Player;
+import javafx.embed.swing.JFXPanel;
 
 public class GameStateTest {
+	JFXPanel jfxPanel = new JFXPanel();
 	
 	@Test
 	public void testAddsPlayer() {
@@ -109,7 +111,7 @@ public class GameStateTest {
 	@Test
 	public void testPlaysQuestProperly() {	
 		GameState gs = new GameState();
-		QuestCard quest = new QuestCard("The Quest", gs.getResourceManager(), 3);
+		QuestCard quest = new QuestCard("Rescue_Maiden", gs.getResourceManager(), 3);
 		
 		Player p1 = new Player(123);
 		Player p2 = new Player(1234);
@@ -180,18 +182,18 @@ public class GameStateTest {
 		assertEquals(0, p2.getTemp().size());
 		
 		gs.setPhase(Phase.SetupQuest);
-		gs.setUpQuestStage(new Foe("Foe", gs.getResourceManager(), 10, 15, "Hi"));
+		gs.setUpQuestStage(new Foe("Giant", gs.getResourceManager(), 10, 15, "Hi"));
 		
 		assertEquals(1, gs.getCurrentQuest().getStages().size());
 		
-		gs.setUpQuestStage(new Foe("Foe1", gs.getResourceManager(), 20, 15, "Hi"));
-		gs.setUpQuestStage(new Foe("Foe3", gs.getResourceManager(), 15, 15, "Hi")); // test foes increasing power
+		gs.setUpQuestStage(new Foe("Mordred", gs.getResourceManager(), 20, 15, "Hi"));
+		gs.setUpQuestStage(new Foe("Dragon", gs.getResourceManager(), 15, 15, "Hi")); // test foes increasing power
 		assertEquals(2, gs.getCurrentQuest().getStages().size());
 		
-		gs.setUpQuestStage(new Foe("Foe4", gs.getResourceManager(), 26, 15, "Hi"));
+		gs.setUpQuestStage(new Foe("Saxons", gs.getResourceManager(), 26, 15, "Hi"));
 		assertEquals(3, gs.getCurrentQuest().getStages().size());
 		
-		gs.setUpQuestStage(new Foe("Foe4", gs.getResourceManager(), 27, 15, "Hi"));
+		gs.setUpQuestStage(new Foe("Saxons", gs.getResourceManager(), 27, 15, "Hi"));
 		assertEquals(3, gs.getCurrentQuest().getStages().size()); // test only set up up to stage nums
 		
 		// test in quest player turns

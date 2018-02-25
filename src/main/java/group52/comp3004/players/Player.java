@@ -33,6 +33,8 @@ public class Player {
 	private GameState game;
 	private GameQuest quest;
 	private GameController controller;
+	private Integer bidPoints;
+	private boolean stoppedBidding;
 	
 	//this needs to be fixed - wrecks the testing
 	public Player(Integer id, GameController gc, GameState gs) {
@@ -92,6 +94,20 @@ public class Player {
 	public void setQuest(GameQuest quest) {
 		this.quest = quest;
 		//quest.addPlayer(this);
+	}
+	
+	public Integer getBidPoints(GameState state) {
+		return bidPoints + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum();
+	}
+	
+	
+	public void bidCards(ArrayList<AdventureCard> bids) {
+		if(validBid(bids)) this.bidPoints += bids.size();
+	}
+	
+	
+	public boolean validBid(ArrayList<AdventureCard> bids) {
+		return bids.stream().allMatch(card -> this.hand.contains(card));
 	}
 	
 	public Integer getBattlePoints(GameState state) {
@@ -199,7 +215,17 @@ public class Player {
 	}
 	
 	public void clearTemp() {
-		final Amour amour;
+		ArrayList<AdventureCard> a = new ArrayList<AdventureCard>();
+		
+		for(int i=0;i<this.temp.size();i++) {
+			if(this.temp.get(i) instanceof Ally) {
+				this.field.add(this.temp.get(i));
+			}else if(this.temp.get(i) instanceof Amour) {
+				a.add(this.temp.get(i));
+			}
+		}
+		
+		this.temp = a;
 		
 		/*this.temp.forEach(card -> {
 			if(card instanceof Ally) {
@@ -241,7 +267,8 @@ public class Player {
 	//not sure what it is
 	public AdventureCard removeAlly(Ally ally) {
 		// TODO Auto-generated method stub
-		return null;
+		this.field.remove(ally);
+		return ally;
 	}
 	
 	
@@ -376,5 +403,14 @@ public class Player {
 			if (this.temp.get(i) instanceof Amour) return true;
 		}
 		return false;
+	}
+
+	public void stopBidding() {
+		this.stoppedBidding = true;
+		
+	}
+	
+	public boolean hasStoppedBidding() {
+		return this.stoppedBidding;
 	}
 }

@@ -20,12 +20,11 @@ public class Deck<T> {
 	
 	List<T> cards;
 	int size;
-	ArrayList<T> discard;
+	ArrayList<T> discard = new ArrayList<T>();
 	
 	public Deck() {
-		this.cards = null;
+		this.cards = new ArrayList<T>();
 		size = 0;
-		ArrayList<T> discard = new ArrayList<T>();
 	}
 	
 	public Deck(List<T> cards) {
@@ -57,19 +56,10 @@ public class Deck<T> {
 		card = cards.remove(index);
 		size--;
 		return card;
-//		while(card == null && size > 0) {
-//			int index = rand.nextInt(cards.size());
-//			card = cards.get(index);
-//			cards.set(index, null);
-//		}
-//		
-//		size -= 1;
-//		
-//		return card;
 	}
 	
 	public T discardCard(T c) {
-		this.discard.add(c);
+		discard.add(c);
 		return c;
 	}
 	

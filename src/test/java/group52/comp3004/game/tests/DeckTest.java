@@ -8,9 +8,11 @@ import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.Card;
 import group52.comp3004.cards.Weapon;
 import group52.comp3004.decks.Deck;
+import javafx.embed.swing.JFXPanel;
 
 public class DeckTest {
 	
+	JFXPanel jfxPanel = new JFXPanel();
 	public ResourceManager resman = new ResourceManager();
 	
 	Card excalibur = new Weapon("Excalibur", resman, 30);
@@ -18,7 +20,7 @@ public class DeckTest {
 	Card sword = new Weapon("Sword", resman, 10);
 	Card dagger = new Weapon("Dagger", resman, 5);
 	Card lance = new Weapon("Lance", resman, 20);
-	Card battleax = new Weapon("Battle-ax", resman, 15);
+	Card battleax = new Weapon("Battle_Ax", resman, 15);
 
 	@Test
 	public void testCreateDeck() {

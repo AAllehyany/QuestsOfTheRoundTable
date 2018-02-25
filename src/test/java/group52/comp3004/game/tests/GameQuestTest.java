@@ -13,23 +13,25 @@ import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
 import group52.comp3004.game.Stage;
 import group52.comp3004.players.Player;
+import javafx.embed.swing.JFXPanel;
 
 public class GameQuestTest {
+	JFXPanel jfxPanel = new JFXPanel();
 	
 	private QuestCard journey;
 	private GameQuest quest;
 	private ResourceManager resman = new ResourceManager();
-
+	
 	@Test
 	public void testHasCorrectNumberOfStages() {
-		journey = new QuestCard("LOL Quest", resman, 3);
+		journey = new QuestCard("Green_Knight", resman, 3);
 		quest = new GameQuest(journey, new Player(1));
 		assertEquals(3, quest.getNumStages());
 	}
 	
 	@Test
 	public void testAdvancesStageCorrectly() {
-		journey = new QuestCard("LOL Quest", resman, 3);
+		journey = new QuestCard("Rescue_Maiden", resman, 3);
 		quest = new GameQuest(journey, new Player(1));
 		assertEquals(0, quest.getCurrentStage());
 		
@@ -45,12 +47,12 @@ public class GameQuestTest {
 	
 	@Test
 	public void testFoePowerIncreasesInEachStage() {
-		journey = new QuestCard("LOL Quest", resman, 3);
+		journey = new QuestCard("Rescue_Maiden", resman, 3);
 		quest = new GameQuest(journey, new Player(1));
 		
-		Foe theGoodGuy = new Foe("I AM GOOD GUY", resman, 10, 20, "Hi");
-		Foe theBadBoy = new Foe("I AM BAD", resman, 2, 1999, "Hi");
-		Foe extremelyNiceFoe = new Foe("EXTREMELY NICE FOE", resman, 103, 200, "Hi");
+		Foe theGoodGuy = new Foe("Giant", resman, 10, 20, "Hi");
+		Foe theBadBoy = new Foe("Dragon", resman, 2, 1999, "Hi");
+		Foe extremelyNiceFoe = new Foe("Mordred", resman, 103, 200, "Hi");
 		
 		Stage stage1 = new Stage(theGoodGuy);
 		Stage stage2 = new Stage(theBadBoy);
@@ -67,12 +69,12 @@ public class GameQuestTest {
 	
 	@Test 
 	public void testPlaysStage() {
-		journey = new QuestCard("LOL Quest", resman, 3);
+		journey = new QuestCard("Rescue_Maiden", resman, 3);
 		quest = new GameQuest(journey, new Player(1));
 		
-		Foe theGoodGuy = new Foe("I AM GOOD GUY", resman, 2, 20, "Hi");
-		Foe theBadBoy = new Foe("I AM BAD", resman, 2, 1999, "Hi");
-		Foe extremelyNiceFoe = new Foe("EXTREMELY NICE FOE", resman, 6, 200, "Hi");
+		Foe theGoodGuy = new Foe("Giant", resman, 2, 20, "Hi");
+		Foe theBadBoy = new Foe("Dragon", resman, 2, 1999, "Hi");
+		Foe extremelyNiceFoe = new Foe("Saxons", resman, 6, 200, "Hi");
 		
 		Stage stage1 = new Stage(theGoodGuy);
 		Stage stage2 = new Stage(theBadBoy);
@@ -114,12 +116,12 @@ public class GameQuestTest {
 	
 	@Test
 	public void testAwardsShields() {
-		journey = new QuestCard("LOL Quest", resman, 3);
+		journey = new QuestCard("Rescue_Maiden", resman, 3);
 		quest = new GameQuest(journey, new Player(1));
 		
-		Foe theGoodGuy = new Foe("I AM GOOD GUY", resman, 2, 20, "Hi");
-		Foe theBadBoy = new Foe("I AM BAD", resman, 2, 1999, "Hi");
-		Foe extremelyNiceFoe = new Foe("EXTREMELY NICE FOE", resman, 6, 200, "Hi");
+		Foe theGoodGuy = new Foe("Dragon", resman, 2, 20, "Hi");
+		Foe theBadBoy = new Foe("Giant", resman, 2, 1999, "Hi");
+		Foe extremelyNiceFoe = new Foe("Saxons", resman, 6, 200, "Hi");
 		
 		Stage stage1 = new Stage(theGoodGuy);
 		Stage stage2 = new Stage(theBadBoy);
@@ -154,14 +156,14 @@ public class GameQuestTest {
 	
 	public void testGetsCorrectNumCardsPlayedBySponsor() {
 		GameState g = new GameState();
-		journey = new QuestCard("LOL Quest", g.getResourceManager(), 3);
+		journey = new QuestCard("Rescue_Maiden", g.getResourceManager(), 3);
 		Player sponsor = new Player(1);
 		g.addPlayer(sponsor);
 		quest = new GameQuest(journey, sponsor);
 		
-		Foe theGoodGuy = new Foe("I AM GOOD GUY", g.getResourceManager(), 2, 20, "Hi");
-		Foe theBadBoy = new Foe("I AM BAD", g.getResourceManager(), 2, 1999, "Hi");
-		Foe extremelyNiceFoe = new Foe("EXTREMELY NICE FOE", g.getResourceManager(), 6, 200, "Hi");
+		Foe theGoodGuy = new Foe("Giant", g.getResourceManager(), 2, 20, "Hi");
+		Foe theBadBoy = new Foe("Mordred", g.getResourceManager(), 2, 1999, "Hi");
+		Foe extremelyNiceFoe = new Foe("Saxons", g.getResourceManager(), 6, 200, "Hi");
 		
 		Stage stage1 = new Stage(theGoodGuy);
 		Stage stage2 = new Stage(theBadBoy);
@@ -175,7 +177,7 @@ public class GameQuestTest {
 		
 		
 		
-		theGoodGuy.addWeapon(new Weapon("goodweapon", g.getResourceManager(), 28));
+		theGoodGuy.addWeapon(new Weapon("Excalibur", g.getResourceManager(), 28));
 		assertEquals(4, quest.getNumCardsPlayedBySponsor());
 		
 		quest.dealCardsToSponsor();

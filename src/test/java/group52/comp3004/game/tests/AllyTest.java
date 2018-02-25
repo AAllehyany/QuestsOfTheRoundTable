@@ -16,18 +16,18 @@ import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
 import group52.comp3004.game.Stage;
 import group52.comp3004.players.Player;
+import javafx.embed.swing.JFXPanel;
 
 public class AllyTest {
-	
+	JFXPanel jfxPanel = new JFXPanel();
 	public ResourceManager resman = new ResourceManager();
-	
+		
 	@Test
 	public void testAllyStats() {
 		GameState state = new GameState();
-		Ally a1 = new Ally("Sir_Gaiwan", resman, 10, 0, "Green_Knight", 20, 0);
+		Ally a1 = new Ally("Sir_Gawain", resman, 10, 0, "Green_Knight", 20, 0);
 		assertEquals(0, (int) a1.getBids(state));
 		assertEquals(10, (int) a1.getBp(state));
-
 		Ally a2 = new Ally("King_Arthur", resman, 10, 2);
 		assertEquals(2, (int) a2.getBids(state));
 		assertEquals(10, (int) a2.getBp(state));
@@ -39,7 +39,7 @@ public class AllyTest {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(p);
 		QuestCard q = new QuestCard("Green_Knight", resman, 4);
-		Ally a1 = new Ally("Sir_Gaiwan", resman, 10, 0, "Green_Knight", 20, 0);
+		Ally a1 = new Ally("Sir_Gawain", resman, 10, 0, "Green_Knight", 20, 0);
 		Ally a2 = new Ally("King_Arthur", resman, 10, 2);
 		Ally a3 = new Ally("King_Pellinore", resman, 10, 0, "Questing_Beast", 0, 4);
 		GameState state = new GameState(players);
@@ -73,7 +73,7 @@ public class AllyTest {
 	@Test
 	public void testMerlin() {
 		GameState state = new GameState();
-		QuestCard q = new QuestCard("Quest", resman, 3);
+		QuestCard q = new QuestCard("Enchanted_Forest", resman, 3);
 		Player p1 = new Player(1);
 		Player p2 = new Player(2);
 		state.addPlayer(p1);
@@ -100,7 +100,7 @@ public class AllyTest {
 		s1cards.add(saxons);
 		s1cards.add(dagger);
 		ArrayList<AdventureCard> mcards;
-		mcards = merlin.StartMerlinSpecial(state, 1);
+		mcards = merlin.StartMerlinSpecial(state, 0);
 		assertEquals(2, (int) mcards.size());
 		for(int i=0;i<mcards.size();i++) {
 			assertEquals(s1cards.get(i), (AdventureCard) mcards.get(i));
