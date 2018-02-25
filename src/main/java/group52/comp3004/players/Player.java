@@ -36,7 +36,6 @@ public class Player {
 	private Integer bidPoints;
 	private boolean stoppedBidding;
 	
-	//this needs to be fixed - wrecks the testing
 	public Player(Integer id, GameController gc, GameState gs) {
 		this.id = id;
 		shields = 10;

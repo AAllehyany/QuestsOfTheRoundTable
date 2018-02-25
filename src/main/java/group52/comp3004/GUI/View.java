@@ -33,7 +33,7 @@ public class View{
 	//Constructor
 	public View(Stage myStage) throws Exception {
 		stage = myStage;
-		w_size.set(600);
+		w_size.set(840);
 		css = getClass().getResource("/css/view.css").toExternalForm();
 		
 		//Load top level fxml document
@@ -48,7 +48,7 @@ public class View{
 	}
 	
 	public void initView() {
-		scene = new Scene(root, 600, 600);
+		scene = new Scene(root, 840, 840);
 		scene.getStylesheets().addAll(css);
 		stage.setTitle("Quest of the Round Table");
 		stage.setScene(scene);
