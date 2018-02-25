@@ -16,8 +16,10 @@ import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
 import group52.comp3004.game.Phase;
 import group52.comp3004.players.Player;
+import javafx.embed.swing.JFXPanel;
 
 public class GameStateTest {
+	JFXPanel jfxPanel = new JFXPanel();
 	
 	@Test
 	public void testAddsPlayer() {

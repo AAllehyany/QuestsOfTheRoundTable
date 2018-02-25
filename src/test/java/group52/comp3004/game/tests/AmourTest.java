@@ -6,8 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.Amour;
+import javafx.embed.swing.JFXPanel;
 
 public class AmourTest {
+	JFXPanel jfxPanel = new JFXPanel();
 	public ResourceManager resman = new ResourceManager();
 
 	@Test

@@ -27,8 +27,8 @@ public class MiddleAreaController implements Initializable{
 	public MiddleAreaController() {
 		super();
 		//temp
-		rm = new ResourceManager();
-		//storyCard = new StoryCard("York", rm);
+		rm = new ResourceManager(); //remove when story card sample is removed
+		storyCard = new StoryCard("York", rm);
 		questContainer = new HBox();
 		questContainer.setAlignment(Pos.CENTER);
 	}
@@ -37,7 +37,7 @@ public class MiddleAreaController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		//middlePane.getChildren().add(storyCard);
 		middlePane.getChildren().add(questContainer);
-		//questContainer.getChildren().add(storyCard);
+		questContainer.getChildren().add(storyCard);
 		System.out.println("Middle area crated");
 	}
 	

@@ -11,8 +11,10 @@ import group52.comp3004.cards.Foe;
 import group52.comp3004.decks.Deck;
 import group52.comp3004.game.GameState;
 import group52.comp3004.players.Player;
+import javafx.embed.swing.JFXPanel;
 
 public class FoeTest {
+	JFXPanel jfxPanel = new JFXPanel();
 	
 	@Test
 	public void testMordred() {

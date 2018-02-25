@@ -13,13 +13,15 @@ import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
 import group52.comp3004.game.Stage;
 import group52.comp3004.players.Player;
+import javafx.embed.swing.JFXPanel;
 
 public class GameQuestTest {
 	
 	private QuestCard journey;
 	private GameQuest quest;
 	private ResourceManager resman = new ResourceManager();
-
+	JFXPanel jfxPanel = new JFXPanel();
+	
 	@Test
 	public void testHasCorrectNumberOfStages() {
 		journey = new QuestCard("LOL Quest", resman, 3);

@@ -13,9 +13,11 @@ import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Weapon;
 import group52.comp3004.players.Player;
 import group52.comp3004.players.Rank;
+import javafx.embed.swing.JFXPanel;
 
 public class PlayerTest {
 	private ResourceManager resman = new ResourceManager();
+	JFXPanel jfxPanel = new JFXPanel();
 	
 	@Test
 	public void testShieldsDoNotGoBelowRank() {
