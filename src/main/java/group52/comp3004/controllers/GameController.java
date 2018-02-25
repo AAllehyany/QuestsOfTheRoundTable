@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+import group52.comp3004.GUI.MiddleArea;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.EventCard;
@@ -23,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.transform.Rotate;
 
 public class GameController implements Initializable {
 	@FXML
@@ -34,20 +36,20 @@ public class GameController implements Initializable {
 	private MiddleAreaController middleController;
 	
 	@FXML
-	private Button dealtoplayer1, startGame;
+	private Button startGame;
 	private GameState model;
 	
 	//Constructor
 	public GameController() {
 		model = new GameState();
-		Player demo = new Player(1234, this, model);
-		//Player demow = new Player(1234);
-		//Player demoww = new Player(1234);
-		//Player demowww= new Player(1234);
+		Player demo = new Player(1, this, model);
+		Player demow = new Player(2, this, model);
+		Player demoww = new Player(3, this, model);
+		Player demowww= new Player(4, this, model);
 		model.addPlayer(demo);
-		//model.addPlayer(demow);
-		//model.addPlayer(demoww);
-		//model.addPlayer(demowww);
+		model.addPlayer(demow);
+		model.addPlayer(demoww);
+		model.addPlayer(demowww);
 		stageSize.set(0);
 		playerControllers = new ArrayList<>();
 		middleController = null;
@@ -64,7 +66,7 @@ public class GameController implements Initializable {
 		System.out.println("Game controller created");
 		startGame.setOnAction(e -> this.startGame());
 		
-			dealtoplayer1.setVisible(false);
+			//dealtoplayer1.setVisible(false);
 	}
 	
 	/*****************************************************************************************************/
@@ -87,9 +89,9 @@ public class GameController implements Initializable {
 		//this.addStoryDeck();
 		
 		//deal out cards
-			dealtoplayer1.setVisible(true);
+			/*dealtoplayer1.setVisible(true);
 			Random rand = new Random();
-			dealtoplayer1.setOnAction(e -> dealPlayer(rand.nextInt(this.model.numPlayers())));
+			dealtoplayer1.setOnAction(e -> dealPlayer(rand.nextInt(this.model.numPlayers())));*/
 		this.updateInfo();
 		this.model.dealCardsToPlayers();
 		
@@ -113,26 +115,32 @@ public class GameController implements Initializable {
 	//		*story card is added to middle area
 	//		*next phase depends on type of card dealt
 	public void revealStory() {
+		//reveal story card
+		middleController.reset();
 		middleController.addStory(model.dealStoryCard());
-		if(model.getRevealedCard() instanceof EventCard) {
+		
+		//move to next phase depending on card type
+		if(model.getRevealedCard() instanceof EventCard) {System.out.println("    -->Event");
 			model.setPhase(Phase.HandleEvent);
 			this.handleEvent();
 		}
-		else if(model.getRevealedCard() instanceof Tourneys) {
+		else if(model.getRevealedCard() instanceof Tourneys) {System.out.println("    -->Tourney");
 			model.setPhase(Phase.SponsorTourney);
-			this.sponsorTourney();
+			//this.sponsorTourney();
 		}
-		else if(model.getRevealedCard() instanceof QuestCard) {
+		else if(model.getRevealedCard() instanceof QuestCard) {System.out.println("    -->Quest");
 			model.setPhase(Phase.SponsorQuest);
-			this.sponsorQuest();
+			//this.sponsorQuest();
 		}
 		else {
 			System.out.println("Unknown card type added to story");
 			model.setPhase(Phase.Broken);
 		}
 	}
-	//PURPOSE: Execute HandleEvent Phase
+	//PURPOSE: Execute the event behaviour contained in the event card
 	public void handleEvent() {
+		if(model.getRevealedCard() instanceof EventCard)
+			((EventCard)model.getRevealedCard()).run(model);
 		
 		//move to next phase
 		model.setPhase(Phase.TurnEnd);
@@ -189,15 +197,16 @@ public class GameController implements Initializable {
 	}
 	//PURPOSE: Execute TurnEnd Phase
 	public void endTurn() {
+		middleController.reset();
 		
 		//move to next phase
 		model.setPhase(Phase.TurnStart);
 		this.startTurn();
 	}	
 	//PURPOSE: Execute GameOver Phase
-		public void endGame() {
+	public void endGame() {
 			
-		}
+	}
 		
 	/*********************************************************************************************/
 	//UTILITY METHODS
@@ -241,7 +250,7 @@ public class GameController implements Initializable {
 		}
 		
 		//update middle area
-		middleController.setStoryCard(model.getRevealedCard());
+		//middleController.setStoryCard(model.getRevealedCard());
 	}	
 	
 	/*********************************************************************************************/
@@ -272,14 +281,17 @@ public class GameController implements Initializable {
 				
 				//add the player areas to the 
 				if(index == 0) gamepane.add(player, 1, 6, 4, 2);
-				else if(index == 1) {
-					gamepane.add(player, 0, 1, 1, 4);
+				else if(index == 1) {	
+					player.getTransforms().add(new Rotate(90, Rotate.Z_AXIS));
+					gamepane.add(player, 1, 1, 2, 4);
 				}
 				else if(index == 2) {
-					gamepane.add(player, 1, 0, 4, 1);
+					player.getTransforms().add(new Rotate(180, Rotate.Z_AXIS));
+					gamepane.add(player, 5, 2, 4, 2);
 				}
 				else if(index == 3) {
-					gamepane.add(player, 5, 1, 1, 4);
+					player.getTransforms().add(new Rotate(270, Rotate.Z_AXIS));
+					gamepane.add(player, 5, 6, 1, 4);
 				}
 			}
 			catch(Exception ex) {

@@ -6,6 +6,6 @@ public class Plague implements EventBehaviour{
 	@Override
 	public void handle(GameState gamestate) {
 //		gamestate.getPlayerByIndex(gamestate.getCurrentPlayer()).removeShield(2);
-		
+		System.out.println("		->Plague");
 	}
 }

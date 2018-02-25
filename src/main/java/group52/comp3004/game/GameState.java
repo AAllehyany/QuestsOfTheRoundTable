@@ -160,8 +160,9 @@ public class GameState {
 		currentQuest.end(this.bonusShields);
 		currentSponsor = -1;
 		currentQuest = null;
-		this.revealedCard = null;
 		
+		
+		// remove all allies and all cards and make people draw (call quest end)
 	}
 	
 	public boolean canBidCards(ArrayList<AdventureCard> bids) {

@@ -6,6 +6,6 @@ public class Recognition implements EventBehaviour{
 	@Override
 	public void handle(GameState gamestate) {
 //		gamestate.setBonusShields(2);
-		
+		System.out.println("		->Recognition");
 	}
 }

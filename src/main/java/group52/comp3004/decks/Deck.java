@@ -9,8 +9,16 @@ import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Amour;
+import group52.comp3004.cards.Arms;
+import group52.comp3004.cards.Deed;
+import group52.comp3004.cards.EventCard;
+import group52.comp3004.cards.Favor;
 import group52.comp3004.cards.Foe;
+import group52.comp3004.cards.Plague;
+import group52.comp3004.cards.Pox;
 import group52.comp3004.cards.QuestCard;
+import group52.comp3004.cards.Realm;
+import group52.comp3004.cards.Recognition;
 import group52.comp3004.cards.StoryCard;
 import group52.comp3004.cards.Tests;
 import group52.comp3004.cards.Tourneys;
@@ -109,11 +117,11 @@ public class Deck<T> {
 	public static ArrayList<StoryCard> createStoryDeck(ResourceManager resman){
 		ArrayList<StoryCard> cards= new ArrayList<>(Arrays.asList(
 				//missing event behaviours
-				/*new EventCard("Pox", resman, ),
-				new EventCard("Plague", resman, ),
-				new EventCard("Chivalrous_Deed", resman, ),
-				new EventCard("Prosperity", resman, ),
-				new EventCard("Call_to_Arms", resman, ),*/
+				new EventCard("Pox", resman, new Pox()),
+				new EventCard("Plague", resman, new Plague()),
+				new EventCard("Chivalrous_Deed", resman, new Deed()),
+				new EventCard("Prosperity", resman, new Realm()),
+				new EventCard("Call_to_Arms", resman, new Arms()),
 				new QuestCard("Holy_Grail", resman, 5),
 				new QuestCard("Green_Knight", resman, 4),
 				new QuestCard("Questing_Beast", resman, 4),
@@ -130,9 +138,9 @@ public class Deck<T> {
 		for(int i = 0; i < 2; i++) cards.add(new QuestCard("Boar_Hunt", resman, 2));
 		for(int i = 0; i < 2; i++) cards.add(new QuestCard("Repel_Saxon_Raiders", resman, 2));
 		//missing event behaviours
-		/*for(int i = 0; i < 2; i++) cards.add(new EventCard("King's_Recognition", resman, ));
-		for(int i = 0; i < 2; i++) cards.add(new EventCard("Queen's_Favor", resman, ));
-		for(int i = 0; i < 2; i++) cards.add(new EventCard("Called_to_Camelot", resman, ));*/
+		for(int i = 0; i < 2; i++) cards.add(new EventCard("King's_Recognition", resman, new Recognition()));
+		for(int i = 0; i < 2; i++) cards.add(new EventCard("Queen's_Favor", resman, new Favor()));
+		//for(int i = 0; i < 2; i++) cards.add(new EventCard("Called_to_Camelot", resman, Ca));
 		
 		return cards;
 	}

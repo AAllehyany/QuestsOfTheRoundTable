@@ -24,17 +24,14 @@ public class Card extends Rectangle{
 	//			   Only subclasses should be created
 	//			   ERROR: If a card is solid black it likely means it is a Card not a subclass
 	public Card(String name, ResourceManager rm) {
-		super(50,75);
+		super(71,100);
 		this.name= name;
-		//System.out.println("RM before");
 		resman = rm;
-		//System.out.println("RM after");
 		isFaceUp = true; //used to determine which face to show front/back
 		this.setArcHeight(20);
 		this.setArcWidth(10);
 		
 		//card faces
-		resman = new ResourceManager();
 		front = null;
 		back = null;
 	}

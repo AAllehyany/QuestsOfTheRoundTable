@@ -36,7 +36,6 @@ public class Player {
 	private Integer bidPoints;
 	private boolean stoppedBidding;
 	
-	//this needs to be fixed - wrecks the testing
 	public Player(Integer id, GameController gc, GameState gs) {
 		this.id = id;
 		shields = 10;
@@ -51,6 +50,7 @@ public class Player {
 		quest = null;
 		controller = gc;
 		game = gs;
+		bidPoints = 0;
 	}
 	
 	public Player(Integer id) {
@@ -65,6 +65,7 @@ public class Player {
 		field = new ArrayList<>();
 		temp = new ArrayList<>();
 		quest = null;
+		bidPoints = 0;
 	}
 	
 	public Integer getId() {
@@ -98,6 +99,10 @@ public class Player {
 	
 	public Integer getBidPoints(GameState state) {
 		return bidPoints + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum();
+	}
+	
+	public Integer getBidPoints() {
+		return bidPoints + temp.stream().mapToInt(c -> c.getBids()).sum() + field.stream().mapToInt(c -> c.getBids()).sum();
 	}
 	
 	
@@ -384,20 +389,20 @@ public class Player {
 				else if(this.hand.get(i) instanceof Amour) total += this.hand.get(i).getBp();
 				else {
 					Weapon wep = (Weapon) this.hand.get(i);
-					if(weps.containsKey(wep)) weps.replace(wep, (weps.get(wep)+1));
-					else weps.put(wep, 1);
+					if(!(weps.containsKey(wep))) weps.put(wep, 1);
+					else weps.replace(wep, weps.get(wep)+1);
 				}
 			}
 		}
 		ArrayList<Weapon> uniqueWeps = new ArrayList<Weapon>(weps.keySet());
 		for(int i=0;i<uniqueWeps.size();i++) {
 			Weapon wep = uniqueWeps.get(i);
-			total = total + Math.min(weps.get(wep), state.getCurrentQuest().getNumStages())*wep.getBp();
+			total += Math.min(weps.get(wep), state.getCurrentQuest().getNumStages())*wep.getBp();
 		}
 		return total;
 	}
 	
-	// Determine if a player has an amour in play in their temp
+	// Determine if a player has an amour in their hand
 	public boolean hasAmour() {
 		for(int i=0;i<this.temp.size();i++) {
 			if (this.temp.get(i) instanceof Amour) return true;

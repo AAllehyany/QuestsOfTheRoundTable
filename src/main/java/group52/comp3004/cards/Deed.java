@@ -11,7 +11,7 @@ public class Deed implements EventBehaviour{
 	private int  lowestShield;
 	@Override
 	public void handle(GameState gamestate) {
-		// TODO Auto-generated method stub
+		System.out.println("		->Deed");
 		for(int i=0;i<gamestate.numPlayers();i++) {
 			if(gamestate.getPlayerByIndex(i).getRank()== Rank.Squire){
 				lowestRank = Rank.Squire;

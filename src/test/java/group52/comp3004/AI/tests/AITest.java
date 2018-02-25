@@ -1,4 +1,4 @@
-package AI.tests;
+package group52.comp3004.AI.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -47,7 +47,6 @@ public class AITest {
 			
 			QuestCard qc = new QuestCard("Green_Knight", resman, 3);
 			state.setRevealedCard(qc);
-			GameQuest q = new GameQuest(qc, p2);
 			state.setQuest();
 			
 			AbstractAI s = new Strategy2();
