@@ -16,6 +16,7 @@ public abstract class AbstractAI{
 	public abstract int nextBid(GameState state, Player p);
 	public abstract ArrayList<AdventureCard> discardAfterWinningTest(GameState state, Player p);
 	
+	// Determine if another player can evolve before a quest or tournament starts
 	public boolean otherEvolve(GameState state) {
 		ArrayList<Player> players = new ArrayList<Player>(state.getAllPlayers());
 		for(int i=0;i<players.size();i++) {

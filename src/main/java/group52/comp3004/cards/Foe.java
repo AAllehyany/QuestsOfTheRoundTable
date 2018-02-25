@@ -14,6 +14,7 @@ public class Foe extends AdventureCard{
 	private HashSet<Weapon> weapons;
 	private HashSet<String> quests = new HashSet<String>();
 	
+	// Constructor for Foes with only one battle power
 	public Foe(String name, ResourceManager rm, int bp) {
 		super(name, rm);
 		this.bp = bp;
@@ -23,6 +24,8 @@ public class Foe extends AdventureCard{
 		quests.add("Queens_Honor");
 	}
 	
+	// Construct for Foes with 2 battle powers. highBp is the higher battle power (not what 
+	// needs to be added to achieve this battle power)
 	public Foe(String name, ResourceManager rm, int bp, int highBp, String quest) {
 		super(name, rm);
 		this.bp = bp;
@@ -34,6 +37,7 @@ public class Foe extends AdventureCard{
 		// TODO Auto-generated constructor stub
 	}
 	
+	// getBp used in the case that the GameState can affect a Foe's battle power
 	public int getBp(GameState state) {
 		if(state.getCurrentQuest()!=null && 
 				quests.contains(state.getCurrentQuest().getQuest().getName())){
@@ -41,6 +45,8 @@ public class Foe extends AdventureCard{
 		}
 		return this.bp + weapons.stream().mapToInt(w -> w.getBp()).sum();
 	}
+	
+	// getBp used in the case that GameState does not matter
 	public int getBp() {
 		return this.bp + weapons.stream().mapToInt(w -> w.getBp()).sum();
 	}

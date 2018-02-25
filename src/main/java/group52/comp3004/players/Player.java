@@ -1,6 +1,7 @@
 package group52.comp3004.players;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -243,6 +244,10 @@ public class Player {
 		return null;
 	}
 	
+	
+	/* Sort a players hand from highest battle power to lowest battle power for each type
+	 of card. Allies are set as first, then amours, then weapons, then foes, then tests. Foes
+	 and allies are sorted depending on the current GameState*/
 	public void sortHand(GameState state) {
 		ArrayList<AdventureCard> foes = new ArrayList<AdventureCard>();
 		ArrayList<AdventureCard> tests = new ArrayList<AdventureCard>();
@@ -268,6 +273,7 @@ public class Player {
 		this.hand.addAll(tests);
 	}
 	
+	// Get any duplicates from a players hand
 	public ArrayList<AdventureCard> getDuplicates(){
 		ArrayList<AdventureCard> dupes = new ArrayList<AdventureCard>();
 		HashSet<AdventureCard> cards = new HashSet<AdventureCard>();
@@ -277,6 +283,7 @@ public class Player {
 		return dupes;
 	}
 	
+	// Determine if a player has a test in their hand
 	public boolean hasTest() {
 		for(int i=0;i<this.hand.size();i++) {
 			if(this.hand.get(i) instanceof Test) return true;
@@ -284,6 +291,7 @@ public class Player {
 		return false;
 	}
 	
+	// count the number of foes in a player's hand
 	public int countFoes() {
 		int count = 0;
 		for(int i=0;i<this.hand.size();i++) {
@@ -292,6 +300,7 @@ public class Player {
 		return count;
 	}
 	
+	// count the number of foes less than a certain battle power in a player's hand
 	public int countFoes(int bp) {
 		int count =0;
 		for(int i=0;i<this.hand.size();i++) {
@@ -300,6 +309,7 @@ public class Player {
 		return count;
 	}
 	
+	// get the foes less than a certain battle power in a player's hand
 	public ArrayList<AdventureCard> getFoes(int bp){
 		ArrayList<AdventureCard> foes = new ArrayList<AdventureCard>();
 		for(int i=0;i<this.hand.size();i++) {
@@ -310,6 +320,7 @@ public class Player {
 		return foes;
 	}
 	
+	// get the foes of unique battle powers in a player's hand depending on the GameState
 	public ArrayList<AdventureCard> getUniqueFoes(GameState state){
 		ArrayList<AdventureCard> uFoes = new ArrayList<AdventureCard>();
 		HashSet<Integer> bps = new HashSet<Integer>();
@@ -323,6 +334,7 @@ public class Player {
 		return uFoes;
 	}
 	
+	// count the foes of unique battle powers in a player's hand depending on the GameState
 	public int numUniqueFoes(GameState state) {
 		int numUFoes = 0;
 		HashSet<Integer> bps = new HashSet<Integer>();
@@ -335,17 +347,30 @@ public class Player {
 		return numUFoes;
 	}
 	
+	// Get the sum of the battle powers of allies, amours, and useable weapons in a player's hand
 	public int getBPInHand(GameState state) {
 		int total = 0;
+		HashMap<Weapon, Integer> weps = new HashMap<Weapon, Integer>();
 		for(int i=0;i<this.hand.size();i++) {
 			if(!(this.hand.get(i) instanceof Test || this.hand.get(i) instanceof Foe)) {
 				if(this.hand.get(i) instanceof Ally) total += this.hand.get(i).getBp(state);
-				else total += this.hand.get(i).getBp();
+				else if(this.hand.get(i) instanceof Amour) total += this.hand.get(i).getBp();
+				else {
+					Weapon wep = (Weapon) this.hand.get(i);
+					if(!(weps.containsKey(wep))) weps.put(wep, 1);
+					else weps.replace(wep, weps.get(wep)+1);
+				}
 			}
+		}
+		ArrayList<Weapon> uniqueWeps = new ArrayList<Weapon>(weps.keySet());
+		for(int i=0;i<uniqueWeps.size();i++) {
+			Weapon wep = uniqueWeps.get(i);
+			total += Math.min(weps.get(wep), state.getCurrentQuest().getNumStages())*wep.getBp();
 		}
 		return total;
 	}
 	
+	// Determine if a player has an amour in their hand
 	public boolean hasAmour() {
 		for(int i=0;i<this.temp.size();i++) {
 			if (this.temp.get(i) instanceof Amour) return true;
