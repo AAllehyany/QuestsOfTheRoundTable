@@ -96,8 +96,13 @@
                 <children xsi:type="advanced:Placeholder" xmi:id="__yzJThgiEeiNdfzuKDEg4Q" elementId="org.eclipse.egit.ui.RepositoriesView" toBeRendered="false" ref="__y1mPRgiEeiNdfzuKDEg4Q"/>
               </children>
             </children>
+<<<<<<< HEAD
+            <children xsi:type="basic:PartSashContainer" xmi:id="__yzJTxgiEeiNdfzuKDEg4Q" containerData="7211" selectedElement="__yzJUBgiEeiNdfzuKDEg4Q">
+              <children xsi:type="basic:PartSashContainer" xmi:id="__yzJUBgiEeiNdfzuKDEg4Q" containerData="6326" selectedElement="__yzJURgiEeiNdfzuKDEg4Q" horizontal="true">
+=======
             <children xsi:type="basic:PartSashContainer" xmi:id="__yzJTxgiEeiNdfzuKDEg4Q" containerData="7211" selectedElement="__yzJWRgiEeiNdfzuKDEg4Q">
               <children xsi:type="basic:PartSashContainer" xmi:id="__yzJUBgiEeiNdfzuKDEg4Q" containerData="1000" selectedElement="__yzJURgiEeiNdfzuKDEg4Q" horizontal="true">
+>>>>>>> 2805f1e778de157a71176ad0916bf5dacfc7390d
                 <children xsi:type="advanced:Placeholder" xmi:id="__yzJURgiEeiNdfzuKDEg4Q" elementId="org.eclipse.ui.editorss" containerData="7500" ref="__yzK7BgiEeiNdfzuKDEg4Q"/>
                 <children xsi:type="basic:PartSashContainer" xmi:id="__yzJUhgiEeiNdfzuKDEg4Q" toBeRendered="false" containerData="2500">
                   <children xsi:type="basic:PartStack" xmi:id="__yzJUxgiEeiNdfzuKDEg4Q" elementId="org.eclipse.mylyn.tasks.ui.views.tasksMStack" toBeRendered="false" containerData="5000">
@@ -111,11 +116,18 @@
                   </children>
                 </children>
               </children>
+<<<<<<< HEAD
+              <children xsi:type="basic:PartStack" xmi:id="__yzJWRgiEeiNdfzuKDEg4Q" elementId="bottom" containerData="3674" selectedElement="__yzJYxgiEeiNdfzuKDEg4Q">
+                <tags>org.eclipse.e4.secondaryDataStack</tags>
+                <tags>Java</tags>
+                <tags>Git</tags>
+=======
               <children xsi:type="basic:PartStack" xmi:id="__yzJWRgiEeiNdfzuKDEg4Q" elementId="bottom" visible="false" containerData="9000" selectedElement="__yzJXhgiEeiNdfzuKDEg4Q">
                 <tags>org.eclipse.e4.secondaryDataStack</tags>
                 <tags>Java</tags>
                 <tags>Git</tags>
                 <tags>Minimized</tags>
+>>>>>>> 2805f1e778de157a71176ad0916bf5dacfc7390d
                 <children xsi:type="advanced:Placeholder" xmi:id="__yzJWhgiEeiNdfzuKDEg4Q" elementId="org.eclipse.ui.views.ProblemView" ref="__y1l_RgiEeiNdfzuKDEg4Q"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="__yzJWxgiEeiNdfzuKDEg4Q" elementId="org.eclipse.jdt.ui.JavadocView" ref="__y1mBBgiEeiNdfzuKDEg4Q"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="__yzJXBgiEeiNdfzuKDEg4Q" elementId="org.eclipse.jdt.ui.SourceView" ref="__y1mBRgiEeiNdfzuKDEg4Q"/>
@@ -399,7 +411,11 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="__y1mWxgiEeiNdfzuKDEg4Q" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
+<<<<<<< HEAD
+        <children xsi:type="menu:HandledToolItem" xmi:id="_gKhn8Bm3Eei2gcsH1SU5qg" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="__y4IthgiEeiNdfzuKDEg4Q"/>
+=======
         <children xsi:type="menu:HandledToolItem" xmi:id="_LAGeIBmiEeimedqIT1E9ww" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="__y4IthgiEeiNdfzuKDEg4Q"/>
+>>>>>>> 2805f1e778de157a71176ad0916bf5dacfc7390d
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="__y1maBgiEeiNdfzuKDEg4Q" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -423,7 +439,14 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="__y1mzxgiEeiNdfzuKDEg4Q" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
+<<<<<<< HEAD
+        <children xsi:type="menu:HandledToolItem" xmi:id="_gKkrQBm3Eei2gcsH1SU5qg" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="__y4IQhgiEeiNdfzuKDEg4Q"/>
+      </children>
+      <children xsi:type="menu:ToolBar" xmi:id="__y1m2RgiEeiNdfzuKDEg4Q" elementId="org.eclipse.jdt.ui.CompilationUnitEditor" visible="false">
+        <tags>Draggable</tags>
+=======
         <children xsi:type="menu:HandledToolItem" xmi:id="_LAKvkBmiEeimedqIT1E9ww" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="__y4IQhgiEeiNdfzuKDEg4Q"/>
+>>>>>>> 2805f1e778de157a71176ad0916bf5dacfc7390d
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="__y1m2hgiEeiNdfzuKDEg4Q" elementId="org.eclipse.fx.ide.fxml.editors.FXMLEditor" visible="false">
         <tags>Draggable</tags>
@@ -477,7 +500,7 @@
         <tags>Draggable</tags>
       </children>
     </trimBars>
-    <trimBars xmi:id="__y1nAxgiEeiNdfzuKDEg4Q" elementId="org.eclipse.ui.trim.vertical2" side="Right">
+    <trimBars xmi:id="__y1nAxgiEeiNdfzuKDEg4Q" elementId="org.eclipse.ui.trim.vertical2" toBeRendered="false" side="Right">
       <children xsi:type="menu:ToolControl" xmi:id="__y1nBBgiEeiNdfzuKDEg4Q" elementId="org.eclipse.mylyn.tasks.ui.views.tasksMStack(IDEWindow).(org.eclipse.jdt.ui.JavaPerspective)" toBeRendered="false" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.TrimStack">
         <tags>TrimStack</tags>
         <tags>Draggable</tags>
@@ -486,7 +509,7 @@
         <tags>TrimStack</tags>
         <tags>Draggable</tags>
       </children>
-      <children xsi:type="menu:ToolControl" xmi:id="__y1nBhgiEeiNdfzuKDEg4Q" elementId="bottom(IDEWindow).(org.eclipse.jdt.ui.JavaPerspective)" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.TrimStack">
+      <children xsi:type="menu:ToolControl" xmi:id="__y1nBhgiEeiNdfzuKDEg4Q" elementId="bottom(IDEWindow).(org.eclipse.jdt.ui.JavaPerspective)" toBeRendered="false" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.TrimStack">
         <tags>TrimStack</tags>
         <tags>Draggable</tags>
         <tags>MinimizedAndShowing</tags>

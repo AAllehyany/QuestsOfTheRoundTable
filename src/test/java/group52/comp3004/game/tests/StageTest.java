@@ -8,9 +8,11 @@ import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.Weapon;
 import group52.comp3004.game.Stage;
+import javafx.embed.swing.JFXPanel;
 
 public class StageTest {
 	private ResourceManager resman = new ResourceManager();
+	JFXPanel jfxPanel = new JFXPanel();
 	
 	@Test
 	public void testHasCorrectBp() {

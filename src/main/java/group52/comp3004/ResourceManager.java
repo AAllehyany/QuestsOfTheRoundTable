@@ -23,6 +23,8 @@ public class ResourceManager {//ISSSUE: multiple resource managers are being mad
 	private HashMap<String, ImagePattern> fronts;
 	
 	public ResourceManager() {
+		//adventureBack = null;
+		//storyBack = null;
 		adventureBackImg = new Image(url+"/Backs/adventure_back.jpg");
 		adventureBack = new ImagePattern(adventureBackImg);
 		
@@ -66,5 +68,6 @@ public class ResourceManager {//ISSSUE: multiple resource managers are being mad
 			fronts.put(name, pattern);
 			return pattern;
 		}
+		//return null;
 	}
 }

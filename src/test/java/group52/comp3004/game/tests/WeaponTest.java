@@ -3,6 +3,7 @@ package group52.comp3004.game.tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import group52.comp3004.players.Player;
+import javafx.embed.swing.JFXPanel;
 import group52.comp3004.cards.Weapon;
 import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.Foe;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class WeaponTest {
 	public ResourceManager resman = new ResourceManager();
+	JFXPanel jfxPanel = new JFXPanel();
 	
 	Player p1 = new Player(1);
 	Weapon excalibur = new Weapon("Excalibur", resman, 30);

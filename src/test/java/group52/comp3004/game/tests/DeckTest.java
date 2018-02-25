@@ -8,9 +8,11 @@ import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.Card;
 import group52.comp3004.cards.Weapon;
 import group52.comp3004.decks.Deck;
+import javafx.embed.swing.JFXPanel;
 
 public class DeckTest {
 	
+	JFXPanel jfxPanel = new JFXPanel();
 	public ResourceManager resman = new ResourceManager();
 	
 	Card excalibur = new Weapon("Excalibur", resman, 30);
