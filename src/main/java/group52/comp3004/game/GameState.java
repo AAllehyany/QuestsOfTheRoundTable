@@ -2,6 +2,7 @@ package group52.comp3004.game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.AdventureCard;
@@ -10,6 +11,7 @@ import group52.comp3004.cards.QuestCard;
 import group52.comp3004.cards.StoryCard;
 import group52.comp3004.decks.Deck;
 import group52.comp3004.players.Player;
+import group52.comp3004.players.Rank;
 
 public class GameState {
 	
@@ -23,6 +25,8 @@ public class GameState {
 	private GameQuest currentQuest;
 	private StoryCard revealedCard;
 	private static ResourceManager resman = null;
+	private Integer maxBid;
+	private Integer bonusShields;
 	/**
 	 * @param players
 	 */
@@ -49,6 +53,8 @@ public class GameState {
 		storyDeck = new Deck<StoryCard>(Deck.createStoryDeck(resman));
 		currentQuest = null;
 		revealedCard = null;
+		maxBid = 0;
+		bonusShields = 0;
 		System.out.println("Model loaded (void)");
 	}
 	
@@ -150,10 +156,29 @@ public class GameState {
 	}
 	
 	public void endQuest() {
+		
+		currentQuest.end(this.bonusShields);
 		currentSponsor = -1;
 		currentQuest = null;
 		
+		
 		// remove all allies and all cards and make people draw (call quest end)
+	}
+	
+	public boolean canBidCards(ArrayList<AdventureCard> bids) {
+		return this.players.get(currentPlayer).validBid(bids) && bids.size() > maxBid;
+	}
+	
+	
+	public void bidCards(ArrayList<AdventureCard> bids) {
+		if(canBidCards(bids)) {
+			this.players.get(currentPlayer).bidCards(bids);
+			this.maxBid = bids.size();
+		}
+	}
+	
+	public void playerStopBidding() {
+		this.players.get(currentPlayer).stopBidding();
 	}
 	
 	public void playCurrentQuestStage() {
@@ -181,4 +206,8 @@ public class GameState {
 	public List<Player> getAllPlayers() { return this.players; }
 	
 	public Deck<AdventureCard> getAdventureDeck() { return adventureDeck; }
+	
+	public List<Player> getWinners() {
+		return this.players.stream().filter(player -> player.getRank() == Rank.KnightOfTheRoundTable).collect(Collectors.toList());
+	}
 }
