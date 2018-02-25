@@ -218,7 +218,14 @@ public class Player {
 	public void addTemp(AdventureCard card) {
 		this.temp.add(card);
 	}
-	
+	public void clearAlly() {
+		
+		for(int i=0;i<this.temp.size();i++) {
+			if(this.field.get(i) instanceof Ally) {
+				this.field.remove(this.temp.get(i));
+			}
+		}
+	}
 	public void clearTemp() {
 		ArrayList<AdventureCard> a = new ArrayList<AdventureCard>();
 		

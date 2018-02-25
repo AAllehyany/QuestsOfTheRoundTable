@@ -10,6 +10,7 @@ import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Amour;
 import group52.comp3004.cards.Arms;
+import group52.comp3004.cards.Camelot;
 import group52.comp3004.cards.Deed;
 import group52.comp3004.cards.EventCard;
 import group52.comp3004.cards.Favor;
@@ -140,7 +141,7 @@ public class Deck<T> {
 		//missing event behaviours
 		for(int i = 0; i < 2; i++) cards.add(new EventCard("King's_Recognition", resman, new Recognition()));
 		for(int i = 0; i < 2; i++) cards.add(new EventCard("Queen's_Favor", resman, new Favor()));
-		//for(int i = 0; i < 2; i++) cards.add(new EventCard("Called_to_Camelot", resman, Ca));
+		for(int i = 0; i < 2; i++) cards.add(new EventCard("Called_to_Camelot", resman,new Camelot()));
 		
 		return cards;
 	}
