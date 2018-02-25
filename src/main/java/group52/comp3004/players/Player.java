@@ -33,6 +33,8 @@ public class Player {
 	private GameState game;
 	private GameQuest quest;
 	private GameController controller;
+	private Integer bidPoints;
+	private boolean stoppedBidding;
 	
 	//this needs to be fixed - wrecks the testing
 	public Player(Integer id, GameController gc, GameState gs) {
@@ -92,6 +94,20 @@ public class Player {
 	public void setQuest(GameQuest quest) {
 		this.quest = quest;
 		//quest.addPlayer(this);
+	}
+	
+	public Integer getBidPoints(GameState state) {
+		return bidPoints + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum();
+	}
+	
+	
+	public void bidCards(ArrayList<AdventureCard> bids) {
+		if(validBid(bids)) this.bidPoints += bids.size();
+	}
+	
+	
+	public boolean validBid(ArrayList<AdventureCard> bids) {
+		return bids.stream().allMatch(card -> this.hand.contains(card));
 	}
 	
 	public Integer getBattlePoints(GameState state) {
@@ -376,5 +392,14 @@ public class Player {
 			if (this.temp.get(i) instanceof Amour) return true;
 		}
 		return false;
+	}
+
+	public void stopBidding() {
+		this.stoppedBidding = true;
+		
+	}
+	
+	public boolean hasStoppedBidding() {
+		return this.stoppedBidding;
 	}
 }

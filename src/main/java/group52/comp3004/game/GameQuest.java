@@ -85,8 +85,11 @@ public class GameQuest {
 	
 	public void playStage() {
 		if(over || this.players.size() == 0) return;
-		this.players = players.stream().filter(p -> p.getBattlePoints() >= stages.get(currentStage).getTotalPower()).collect(Collectors.toList());
-		if(currentStage == (quest.getStages() - 1)) this.over = true;
+		
+		List<Player> remaining = players.stream().filter(p -> p.getBattlePoints() >= stages.get(currentStage).getTotalPower()).collect(Collectors.toList());
+		this.players.forEach(p -> p.clearTemp());
+		this.players = remaining;
+		if(currentStage == (quest.getStages() - 1) || this.players.size() < 1)  this.over = true;
 		advanceStage();	
 	}
 	
@@ -96,6 +99,10 @@ public class GameQuest {
 	
 	public void awardShields() {
 		if(over) players.forEach(p -> p.addShields(quest.getStages()));
+	}
+	
+	public void awardShields(int bonus) {
+		if(over) players.forEach(p -> p.addShields(quest.getStages() + bonus));
 	}
 	
 	public List<Player> getPlayers() {
@@ -121,5 +128,14 @@ public class GameQuest {
 	}
 	
 	
-	public void end() { this.over = true; }
+	public void end() { 
+		this.over = true;
+		
+	}
+	
+	public void end(int bonus) {
+		this.over = true;
+		dealCardsToSponsor();
+		awardShields(bonus);
+	}
 }
