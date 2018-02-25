@@ -24,11 +24,11 @@ public class AllyTest {
 	@Test
 	public void testAllyStats() {
 		GameState state = new GameState();
-		Ally a1 = new Ally("Sir Gaiwan", resman, 10, 0, "Test of the Green Knight", 20,0);
+		Ally a1 = new Ally("Sir_Gaiwan", resman, 10, 0, "Green_Knight", 20, 0);
 		assertEquals(0, (int) a1.getBids(state));
 		assertEquals(10, (int) a1.getBp(state));
-		
-		Ally a2 = new Ally("King Arthur", resman, 10, 2);
+
+		Ally a2 = new Ally("King_Arthur", resman, 10, 2);
 		assertEquals(2, (int) a2.getBids(state));
 		assertEquals(10, (int) a2.getBp(state));
 	}
@@ -38,10 +38,10 @@ public class AllyTest {
 		Player p = new Player(0);
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(p);
-		QuestCard q = new QuestCard("Test of the Green Knight", resman, 4);
-		Ally a1 = new Ally("Sir Gaiwan", resman, 10, 0, "Test of the Green Knight", 20, 0);
-		Ally a2 = new Ally("King Arthur", resman, 10, 2);
-		Ally a3 = new Ally("King Pellinore", resman, 10, 0, "Search for the Questing Beast", 0, 4);
+		QuestCard q = new QuestCard("Green_Knight", resman, 4);
+		Ally a1 = new Ally("Sir_Gaiwan", resman, 10, 0, "Green_Knight", 20, 0);
+		Ally a2 = new Ally("King_Arthur", resman, 10, 2);
+		Ally a3 = new Ally("King_Pellinore", resman, 10, 0, "Questing_Beast", 0, 4);
 		GameState state = new GameState(players);
 		state.setRevealedCard(q);
 		state.setQuest();
@@ -59,8 +59,8 @@ public class AllyTest {
 		Player p1 = new Player(0);
 		ArrayList<Player> players = new ArrayList<Player> ();
 		players.add(p1);
-		Ally a1 = new Ally("Sir Tristan", resman, 10, 0, "Queen Iseult", 20, 0);
-		Ally a2 = new Ally("Queen Iseult", resman, 0, 2, "Sir Tristan", 0, 2);
+		Ally a1 = new Ally("Sir_Tristan", resman, 10, 0, "Queen_Iseult", 20, 0);
+		Ally a2 = new Ally("Queen_Iseult", resman, 0, 2, "Sir_Tristan", 0, 2);
 		p1.addCardToHand(a1);
 		p1.addCardToHand(a2);
 		p1.addField(a1);
