@@ -97,7 +97,8 @@ public class Player {
 	}
 	
 	public Integer getBidPoints(GameState state) {
-		return bidPoints + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum();
+		//return bidPoints + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum();
+		return 0;
 	}
 	
 	

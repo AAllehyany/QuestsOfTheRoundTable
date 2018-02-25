@@ -34,7 +34,6 @@ public class Card extends Rectangle{
 		this.setArcWidth(10);
 		
 		//card faces
-		resman = new ResourceManager();
 		front = null;
 		back = null;
 	}
