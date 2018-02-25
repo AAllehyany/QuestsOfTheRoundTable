@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+import group52.comp3004.GUI.MiddleArea;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.EventCard;
@@ -113,16 +114,20 @@ public class GameController implements Initializable {
 	//		*story card is added to middle area
 	//		*next phase depends on type of card dealt
 	public void revealStory() {
+		//reveal story card
+		middleController.reset();
 		middleController.addStory(model.dealStoryCard());
-		if(model.getRevealedCard() instanceof EventCard) {
+		
+		//move to next phase depending on card type
+		if(model.getRevealedCard() instanceof EventCard) {System.out.println("    -->Event");
 			model.setPhase(Phase.HandleEvent);
-			//this.handleEvent();
+			this.handleEvent();
 		}
-		else if(model.getRevealedCard() instanceof Tourneys) {
+		else if(model.getRevealedCard() instanceof Tourneys) {System.out.println("    -->Tourney");
 			model.setPhase(Phase.SponsorTourney);
 			//this.sponsorTourney();
 		}
-		else if(model.getRevealedCard() instanceof QuestCard) {
+		else if(model.getRevealedCard() instanceof QuestCard) {System.out.println("    -->Quest");
 			model.setPhase(Phase.SponsorQuest);
 			//this.sponsorQuest();
 		}
@@ -131,8 +136,10 @@ public class GameController implements Initializable {
 			model.setPhase(Phase.Broken);
 		}
 	}
-	//PURPOSE: Execute HandleEvent Phase
+	//PURPOSE: Execute the event behaviour contained in the event card
 	public void handleEvent() {
+		if(model.getRevealedCard() instanceof EventCard)
+			((EventCard)model.getRevealedCard()).run(model);
 		
 		//move to next phase
 		model.setPhase(Phase.TurnEnd);
@@ -196,7 +203,7 @@ public class GameController implements Initializable {
 	}	
 	//PURPOSE: Execute GameOver Phase
 		public void endGame() {
-			
+			middleController.reset();
 		}
 		
 	/*********************************************************************************************/
@@ -241,7 +248,7 @@ public class GameController implements Initializable {
 		}
 		
 		//update middle area
-		middleController.setStoryCard(model.getRevealedCard());
+		//middleController.setStoryCard(model.getRevealedCard());
 	}	
 	
 	/*********************************************************************************************/

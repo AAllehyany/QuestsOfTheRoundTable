@@ -19,25 +19,16 @@ public class MiddleAreaController implements Initializable{
 	@FXML
 	private StackPane middlePane;
 	private HBox questContainer;
-	private StoryCard storyCard;
-	
-	//temp
-	private ResourceManager rm;
 	
 	public MiddleAreaController() {
 		super();
-		//temp
-		rm = new ResourceManager();
-		storyCard = new StoryCard("York", rm);
 		questContainer = new HBox();
 		questContainer.setAlignment(Pos.CENTER);
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//middlePane.getChildren().add(storyCard);
 		middlePane.getChildren().add(questContainer);
-		questContainer.getChildren().add(storyCard);
 		System.out.println("Middle area crated");
 	}
 	
@@ -48,10 +39,10 @@ public class MiddleAreaController implements Initializable{
 	
 	//PURPOSE: add the dealt story card to play
 	public void addStory(StoryCard card) {
-		
+		questContainer.getChildren().add(card);
 	}
-	public void setStoryCard(StoryCard card) {
-		storyCard = null;
-		storyCard = card;
+	//PURPOSE: Empties the contents of the middle pane to get ready for new story
+	public void reset() {
+		questContainer.getChildren().clear();
 	}
 }
