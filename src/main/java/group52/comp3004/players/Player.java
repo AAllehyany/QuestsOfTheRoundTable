@@ -50,6 +50,7 @@ public class Player {
 		quest = null;
 		controller = gc;
 		game = gs;
+		bidPoints = 0;
 	}
 	
 	public Player(Integer id) {
@@ -64,6 +65,7 @@ public class Player {
 		field = new ArrayList<>();
 		temp = new ArrayList<>();
 		quest = null;
+		bidPoints = 0;
 	}
 	
 	public Integer getId() {
@@ -96,8 +98,11 @@ public class Player {
 	}
 	
 	public Integer getBidPoints(GameState state) {
-		//return bidPoints + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum();
-		return 0;
+		return bidPoints + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum();
+	}
+	
+	public Integer getBidPoints() {
+		return bidPoints + temp.stream().mapToInt(c -> c.getBids()).sum() + field.stream().mapToInt(c -> c.getBids()).sum();
 	}
 	
 	

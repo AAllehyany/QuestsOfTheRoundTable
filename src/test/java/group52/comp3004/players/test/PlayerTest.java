@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -103,6 +104,27 @@ public class PlayerTest {
 		p.playCardToField(c);
 		
 		assertEquals(Arrays.asList(c), p.getField());
+		
+		
+	}
+	
+	@Test
+	public void testDoesNotBidCardsNotInHand() {
+		Player p = new Player(1337);
+		
+		Ally c = new Ally("King_Arthur", resman, 16, 0);
+		ArrayList<AdventureCard> bids = new ArrayList();
+		bids.add(c);
+		p.bidCards(bids);
+		
+		assertEquals(0, (int) p.getBidPoints());
+		
+		p.addCardToHand(c);
+		
+		p.bidCards(bids);
+		
+		assertEquals(1, (int) p.getBidPoints());
+		
 		
 		
 	}
