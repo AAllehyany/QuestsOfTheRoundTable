@@ -159,8 +159,10 @@ public class GameQuestTest {
 		journey = new QuestCard("Rescue_Maiden", g.getResourceManager(), 3);
 		Player sponsor = new Player(1);
 		g.addPlayer(sponsor);
+		sponsor.setGame(g);
 		quest = new GameQuest(journey, sponsor);
-		
+		g.setRevealedCard(journey);
+		g.setQuest();
 		Foe theGoodGuy = new Foe("Giant", g.getResourceManager(), 2, 20, "Hi");
 		Foe theBadBoy = new Foe("Mordred", g.getResourceManager(), 2, 1999, "Hi");
 		Foe extremelyNiceFoe = new Foe("Saxons", g.getResourceManager(), 6, 200, "Hi");
