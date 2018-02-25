@@ -16,8 +16,8 @@ public class CardComparator implements Comparator<AdventureCard>{
 	
 	public int compare(AdventureCard a, AdventureCard b) {
 		if(this.state!=null) {
-			return a.getBp(state) < b.getBp(state) ? -1 : a.getBp(state) == b.getBp(state) ? 0 : 1;
+			return b.getBp(state)-a.getBp(state);
 		}
-		return a.getBp() < b.getBp() ? -1 : a.getBp() == b.getBp() ? 0 : 1;
+		return b.getBp()-a.getBp();
 	}
 }

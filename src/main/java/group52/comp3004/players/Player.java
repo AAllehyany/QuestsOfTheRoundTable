@@ -10,7 +10,7 @@ import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Amour;
 import group52.comp3004.cards.CardComparator;
 import group52.comp3004.cards.Foe;
-import group52.comp3004.cards.Test;
+import group52.comp3004.cards.Tests;
 import group52.comp3004.cards.Weapon;
 import group52.comp3004.controllers.GameController;
 import group52.comp3004.game.GameQuest;
@@ -283,7 +283,7 @@ public class Player {
 		ArrayList<AdventureCard> Al = new ArrayList<AdventureCard>();
 		for(int i=0;i<this.hand.size();i++) {
 			if(this.hand.get(i) instanceof Foe) foes.add(this.hand.get(i));
-			else if(this.hand.get(i) instanceof Test) tests.add(this.hand.get(i));
+			else if(this.hand.get(i) instanceof Tests) tests.add(this.hand.get(i));
 			else if(this.hand.get(i) instanceof Weapon) weps.add(this.hand.get(i));
 			else if(this.hand.get(i) instanceof Amour) Am.add(this.hand.get(i));
 			else Al.add(this.hand.get(i));
@@ -313,7 +313,7 @@ public class Player {
 	// Determine if a player has a test in their hand
 	public boolean hasTest() {
 		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Test) return true;
+			if(this.hand.get(i) instanceof Tests) return true;
 		}
 		return false;
 	}
@@ -379,25 +379,25 @@ public class Player {
 		int total = 0;
 		HashMap<Weapon, Integer> weps = new HashMap<Weapon, Integer>();
 		for(int i=0;i<this.hand.size();i++) {
-			if(!(this.hand.get(i) instanceof Test || this.hand.get(i) instanceof Foe)) {
+			if(!(this.hand.get(i) instanceof Tests || this.hand.get(i) instanceof Foe)) {
 				if(this.hand.get(i) instanceof Ally) total += this.hand.get(i).getBp(state);
 				else if(this.hand.get(i) instanceof Amour) total += this.hand.get(i).getBp();
 				else {
 					Weapon wep = (Weapon) this.hand.get(i);
-					if(!(weps.containsKey(wep))) weps.put(wep, 1);
-					else weps.replace(wep, weps.get(wep)+1);
+					if(weps.containsKey(wep)) weps.replace(wep, (weps.get(wep)+1));
+					else weps.put(wep, 1);
 				}
 			}
 		}
 		ArrayList<Weapon> uniqueWeps = new ArrayList<Weapon>(weps.keySet());
 		for(int i=0;i<uniqueWeps.size();i++) {
 			Weapon wep = uniqueWeps.get(i);
-			total += Math.min(weps.get(wep), state.getCurrentQuest().getNumStages())*wep.getBp();
+			total = total + Math.min(weps.get(wep), state.getCurrentQuest().getNumStages())*wep.getBp();
 		}
 		return total;
 	}
 	
-	// Determine if a player has an amour in their hand
+	// Determine if a player has an amour in play in their temp
 	public boolean hasAmour() {
 		for(int i=0;i<this.temp.size();i++) {
 			if (this.temp.get(i) instanceof Amour) return true;

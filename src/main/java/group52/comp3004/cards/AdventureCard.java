@@ -7,7 +7,6 @@ public class AdventureCard extends Card{
 
 	private String description;
 	protected int bp;
-	protected int bids;
 	
 	public AdventureCard(String name, ResourceManager rm ) {
 		super(name, rm);
@@ -34,14 +33,5 @@ public class AdventureCard extends Card{
 	public int getBp() {
 		return this.bp;
 	}
-	
-	public int getBids(GameState state) {
-		return 0;
-	}
-	
-	public int getBids() {
-		return 0;
-	}
-
 
 }

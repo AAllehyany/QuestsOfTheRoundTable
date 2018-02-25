@@ -8,7 +8,7 @@ import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Amour;
 import group52.comp3004.cards.CardComparator;
 import group52.comp3004.cards.Foe;
-import group52.comp3004.cards.Test;
+import group52.comp3004.cards.Tests;
 import group52.comp3004.cards.Weapon;
 import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
@@ -78,7 +78,7 @@ public class Strategy1 extends AbstractAI{
 		ArrayList<AdventureCard> dupes = p.getDuplicates();
 		if(tourneyEvolve(state)) {
 			for(int i=0;i<p.getHand().size();i++) {
-				if(!(p.getHand().get(i) instanceof Test)) cards.add(p.getHand().get(i));
+				if(!(p.getHand().get(i) instanceof Tests)) cards.add(p.getHand().get(i));
 			}
 		}else {
 			for(int i=0;i<dupes.size();i++) {
@@ -121,8 +121,8 @@ public class Strategy1 extends AbstractAI{
 			}else if(i==1) {
 				if(p.hasTest()) {
 					for(int j=p.getHand().size()-1;j>=0;j--) {
-						if(p.getHand().get(j) instanceof Test) {
-							Stage s = new Stage((Test) p.getHand().get(j));
+						if(p.getHand().get(j) instanceof Tests) {
+							Stage s = new Stage((Tests) p.getHand().get(j));
 							quest.add(0, s);
 							break;
 						}
@@ -164,14 +164,14 @@ public class Strategy1 extends AbstractAI{
 		ArrayList<AdventureCard> stageCards = new ArrayList<AdventureCard>();
 		if(state.getCurrentQuest().getCurrentStage()+1==state.getCurrentQuest().getNumStages()) {
 			for(int i=0;i<p.getHand().size();i++) {
-				if(!(p.getHand().get(i) instanceof Test)) {
+				if(!(p.getHand().get(i) instanceof Tests)) {
 					stageCards.add(p.getHand().get(i));
 				}
 			}
 		}else {
 			while(stageCards.size()<2) {
 				for(int i=0;i<p.getHand().size();i++) {
-					if(!(p.getHand().get(i) instanceof Test)) {
+					if(!(p.getHand().get(i) instanceof Tests)) {
 						stageCards.add(p.getHand().get(i));
 						break;
 					}

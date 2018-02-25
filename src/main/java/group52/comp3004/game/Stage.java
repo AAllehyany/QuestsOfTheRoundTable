@@ -1,12 +1,12 @@
 package group52.comp3004.game;
 
 import group52.comp3004.cards.Foe;
-import group52.comp3004.cards.Test;
+import group52.comp3004.cards.Tests;
 
 public class Stage {
 	
 	private final Foe foe;
-	private final Test test;
+	private final Tests test;
 	
 	private final boolean testStage;
 	
@@ -20,7 +20,7 @@ public class Stage {
 		testStage = false;
 	}
 	
-	public Stage(Test test) {
+	public Stage(Tests test) {
 		super();
 		this.foe = null;
 		this.test = test;

@@ -143,7 +143,7 @@ public class GameStateTest {
 		assertEquals(null, sponsor);
 		
 		gs.setQuest();
-		assertEquals(null, gs.getRevealed());
+		assertEquals(quest, gs.getRevealed());
 		assertEquals(Phase.SponsorQuest, gs.getPhase());
 		
 		GameQuest gq = gs.getCurrentQuest();

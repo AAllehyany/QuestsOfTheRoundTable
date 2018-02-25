@@ -6,7 +6,7 @@ import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Amour;
 import group52.comp3004.cards.Foe;
-import group52.comp3004.cards.Test;
+import group52.comp3004.cards.Tests;
 import group52.comp3004.cards.Weapon;
 import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
@@ -85,8 +85,8 @@ public class Strategy2 extends AbstractAI{
 			}else if(i==q.getNumStages()-2) {
 				if(p.hasTest()) {
 					for(int j=p.getHand().size()-1;j>=0;j--) {
-						if(p.getHand().get(j) instanceof Test) {
-							Stage stage = new Stage((Test) p.getHand().get(j));
+						if(p.getHand().get(j) instanceof Tests) {
+							Stage stage = new Stage((Tests) p.getHand().get(j));
 							stages.add(stage);
 							break;
 						}

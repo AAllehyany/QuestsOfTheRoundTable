@@ -22,7 +22,7 @@ public class AmourTest {
 		Amour a = new Amour("Amour", resman, 10, 1);
 		p1.addCardToHand(a);
 		p1.addTemp(a);
-		assertEquals(10, (int) a.getBP());
+		assertEquals(10, (int) a.getBp());
 		assertEquals(1, (int) a.getBids());
 	}
 

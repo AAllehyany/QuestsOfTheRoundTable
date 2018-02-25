@@ -14,7 +14,7 @@ public class Amour extends AdventureCard{
 		this.bids = bids;
 	}
 	
-	public int getBP() {
+	public int getBp() {
 		return this.bp;
 	}
 	

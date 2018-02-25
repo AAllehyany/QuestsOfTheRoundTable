@@ -12,7 +12,7 @@ import group52.comp3004.cards.Amour;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.QuestCard;
 import group52.comp3004.cards.StoryCard;
-import group52.comp3004.cards.Test;
+import group52.comp3004.cards.Tests;
 import group52.comp3004.cards.Tourneys;
 import group52.comp3004.cards.Weapon;
 
@@ -95,10 +95,10 @@ public class Deck<T> {
 		for(int i = 0; i < 5; i++) cards.add(new Foe("Saxons", resman, 10, 20, "Repel_Saxon_Raiders"));
 		for(int i = 0; i < 4; i++) cards.add(new Foe("Boar", resman, 5, 15, "Boar_Hunt"));
 		for(int i = 0; i < 8; i++) cards.add(new Foe("Thieves", resman, 5));
-		for(int i = 0; i < 2; i++) cards.add(new Test("Valor", resman, 3));
-		for(int i = 0; i < 2; i++) cards.add(new Test("Temptation", resman, 3));
-		for(int i = 0; i < 2; i++) cards.add(new Test("Morgan_Le_Fey", resman, 3));
-		for(int i = 0; i < 2; i++) cards.add(new Test("Questing_Beast", resman, 4));
+		for(int i = 0; i < 2; i++) cards.add(new Tests("Valor", resman, 3));
+		for(int i = 0; i < 2; i++) cards.add(new Tests("Temptation", resman, 3));
+		for(int i = 0; i < 2; i++) cards.add(new Tests("Morgan_Le_Fey", resman, 3));
+		for(int i = 0; i < 2; i++) cards.add(new Tests("Questing_Beast", resman, 4));
 		for(int i = 0; i < 8; i++) cards.add(new Amour("Amour", resman, 10, 2));
 		
 		return cards;
