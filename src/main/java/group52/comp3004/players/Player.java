@@ -157,10 +157,7 @@ public class Player {
 	}
 	
 	public void setHand(ArrayList<AdventureCard> hand) {
-		this.hand.clear();
-		for(int i=0;i<hand.size();i++) {
-			this.hand.add(hand.get(i));
-		}
+		this.hand = hand;
 	}
 	
 	
