@@ -434,4 +434,9 @@ public class Player {
 	public boolean hasStoppedBidding() {
 		return this.stoppedBidding;
 	}
+
+	public void removeShield(int i) {
+		this.shields -= shields;
+		
+	}
 }
