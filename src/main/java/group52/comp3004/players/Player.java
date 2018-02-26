@@ -143,6 +143,14 @@ public class Player {
 		}
 	}
 	
+	public void removeShields(Integer shields) {
+		this.shields -= shields;
+		if(this.shields<minShields) this.shields = minShields;
+		if(this.shields>= this.requiredShields) {
+			updateRank();
+		}
+	}
+	
 	
 	public ArrayList<AdventureCard> getHand() {
 		return hand;
@@ -386,33 +394,17 @@ public class Player {
 		return numUFoes;
 	}
 	
-	// Get the sum of the battle powers of allies, amours, and useable weapons in a player's hand
-	public int getBPInHand(GameState state) {
-		int total = 0;
-		HashMap<Weapon, Integer> weps = new HashMap<Weapon, Integer>();
-		for(int i=0;i<this.hand.size();i++) {
-			if(!(this.hand.get(i) instanceof Tests || this.hand.get(i) instanceof Foe)) {
-				if(this.hand.get(i) instanceof Ally) total += this.hand.get(i).getBp(state);
-				else if(this.hand.get(i) instanceof Amour) total += this.hand.get(i).getBp();
-				else {
-					Weapon wep = (Weapon) this.hand.get(i);
-					if(!(weps.containsKey(wep))) weps.put(wep, 1);
-					else weps.replace(wep, weps.get(wep)+1);
-				}
-			}
-		}
-		ArrayList<Weapon> uniqueWeps = new ArrayList<Weapon>(weps.keySet());
-		for(int i=0;i<uniqueWeps.size();i++) {
-			Weapon wep = uniqueWeps.get(i);
-			total += Math.min(weps.get(wep), state.getCurrentQuest().getNumStages())*wep.getBp();
-		}
-		return total;
-	}
-	
 	// Determine if a player has an amour in their hand
 	public boolean hasAmour() {
 		for(int i=0;i<this.temp.size();i++) {
 			if (this.temp.get(i) instanceof Amour) return true;
+		}
+		return false;
+	}
+	
+	public boolean hasAmourInHand() {
+		for(int i=0;i<this.hand.size();i++) {
+			if(this.hand.get(i) instanceof Amour) return true;
 		}
 		return false;
 	}
