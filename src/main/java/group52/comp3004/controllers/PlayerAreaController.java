@@ -60,8 +60,9 @@ public class PlayerAreaController implements Initializable{
 	}
 
 
-	public void update(ArrayList<AdventureCard> hand, ArrayList<AdventureCard> field) {
+	public void update(ArrayList<AdventureCard> hand, ArrayList<AdventureCard> field, Player player) {
 		setField(field);
 		setHand(hand);
+		setPortraitArea(player);
 	}
 }

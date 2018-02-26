@@ -181,7 +181,14 @@ public class Player {
 						controller.updateAll();	
 					}
 				}
-				else {
+				else if(game.getPhase()==Phase.HandleEvent){
+					card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
+					System.out.println(card.getName()+ " discarded");
+					hand.remove(card);
+					controller.updateAll();	
+				}
+				else{
+				
 					card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
 					System.out.println(card.getName()+ " clicked");
 					field.add(card);
@@ -417,7 +424,9 @@ public class Player {
 		return numUFoes;
 	}
 	
-	
+	public void discard(AdventureCard card) {
+		this.hand.remove(card);
+	}
 	// Determine if a player has an amour in their hand
 	public boolean hasAmour() {
 		for(int i=0;i<this.temp.size();i++) {
