@@ -54,6 +54,15 @@ public class GameQuest {
 	}
 	
 	public boolean addStage(Stage stage) {
+		
+		if(stage.isTestStage() && withTest) return false;
+		
+		if(stage.isTestStage() && !withTest) {
+			withTest = true;
+			stages.add(stage);
+			return true;
+		}
+		
 		Stage highestStage = stages.stream().max( (s1, s2) -> Integer.compare(s1.getTotalPower(), s2.getTotalPower())).orElse(null);
 		
 		if((highestStage == null || stage.getTotalPower() >= highestStage.getTotalPower()) && stages.size() < quest.getStages()) {
@@ -85,6 +94,17 @@ public class GameQuest {
 	
 	public void playStage() {
 		if(over || this.players.size() == 0) return;
+		
+		if(stages.get(currentStage).isTestStage()) {
+			
+			Player remaining = players.stream().max((p1, p2) -> {
+				if(p1.getOfferedBids() > p2.getOfferedBids()) return -1;
+				if(p1.getOfferedBids() == p2.getOfferedBids()) return 0;
+				return 1;
+			}).get();
+			
+			return;
+		}
 		
 		List<Player> remaining = players.stream().filter(p -> p.getBattlePoints() >= stages.get(currentStage).getTotalPower()).collect(Collectors.toList());
 		this.players.forEach(p -> p.clearTemp());

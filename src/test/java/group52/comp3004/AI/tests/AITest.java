@@ -291,5 +291,6 @@ public class AITest {
 			state.setRevealedCard(hg);
 			state.setQuest();
 			p1.setHand(qcard);
+			//assertEquals(115, (int) p1.getBPInHand(state));
 		}
 }

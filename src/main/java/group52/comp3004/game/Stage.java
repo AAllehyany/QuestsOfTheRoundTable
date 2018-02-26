@@ -28,7 +28,7 @@ public class Stage {
 	}
 	
 	public int getTotalPower() {
-		return foe.getBp();
+		return testStage ? 0 : foe.getBp();
 	}
 	
 	public boolean isTestStage() {

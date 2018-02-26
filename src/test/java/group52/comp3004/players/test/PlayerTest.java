@@ -109,23 +109,28 @@ public class PlayerTest {
 	}
 	
 	@Test
-	public void testDoesNotBidCardsNotInHand() {
+	public void testDoesNotBidMoreThanInHand() {
 		Player p = new Player(1337);
 		
 		Ally c = new Ally("King_Arthur", resman, 16, 0);
 		ArrayList<AdventureCard> bids = new ArrayList();
-		bids.add(c);
-		p.bidCards(bids);
-		
-		assertEquals(0, (int) p.getBidPoints());
-		
+		p.addCardToHand(c);
 		p.addCardToHand(c);
 		
-		p.bidCards(bids);
+		p.bidCards(10);
 		
-		assertEquals(1, (int) p.getBidPoints());
+		assertEquals(0, (int) p.getOfferedBids());
+		
+		p.bidCards(-1);
+		
+		assertEquals(0, (int) p.getOfferedBids());
+		
+		p.bidCards(1);
 		
 		
+		assertEquals(1, (int) p.getOfferedBids());
 		
+		p.bidCards(2);
+		assertEquals(2, (int) p.getOfferedBids());
 	}
 }
