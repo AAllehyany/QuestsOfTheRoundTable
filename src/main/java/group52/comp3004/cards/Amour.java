@@ -1,7 +1,7 @@
 package group52.comp3004.cards;
 
-import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.ResourceManager;
+import group52.comp3004.game.GameState;
 
 public class Amour extends AdventureCard{
 	public String name;
@@ -12,6 +12,10 @@ public class Amour extends AdventureCard{
 		super(name, rm);
 		this.bp = bp;
 		this.bids = bids;
+	}
+	
+	public int getBp(GameState state){
+		return this.bp;
 	}
 	
 	public int getBp() {
