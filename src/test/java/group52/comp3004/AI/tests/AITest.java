@@ -40,6 +40,7 @@ public class AITest {
 		Foe bknight = new Foe("Black_Knight", resman, 25, 35, "Rescue_Maiden");
 		Foe boar = new Foe("Boar", resman, 5, 15, "Boar_Hunt");
 		Foe saxons = new Foe("Saxons", resman, 10, 20, "Saxon_Raiders");
+		Foe dragon = new Foe("Dragon", resman, 50, 70, "Slay_the_Dragon");
 		Weapon excalibur = new Weapon("Excalibur", resman, 30);
 		Weapon dagger = new Weapon("Dagger", resman, 5);
 		Weapon horse = new Weapon("Horse", resman, 10);
@@ -222,7 +223,7 @@ public class AITest {
 			p3.addCardToHand(kp);
 			assertFalse(s2.doISponsorQuest(state, p3));
 			
-			p1.removeShields(4);
+			p1.addShields(-4);
 			assertFalse(s2.doISponsorQuest(state, p3));
 			
 			p3.addCardToHand(qb);
@@ -290,7 +291,22 @@ public class AITest {
 			
 			state.setRevealedCard(hg);
 			state.setQuest();
+			p1.addShields(6);
+			p2.addShields(6);
+			p3.addShields(6);
+			p4.addShields(6);
 			p1.setHand(qcard);
-			//assertEquals(115, (int) p1.getBPInHand(state));
+			p1.addCardToHand(mordred);
+			p1.addCardToHand(qb);
+			p1.addCardToHand(excalibur);
+			p1.addCardToHand(giant);
+			p1.addCardToHand(dragon);
+			assert(s2.doISponsorQuest(state, p1));
+			stages = s2.createQuest(state, p1);
+			assertEquals(boar, stages.get(0).getFoe());
+			assertEquals(saxons, stages.get(1).getFoe());
+			assertEquals(mordred, stages.get(2).getFoe());
+			assert(stages.get(3).isTestStage());
+			assertEquals(dragon, stages.get(4).getFoe());
 		}
 }

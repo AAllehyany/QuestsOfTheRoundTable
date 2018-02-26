@@ -437,6 +437,13 @@ public class Player {
 		}
 		return false;
 	}
+	
+	public boolean hasAmourInHand() {
+		for(int i=0;i<this.hand.size();i++) {
+			if(this.hand.get(i) instanceof Amour) return true;
+		}
+		return false;
+	}
 
 	public void stopBidding() {
 		this.stoppedBidding = true;
