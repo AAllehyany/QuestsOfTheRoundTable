@@ -120,8 +120,22 @@ public class GameState {
 	public int numPlayers() {
 		return this.players.size();
 	}
+	
 	public void joinQuest() {
 		if(currentQuest != null && currentSponsor != currentPlayer) currentQuest.addPlayer(getPlayerByIndex(currentPlayer));
+	}
+	
+	public boolean canSponsorQuest() {
+		if(revealedCard == null || !(revealedCard instanceof QuestCard)) return false;
+		
+		Player current = this.players.get(currentPlayer);
+		QuestCard quest = (QuestCard) revealedCard;
+		int numFoes = current.countFoes();
+		int numFoesMinusOne = numFoes - 1;
+		int numTests = current.countTests();
+		int stages = quest.getStages();
+		
+		return numFoes >= stages || numFoesMinusOne + numTests >= stages;
 	}
 	
 	public void setQuest() {
@@ -165,15 +179,15 @@ public class GameState {
 		// remove all allies and all cards and make people draw (call quest end)
 	}
 	
-	public boolean canBidCards(ArrayList<AdventureCard> bids) {
-		return this.players.get(currentPlayer).validBid(bids) && bids.size() > maxBid;
+	public boolean canBidCards(int bids) {
+		return this.players.get(currentPlayer).validBid(bids) && bids > maxBid;
 	}
 	
 	
-	public void bidCards(ArrayList<AdventureCard> bids) {
+	public void bidCards(int bids) {
 		if(canBidCards(bids)) {
 			this.players.get(currentPlayer).bidCards(bids);
-			this.maxBid = bids.size();
+			this.maxBid = bids;
 		}
 	}
 	
