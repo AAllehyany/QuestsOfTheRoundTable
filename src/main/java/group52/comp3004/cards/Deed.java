@@ -34,7 +34,7 @@ public class Deed implements EventBehaviour{
 		}
 		for(int i=0;i<gamestate.numPlayers();i++) {
 			if(gamestate.getPlayerByIndex(i).getRank()== lowestRank) {
-				gamestate.getPlayerByIndex(i).addShields(2);
+				gamestate.getPlayerByIndex(i).addShields(3);
 			}
 		}
 		lowestShield = gamestate.getPlayerByIndex(0).getShields();
@@ -45,7 +45,7 @@ public class Deed implements EventBehaviour{
 		}
 		for(int i=1;i<gamestate.numPlayers();i++) {
 			if(gamestate.getPlayerByIndex(i).getShields()==lowestShield ) {
-				gamestate.getPlayerByIndex(i).addShields(2);;
+				gamestate.getPlayerByIndex(i).addShields(3);;
 			}
 		}
 	}
