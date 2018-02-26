@@ -1,7 +1,6 @@
 package group52.comp3004.players;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -157,7 +156,10 @@ public class Player {
 	}
 	
 	public void setHand(ArrayList<AdventureCard> hand) {
-		this.hand = hand;
+		this.hand.clear();
+		for(int i=0;i<hand.size();i++) {
+			this.hand.add(hand.get(i));
+		}
 	}
 	
 	
