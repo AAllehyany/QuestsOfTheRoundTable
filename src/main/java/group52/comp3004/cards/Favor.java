@@ -33,7 +33,9 @@ public class Favor implements EventBehaviour{
 		}
 		for(int i=0;i<gamestate.numPlayers();i++) {
 			if(gamestate.getPlayerByIndex(i).getRank()== lowestRank) {
-				gamestate.getPlayerByIndex(i).addShields(2);
+				for(int j=0;j<2; j++) {
+				gamestate.dealToPlayer(i);
+				}
 			}
 		}
 	}

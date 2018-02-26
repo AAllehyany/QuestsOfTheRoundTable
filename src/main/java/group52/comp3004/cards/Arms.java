@@ -31,7 +31,8 @@ public class Arms implements EventBehaviour{
 		}
 		for(int i=0;i<gamestate.numPlayers();i++) {
 			if(gamestate.getPlayerByIndex(i).getRank()== highestRank) {
-				gamestate.getPlayerByIndex(i);
+				System.out.println(gamestate.getPlayerByIndex(i).getId() +"discard two cards");
+				
 			}
 		}
 	}

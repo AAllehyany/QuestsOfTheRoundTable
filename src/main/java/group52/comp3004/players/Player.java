@@ -248,6 +248,7 @@ public class Player {
 	
 	public void addField(Ally card) {
 		this.field.add(card);
+		this.hand.remove(card);
 	}
 	
 	public void addTemp(AdventureCard card) {
@@ -447,7 +448,7 @@ public class Player {
 	}
 
 	public void removeShield(int i) {
-		this.shields -= shields;
+		this.shields = shields-i;
 		
 	}
 }

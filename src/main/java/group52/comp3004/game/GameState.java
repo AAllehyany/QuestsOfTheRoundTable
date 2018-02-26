@@ -219,7 +219,7 @@ public class GameState {
 	}
 	public void setPhase(Phase phase) { this.phase = phase; }
 	public Phase getPhase() { return this.phase; }
-	
+	public int getBonusShields() {	return this.bonusShields;}
 	public ResourceManager getResourceManager() { return resman; }
 	
 	public List<Player> getAllPlayers() { return this.players; }

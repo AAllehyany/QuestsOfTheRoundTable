@@ -34,20 +34,20 @@ public class Deed implements EventBehaviour{
 		}
 		for(int i=0;i<gamestate.numPlayers();i++) {
 			if(gamestate.getPlayerByIndex(i).getRank()== lowestRank) {
-				gamestate.getPlayerByIndex(i).addShields(3);
+				lowestShield = gamestate.getPlayerByIndex(0).getShields();
+				for(int j=1;j<gamestate.numPlayers();j++) {
+					if(gamestate.getPlayerByIndex(i).getShields()<lowestShield ) {
+						lowestShield = gamestate.getPlayerByIndex(i).getShields();
+					}
+				}
+				for(int j=1;j<gamestate.numPlayers();j++) {
+					if(gamestate.getPlayerByIndex(i).getShields()==lowestShield ) {
+						gamestate.getPlayerByIndex(i).addShields(3);;
+					}
+				}
 			}
 		}
-		lowestShield = gamestate.getPlayerByIndex(0).getShields();
-		for(int i=1;i<gamestate.numPlayers();i++) {
-			if(gamestate.getPlayerByIndex(i).getShields()<lowestShield ) {
-				lowestShield = gamestate.getPlayerByIndex(i).getShields();
-			}
-		}
-		for(int i=1;i<gamestate.numPlayers();i++) {
-			if(gamestate.getPlayerByIndex(i).getShields()==lowestShield ) {
-				gamestate.getPlayerByIndex(i).addShields(3);;
-			}
-		}
+		
 	}
 
 }
