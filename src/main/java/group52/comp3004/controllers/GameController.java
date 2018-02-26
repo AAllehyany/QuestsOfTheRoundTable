@@ -232,17 +232,24 @@ public class GameController implements Initializable {
 		if(!(card instanceof Ally)) return;
 		Player player = this.model.getPlayerByIndex(index);
 		player.playCardToField((Ally) card);
-		this.playerControllers.get(index).update(player.getHand(),player.getField());
+		this.playerControllers.get(index).update(player.getHand(),player.getField(), player);
 	}
 
-	
+	public void discardOnClick(AdventureCard card, int index) {
+		if(model.getPhase()==Phase.HandleEvent) {
+			System.out.println("Discarded card: " + card.getName());
+			Player player =this.model.getPlayerByIndex(index);
+			player.discard(card);
+			this.playerControllers.get(index).update(player.getHand(),player.getField(), player);
+		}
+	}
 
 	//CLICK EVENT: Card dealt from adventure deck
 	public void dealPlayer(int index) {
 		System.out.println("Dealt card");
 		this.model.dealToPlayer(index);
 		Player player = this.model.getPlayerByIndex(index);
-		this.playerControllers.get(index).update(player.getHand(),player.getField());
+		this.playerControllers.get(index).update(player.getHand(),player.getField(),player);
 	}
 
 	
@@ -263,7 +270,7 @@ public class GameController implements Initializable {
 		//update player hand and field arraylists for each player
 		for(int i = 0; i < this.playerControllers.size(); i++) {
 			Player player = this.model.getPlayerByIndex(i);
-			this.playerControllers.get(i).update(player.getHand(),player.getField());
+			this.playerControllers.get(i).update(player.getHand(),player.getField(),player);
 		}
 		//update middle area
 		//middleController.setStoryCard(model.getRevealedCard());

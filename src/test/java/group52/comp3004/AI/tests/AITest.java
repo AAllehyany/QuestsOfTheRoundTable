@@ -223,7 +223,7 @@ public class AITest {
 			p3.addCardToHand(kp);
 			assertFalse(s2.doISponsorQuest(state, p3));
 			
-			p1.removeShields(4);
+			p1.addShields(-4);
 			assertFalse(s2.doISponsorQuest(state, p3));
 			
 			p3.addCardToHand(qb);

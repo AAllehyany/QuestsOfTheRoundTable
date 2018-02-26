@@ -23,6 +23,7 @@ public class GameState {
 	private Deck<AdventureCard> adventureDeck;
 	private Deck<StoryCard> storyDeck;
 	private GameQuest currentQuest;
+	private GameTourney currentTourney;
 	private StoryCard revealedCard;
 	private static ResourceManager resman = null;
 	private Integer maxBid;
@@ -174,6 +175,7 @@ public class GameState {
 		currentQuest.end(this.bonusShields);
 		currentSponsor = -1;
 		currentQuest = null;
+		this.bonusShields=0;
 		
 		
 		// remove all allies and all cards and make people draw (call quest end)
@@ -212,6 +214,9 @@ public class GameState {
 	public StoryCard getRevealedCard() { return this.revealedCard; }
 	public void setRevealedCard(StoryCard card) { this.revealedCard = card; }
 
+	public void setBonusShields(int b) {
+		this.bonusShields= b;
+	}
 	public void setPhase(Phase phase) { this.phase = phase; }
 	public Phase getPhase() { return this.phase; }
 	
