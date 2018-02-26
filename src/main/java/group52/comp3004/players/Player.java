@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
@@ -16,7 +15,6 @@ import group52.comp3004.cards.Weapon;
 import group52.comp3004.controllers.GameController;
 import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
-import group52.comp3004.game.Phase;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
@@ -37,7 +35,6 @@ public class Player {
 	private GameController controller;
 	private Integer bidPoints;
 	private boolean stoppedBidding;
-	private int offeredBids;
 	
 	public Player(Integer id, GameController gc, GameState gs) {
 		this.id = id;
@@ -54,7 +51,6 @@ public class Player {
 		controller = gc;
 		game = gs;
 		bidPoints = 0;
-		offeredBids = 0;
 	}
 	
 	public Player(Integer id) {
@@ -70,7 +66,6 @@ public class Player {
 		temp = new ArrayList<>();
 		quest = null;
 		bidPoints = 0;
-		offeredBids = 0;
 	}
 	
 	public Integer getId() {
@@ -111,17 +106,13 @@ public class Player {
 	}
 	
 	
-	public void bidCards(int bids) {
-		if(validBid(bids) && !stoppedBidding) this.offeredBids = bids;
+	public void bidCards(ArrayList<AdventureCard> bids) {
+		if(validBid(bids)) this.bidPoints += bids.size();
 	}
 	
 	
-	public boolean validBid(int num) {
-		return num <= this.hand.size() && num >= 0;
-	}
-	
-	public int getOfferedBids() {
-		return this.offeredBids;
+	public boolean validBid(ArrayList<AdventureCard> bids) {
+		return bids.stream().allMatch(card -> this.hand.contains(card));
 	}
 	
 	public Integer getBattlePoints(GameState state) {
@@ -152,13 +143,24 @@ public class Player {
 		}
 	}
 	
+	public void removeShields(Integer shields) {
+		this.shields -= shields;
+		if(this.shields<minShields) this.shields = minShields;
+		if(this.shields>= this.requiredShields) {
+			updateRank();
+		}
+	}
+	
 	
 	public ArrayList<AdventureCard> getHand() {
 		return hand;
 	}
 	
 	public void setHand(ArrayList<AdventureCard> hand) {
-		this.hand = hand;
+		this.hand.clear();
+		for(int i=0;i<hand.size();i++) {
+			this.hand.add(hand.get(i));
+		}
 	}
 	
 	
@@ -166,28 +168,9 @@ public class Player {
 		System.out.println("Adding "+card.getName()+" to hand");
 		card.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
-				
+				card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
+				System.out.println(card.getName()+ " clicked");
 				//change so card click behaviour changes based on the phase
-				
-				if(game.getPhase() == Phase.SetupQuest) {
-					if(!(card instanceof Foe)) {
-						System.out.println("Clicking illegal card for setting quest");
-					}
-					else {
-						card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
-						System.out.println(card.getName()+ " clicked");
-						field.add(card);
-						hand.remove(card);
-						controller.updateAll();	
-					}
-				}
-				else {
-					card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
-					System.out.println(card.getName()+ " clicked");
-					field.add(card);
-					hand.remove(card);
-					controller.updateAll();	
-				}
 				/*
 				 if(game.getPhase() == SetupQuest){
 				 	//add foes and weapons to quest
@@ -209,7 +192,9 @@ public class Player {
 				 	//do nothing
 				 }
 				 */
-				
+				field.add(card);
+				hand.remove(card);	
+				controller.updateAll();	
 			}
 		});
 		this.hand.add(card);
@@ -356,11 +341,6 @@ public class Player {
 		return false;
 	}
 	
-	// count the number of tests in a player's hand
-	public int countTests() {
-		return this.hand.stream().filter(c -> c instanceof Tests).collect(Collectors.toList()).size();
-	}
-	
 	// count the number of foes in a player's hand
 	public int countFoes() {
 		int count = 0;
@@ -417,11 +397,17 @@ public class Player {
 		return numUFoes;
 	}
 	
-	
 	// Determine if a player has an amour in their hand
 	public boolean hasAmour() {
 		for(int i=0;i<this.temp.size();i++) {
 			if (this.temp.get(i) instanceof Amour) return true;
+		}
+		return false;
+	}
+	
+	public boolean hasAmourInHand() {
+		for(int i=0;i<this.hand.size();i++) {
+			if(this.hand.get(i) instanceof Amour) return true;
 		}
 		return false;
 	}
@@ -433,10 +419,5 @@ public class Player {
 	
 	public boolean hasStoppedBidding() {
 		return this.stoppedBidding;
-	}
-
-	public void removeShield(int i) {
-		this.shields -= shields;
-		
 	}
 }

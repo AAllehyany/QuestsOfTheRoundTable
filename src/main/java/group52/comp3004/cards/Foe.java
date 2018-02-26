@@ -18,7 +18,7 @@ public class Foe extends AdventureCard{
 	public Foe(String name, ResourceManager rm, int bp) {
 		super(name, rm);
 		this.bp = bp;
-		this.highBp = 0;
+		this.highBp = bp;
 		this.weapons = new HashSet<Weapon>();
 		quests.add("Holy_Grail");
 		quests.add("Queens_Honor");
