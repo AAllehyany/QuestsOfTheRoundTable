@@ -25,7 +25,7 @@ public class AllyTest {
 	@Test
 	public void testAllyStats() {
 		GameState state = new GameState();
-		Ally a1 = new Ally("Sir_Gawain", resman, 10, 0, "Green_Knight", 20, 0);
+		Ally a1 = new Ally("Sir_Gawain", resman, 10, 0, "Green_Knight_Quest", 20, 0);
 		assertEquals(0, (int) a1.getBids(state));
 		assertEquals(10, (int) a1.getBp(state));
 		Ally a2 = new Ally("King_Arthur", resman, 10, 2);
@@ -38,10 +38,10 @@ public class AllyTest {
 		Player p = new Player(0);
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(p);
-		QuestCard q = new QuestCard("Green_Knight", resman, 4);
-		Ally a1 = new Ally("Sir_Gawain", resman, 10, 0, "Green_Knight", 20, 0);
+		QuestCard q = new QuestCard("Green_Knight_Quest", resman, 4);
+		Ally a1 = new Ally("Sir_Gawain", resman, 10, 0, "Green_Knight_Quest", 20, 0);
 		Ally a2 = new Ally("King_Arthur", resman, 10, 2);
-		Ally a3 = new Ally("King_Pellinore", resman, 10, 0, "Questing_Beast", 0, 4);
+		Ally a3 = new Ally("King_Pellinore", resman, 10, 0, "Questing_Beast_Search", 0, 4);
 		GameState state = new GameState(players);
 		state.setRevealedCard(q);
 		state.setQuest();

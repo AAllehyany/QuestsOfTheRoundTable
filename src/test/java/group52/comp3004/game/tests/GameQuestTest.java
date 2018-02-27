@@ -24,7 +24,7 @@ public class GameQuestTest {
 	
 	@Test
 	public void testHasCorrectNumberOfStages() {
-		journey = new QuestCard("Green_Knight", resman, 3);
+		journey = new QuestCard("Green_Knight_Quest", resman, 3);
 		quest = new GameQuest(journey, new Player(1));
 		assertEquals(3, quest.getNumStages());
 	}

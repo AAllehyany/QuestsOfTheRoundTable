@@ -36,11 +36,10 @@ public class GameController implements Initializable {
 	private MiddleAreaController middleController;
 
 	@FXML
-	private Button twoPlayers;
+	private Button twoPlayers, threePlayers, fourPlayers;
 	@FXML
-	private Button threePlayers;
-	@FXML
-	private Button fourPlayers;
+	private Button finishSponsor;
+	
 	private GameState model;
 
 	//Constructor
@@ -72,7 +71,7 @@ public class GameController implements Initializable {
 		threePlayers.setOnAction(e -> this.startGame());
 		fourPlayers.setOnAction(e -> this.startGame());
 		
-		//dealtoplayer1.setVisible(false);
+		finishSponsor.setVisible(false);
 	}
 
 	/*****************************************************************************************************/
@@ -91,7 +90,7 @@ public class GameController implements Initializable {
 		twoPlayers.setOnAction(null);
 		twoPlayers.setVisible(false);
 
-
+		
 		//call GUI creation methods
 		this.createMiddleArea();
 		this.createPlayerAreas();
@@ -138,7 +137,7 @@ public class GameController implements Initializable {
 		}
 		else if(model.getRevealedCard() instanceof QuestCard) {System.out.println("    -->Quest");
 			model.setPhase(Phase.SponsorQuest);
-			//this.sponsorQuest();
+			this.sponsorQuest();
 		}
 		else {
 			System.out.println("Unknown card type added to story");
@@ -175,6 +174,7 @@ public class GameController implements Initializable {
 	}
 	//PURPOSE: Execute SponsorQuest Phase
 	public void sponsorQuest() {
+		
 		//move to next phase
 		model.setPhase(Phase.SetupQuest);
 		this.setupQuest();
@@ -182,16 +182,25 @@ public class GameController implements Initializable {
 
 	//PURPOSE: Execute SetupQuest Phase
 	public void setupQuest() {
-		//move to next phase
+		finishSponsor.setVisible(true);
+		
+		
+		//move to next phase if ready button is pressed
 		model.setPhase(Phase.RunQuest);
-		this.runQuest();
+		finishSponsor.setOnAction(e -> this.runQuest());
 	}
 
 	//PURPOSE: Execute RunQuest Phase
 	public void runQuest() {
+		//remove the ready button
+		finishSponsor.setOnAction(null);
+		finishSponsor.setVisible(false);
+		System.out.println("          ->Run Quest");
+		//Players play cards into quest
+		
 		//move to next phase
 		model.setPhase(Phase.EndQuest);
-		this.endQuest();
+		//this.endQuest();
 	}
 
 	//PURPOSE: Execute EndQuest Phase

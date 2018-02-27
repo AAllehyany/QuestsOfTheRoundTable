@@ -28,13 +28,13 @@ public class AITest {
 		JFXPanel jfxPanel = new JFXPanel();
 		public ResourceManager resman = new ResourceManager();
 		
-		QuestCard gk = new QuestCard("Green_Knight", resman, 3);
+		QuestCard gk = new QuestCard("Green_Knight_Quest", resman, 3);
 		QuestCard qh = new QuestCard("Queens_Honor", resman, 4);
 		QuestCard bh = new QuestCard("Boar_Hunt", resman, 2);
 		QuestCard hg = new QuestCard("Holy_Grail", resman, 5);
 		Tourneys camelot = new Tourneys("Camelot", resman, 3);
 		
-		Foe gknight = new Foe("Green_Knight", resman, 25, 40, "Green_Knight");
+		Foe gknight = new Foe("Green_Knight", resman, 25, 40, "Green_Knight_Quest");
 		Foe mordred = new Foe("Mordred", resman, 30);
 		Foe giant = new Foe("Giant", resman, 40);
 		Foe bknight = new Foe("Black_Knight", resman, 25, 35, "Rescue_Maiden");
@@ -44,8 +44,8 @@ public class AITest {
 		Weapon excalibur = new Weapon("Excalibur", resman, 30);
 		Weapon dagger = new Weapon("Dagger", resman, 5);
 		Weapon horse = new Weapon("Horse", resman, 10);
-		Ally kp = new Ally("King_Pellinore", resman, 10, 0, "Questing_Beast", 0, 4);
-		Ally sg = new Ally("Sir_Gawain", resman, 10, 0, "Green_Knight", 20, 0);
+		Ally kp = new Ally("King_Pellinore", resman, 10, 0, "Questing_Beast_Search", 0, 4);
+		Ally sg = new Ally("Sir_Gawain", resman, 10, 0, "Green_Knight_Quest", 20, 0);
 		Amour a = new Amour("Amour", resman, 10, 1);
 		Tests qb = new Tests("Questing_Beast", resman, 4);
 
@@ -60,7 +60,7 @@ public class AITest {
 			state.addPlayer(p2);
 			state.addPlayer(p3);
 			
-			QuestCard qc = new QuestCard("Green_Knight", resman, 3);
+			QuestCard qc = new QuestCard("Green_Knight_Quest", resman, 3);
 			state.setRevealedCard(qc);
 			state.setQuest();
 			
