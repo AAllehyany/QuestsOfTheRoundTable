@@ -6,7 +6,11 @@ import java.util.ResourceBundle;
 import group52.comp3004.players.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 public class PortraitAreaController implements Initializable {
@@ -19,16 +23,22 @@ public class PortraitAreaController implements Initializable {
 	private Text shield ;
 	@FXML 
 	private Text rank;
+	@FXML
+	private HBox shields1;
 	public PortraitAreaController() {
 		
 	}
-//create portraitarea
+//create portrait area
     public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
     	System.out.println("PORTRAIT AREA");
     	this.name.setText("");
     	this.shield.setText("");
     	this.rank.setText("");
+    	Rectangle shield = new Rectangle(20, 20);
+    	Image img = new Image("image/Shields/chief.png");
+    	ImagePattern tex = new ImagePattern(img);
+    	shields1.getChildren().add(shield);
+    	shield.setFill(tex);
 	}
     
     public void playerInfo(Player player){

@@ -114,10 +114,8 @@ public class Deck<T> {
 	}
 	
 	//PURPOSE: Builds the story deck
-	//	->Missing: not sure how event behaviour works so events aren't added
 	public static ArrayList<StoryCard> createStoryDeck(ResourceManager resman){
 		ArrayList<StoryCard> cards= new ArrayList<>(Arrays.asList(
-				//missing event behaviours
 				new EventCard("Pox", resman, new Pox()),
 				new EventCard("Plague", resman, new Plague()),
 				new EventCard("Chivalrous_Deed", resman, new Deed()),
@@ -138,7 +136,6 @@ public class Deck<T> {
 		for(int i = 0; i < 2; i++) cards.add(new QuestCard("Arthurs_Enemy", resman, 3));
 		for(int i = 0; i < 2; i++) cards.add(new QuestCard("Boar_Hunt", resman, 2));
 		for(int i = 0; i < 2; i++) cards.add(new QuestCard("Repel_Saxon_Raiders", resman, 2));
-		//missing event behaviours
 		for(int i = 0; i < 2; i++) cards.add(new EventCard("King's_Recognition", resman, new Recognition()));
 		for(int i = 0; i < 2; i++) cards.add(new EventCard("Queen's_Favor", resman, new Favor()));
 		for(int i = 0; i < 2; i++) cards.add(new EventCard("Called_to_Camelot", resman,new Camelot()));
