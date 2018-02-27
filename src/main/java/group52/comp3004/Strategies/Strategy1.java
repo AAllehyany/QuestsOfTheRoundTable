@@ -32,11 +32,11 @@ public class Strategy1 extends AbstractAI{
 	public boolean doIParticipateInQuest(GameState state, Player p) {
 		p.sortHand(state);
 		if(p.countFoes(20)<2) return false;
-		int AA = 0;
+		int sum = 0;
 		HashMap<Weapon, Integer> weps = new HashMap<Weapon, Integer>();
 		for(int i=0;i<p.getHand().size();i++) {
-			if(p.getHand().get(i) instanceof Ally || p.getHand().get(i) instanceof Amour) {
-				AA++;
+			if(p.getHand().get(i) instanceof Ally) {
+				sum++;
 			}
 			if(p.getHand().get(i) instanceof Weapon) {
 				Weapon w = (Weapon) p.getHand().get(i);
@@ -44,12 +44,13 @@ public class Strategy1 extends AbstractAI{
 				else weps.put((Weapon) p.getHand().get(i), 1);
 			}
 		}
-		int cards = AA;
+		if(p.hasAmourInHand()) sum++;
+		int AA = sum;
 		ArrayList<Integer> w = new ArrayList<Integer>(weps.values());
 		for(int i=0;i<w.size();i++) {
-			cards += Math.min(w.get(i), state.getCurrentQuest().getNumStages()-AA/2);
+			sum += Math.min(w.get(i), state.getCurrentQuest().getNumStages()-AA/2);
 		}
-		if(AA+cards<state.getCurrentQuest().getNumStages()*2) return false;
+		if(sum<state.getCurrentQuest().getNumStages()*2) return false;
 		return true;
 	}
 	
@@ -78,7 +79,9 @@ public class Strategy1 extends AbstractAI{
 		ArrayList<AdventureCard> dupes = p.getDuplicates();
 		if(tourneyEvolve(state)) {
 			for(int i=0;i<p.getHand().size();i++) {
-				if(!(p.getHand().get(i) instanceof Tests)) cards.add(p.getHand().get(i));
+				if(!(p.getHand().get(i) instanceof Tests || p.getHand().get(i) instanceof Foe)) {
+					cards.add(p.getHand().get(i));
+				}
 			}
 		}else {
 			for(int i=0;i<dupes.size();i++) {

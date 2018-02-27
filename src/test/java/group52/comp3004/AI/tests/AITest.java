@@ -46,6 +46,8 @@ public class AITest {
 		Weapon horse = new Weapon("Horse", resman, 10);
 		Ally kp = new Ally("King_Pellinore", resman, 10, 0, "Questing_Beast_Search", 0, 4);
 		Ally sg = new Ally("Sir_Gawain", resman, 10, 0, "Green_Knight_Quest", 20, 0);
+		Ally sp = new Ally("Sir_Percival", resman, 5, 0, "Holy_Grail", 20, 0);
+		Ally ka = new Ally("King_Arthur", resman, 10, 2);
 		Amour a = new Amour("Amour", resman, 10, 1);
 		Tests qb = new Tests("Questing_Beast", resman, 4);
 
@@ -157,6 +159,54 @@ public class AITest {
 			assertEquals(false, (boolean) s1.doIParticipateInTournament(state));
 			p1.addShields(4);
 			assertEquals(true, (boolean) s1.doIParticipateInTournament(state));
+			
+			p1.addCardToHand(gknight);
+			p1.addCardToHand(mordred);
+			p1.addCardToHand(giant);
+			p1.addCardToHand(boar);
+			p1.addCardToHand(dagger);
+			p1.addCardToHand(kp);
+			
+			assertEquals(1, s1.nextBid(state, p1));
+			p1.setHand(new ArrayList<AdventureCard>());
+			p1.addCardToHand(gknight);
+			p1.addCardToHand(dagger);
+			p1.addCardToHand(kp);
+			p1.addCardToHand(a);
+			assertEquals(0, s1.nextBid(state, p1));
+			
+			p1.addCardToHand(boar);
+			p1.addCardToHand(saxons);
+			ArrayList<AdventureCard> dCard = s1.discardAfterWinningTest(state, p1);
+			assertEquals(boar, dCard.get(0));
+			assertEquals(saxons, dCard.get(1));
+			
+			state.setRevealedCard(camelot);
+			// Add tourney tests
+			
+			state.setRevealedCard(hg);
+			state.setQuest();
+			assertFalse(s1.doIParticipateInQuest(state, p1));
+			p1.addCardToHand(sg);
+			p1.addCardToHand(dagger);
+			p1.addCardToHand(dagger);
+			p1.addCardToHand(dagger);
+			p1.addCardToHand(dagger);
+			p1.addCardToHand(dagger);
+			p1.addCardToHand(dagger);
+			p1.addCardToHand(dagger);
+			p1.addCardToHand(dagger);
+			p1.addCardToHand(dagger);
+			p1.addCardToHand(dagger);
+			p1.addCardToHand(dagger);
+			assertFalse(s1.doIParticipateInQuest(state, p1));
+			p1.addCardToHand(excalibur);
+			p1.addCardToHand(excalibur);
+			p1.addCardToHand(ka);
+			p1.addCardToHand(sp);
+			p1.addCardToHand(boar);
+			assert(s1.doIParticipateInQuest(state, p1));
+			
 		}
 		
 		@Test
@@ -177,8 +227,6 @@ public class AITest {
 			state.setRevealedCard(camelot);
 			assertEquals(true, (boolean) s2.doIParticipateInTournament(state));
 			
-			state.setRevealedCard(gk);
-			
 			p1.addCardToHand(gknight);
 			p1.addCardToHand(mordred);
 			p1.addCardToHand(dagger);
@@ -198,6 +246,8 @@ public class AITest {
 			ArrayList<AdventureCard> tCards2 = s2.playTourney(state, p2);
 			assertEquals(excalibur, tCards2.get(0));
 			assertEquals(dagger, tCards2.get(1));
+			
+			state.setRevealedCard(gk);
 
 			ArrayList<AdventureCard> dCards;
 			p1.addCardToHand(boar);

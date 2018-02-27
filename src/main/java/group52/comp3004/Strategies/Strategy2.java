@@ -48,8 +48,11 @@ public class Strategy2 extends AbstractAI{
 			}
 		}
 		ArrayList<AdventureCard> weakCards = new ArrayList<AdventureCard>(weak.keySet());
-		AAW += weakCards.stream().mapToInt(c->Math.min(stages, weak.get(c))*c.getBp(state)).sum()/10;
-		if(AAW<stages)return false;
+		int rem = stages-AAW;
+		if(rem>0) {
+			int weaksum = weakCards.stream().mapToInt(c->Math.min(rem, weak.get(c))*c.getBp()).sum();
+			if(weaksum<rem*(rem+1)/2*10) return false;
+		}
 		this.resetBid();
 		return true;
 	}
