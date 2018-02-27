@@ -48,7 +48,7 @@ public class View{
 	}
 	
 	public void initView() {
-		scene = new Scene(root, 840, 840);
+		scene = new Scene(root, 1120, 840);
 		scene.getStylesheets().addAll(css);
 		stage.setTitle("Quest of the Round Table");
 		stage.setScene(scene);

@@ -3,9 +3,8 @@ package group52.comp3004.controllers;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.ResourceBundle;
-import group52.comp3004.GUI.MiddleArea;
+
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.EventCard;
@@ -20,10 +19,13 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Scale;
 
 
 
@@ -49,11 +51,11 @@ public class GameController implements Initializable {
 		Player demo = new Player(1, this, model);
 		Player demow = new Player(2, this, model);
 		Player demoww = new Player(3, this, model);
-		Player demowww= new Player(4, this, model);
+		//Player demowww= new Player(4, this, model);
 		model.addPlayer(demo);
 		model.addPlayer(demow);
 		model.addPlayer(demoww);
-		model.addPlayer(demowww);
+		//model.addPlayer(demowww);
 		stageSize.set(0);
 		playerControllers = new ArrayList<>();
 		middleController = null;
@@ -67,6 +69,9 @@ public class GameController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources)  {
 		System.out.println("Game controller created");
+		
+		gamepane.setAlignment(Pos.CENTER);
+		
 		twoPlayers.setOnAction(e -> this.startGame());
 		threePlayers.setOnAction(e -> this.startGame());
 		fourPlayers.setOnAction(e -> this.startGame());
@@ -94,12 +99,9 @@ public class GameController implements Initializable {
 		//call GUI creation methods
 		this.createMiddleArea();
 		this.createPlayerAreas();
-		//this.addAdventureDeck();
-		//this.addStoryDeck();
-		//deal out cards
-			/*dealtoplayer1.setVisible(true);
-			Random rand = new Random();
-			dealtoplayer1.setOnAction(e -> dealPlayer(rand.nextInt(this.model.numPlayers())));*/
+		this.addAdventureDeck();
+		this.addStoryDeck();
+
 		this.updateInfo();
 		this.model.dealCardsToPlayers();
 		//update all controllers
@@ -300,7 +302,7 @@ public class GameController implements Initializable {
 		try {
 			FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/fxml/middle_area.fxml"));
 			StackPane middle = loader1.load();
-			gamepane.add(middle, 2, 2, 2, 2);
+			gamepane.add(middle, 2, 2, 4, 2);
 			middleController = loader1.getController();
 		}
 
@@ -324,15 +326,15 @@ public class GameController implements Initializable {
 				if(index == 0) gamepane.add(player, 1, 6, 4, 2);
 				else if(index == 1) {	
 					player.getTransforms().add(new Rotate(90, Rotate.Z_AXIS));
-					gamepane.add(player, 1, 1, 2, 4);
+					gamepane.add(player, 2, 0, 2, 4);
 				}
 				else if(index == 2) {
-					player.getTransforms().add(new Rotate(180, Rotate.Z_AXIS));
-					gamepane.add(player, 5, 2, 4, 2);
+					player.getTransforms().add(new Scale(1, -1));
+					gamepane.add(player, 2, 3, 4, 2);
 				}
 				else if(index == 3) {
 					player.getTransforms().add(new Rotate(270, Rotate.Z_AXIS));
-					gamepane.add(player, 5, 6, 1, 4);
+					gamepane.add(player, 6, 6, 1, 4);
 				}
 			}
 
@@ -344,16 +346,23 @@ public class GameController implements Initializable {
 
 	//PURPOSE: add Adventure Deck GUI item
 	public void addAdventureDeck() {
-		AdventureCard adventureDeck = new AdventureCard("Adventure deck card", model.getResourceManager());
-		StackPane deckPane = new StackPane();
-		deckPane.getChildren().add(adventureDeck);
+		AdventureCard adventureDeck = new AdventureCard("Sword", model.getResourceManager());
+		adventureDeck.setFaceDown();
+		StackPane aPane = new StackPane();
+		aPane.setAlignment(Pos.CENTER);
+		aPane.getChildren().add(adventureDeck);
 		gamepane.add(adventureDeck, 0, 5);
 	}
 
 	//PURPOSE: add Story Deck GUI item
 	//	-->Incomplete
 	public void addStoryDeck() {
-		StoryCard storyDeck = new StoryCard("Story deck card", model.getResourceManager());
+		StoryCard storyDeck = new StoryCard("Boar_Hunt", model.getResourceManager());
+		storyDeck.setFaceDown();
+		HBox sPane = new HBox();
+		sPane.setAlignment(Pos.CENTER);
+		sPane.getChildren().add(storyDeck);
+		gamepane.add(storyDeck, 7, 5);	
 	}
 
 }

@@ -67,11 +67,13 @@ public class Card extends Rectangle{
 	
 	public void setFaceUp() {
 		this.isFaceUp = true;
+		this.setFill(front);
 		return;
 	}
 	
 	public void setFaceDown() {
 		this.isFaceUp = false;
+		this.setFill(back);
 		return;
 	}
 }
