@@ -10,15 +10,19 @@ import group52.comp3004.players.Player;
 public class GameTourney {
 	private final Tourneys tourney;
 	private List<Player> players;
-	private Player sponsor;
-	private List<Player> winner;
 	private List<Player> count;
+	private Player sponsor;
+	private int bonus;
+	private List<Player> winner;
 	private boolean over;
 	
 	public GameTourney(Tourneys tourney, Player sponsor) {
 		this.tourney = tourney;
 		this.players = new ArrayList<Player>();
+		this.count = new ArrayList<Player>();
 		this.sponsor = sponsor;
+		this.winner=new ArrayList<Player>();
+		this.bonus=0;
 		this.over= false;
 	}
 	
@@ -32,10 +36,10 @@ public class GameTourney {
 	
 	//Why need to add tourney inside player?
 	public void addPlayer(Player player) {
-		/*if(!this.players.contains(player) && player.getTourney() == null) {
+		if(!this.players.contains(player) && player.getTourney() == null) {
 			this.players.add(player);
 			player.setTourney(this);
-		}*/
+		}
 	}
 
 	public boolean isOver() {
@@ -50,30 +54,47 @@ public class GameTourney {
 	}
 	
 	public List<Player> winner() {
-		int count = battle(this.players).size();
-		if(count>1) {
-				winner = battle(battle(this.players));
+		List<Player> win= battle(this.players);
+		if(this.players.size()==1) {
+			this.winner= this.players;
+			bonus=2;
+		}else {
+			int count = win.size();
+			if(count>1) {
+					this.winner = battle(win);
+				}
+			else {
+				this.winner = win;
 			}
-		else {
-			winner = battle(this.players);
 		}
 		return this.winner;
+
+
 	}
 	
 	public List<Player> battle(List<Player> player) {
-
+		this.count.clear();
 		Player highest= player.get(0);
+		this.count.add(player.get(0));
 		for(int i=1;i<this.players.size();i++) {
 			if(player.get(i).getBattlePoints()>highest.getBattlePoints()) {
 				highest =player.get(i);
-				count.clear();
+				this.count.clear();
+				this.count.add(player.get(i));
 			}else if(player.get(i).getBattlePoints()==highest.getBattlePoints()) {
-				count.add(player.get(i));
+				this.count.add(player.get(i));
+			}else {
+				System.out.println("no");
 			}
 		}
-		return count;
+		return this.count;
 	}
 	public void awardShields() {
-		if(over) winner.forEach(p -> p.addShields(tourney.getShields()));
+		 this.winner.forEach(p -> p.addShields(tourney.getShields() + bonus));
+	}
+	
+	public void end() {
+		this.over = true;
+		bonus = 0;
 	}
 }

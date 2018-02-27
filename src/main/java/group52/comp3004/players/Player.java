@@ -15,6 +15,7 @@ import group52.comp3004.cards.Weapon;
 import group52.comp3004.controllers.GameController;
 import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
+import group52.comp3004.game.GameTourney;
 import group52.comp3004.game.Phase;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -33,6 +34,7 @@ public class Player {
 	private ArrayList<AdventureCard> temp;
 	private GameState game;
 	private GameQuest quest;
+	private GameTourney tourney;
 	private GameController controller;
 	private Integer bidPoints;
 	private boolean stoppedBidding;
@@ -50,6 +52,7 @@ public class Player {
 		field = new ArrayList<>();
 		temp = new ArrayList<>();
 		quest = null;
+		tourney = null;
 		controller = gc;
 		game = gs;
 		bidPoints = 0;
@@ -68,6 +71,7 @@ public class Player {
 		field = new ArrayList<>();
 		temp = new ArrayList<>();
 		quest = null;
+		tourney = null;
 		bidPoints = 0;
 		offeredBids = 0;
 	}
@@ -457,5 +461,13 @@ public class Player {
 	public void removeShield(int i) {
 		this.shields = shields-i;
 		
+	}
+
+	public GameTourney getTourney() {
+		return this.tourney;
+	}
+	
+	public void setTourney(GameTourney tourney) {
+		this.tourney = tourney;
 	}
 }
