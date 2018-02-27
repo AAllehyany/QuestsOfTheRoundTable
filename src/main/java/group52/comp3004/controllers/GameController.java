@@ -3,6 +3,7 @@ package group52.comp3004.controllers;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import group52.comp3004.cards.AdventureCard;
@@ -20,7 +21,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -178,9 +182,28 @@ public class GameController implements Initializable {
 	//PURPOSE: Execute SponsorQuest Phase
 	public void sponsorQuest() {
 		
-		//move to next phase
-		model.setPhase(Phase.SetupQuest);
-		this.setupQuest();
+		boolean sponsored = false;
+		
+		for(int i = 0; i < model.getAllPlayers().size(); i++) {
+			Optional<ButtonType> result = makeAlertBox("Quest sponsoring", "Quest " + model.getRevealed().getName(),
+					"Do you want to sponsor the quest, player " + model.getCurrentPlayer() + "?");
+//			Alert alert = new Alert(AlertType.CONFIRMATION);
+//			alert.setTitle("Quest Sponsoring");
+//			alert.setHeaderText("Quest " + model.getRevealed().getName());
+//			alert.setContentText("Do you want to sponsor the quest, player " + model.getCurrentPlayer() + "?");
+//			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK){
+				System.out.println("Quest sponsored by player " + model.getCurrentPlayer());
+				model.setQuest();
+				model.setPhase(Phase.SetupQuest);
+				this.setupQuest();
+				sponsored = true;
+			    break;
+			}
+			model.nextPlayer();
+		}
+		
+		if(!sponsored) this.endTurn();
 	}
 
 	//PURPOSE: Execute SetupQuest Phase
@@ -189,7 +212,7 @@ public class GameController implements Initializable {
 		
 		
 		//move to next phase if ready button is pressed
-		model.setPhase(Phase.RunQuest);
+		//model.setPhase(Phase.RunQuest);
 		finishSponsor.setOnAction(e -> this.runQuest());
 	}
 
@@ -264,7 +287,18 @@ public class GameController implements Initializable {
 		this.playerControllers.get(index).update(player.getHand(),player.getField(),player);
 	}
 
-	
+	private Optional<ButtonType> makeAlertBox(String title, String header, String context) {
+		
+		
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle(title);
+		alert.setHeaderText(header);
+		alert.setContentText(context);
+
+		Optional<ButtonType> result = alert.showAndWait();
+		
+		return result;
+	}
 
 	//
 	public void updateInfo() {
