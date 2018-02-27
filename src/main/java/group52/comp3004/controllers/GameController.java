@@ -122,8 +122,10 @@ public class GameController implements Initializable {
 			
 			
 			stages.forEach(s -> model.getCurrentQuest().addStage(s));
-			
-			if(model.getCurrentQuest().getStages().size() < stages.size()) {
+			System.out.println("Stages: " + model.getCurrentQuest().getStages().size());
+			System.out.println("Prepared: " + stages.size());
+			if(model.getCurrentQuest().getStages().size() < stages.size() ||
+					stages.size() != model.getCurrentQuest().getQuest().getStages()) {
 				current.tempToHand();
 				model.getCurrentQuest().clearAllStages();
 				this.updateAll();
@@ -278,7 +280,7 @@ public class GameController implements Initializable {
 			if (result.get() == ButtonType.OK){
 				model.joinQuest();
 				joined += 1;
-			    break;
+			    //break;
 			}
 			model.nextPlayer();
 		}
@@ -300,7 +302,6 @@ public class GameController implements Initializable {
 	//PURPOSE: Execute TurnEnd Phase
 	public void endTurn() {
 		middleController.reset();
-		this.updateAll();
 		//move to next phase
 		model.setPhase(Phase.TurnStart);
 		this.startTurn();
