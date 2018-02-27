@@ -25,14 +25,6 @@ public class Strategy2 extends AbstractAI{
 		return true;
 	}
 	
-	public boolean doISponsorQuest(GameState state, Player p) {
-		if(otherEvolve(state)) return false;
-		int test = 0;
-		if(p.hasTest()) test = 1;
-		if(p.numUniqueFoes(state) +test<state.getCurrentQuest().getNumStages()) return false;
-		return true;
-	}
-	
 	public boolean doIParticipateInQuest(GameState state, Player p) {
 		if(p.countFoes(25)<2) return false;
 		p.sortHand(state);
@@ -59,7 +51,6 @@ public class Strategy2 extends AbstractAI{
 		int pos = ws.size()-1;
 		for(int i=0;i<rem;i++) {
 			while(curbp<runningbp+10 && pos>=0) {
-				System.out.println(pos);
 				curbp += ws.get(pos).getBp();
 				weps.replace(ws.get(pos), weps.get(ws.get(pos))-1);
 				if(weps.get(ws.get(pos))==0) {

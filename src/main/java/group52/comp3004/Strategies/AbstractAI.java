@@ -14,7 +14,15 @@ import group52.comp3004.players.Player;
 
 public abstract class AbstractAI{
 	public abstract boolean doIParticipateInTournament(GameState state);
-	public abstract boolean doISponsorQuest(GameState state, Player p);
+	
+	public boolean doISponsorQuest(GameState state, Player p) {
+		if(otherEvolve(state, p)) return false;
+		int test = 0;
+		if(p.hasTest()) test = 1;
+		if(p.numUniqueFoes(state) +test<state.getCurrentQuest().getNumStages()) return false;
+		return true;
+	}
+	
 	public abstract boolean doIParticipateInQuest(GameState state, Player p);
 	public abstract int nextBid(GameState state, Player p);
 	public abstract ArrayList<AdventureCard> discardAfterWinningTest(GameState state, Player p);
@@ -22,19 +30,39 @@ public abstract class AbstractAI{
 	public abstract ArrayList<Stage> createQuest(GameState state, Player p);
 	public abstract ArrayList<AdventureCard> playStage(GameState state, Player p);
 	
-	// Determine if another player can evolve before a quest or tournament starts
-	public boolean otherEvolve(GameState state) {
+	// Determine if any player can evolve before a quest or tournament starts
+	public boolean anyEvolve(GameState state) {
 		ArrayList<Player> players = new ArrayList<Player>(state.getAllPlayers());
 		for(int i=0;i<players.size();i++) {
-			Player p = players.get(i);
+			Player otherP = players.get(i);
 			StoryCard curCard = state.getRevealed();
 			if(curCard instanceof QuestCard) {
 				QuestCard q = (QuestCard) curCard;
-				if(p.getShields()+q.getStages()>=p.getRequiredShields()) return true;
+				if(otherP.getShields()+q.getStages()>=otherP.getRequiredShields()) return true;
 			}else {
 				Tourneys t = (Tourneys) curCard;
-				if(p.getShields()+t.getShields()+players.size()>=
-						p.getRequiredShields()) return true;
+				if(otherP.getShields()+t.getShields()+players.size()>=
+						otherP.getRequiredShields()) return true;
+			}
+		}
+		return false;
+	}
+	
+	// Determine if another player can evolve before a quest or tournament starts
+	public boolean otherEvolve(GameState state, Player p) {
+		ArrayList<Player> players = new ArrayList<Player>(state.getAllPlayers());
+		for(int i=0;i<players.size();i++) {
+			if(!players.get(i).equals(p)) {
+				Player otherP = players.get(i);
+				StoryCard curCard = state.getRevealed();
+				if(curCard instanceof QuestCard) {
+					QuestCard q = (QuestCard) curCard;
+					if(otherP.getShields()+q.getStages()>=otherP.getRequiredShields()) return true;
+				}else {
+					Tourneys t = (Tourneys) curCard;
+					if(otherP.getShields()+t.getShields()+players.size()>=
+							otherP.getRequiredShields()) return true;
+				}
 			}
 		}
 		return false;

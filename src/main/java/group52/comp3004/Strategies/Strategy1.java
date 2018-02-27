@@ -16,16 +16,8 @@ import group52.comp3004.players.Player;
 
 public class Strategy1 extends AbstractAI{
 	public boolean doIParticipateInTournament(GameState state) {
-		if(otherEvolve(state)) return true;
+		if(anyEvolve(state)) return true;
 		return false;
-	}
-	
-	public boolean doISponsorQuest(GameState state, Player p) {
-		if(otherEvolve(state)) return false;
-		int test = 0;
-		if(p.hasTest()) test = 1;
-		if(p.numUniqueFoes(state)+test<state.getCurrentQuest().getNumStages()) return false;
-		return true;
 	}
 	
 	public boolean doIParticipateInQuest(GameState state, Player p) {
@@ -120,7 +112,7 @@ public class Strategy1 extends AbstractAI{
 			}else if(i==1) {
 				if(p.hasTest()) {
 					Stage stage = new Stage(getTest(p));
-					quest.add(stage);
+					quest.add(0, stage);
 				}else {
 					Foe f = this.getStrongestFoe(state, p);
 					Weapon wep = null;
@@ -128,22 +120,14 @@ public class Strategy1 extends AbstractAI{
 						wep = wepdupes.remove(0);
 						f.addWeapon(wep);
 					}
-					if(quest.get(0).isTestStage()) {
-						while(quest.get(1).getFoe().getBp(state)<=f.getBp(state)) {
-							f.clearWeapons();
-							wep = wepdupes.remove(0);
-							f.addWeapon(wep);
-						}
-					}else {
-						while(quest.get(0).getFoe().getBp(state)<=f.getBp(state)) {
-							f.clearWeapons();
-							wep = wepdupes.remove(0);
-							f.addWeapon(wep);
-						}
+					while(quest.get(0).getFoe().getBp(state)<=f.getBp(state)) {
+						f.clearWeapons();
+						wep = wepdupes.remove(0);
+						f.addWeapon(wep);
 					}
 					if(wep!=null) p.getHand().remove(wep);
 					Stage stage = new Stage(f);
-					quest.add(stage);
+					quest.add(0, stage);
 				}
 			}else {
 				Foe f = this.getStrongestFoe(state, p);
@@ -167,8 +151,12 @@ public class Strategy1 extends AbstractAI{
 				}
 				if(wep!=null) p.getHand().remove(wep);
 				Stage stage = new Stage(f);
-				quest.add(stage);
+				quest.add(0, stage);
 			}
+		}
+		ArrayList<Stage> stages = new ArrayList<Stage>();
+		for(int i=quest.size()-1;i>=0;i--) {
+			stages.add(quest.get(i));
 		}
 		return quest;
 	}
