@@ -76,4 +76,8 @@ public class Card extends Rectangle{
 		this.setFill(back);
 		return;
 	}
+	
+	public boolean equals(Card c) {
+		return c.getName().equals(this.getName());
+	}
 }

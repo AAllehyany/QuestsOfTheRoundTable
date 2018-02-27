@@ -33,7 +33,8 @@ public abstract class AbstractAI{
 				if(p.getShields()+q.getStages()>=p.getRequiredShields()) return true;
 			}else {
 				Tourneys t = (Tourneys) curCard;
-				if(p.getShields()+t.getShields()>=p.getRequiredShields()) return true;
+				if(p.getShields()+t.getShields()+players.size()>=
+						p.getRequiredShields()) return true;
 			}
 		}
 		return false;
