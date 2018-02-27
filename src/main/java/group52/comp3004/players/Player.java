@@ -146,6 +146,10 @@ public class Player {
 		return requiredShields;
 	}
 	
+	public int getMinShields() {
+		return minShields;
+	}
+	
 	public void addWeapon(Integer weapon) {
 		this.weapons.add(weapon);
 	}
@@ -490,6 +494,28 @@ public class Player {
 			if(this.hand.get(i) instanceof Amour) return true;
 		}
 		return false;
+	}
+	
+	public AdventureCard getAmourInHand() {
+		for(int i=0;i<this.hand.size();i++) {
+			if(this.hand.get(i) instanceof Amour) return this.hand.remove(i);
+		}
+		return null;
+	}
+	
+	public boolean hasAllyInHand() {
+		for(int i=0;i<this.hand.size();i++) {
+			if(this.hand.get(i) instanceof Ally) return true;
+		}
+		return false;
+	}
+	
+	public AdventureCard getStrongestAllyInHand(GameState state) {
+		this.sortHand(state);
+		for(int i=0;i<this.hand.size();i++) {
+			if(this.hand.get(i) instanceof Ally) return this.hand.remove(i);
+		}
+		return null;
 	}
 
 	public void stopBidding() {

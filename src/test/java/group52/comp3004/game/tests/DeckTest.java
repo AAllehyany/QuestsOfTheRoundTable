@@ -1,10 +1,12 @@
 package group52.comp3004.game.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
 import group52.comp3004.ResourceManager;
+import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Card;
 import group52.comp3004.cards.Weapon;
 import group52.comp3004.decks.Deck;
@@ -18,10 +20,17 @@ public class DeckTest {
 	Card excalibur = new Weapon("Excalibur", resman, 30);
 	Card horse = new Weapon("Horse", resman, 10);
 	Card sword = new Weapon("Sword", resman, 10);
-	Card dagger = new Weapon("Dagger", resman, 5);
+	AdventureCard dagger = new Weapon("Dagger", resman, 5);
+	AdventureCard dagger2 = new Weapon("Dagger", resman, 5);
 	Card lance = new Weapon("Lance", resman, 20);
-	Card battleax = new Weapon("Battle_Ax", resman, 15);
+	Weapon battleax = new Weapon("Battle_Ax", resman, 15);
 
+	@Test
+	public void testEquals() {
+		assert(dagger.equals(dagger2));
+		assertFalse(dagger.equals(lance));
+	}
+	
 	@Test
 	public void testCreateDeck() {
 		Deck<Card> aDeck = new Deck<Card>();

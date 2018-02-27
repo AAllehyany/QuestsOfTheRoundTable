@@ -9,6 +9,7 @@ import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.QuestCard;
 import group52.comp3004.cards.StoryCard;
+import group52.comp3004.cards.Tourneys;
 import group52.comp3004.decks.Deck;
 import group52.comp3004.players.Player;
 import group52.comp3004.players.Rank;
@@ -149,6 +150,15 @@ public class GameState {
 			this.phase = Phase.SponsorQuest;
 		}
 	}
+	public void setTourney() {
+		if(revealedCard != null && revealedCard instanceof Tourneys)
+		{
+			currentSponsor = currentPlayer;
+			currentTourney = new GameTourney((Tourneys) revealedCard, getPlayerByIndex(currentSponsor));
+			this.players.get(currentPlayer).setTourney(currentTourney);
+			this.phase = Phase.RunTourney;
+		}
+	}
 	
 	public boolean setUpQuestStage(Foe foe) {
 		if(currentQuest != null && currentQuest.canAddStage() && currentSponsor == currentPlayer
@@ -210,7 +220,7 @@ public class GameState {
 	public StoryCard getRevealed() { return this.revealedCard; }
 	
 	public GameQuest getCurrentQuest() { return this.currentQuest; }
-	
+	public GameTourney getCurrentTourney() {	return this.currentTourney;}
 	public StoryCard getRevealedCard() { return this.revealedCard; }
 	public void setRevealedCard(StoryCard card) { this.revealedCard = card; }
 

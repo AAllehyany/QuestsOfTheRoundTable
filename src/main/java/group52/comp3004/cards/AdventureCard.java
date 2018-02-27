@@ -42,6 +42,10 @@ public class AdventureCard extends Card{
 	public int getBids() {
 		return 0;
 	}
+	
+	public boolean equals(AdventureCard c) {
+		return c.getName().equals(this.getName());
+	}
 
 
 }

@@ -300,6 +300,7 @@ public class GameController implements Initializable {
 	//PURPOSE: Execute TurnEnd Phase
 	public void endTurn() {
 		middleController.reset();
+		this.updateAll();
 		//move to next phase
 		model.setPhase(Phase.TurnStart);
 		this.startTurn();

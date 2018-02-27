@@ -17,6 +17,7 @@ import group52.comp3004.players.Player;
 
 public class Strategy2 extends AbstractAI{
 	private boolean havebid = false;
+	private int prevbp = 0;
 	
 	public Strategy2() {}
 	
@@ -35,25 +36,45 @@ public class Strategy2 extends AbstractAI{
 	public boolean doIParticipateInQuest(GameState state, Player p) {
 		if(p.countFoes(25)<2) return false;
 		p.sortHand(state);
-		int stages = state.getCurrentQuest().getNumStages();
-		int AAW = 0;
-		if (p.hasAmourInHand()) AAW++;
-		HashMap<AdventureCard, Integer> weak = new HashMap<AdventureCard, Integer>();
+		int AA = 0;
+		if (p.hasAmourInHand()) AA++;
+		HashMap<AdventureCard, Integer> weps = new HashMap<AdventureCard, Integer>();
+		ArrayList<AdventureCard> weakAllies = new ArrayList<AdventureCard>();
 		for(int i=0;i<p.getHand().size();i++) {
 			AdventureCard c = p.getHand().get(i);
-			if(c.getBp()>=10) AAW++;
-			else {
-				if(weak.containsKey(c)) weak.replace(c, weak.get(c)+1);
-				else weak.put(c, 1);
+			if(c.getBp()>=10 && c instanceof Ally) AA++;
+			else if(c instanceof Ally) weakAllies.add(c);
+			else if(c instanceof Weapon){
+				if(weps.containsKey(c)) weps.replace(c, weps.get(c)+1);
+				else weps.put(c, 1);
 			}
 		}
-		ArrayList<AdventureCard> weakCards = new ArrayList<AdventureCard>(weak.keySet());
-		int rem = stages-AAW;
-		if(rem>0) {
-			int weaksum = weakCards.stream().mapToInt(c->Math.min(rem, weak.get(c))*c.getBp()).sum();
-			if(weaksum<rem*(rem+1)/2*10) return false;
+		int rem = state.getCurrentQuest().getNumStages()-AA;
+		ArrayList<AdventureCard> ws = new ArrayList<AdventureCard>(weps.keySet());
+		ws.sort(new CardComparator());
+		int constbp = 0;
+		int runningbp = 0;
+		if(!(weakAllies.isEmpty())) constbp = weakAllies.get(0).getBp();
+		int curbp = constbp;
+		int pos = ws.size()-1;
+		for(int i=0;i<rem;i++) {
+			while(curbp<runningbp+10 && pos>=0) {
+				System.out.println(pos);
+				curbp += ws.get(pos).getBp();
+				weps.replace(ws.get(pos), weps.get(ws.get(pos))-1);
+				if(weps.get(ws.get(pos))==0) {
+					weps.remove(ws.remove(pos));
+//					pos++;
+				}
+				pos--;
+			}
+			if(curbp<runningbp+10) return false;
+			runningbp = curbp;
+			curbp = constbp;
+			pos = ws.size()-1;
 		}
 		this.resetBid();
+		this.prevbp = 0;
 		return true;
 	}
 	
@@ -132,37 +153,40 @@ public class Strategy2 extends AbstractAI{
 	
 	public ArrayList<AdventureCard> playStage(GameState state, Player p){
 		ArrayList<AdventureCard> stageCards = new ArrayList<AdventureCard>();
-		if(state.getCurrentQuest().getCurrentStage() == 1) return stageCards;
-		else if(state.getCurrentQuest().currentStage().isTestStage()) {
-			return discardAfterWinningTest(state, p);
-		}else {
-			int stageBP = 0;
-			int pos = 0;
+		int stagebp = p.getField().stream().mapToInt(c->c.getBp(state)).sum();
+		if(p.hasAmour()) stagebp += p.getTemp().get(0).getBp();
+		if(state.getCurrentQuest().getCurrentStage()>0){
 			p.sortHand(state);
-			if(!p.hasAmour()) {
-				for(int i=0;i<p.getHand().size();i++) {
-					if(p.getHand().get(i) instanceof Amour) {
-						stageCards.add(p.getHand().get(i));
-						stageBP += p.getHand().get(i).getBp();
-						return stageCards;
+			if(!p.hasAmour() && p.hasAmourInHand()) {
+				stageCards.add(p.getAmourInHand());
+				stagebp+=10;
+			}else {
+				if(p.hasAllyInHand()) {
+					stageCards.add(p.getStrongestAllyInHand(state));
+					stagebp += stageCards.get(0).getBp();
+				}
+				if(stagebp<prevbp+10) {
+					HashMap<AdventureCard, Integer> wepNum = new HashMap<AdventureCard, Integer>();
+					for(int i=0;i<p.getHand().size();i++) {
+						if(p.getHand().get(i) instanceof Weapon) {
+							if(wepNum.containsKey(p.getHand().get(i))) {
+								wepNum.replace(p.getHand().get(i), wepNum.get(p.getHand().get(i))+1);
+							}else wepNum.put(p.getHand().get(i), 1);
+						}
+					}
+					ArrayList<AdventureCard> weps = new ArrayList<AdventureCard>(wepNum.keySet());
+					int pos = weps.size()-1;
+					while(stagebp<prevbp+10 && pos>=0) {
+						stageCards.add(weps.get(pos));
+						stagebp += weps.get(pos).getBp();
+						p.getHand().remove(weps.get(pos));
+						pos--;
 					}
 				}
 			}
-			while(stageBP<10 && pos<p.getHand().size()) {
-				if(p.getHand().get(pos) instanceof Ally) {
-					stageCards.add(p.getHand().get(pos));
-					stageBP += p.getHand().get(pos).getBp();
-				}
-			}
-			pos = 0;
-			while(stageBP<10 && pos<p.getHand().size()) {
-				if(p.getHand().get(pos) instanceof Weapon) {
-					stageCards.add(p.getHand().get(pos));
-					stageBP += p.getHand().get(pos).getBp();
-				}
-			}
-			return stageCards;
 		}
+		prevbp = stagebp;
+		return stageCards;
 	}
 	
 	public ArrayList<AdventureCard> playTourney(GameState state, Player p) {
