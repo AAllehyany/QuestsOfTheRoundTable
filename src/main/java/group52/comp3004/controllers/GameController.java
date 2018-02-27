@@ -26,6 +26,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Scale;
+import javafx.scene.transform.Translate;
 
 
 
@@ -51,11 +52,11 @@ public class GameController implements Initializable {
 		Player demo = new Player(1, this, model);
 		Player demow = new Player(2, this, model);
 		Player demoww = new Player(3, this, model);
-		//Player demowww= new Player(4, this, model);
+		Player demowww= new Player(4, this, model);
 		model.addPlayer(demo);
 		model.addPlayer(demow);
 		model.addPlayer(demoww);
-		//model.addPlayer(demowww);
+		model.addPlayer(demowww);
 		stageSize.set(0);
 		playerControllers = new ArrayList<>();
 		middleController = null;
@@ -334,6 +335,7 @@ public class GameController implements Initializable {
 				}
 				else if(index == 3) {
 					player.getTransforms().add(new Rotate(270, Rotate.Z_AXIS));
+					player.getTransforms().add(new Translate(-140, 0));
 					gamepane.add(player, 6, 6, 1, 4);
 				}
 			}
