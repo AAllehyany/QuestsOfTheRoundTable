@@ -482,6 +482,7 @@ public class Player {
 
 	public void removeShield(int i) {
 		this.shields = shields-i;
+		if (this.shields<this.minShields) this.shields = this.minShields;
 		
 	}
 
