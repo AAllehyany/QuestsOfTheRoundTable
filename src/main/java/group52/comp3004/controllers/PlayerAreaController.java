@@ -55,7 +55,7 @@ public class PlayerAreaController implements Initializable{
 			this.portraitAreaController.playerInfo(player);
 	}
 	
-	public void updateIn(Player player) {
+	public void updateInfo(Player player) {
 		setPortraitArea(player);
 	}
 

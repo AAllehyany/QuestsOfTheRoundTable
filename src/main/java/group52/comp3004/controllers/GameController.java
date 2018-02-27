@@ -305,7 +305,7 @@ public class GameController implements Initializable {
 	public void updateInfo() {
 		for(int i = 0; i < model.numPlayers(); i++) {
 			Player player = this.model.getPlayerByIndex(i);
-			this.playerControllers.get(i).updateIn(player);
+			this.playerControllers.get(i).updateInfo(player);
 		}
 	}
 
@@ -365,8 +365,8 @@ public class GameController implements Initializable {
 					gamepane.add(player, 2, 0, 2, 4);
 				}
 				else if(index == 2) {
-					player.getTransforms().add(new Scale(1, -1));
-					gamepane.add(player, 2, 3, 4, 2);
+					player.getTransforms().add(new Rotate(180, Rotate.Z_AXIS));
+					gamepane.add(player, 7, 3, 4, 2);
 				}
 				else if(index == 3) {
 					player.getTransforms().add(new Rotate(270, Rotate.Z_AXIS));
