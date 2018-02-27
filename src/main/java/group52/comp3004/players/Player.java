@@ -39,6 +39,7 @@ public class Player {
 	private Integer bidPoints;
 	private boolean stoppedBidding;
 	private int offeredBids;
+	private ArrayList<AdventureCard> tempWeapons;
 	
 	public Player(Integer id, GameController gc, GameState gs) {
 		this.id = id;
@@ -57,6 +58,7 @@ public class Player {
 		game = gs;
 		bidPoints = 0;
 		offeredBids = 0;
+		tempWeapons = new ArrayList<>();
 	}
 	
 	public Player(Integer id) {
@@ -74,6 +76,7 @@ public class Player {
 		tourney = null;
 		bidPoints = 0;
 		offeredBids = 0;
+		tempWeapons = new ArrayList<>();
 	}
 	
 	public Integer getId() {
@@ -176,15 +179,50 @@ public class Player {
 				//change so card click behaviour changes based on the phase
 				
 				if(game.getPhase() == Phase.SetupQuest) {
-					if(!(card instanceof Foe)) {
+					if(!(card instanceof Foe) && !(card instanceof Tests) && !(card instanceof Weapon)) {
 						System.out.println("Clicking illegal card for setting quest");
 					}
 					else {
-						card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
-						System.out.println(card.getName()+ " clicked");
-						field.add(card);
-						hand.remove(card);
-						controller.updateAll();	
+						int numFoes = (int) temp.stream().filter(c -> c instanceof Foe).count();
+						int numTests = (int) temp.stream().filter(c -> c instanceof Tests).count();
+						
+						if(card instanceof Tests && numTests > 0) {
+							return;
+						}
+						
+						if(!(card instanceof Weapon)) {
+							
+							if((numFoes + numTests) >= game.getCurrentQuest().getNumStages()) {
+								return;
+							}
+						}
+						
+						
+						// check for adding weapons.
+						if( card instanceof Weapon ) {
+							if(tempWeapons.stream().map(c -> c.getName()).collect(Collectors.toList()).contains(card.getName())) {
+								return;
+							}
+							
+							if(temp.size() > 0 && !(temp.get(temp.size() - 1) instanceof Tests)) {
+								card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
+								System.out.println(card.getName()+ " clicked");
+								temp.add(card);
+								tempWeapons.add(card);
+								hand.remove(card);
+								controller.updateAll();
+							}
+								
+						}
+						else {
+							tempWeapons.clear();
+							card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
+							System.out.println(card.getName()+ " clicked");
+							temp.add(card);
+							hand.remove(card);
+							controller.updateAll();	
+						}
+						
 					}
 				}
 				else if(game.getPhase()==Phase.HandleEvent){
@@ -226,6 +264,11 @@ public class Player {
 			}
 		});
 		this.hand.add(card);
+	}
+	
+	public void tempToHand() {
+		temp.forEach(c -> addCardToHand(c));
+		temp.clear();
 	}
 	
 	public boolean canPlayWeapon(Weapon weapon) {

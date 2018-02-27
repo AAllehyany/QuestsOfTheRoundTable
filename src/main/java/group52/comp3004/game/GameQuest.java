@@ -53,6 +53,11 @@ public class GameQuest {
 		return this.stages.size() < quest.getStages();
 	}
 	
+	
+	public void clearAllStages() {
+		withTest = false;
+		this.stages.clear();
+	}
 	public boolean addStage(Stage stage) {
 		
 		if(stage.isTestStage() && withTest) return false;

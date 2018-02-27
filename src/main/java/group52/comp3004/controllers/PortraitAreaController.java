@@ -35,7 +35,7 @@ public class PortraitAreaController implements Initializable {
     	this.shield.setText("");
     	this.rank.setText("");
     	Rectangle shield = new Rectangle(20, 20);
-    	Image img = new Image("image/Shields/chief.png");
+    	Image img = new Image("image/Shields/shield1.png");
     	ImagePattern tex = new ImagePattern(img);
     	shields1.getChildren().add(shield);
     	shield.setFill(tex);

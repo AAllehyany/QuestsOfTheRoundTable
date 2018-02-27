@@ -9,11 +9,15 @@ import java.util.ResourceBundle;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.EventCard;
+import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.QuestCard;
 import group52.comp3004.cards.StoryCard;
+import group52.comp3004.cards.Tests;
 import group52.comp3004.cards.Tourneys;
+import group52.comp3004.cards.Weapon;
 import group52.comp3004.game.GameState;
 import group52.comp3004.game.Phase;
+import group52.comp3004.game.Stage;
 import group52.comp3004.players.Player;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -48,7 +52,7 @@ public class GameController implements Initializable {
 	private Button finishSponsor;
 	
 	private GameState model;
-
+	
 	//Constructor
 
 	public GameController() {
@@ -69,6 +73,7 @@ public class GameController implements Initializable {
 	public DoubleProperty stageSizeProperty() {
 		return stageSize;
 	}
+	
 
 	//PURPOSE: Controller Initialization
 	@Override
@@ -81,7 +86,54 @@ public class GameController implements Initializable {
 		threePlayers.setOnAction(e -> this.startGame());
 		fourPlayers.setOnAction(e -> this.startGame());
 		
-		finishSponsor.setVisible(false);
+		//finishSponsor.setOnAction(e -> this.handleReady());
+	}
+
+	@FXML
+	private void handleReady() {
+		Phase phase = model.getPhase();
+		System.out.println("Clicking ready!");
+		if(phase == Phase.SetupQuest) {
+			Player current = model.getPlayerByIndex(model.getCurrentPlayer());
+			ArrayList<AdventureCard> cards = current.getTemp();
+			ArrayList<Stage> stages = new ArrayList<>();
+			Foe currentFoe = null;
+			
+			for(AdventureCard card : cards) {
+				if(card instanceof Foe) {
+					if(currentFoe != null) {
+						stages.add(new Stage(currentFoe));
+					}
+					currentFoe = (Foe) card;
+				}
+				else if(card instanceof Tests) {
+					if(currentFoe != null) {
+						stages.add(new Stage(currentFoe));
+						currentFoe = null;
+					}
+					stages.add(new Stage((Tests) card));
+				}
+				else if(card instanceof Weapon) {
+					currentFoe.addWeapon((Weapon) card);
+				}
+			}
+			
+			if(currentFoe != null) stages.add(new Stage(currentFoe));
+			
+			
+			stages.forEach(s -> model.getCurrentQuest().addStage(s));
+			
+			if(model.getCurrentQuest().getStages().size() < stages.size()) {
+				current.tempToHand();
+				model.getCurrentQuest().clearAllStages();
+				this.updateAll();
+			}
+			else {
+				current.getTemp().clear();
+				this.updateAll();
+				this.runQuest();
+			}
+		}
 	}
 
 	/*****************************************************************************************************/
@@ -185,17 +237,13 @@ public class GameController implements Initializable {
 		boolean sponsored = false;
 		
 		for(int i = 0; i < model.getAllPlayers().size(); i++) {
+			Player player = model.getPlayerByIndex(model.getCurrentPlayer());
 			Optional<ButtonType> result = makeAlertBox("Quest sponsoring", "Quest " + model.getRevealed().getName(),
-					"Do you want to sponsor the quest, player " + model.getCurrentPlayer() + "?");
-//			Alert alert = new Alert(AlertType.CONFIRMATION);
-//			alert.setTitle("Quest Sponsoring");
-//			alert.setHeaderText("Quest " + model.getRevealed().getName());
-//			alert.setContentText("Do you want to sponsor the quest, player " + model.getCurrentPlayer() + "?");
-//			Optional<ButtonType> result = alert.showAndWait();
+					"Do you want to sponsor the quest, player " + player.getId() + "?");
+
 			if (result.get() == ButtonType.OK){
 				System.out.println("Quest sponsored by player " + model.getCurrentPlayer());
 				model.setQuest();
-				model.setPhase(Phase.SetupQuest);
 				this.setupQuest();
 				sponsored = true;
 			    break;
@@ -208,32 +256,44 @@ public class GameController implements Initializable {
 
 	//PURPOSE: Execute SetupQuest Phase
 	public void setupQuest() {
-		finishSponsor.setVisible(true);
-		
-		
-		//move to next phase if ready button is pressed
-		//model.setPhase(Phase.RunQuest);
-		finishSponsor.setOnAction(e -> this.runQuest());
+		System.out.println("          ->Setup Quest");
+		model.setPhase(Phase.SetupQuest);
 	}
 
 	//PURPOSE: Execute RunQuest Phase
 	public void runQuest() {
 		//remove the ready button
-		finishSponsor.setOnAction(null);
-		finishSponsor.setVisible(false);
+		//finishSponsor.setOnAction(null);
+		//finishSponsor.setVisible(false);
 		System.out.println("          ->Run Quest");
 		//Players play cards into quest
+		int joined = 0;
+		model.setPhase(Phase.RunQuest);
+		for(int i = 0; i < model.getAllPlayers().size(); i++) {
+			//if(model.getCurrentPlayer() == model.getSponsorIndex()) continue;
+			Player player = model.getPlayerByIndex(model.getCurrentPlayer());
+			Optional<ButtonType> result = makeAlertBox("Quest Joining", "Quest " + model.getCurrentQuest().getQuest().getName(),
+					"Do you want to play in the quest, player " + player.getId() + "?");
+
+			if (result.get() == ButtonType.OK){
+				model.joinQuest();
+				joined += 1;
+			    break;
+			}
+			model.nextPlayer();
+		}
 		
-		//move to next phase
-		model.setPhase(Phase.EndQuest);
-		//this.endQuest();
+		if(joined == 0) this.endQuest();
+		
 	}
 
 	//PURPOSE: Execute EndQuest Phase
 
 	public void endQuest() {
+		model.endQuest();
 		//move to next phase
 		model.setPhase(Phase.TurnEnd);
+		this.updateAll();
 		this.endTurn();
 	}
 
@@ -316,7 +376,10 @@ public class GameController implements Initializable {
 		//update player hand and field arraylists for each player
 		for(int i = 0; i < this.playerControllers.size(); i++) {
 			Player player = this.model.getPlayerByIndex(i);
-			this.playerControllers.get(i).update(player.getHand(),player.getField(),player);
+			ArrayList<AdventureCard> field = new ArrayList<>();
+			field.addAll(player.getField());
+			field.addAll(player.getTemp());
+			this.playerControllers.get(i).update(player.getHand(),field,player);
 		}
 		//update middle area
 		//middleController.setStoryCard(model.getRevealedCard());
@@ -372,6 +435,10 @@ public class GameController implements Initializable {
 					player.getTransforms().add(new Translate(-140, 0));
 					gamepane.add(player, 6, 6, 1, 4);
 				}
+				
+				Button readyButton = new Button("Ready");
+				readyButton.setOnAction(e -> this.handleReady());
+				gamepane.add(readyButton, 1, 4, 1, 1);
 			}
 
 			catch(Exception ex) {
