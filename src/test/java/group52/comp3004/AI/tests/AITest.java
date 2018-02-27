@@ -69,10 +69,10 @@ public class AITest {
 			state.setQuest();
 			
 			AbstractAI s = new Strategy2();
-			assertEquals(false, (boolean) s.otherEvolve(state));
+			assertEquals(false, (boolean) s.anyEvolve(state));
 			
 			state.addPlayer(p1);
-			assertEquals(true, (boolean) s.otherEvolve(state));
+			assertEquals(true, (boolean) s.otherEvolve(state, p2));
 		}
 		
 		@Test
@@ -155,6 +155,7 @@ public class AITest {
 			state.addPlayer(p1);
 			state.addPlayer(p2);
 			
+			// Tournament Testing
 			state.setRevealedCard(york);
 			assertEquals(false, (boolean) s1.doIParticipateInTournament(state));
 			state.addPlayer(p3);
@@ -187,6 +188,7 @@ public class AITest {
 			assert(tCards.contains(excalibur));
 			assertEquals(3, p2.getHand().size());
 			
+			// Test Testing
 			p1.addCardToHand(gknight);
 			p1.addCardToHand(mordred);
 			p1.addCardToHand(giant);
@@ -208,6 +210,8 @@ public class AITest {
 			assertEquals(boar, dCard.get(0));
 			assertEquals(saxons, dCard.get(1));
 			
+			
+			// Participate in quest testing
 			state.setRevealedCard(hg);
 			state.setQuest();
 			assertFalse(s1.doIParticipateInQuest(state, p1));
@@ -231,6 +235,60 @@ public class AITest {
 			p1.addCardToHand(boar);
 			assert(s1.doIParticipateInQuest(state, p1));
 			
+			// Sponsor quest testing
+			p1.setHand(new ArrayList<AdventureCard>());
+			p2.setHand(new ArrayList<AdventureCard>());
+			p3.setHand(new ArrayList<AdventureCard>());
+			p4.setHand(new ArrayList<AdventureCard>());
+			
+			p1.addShields(4);
+			state.setRevealedCard(bh);
+			state.setQuest();
+			assertFalse(s1.doISponsorQuest(state, p2));
+			p2.addCardToHand(dagger);
+			p2.addCardToHand(mordred);
+			p2.addCardToHand(excalibur);
+			p2.addCardToHand(giant);
+			p2.addCardToHand(dragon);
+			assertFalse(s1.doISponsorQuest(state, p2));
+			p1.removeShield(20);
+			p3.removeShield(20);
+			p4.removeShield(20);
+			assertEquals(true, s1.doISponsorQuest(state, p2));
+			ArrayList<Stage> quest = s1.createQuest(state, p2);
+			assertEquals(2, quest.size());
+			assertEquals(dragon, quest.get(1).getFoe());
+			assertEquals(giant, quest.get(0).getFoe());
+			assertEquals(3, p2.getHand().size());
+			
+			state.setRevealedCard(hg);
+			state.setQuest();
+			p1.addShields(6);
+			p2.addShields(6);
+			p3.addShields(6);
+			p4.addShields(6);
+			p1.setHand(new ArrayList<AdventureCard>());
+			p1.addCardToHand(dagger);
+			p1.addCardToHand(bknight);
+			p1.addCardToHand(excalibur);
+			p1.addCardToHand(excalibur);
+			p1.addCardToHand(dagger);
+			p1.addCardToHand(boar);
+			p1.addCardToHand(mordred);
+			p1.addCardToHand(qb);
+			p1.addCardToHand(giant);
+			p1.addCardToHand(dragon);
+			assertEquals(10, p1.getHand().size());
+			assert(s1.doISponsorQuest(state, p1));
+			quest = s1.createQuest(state, p1);
+			assertEquals(5, quest.size());
+			assertEquals(dragon, quest.get(4).getFoe());
+			assert(quest.get(3).isTestStage());
+			assertEquals(giant, quest.get(2).getFoe());
+			assertEquals(45, quest.get(2).getFoe().getBp(state));
+			assertEquals(bknight, quest.get(1).getFoe());
+			assertEquals(35, quest.get(1).getFoe().getBp(state));
+			assertEquals(mordred, quest.get(0).getFoe());
 		}
 		
 		@Test
@@ -248,6 +306,7 @@ public class AITest {
 			state.addPlayer(p4);
 			p1.addShields(4);
 			
+			// Tournament Testing
 			state.setRevealedCard(camelot);
 			assertEquals(true, (boolean) s2.doIParticipateInTournament(state));
 			
@@ -273,6 +332,7 @@ public class AITest {
 			
 			state.setRevealedCard(gk);
 
+			// Test Testing
 			ArrayList<AdventureCard> dCards;
 			p1.addCardToHand(boar);
 			assertEquals(1, s2.nextBid(state, p1));
@@ -285,6 +345,7 @@ public class AITest {
 			assert(dCards.contains(dagger));
 			assert(dCards.contains(boar));
 			
+			// Sponsor Quest Testing
 			state.setRevealedCard(qh);
 			state.setQuest();
 			
@@ -305,7 +366,7 @@ public class AITest {
 			p3.addCardToHand(bknight);
 			assertEquals(true, (boolean) s2.doISponsorQuest(state, p3));
 			
-
+			// Participate in quest testing
 			p4.addCardToHand(saxons);
 			p4.addCardToHand(excalibur);
 			p4.addCardToHand(a);
@@ -320,11 +381,12 @@ public class AITest {
 			for(int i=0;i<10;i++) p4.addCardToHand(dagger);
 			assertFalse(s2.doIParticipateInQuest(state, p4));
 			
+			// Create Quest Testing	
 			p1.setHand(new ArrayList<AdventureCard>());
 			p2.setHand(new ArrayList<AdventureCard>());
 			p3.setHand(new ArrayList<AdventureCard>());
 			p4.setHand(new ArrayList<AdventureCard>());
-			
+
 			ArrayList<AdventureCard> qcard = new ArrayList<AdventureCard>();
 			qcard.add(boar);
 			qcard.add(saxons);
