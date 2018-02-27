@@ -143,6 +143,10 @@ public class Player {
 		return requiredShields;
 	}
 	
+	public int getMinShields() {
+		return minShields;
+	}
+	
 	public void addWeapon(Integer weapon) {
 		this.weapons.add(weapon);
 	}

@@ -19,8 +19,10 @@ public class ResourceManager {//ISSSUE: multiple resource managers are being mad
 	private Image        storyBackImg;
 	private ImagePattern storyBack;
 	
-	private HashMap<String, Image> frontsImg;
+	//private HashMap<String, Image> frontsImg;
 	private HashMap<String, ImagePattern> fronts;
+	//private HashMap<String, Image> shieldsImg;
+	private HashMap<String, ImagePattern> shields;
 	
 	public ResourceManager() {
 		adventureBackImg = new Image(url+"/Backs/adventure_back.jpg");
@@ -29,8 +31,15 @@ public class ResourceManager {//ISSSUE: multiple resource managers are being mad
 		storyBackImg = new Image(url+"/Backs/story_back.jpg");
 		storyBack = new ImagePattern(storyBackImg);
 		
-		frontsImg = new HashMap<String, Image>();
+		//frontsImg = new HashMap<String, Image>();
 		fronts = new HashMap<String, ImagePattern>();
+		
+		//load all the shields to the map
+		shields = new HashMap<String, ImagePattern>();
+		for(int i = 0; i < 15; i++) {
+			Image img = new Image("image/Shields/shield"+(i+1)+".png");
+			shields.put("shield"+(i+1), new ImagePattern(img));
+		}
 		//System.out.println("Resource manager loaded");
 	}
 	
@@ -66,5 +75,10 @@ public class ResourceManager {//ISSSUE: multiple resource managers are being mad
 			fronts.put(name, pattern);
 			return pattern;
 		}
+	}
+	
+	//PURPOSE: Return a shield image pattern based on an input number
+	public ImagePattern getShield(int index) {
+		return shields.get("shield"+index);
 	}
 }
