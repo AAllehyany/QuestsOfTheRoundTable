@@ -2,6 +2,8 @@ package group52.comp3004.cards;
 
 import java.util.HashSet;
 
+import org.apache.log4j.Logger;
+
 import group52.comp3004.ResourceManager;
 import group52.comp3004.decks.Deck;
 import group52.comp3004.game.GameState;
@@ -14,6 +16,7 @@ public class Foe extends AdventureCard{
 	private HashSet<Weapon> weapons;
 	private HashSet<String> quests = new HashSet<String>();
 	
+	final static Logger logger = Logger.getLogger(Foe.class);
 	// Constructor for Foes with only one battle power
 	public Foe(String name, ResourceManager rm, int bp) {
 		super(name, rm);
@@ -70,15 +73,15 @@ public class Foe extends AdventureCard{
     // spaghetti code to implement Mordred's special ability
     public boolean MordredSpecial(GameState state, Player owner, int player, Ally ally, Deck<AdventureCard> adventureDeck) {
     	if(!this.getName().equals("Mordred")) {
-    		System.out.println("NOT MORDRED\n");
+    		logger.info("NOT MORDRED\n");
     		return false;
     	}
     	if(player>state.numPlayers()) {
-    		System.out.println("INVALID PLAYER\n");
+    		logger.info("INVALID PLAYER\n");
     		return false;
     	}
     	if(!state.getPlayerByIndex(player).getField().contains(ally)) {
-    		System.out.println("INVALID ALLY\n");
+    		logger.info("INVALID ALLY\n");
     		return false;
     	}
     	adventureDeck.discardCard(state.getPlayerByIndex(player).removeAlly(ally));

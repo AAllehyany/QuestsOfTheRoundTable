@@ -3,6 +3,8 @@ package group52.comp3004.Strategies;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.log4j.Logger;
+
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Amour;
@@ -16,6 +18,8 @@ import group52.comp3004.game.Stage;
 import group52.comp3004.players.Player;
 
 public class Strategy1 extends AbstractAI{
+	
+	static final private Logger logger = Logger.getLogger(Strategy1.class);
 	public boolean doIParticipateInTournament(GameState state) {
 		if(anyEvolve(state)) return true;
 		return false;

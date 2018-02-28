@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import org.apache.log4j.Logger;
+
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.players.*;
 import javafx.beans.property.SimpleStringProperty;
@@ -13,6 +15,7 @@ import javafx.scene.control.Button;
 
 public class PlayerAreaController implements Initializable{
 	
+	private static Logger logger = Logger.getLogger(PlayerAreaController.class);
 	
 	@FXML
 	private FieldAreaController fieldAreaController;
@@ -36,7 +39,7 @@ public class PlayerAreaController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println("player area loaded");
+		logger.info("player area loaded");
 	}
 
 	//update card that are in the field

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
+
 import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Foe;
@@ -29,6 +31,8 @@ public class GameState {
 	private static ResourceManager resman = null;
 	private Integer maxBid;
 	private Integer bonusShields;
+	
+	static final private Logger logger = Logger.getLogger(GameState.class);
 	/**
 	 * @param players
 	 */
@@ -40,7 +44,7 @@ public class GameState {
 		this.currentTurn = 0;
 		this.currentPlayer = 0;
 		phase = Phase.TurnStart;
-		System.out.println("Model loaded (players)");
+		logger.info("Model loaded (players)");
 	}
 	
 	public GameState() {//<- Issue model loading twice?
@@ -57,14 +61,14 @@ public class GameState {
 		revealedCard = null;
 		maxBid = 0;
 		bonusShields = 0;
-		System.out.println("Model loaded (void)");
+		logger.info("Model loaded (void)");
 	}
 	
 	//PURPOSE: deal initial cards to all players
 	public void dealCardsToPlayers() {
 		this.players.forEach(player -> {
 			for(int i = 0; i < 12; i++) {
-				System.out.println("Card "+i+" dealt");
+				logger.info("Card "+i+" dealt");
 				player.addCardToHand(adventureDeck.drawCard());
 			}
 		});

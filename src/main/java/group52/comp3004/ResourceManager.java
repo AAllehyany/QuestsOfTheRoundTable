@@ -2,6 +2,8 @@ package group52.comp3004;
 
 import java.util.HashMap;
 
+import org.apache.log4j.Logger;
+
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
@@ -21,6 +23,7 @@ public class ResourceManager {//ISSSUE: multiple resource managers are being mad
 	private Image 		 swordImg;
 	private ImagePattern sword;
 	
+	final static Logger logger = Logger.getLogger(ResourceManager.class);
 	//private HashMap<String, Image> frontsImg;
 	private HashMap<String, ImagePattern> fronts;
 	//private HashMap<String, Image> shieldsImg;
@@ -47,6 +50,9 @@ public class ResourceManager {//ISSSUE: multiple resource managers are being mad
 		swordImg = new Image("image/swordIcon.png");
 		sword = new ImagePattern(swordImg);
 		//System.out.println("Resource manager loaded");
+
+		logger.debug("Resource manager loaded");
+
 	}
 	
 	public ImagePattern getAdventureBack() {

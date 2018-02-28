@@ -2,6 +2,8 @@ package group52.comp3004.Strategies;
 
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Amour;
 import group52.comp3004.cards.Foe;
@@ -16,7 +18,12 @@ import group52.comp3004.players.Player;
 public abstract class AbstractAI{
 	public abstract boolean doIParticipateInTournament(GameState state);
 	
+	static final private Logger logger = Logger.getLogger(AbstractAI.class);
 	public boolean doISponsorQuest(GameState state, Player p) {
+		if(state.getCurrentQuest()==null) {
+			logger.info("NO QUEST");
+			return false;
+		}
 		if(otherEvolve(state, p)) return false;
 		int test = 0;
 		if(p.hasTest()) test = 1;
