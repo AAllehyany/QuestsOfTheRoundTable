@@ -176,12 +176,12 @@ public class GameQuestTest {
 		quest.addStage(stage2);
 		quest.addStage(stage3);
 		
-		assertEquals(3, quest.getNumCardsPlayedBySponsor());
+		assertEquals(6, quest.getNumCardsPlayedBySponsor());
 		
 		
 		
 		theGoodGuy.addWeapon(new Weapon("Excalibur", g.getResourceManager(), 28));
-		assertEquals(4, quest.getNumCardsPlayedBySponsor());
+		assertEquals(7, quest.getNumCardsPlayedBySponsor());
 		
 		assertFalse(g.getAdventureDeck().getSize()==0);
 		
