@@ -52,6 +52,12 @@ public class AllyTest {
 		assertEquals(10, (int) a2.getBp(state));
 		assertEquals(2, (int) a2.getBids(state));
 		assertEquals(0, (int) a3.getBids(state));
+		
+		QuestCard hg = new QuestCard("Holy_Grail", resman, 5);
+		Ally sp = new Ally("Sir_Percival", resman, 5, 0, "Holy_Grail", 20, 0);
+		state.setRevealedCard(hg);
+		state.setQuest();
+		assertEquals(25, (int) sp.getBp(state));
 	}
 	
 	@Test
