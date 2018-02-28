@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
+
 import group52.comp3004.GUI.cards.GameCard;
 import group52.comp3004.cards.AdventureCard;
+import group52.comp3004.cards.Arms;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
@@ -15,6 +18,8 @@ public class FieldAreaController implements Initializable{
 
 	@FXML
 	private HBox fieldContainer;
+	
+	final static Logger logger = Logger.getLogger(FieldAreaController.class);
 
 
 	/**
@@ -27,7 +32,7 @@ public class FieldAreaController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println("Field area crated");
+		logger.info("Field area crated");
 	}
 	
 	

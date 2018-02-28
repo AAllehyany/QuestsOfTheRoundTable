@@ -204,7 +204,7 @@ public class GameStateTest {
 		assertEquals(p4, gs.getPlayerByIndex(gs.getCurrentPlayer()));
 		
 		gs.nextPlayer();
-		assertEquals(p2, gs.getPlayerByIndex(gs.getCurrentPlayer()));
+		assertEquals(p3, gs.getPlayerByIndex(gs.getCurrentPlayer()));
 		
 		//TODO: test players playing
 	

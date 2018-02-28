@@ -2,6 +2,8 @@ package group52.comp3004.cards;
 
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 import group52.comp3004.ResourceManager;
 import group52.comp3004.game.*;
 import group52.comp3004.players.Player;
@@ -14,6 +16,7 @@ public class Ally extends AdventureCard
 	private int bonusbid;
 	private boolean merlin = false;
 	
+	final static Logger logger = Logger.getLogger(Ally.class);
 	// TODO special abilities
 	
 	// used for allies without special cases (should not be used for Merlin)
@@ -64,13 +67,13 @@ public class Ally extends AdventureCard
 	public ArrayList<AdventureCard> StartMerlinSpecial(GameState state, int stage) {
 		ArrayList<AdventureCard> cards = new ArrayList<AdventureCard>();
 		if(!this.merlin) {
-			System.out.println("NOT MERLIN\n");
+			logger.info("NOT MERLIN");
 			return null;
 		}
 		GameQuest q = state.getCurrentQuest();
 		if(q==null) return null;
 		if(stage>=q.getNumStages()) {
-			System.out.println("INVALID STAGE");
+			logger.info("INVALID STAGE");
 			return null;
 		}
 		Stage s = q.getStage(stage);

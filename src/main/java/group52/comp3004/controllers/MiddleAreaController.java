@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import org.apache.log4j.Logger;
+
 import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Card;
@@ -20,6 +22,7 @@ public class MiddleAreaController implements Initializable{
 	private StackPane middlePane;
 	private HBox questContainer;
 	
+	private static Logger logger = Logger.getLogger(MiddleAreaController.class);
 	public MiddleAreaController() {
 		super();
 		questContainer = new HBox();
@@ -29,7 +32,7 @@ public class MiddleAreaController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		middlePane.getChildren().add(questContainer);
-		System.out.println("Middle area crated");
+		logger.info("Middle area crated");
 	}
 	
 	public void updateCards(ArrayList<AdventureCard> cards) {
@@ -38,7 +41,7 @@ public class MiddleAreaController implements Initializable{
 	}
 	
 	//PURPOSE: add the dealt story card to play
-	public void addStory(StoryCard card) {
+	public void addStory(Card card) {
 		questContainer.getChildren().add(card);
 	}
 	//PURPOSE: Empties the contents of the middle pane to get ready for new story

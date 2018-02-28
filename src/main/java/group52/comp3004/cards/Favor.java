@@ -2,15 +2,19 @@ package group52.comp3004.cards;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import group52.comp3004.game.GameState;
 import group52.comp3004.players.Player;
 import group52.comp3004.players.Rank;
 
 public class Favor implements EventBehaviour{
 	private Rank lowestRank;
+	
+	final static Logger logger = Logger.getLogger(Favor.class);
 	@Override
 	public void handle(GameState gamestate) {
-		System.out.println("		->Favor");
+		logger.info("		->Favor");
 		for(int i=0;i<gamestate.numPlayers();i++) {
 			if(gamestate.getPlayerByIndex(i).getRank()== Rank.Squire){
 				lowestRank = Rank.Squire;

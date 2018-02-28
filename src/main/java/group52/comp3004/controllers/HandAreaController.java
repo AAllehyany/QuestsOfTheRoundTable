@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
+
 import group52.comp3004.GUI.cards.GameCard;
 import group52.comp3004.cards.AdventureCard;
 import javafx.fxml.FXML;
@@ -16,6 +18,7 @@ public class HandAreaController implements Initializable{
 	@FXML
 	private HBox handContainer;
 
+	private static Logger logger = Logger.getLogger(HandAreaController.class);
 	public HandAreaController() {
 		super();
 	}
@@ -23,7 +26,7 @@ public class HandAreaController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println("Field area crated");
+		logger.info("Field area crated");
 	}
 	
 	public void updateCards(ArrayList<AdventureCard> cards) {
