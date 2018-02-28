@@ -18,7 +18,7 @@ public enum Phase {
 	SponsorTourney, //Player choose to sponsor the quest
 	JoinTourney, //Players play their adventure cards for tourneys
 	RunTourney, //Compare bids and hand out shields to the winner
-	
+	SetUpTourney,
 	Broken //The game is broken, despair
 , PlayQuest // Playing in the quest
 }

@@ -47,7 +47,7 @@ public class GameController implements Initializable {
 	private MiddleAreaController middleController;
 
 	@FXML
-	private Button twoPlayers, threePlayers, fourPlayers;
+	private Button twoPlayers, threePlayers, fourPlayers,battle;
 	@FXML
 	private Button finishSponsor;
 	
@@ -88,6 +88,7 @@ public class GameController implements Initializable {
 		twoPlayers.setOnAction(e -> this.startGame());
 		threePlayers.setOnAction(e -> this.startGame());
 		fourPlayers.setOnAction(e -> this.startGame());
+		battle.setVisible(false);
 		
 		//finishSponsor.setOnAction(e -> this.handleReady());
 	}
