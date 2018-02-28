@@ -1,5 +1,8 @@
 package group52.comp3004.game;
 
+import java.util.ArrayList;
+
+import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.Tests;
 
@@ -25,6 +28,17 @@ public class Stage {
 		this.foe = null;
 		this.test = test;
 		testStage = true;
+	}
+	
+	public ArrayList<AdventureCard> getCards(){
+		ArrayList<AdventureCard> cards = new ArrayList<AdventureCard>();
+		if(this.testStage) {
+			cards.add(this.test);
+		}else {
+			cards.addAll(this.foe.getWeapons());
+			cards.add(this.foe);
+		}
+		return cards;
 	}
 	
 	public int getTotalPower() {

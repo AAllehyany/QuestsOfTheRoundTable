@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 import org.apache.log4j.Logger;
 
 import group52.comp3004.cards.AdventureCard;
+import group52.comp3004.cards.Amour;
 import group52.comp3004.cards.QuestCard;
+import group52.comp3004.cards.Tests;
 import group52.comp3004.players.Player;
 
 public class GameQuest {
@@ -227,6 +229,25 @@ public class GameQuest {
 	public void dealCardsToSponsor() {
 		for(int i = 0; i< getNumCardsPlayedBySponsor(); i++)
 			sponsor.getGame().dealToPlayer(sponsor.getGame().getSponsorIndex());
+	}
+	
+	public void end(GameState state, int bonus) {
+		this.over = true;
+		dealCardsToSponsor();
+		for(int i=0;i<state.getAllPlayers().size();i++) {
+			Player p = state.getPlayerByIndex(i);
+			for(int j=0;j<p.getTemp().size();j++) {
+				if(p.getTemp().get(j) instanceof Amour) {
+					state.getAdventureDeck().discardCard(p.getTemp().get(j));
+					p.getTemp().remove(j);
+					break;
+				}
+			}
+		}
+		for(int i=0;i<this.getNumStages();i++) {
+			state.getAdventureDeck().discardCard(this.stages.get(i).getCards());
+		}
+		awardShields(bonus);
 	}
 	
 	
