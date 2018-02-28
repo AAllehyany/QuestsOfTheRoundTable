@@ -46,7 +46,7 @@ public class AITest {
 		Weapon excalibur = new Weapon("Excalibur", resman, 30);
 		Weapon dagger = new Weapon("Dagger", resman, 5);
 		Weapon horse = new Weapon("Horse", resman, 10);
-		Weapon sword = new Weapon("Sword", resman, 10);
+		Weapon sword = new Weapon("Sword", resman, 15);
 		Ally kp = new Ally("King_Pellinore", resman, 10, 0, "Questing_Beast_Search", 0, 4);
 		Ally sg = new Ally("Sir_Gawain", resman, 10, 0, "Green_Knight_Quest", 20, 0);
 		Ally sp = new Ally("Sir_Percival", resman, 5, 0, "Holy_Grail", 20, 0);
@@ -216,6 +216,11 @@ public class AITest {
 			state.setRevealedCard(hg);
 			state.setQuest();
 			assertFalse(s1.doIParticipateInQuest(state, p1));
+			p1.setHand(new ArrayList<AdventureCard>());
+			p1.addCardToHand(boar);
+			p1.addCardToHand(saxons);
+			p1.addCardToHand(kp);
+			p1.addCardToHand(a);
 			p1.addCardToHand(sg);
 			p1.addCardToHand(dagger);
 			p1.addCardToHand(dagger);
@@ -402,6 +407,7 @@ public class AITest {
 			assertEquals(boar, dCards.get(0));
 			p1.addCardToHand(boar);
 			p1.addCardToHand(dagger);
+			p1.addCardToHand(boar);
 			assertEquals(2, s2.nextBid(state, p1));
 			dCards = s2.discardAfterWinningTest(state, p1);
 			assert(dCards.contains(dagger));
@@ -561,7 +567,7 @@ public class AITest {
 			stageCards = s2.playStage(state, p2);
 			assertEquals(2, stageCards.size());
 			assert(stageCards.contains(dagger));
-			assert(stageCards.contains(sword));
+			assert(stageCards.contains(horse));
 			p2.addTemp(stageCards);
 			p2.clearTemp();
 			state.getCurrentQuest().advanceStage();

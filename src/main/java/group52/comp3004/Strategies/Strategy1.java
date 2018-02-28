@@ -51,7 +51,9 @@ public class Strategy1 extends AbstractAI{
 	}
 	
 	public ArrayList<AdventureCard> discardAfterWinningTest(GameState state, Player p){
-		return p.getFoes(20);
+		ArrayList<AdventureCard> dcards = p.getFoes(20);
+		for(int i=0;i<dcards.size();i++) p.getHand().remove(dcards.get(i));
+		return dcards;
 	}
 
 	
@@ -176,6 +178,7 @@ public class Strategy1 extends AbstractAI{
 					}
 				}
 			}
+			for(int i=0;i<stageCards.size();i++) p.getHand().remove(stageCards.get(i));
 		}else {
 			while(stageCards.size()<2) {
 				if(!p.hasAmour() && p.hasAmourInHand() && 

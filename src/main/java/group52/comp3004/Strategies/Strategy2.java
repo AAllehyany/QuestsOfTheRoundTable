@@ -81,14 +81,11 @@ public class Strategy2 extends AbstractAI{
 		ArrayList<AdventureCard> discards = new ArrayList<AdventureCard>();
 		discards.addAll(p.getFoes(25));
 		if(havebid) {
-			havebid = false;
 			discards.addAll(p.getDuplicates());
-			return discards;
 		}
-		else {
-			havebid = false;
-			return discards;
-		}
+		havebid = false;
+		for(int i=0;i<discards.size();i++) p.getHand().remove(discards.get(i));
+		return discards;
 	}
 	
 	public void resetBid() {
@@ -194,6 +191,7 @@ public class Strategy2 extends AbstractAI{
 			}
 			i++;
 		}
+		for(i=0;i<tourneyCards.size();i++) p.getHand().remove(tourneyCards.get(i));
 		return tourneyCards;
 	}
 }
