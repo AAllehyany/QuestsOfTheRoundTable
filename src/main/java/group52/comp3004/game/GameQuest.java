@@ -108,6 +108,20 @@ public class GameQuest {
 				return 1;
 			}).get();
 			
+			System.out.println("Remaining player is " + remaining.getId());
+			
+			if(remaining.getOfferedBids() == 0) {
+				System.out.println("Everyone dropped of the test!");
+				this.over = true;
+				this.players.clear();
+			}
+			else {
+				this.players.clear();
+				this.players.add(remaining);
+			}
+			
+			advanceStage();
+			
 			return;
 		}
 		

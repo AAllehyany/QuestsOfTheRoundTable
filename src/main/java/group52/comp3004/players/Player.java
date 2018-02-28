@@ -594,4 +594,8 @@ public class Player {
 	public void setTourney(GameTourney tourney) {
 		this.tourney = tourney;
 	}
+
+	public void removeQuest() {
+		this.quest = null;
+	}
 }
