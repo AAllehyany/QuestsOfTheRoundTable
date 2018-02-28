@@ -422,18 +422,22 @@ public class Player {
 			}
 		}
 	}
-	public void clearTemp() {
+	public ArrayList<AdventureCard> clearTemp() {
 		ArrayList<AdventureCard> a = new ArrayList<AdventureCard>();
+		ArrayList<AdventureCard> weps = new ArrayList<AdventureCard>();
 		
 		for(int i=0;i<this.temp.size();i++) {
 			if(this.temp.get(i) instanceof Ally) {
 				this.field.add(this.temp.get(i));
 			}else if(this.temp.get(i) instanceof Amour) {
 				a.add(this.temp.get(i));
-			}
+			}else if(this.temp.get(i) instanceof Weapon) weps.add(this.temp.get(i));
 		}
 		
+		
 		this.temp = a;
+		
+		return weps;
 		
 		/*this.temp.forEach(card -> {
 			if(card instanceof Ally) {

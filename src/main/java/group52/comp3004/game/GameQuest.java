@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 
+import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.QuestCard;
 import group52.comp3004.players.Player;
 
@@ -173,7 +174,9 @@ public class GameQuest {
 		System.out.println("Playing a foe stage!");
 		
 		List<Player> remaining = players.stream().filter(p -> p.getBattlePoints(state) >= stages.get(currentStage).getTotalPower(state)).collect(Collectors.toList());
-		this.players.forEach(p -> p.clearTemp());
+		ArrayList<AdventureCard> discard = new ArrayList<AdventureCard>();
+		state.getAdventureDeck().discardCard(discard);
+		for(int i=0;i<players.size();i++) discard.addAll(players.get(i).clearTemp());
 		System.out.println("Done playing the stage...");
 		System.out.println(remaining.size() + " players are now in the quest.");
 		this.players = remaining;

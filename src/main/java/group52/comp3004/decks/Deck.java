@@ -72,6 +72,11 @@ public class Deck<T> {
 		return c;
 	}
 	
+	public ArrayList<T> discardCard(ArrayList<T> cards){
+		discard.addAll(cards);
+		return cards;
+	}
+	
 	//PURPOSE: Builds the adventure deck
 	public static ArrayList<AdventureCard> createAdventureDeck(ResourceManager resman) {
 			
