@@ -294,6 +294,14 @@ public class Player {
 					}
 					
 					controller.updateAll();
+				}else if(game.getPhase() == Phase.Arms) {
+					if(!(card instanceof Ally) && !(card instanceof Weapon)) {
+						return;
+					}else{
+						card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
+						System.out.println(card.getName()+ " discarded");
+						hand.remove(card);
+					}
 				}
 				else if(game.getPhase() == Phase.PlayQuest) {
 					if(!(card instanceof Ally) && !(card instanceof Amour) && !(card instanceof Weapon)) {

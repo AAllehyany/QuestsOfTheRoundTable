@@ -21,5 +21,6 @@ public enum Phase {
 	SetUpTourney,
 	Broken //The game is broken, despair
 , PlayQuest // Playing in the quest
-, SecondRound
+, SecondRound,
+Arms
 }

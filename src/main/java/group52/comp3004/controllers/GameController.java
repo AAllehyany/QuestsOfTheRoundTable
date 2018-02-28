@@ -97,7 +97,12 @@ public class GameController implements Initializable {
 		
 		//finishSponsor.setOnAction(e -> this.handleReady());
 	}
-
+	@FXML
+	private void discard() {
+		System.out.println("cards discarded");
+		model.setPhase(Phase.TurnEnd);
+		this.endTurn();
+	}
 	@FXML
 	private void handleReady() {
 		Phase phase = model.getPhase();
@@ -189,7 +194,7 @@ public class GameController implements Initializable {
 			System.out.println("Num players in tourney so far: " + numPlayers);
 			if(numPlayers == readyCounter1) {
 				System.out.println("Everyone is ready!");
-				model.getCurrentTourney().winner();
+				model.getCurrentTourney().battle(model.getCurrentTourney().getPlayers());
 				model.getCurrentTourney().awardShields();
 				readyCounter1 = 0;
 				this.endTourney();
@@ -285,8 +290,14 @@ public class GameController implements Initializable {
 		middleController.addStory(model.dealStoryCard());
 		//move to next phase depending on card type
 		if(model.getRevealedCard() instanceof EventCard) {System.out.println("    -->Event");
-			model.setPhase(Phase.HandleEvent);
-			this.handleEvent();
+			if(model.getRevealedCard().getName()=="Call_to_Arms") {
+				model.setPhase(Phase.Arms);
+				this.handleArms();
+			}else {
+				model.setPhase(Phase.HandleEvent);
+				this.handleEvent();
+			}
+
 		}
 
 		else if(model.getRevealedCard() instanceof Tourneys) {System.out.println("    -->Tourney");
@@ -302,6 +313,11 @@ public class GameController implements Initializable {
 			model.setPhase(Phase.Broken);
 		}
 		//this.updateAll();
+	}
+
+	private void handleArms() {
+		
+		
 	}
 
 	//PURPOSE: Execute the event behaviour contained in the event card
@@ -497,6 +513,9 @@ public class GameController implements Initializable {
 
 	public void endTourney() {
 		model.endTourney();
+		for(Player p: model.getAllPlayers()) {
+			p.clearTemp();
+		}
 		model.setPhase(Phase.TurnEnd);
 		this.readyCounter1=0;
 		this.updateAll();
@@ -671,6 +690,9 @@ public class GameController implements Initializable {
 				Button readyBattle = new Button("Ready for battle");
 				readyBattle.setOnAction(e -> this.battle());
 				gamepane.add(readyBattle, 6, 4, 1, 1);
+				Button discardButton = new Button("Discard");
+				discardButton.setOnAction(e -> this.discard());
+				gamepane.add(discardButton, 7, 4, 1, 1);
 			}
 
 			catch(Exception ex) {
