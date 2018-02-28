@@ -37,7 +37,7 @@ public class PortraitAreaController implements Initializable {
     	int currentShields = player.getShields() - player.getMinShields();
     	//need to add more shields
     	if(currentShields > numShields) {
-    		System.out.println("Need to add "+(currentShields-numShields)+ " shields");
+    		System.out.println("Need to add "+(currentShields-numShields)+ " shields from  " + player.getId());
     		for(int i = 0; i < currentShields-numShields; i++) {
     			Rectangle shield = new Rectangle(20, 20);
     			int index = rand.nextInt(TYPES_OF_SHIELDS) + 1;
@@ -49,7 +49,7 @@ public class PortraitAreaController implements Initializable {
     	}
     	//need to remove shields
     	else if(currentShields < numShields) {
-    		System.out.println("Need to remove "+(currentShields-numShields)+ " shields");
+    		System.out.println("Need to remove "+(currentShields-numShields)+ " shields from  " + player.getId());
     		for(int i = 0; i < numShields-currentShields; i++) {
     			shields1.getChildren().remove(shields1.getChildren().size()-1);
     		}

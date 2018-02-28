@@ -271,7 +271,7 @@ public class Player {
 					hand.remove(card);
 					controller.updateAll();	
 				}
-				else if(game.getPhase() == Phase.SetUpTourney) {
+				else if(game.getPhase() == Phase.SetUpTourney || game.getPhase() == Phase.SecondRound) {
 					if(!(card instanceof Ally) && !(card instanceof Amour) && !(card instanceof Weapon)) {
 						return;
 					}
@@ -637,4 +637,5 @@ public class Player {
 	public void removeQuest() {
 		this.quest = null;
 	}
+	
 }

@@ -36,15 +36,14 @@ public class Card extends Rectangle{
 		back = null;
 	}
 	
-	public void flipCard() {
-		if(isFaceUp) {
-			isFaceUp = false;
-			this.setFill(back);
-		}
-		else {
+	public void flipUp() {
+
 			isFaceUp = true;
 			this.setFill(front);
-		}
+	}
+	public void flipDown() {
+		isFaceUp = false;
+		this.setFill(back);
 	}
 	
 	public String getName() {

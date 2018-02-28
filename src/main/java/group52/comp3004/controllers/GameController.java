@@ -270,6 +270,7 @@ public class GameController implements Initializable {
 	//		*placeholder if we want to add future behaviour
 	public void startTurn() {
 		//move to next phase
+		updateAll();
 		model.setPhase(Phase.RevealStory);
 		this.revealStory();
 	}
@@ -590,11 +591,23 @@ public class GameController implements Initializable {
 	public void updateAll() {
 		//update player hand and field arraylists for each player
 		for(int i = 0; i < this.playerControllers.size(); i++) {
+			if(model.getCurrentPlayer()!=i) {
+				for(AdventureCard c :model.getPlayerByIndex(i).getHand()) {
+					c.flipDown();
+				}
+			}else {
+				for(AdventureCard c :model.getPlayerByIndex(i).getHand()) {
+					c.flipUp();
+				}
+			}
+		}
+		for(int i = 0; i < this.playerControllers.size(); i++) {
 			int index = (model.getCurrentPlayer() + i) % model.getAllPlayers().size();
 			Player player = this.model.getPlayerByIndex(index);
 			ArrayList<AdventureCard> field = new ArrayList<>();
 			field.addAll(player.getField());
 			field.addAll(player.getTemp());
+			
 			this.playerControllers.get(i).update(player.getHand(),field,player);
 		}
 		//update middle area
