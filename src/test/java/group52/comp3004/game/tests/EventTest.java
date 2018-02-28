@@ -50,8 +50,8 @@ class EventTest {
 		Pox.run(model);
 		
 		assertEquals(10, (int) a.getShields());
-		assertEquals(9, (int) b.getShields());
-		assertEquals(9, (int) c.getShields());
+		assertEquals(10, (int) b.getShields());
+		assertEquals(10, (int) c.getShields());
 	}
 	@Test
 	public void testPlugue() {
@@ -65,7 +65,7 @@ class EventTest {
 		EventCard Plague =  new EventCard("Plague",resman, new Plague());
 		Plague.run(model);
 		
-		assertEquals(8, (int) a.getShields());
+		assertEquals(10, (int) a.getShields());
 		assertEquals(10, (int) b.getShields());
 		assertEquals(10, (int) c.getShields());
 	}
