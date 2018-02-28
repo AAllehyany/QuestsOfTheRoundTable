@@ -2,6 +2,8 @@ package group52.comp3004.cards;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import group52.comp3004.game.GameState;
 import group52.comp3004.players.Player;
 import group52.comp3004.players.Rank;
@@ -9,9 +11,11 @@ import group52.comp3004.players.Rank;
 public class Deed implements EventBehaviour{
 	private Rank lowestRank;
 	private int  lowestShield;
+	
+	final static Logger logger = Logger.getLogger(Deed.class);
 	@Override
 	public void handle(GameState gamestate) {
-		System.out.println("		->Deed");
+		logger.info("		->Deed");
 		for(int i=0;i<gamestate.numPlayers();i++) {
 			if(gamestate.getPlayerByIndex(i).getRank()== Rank.Squire){
 				lowestRank = Rank.Squire;

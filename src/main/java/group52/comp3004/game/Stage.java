@@ -47,4 +47,7 @@ public class Stage {
 		return foe;
 	}
 	
+	public Tests getTest() {
+		return test;
+	}
 }

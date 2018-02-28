@@ -1,5 +1,7 @@
 package group52.comp3004.cards;
 
+import org.apache.log4j.Logger;
+
 import group52.comp3004.ResourceManager;
 import group52.comp3004.controllers.CardClickBehaviour;
 import group52.comp3004.players.Player;
@@ -19,6 +21,7 @@ public class Card extends Rectangle{
 	
 	protected CardClickBehaviour clickBehaviour;
 	
+	final static Logger logger = Logger.getLogger(Card.class);
 	//DESCRIPTION: representation of a player's card
 	//			   extends Rectangle to make it easier to deal with (no get/sets needed)
 	//			   Only subclasses should be created

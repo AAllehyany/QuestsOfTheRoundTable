@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
+
 import group52.comp3004.Strategies.AbstractAI;
 import group52.comp3004.Strategies.Strategy1;
 import group52.comp3004.Strategies.Strategy2;
@@ -45,6 +47,8 @@ public class Player {
 	private ArrayList<AdventureCard> tempWeapons;
 	private AbstractAI strategy;
 	
+	
+	static final private Logger logger = Logger.getLogger(Player.class);
 	public Player(Integer id, GameController gc, GameState gs) {
 		this.id = id;
 		shields = 10;
@@ -214,7 +218,7 @@ public class Player {
 	
 	
 	public void addCardToHand(AdventureCard card) {
-		System.out.println("Adding "+card.getName()+" to hand");
+		logger.info("Adding "+card.getName()+" to hand");
 		card.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
 				
@@ -224,7 +228,7 @@ public class Player {
 				
 				if(game.getPhase() == Phase.SetupQuest) {
 					if(!(card instanceof Foe) && !(card instanceof Tests) && !(card instanceof Weapon)) {
-						System.out.println("Clicking illegal card for setting quest");
+						logger.info("Clicking illegal card for setting quest");
 					}
 					else {
 						int numFoes = (int) temp.stream().filter(c -> c instanceof Foe).count();
@@ -250,7 +254,7 @@ public class Player {
 							
 							if(temp.size() > 0 && !(temp.get(temp.size() - 1) instanceof Tests)) {
 								card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
-								System.out.println(card.getName()+ " clicked");
+								logger.info(card.getName()+ " clicked");
 								temp.add(card);
 								tempWeapons.add(card);
 								hand.remove(card);
@@ -261,7 +265,7 @@ public class Player {
 						else {
 							tempWeapons.clear();
 							card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
-							System.out.println(card.getName()+ " clicked");
+							logger.info(card.getName()+ " clicked");
 							temp.add(card);
 							hand.remove(card);
 							controller.updateAll();	
@@ -271,7 +275,7 @@ public class Player {
 				}
 				else if(game.getPhase()==Phase.HandleEvent){
 					card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
-					System.out.println(card.getName()+ " discarded");
+					logger.info(card.getName()+ " discarded");
 					hand.remove(card);
 					controller.updateAll();	
 				}
@@ -283,7 +287,7 @@ public class Player {
 					if(card instanceof Weapon) {
 						if(!canPlayWeapon((Weapon) card)) return;
 						card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
-						System.out.println(card.getName()+ " clicked");
+						logger.info(card.getName()+ " clicked");
 						temp.add(card);
 						hand.remove(card);
 					}
@@ -292,7 +296,7 @@ public class Player {
 						if(card instanceof Amour && countAmours > 0) return;
 						
 						card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
-						System.out.println(card.getName()+ " clicked");
+						logger.info(card.getName()+ " clicked");
 						temp.add(card);
 						hand.remove(card);
 					}
@@ -303,7 +307,7 @@ public class Player {
 						return;
 					}else{
 						card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
-						System.out.println(card.getName()+ " discarded");
+						logger.info(card.getName()+ " discarded");
 						hand.remove(card);
 					}
 				}
@@ -315,7 +319,7 @@ public class Player {
 					if(card instanceof Weapon) {
 						if(!canPlayWeapon((Weapon) card)) return;
 						card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
-						System.out.println(card.getName()+ " clicked");
+						logger.info(card.getName()+ " clicked");
 						temp.add(card);
 						hand.remove(card);
 					}
@@ -324,7 +328,7 @@ public class Player {
 						if(card instanceof Amour && countAmours > 0) return;
 						
 						card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
-						System.out.println(card.getName()+ " clicked");
+						logger.info(card.getName()+ " clicked");
 						temp.add(card);
 						hand.remove(card);
 					}
@@ -336,7 +340,7 @@ public class Player {
 				else{
 				
 					card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
-					System.out.println(card.getName()+ " clicked");
+					logger.info(card.getName()+ " clicked");
 					field.add(card);
 					hand.remove(card);
 					controller.updateAll();	

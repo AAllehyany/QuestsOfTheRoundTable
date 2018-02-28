@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
+
 import group52.comp3004.cards.QuestCard;
 import group52.comp3004.players.Player;
 
@@ -17,6 +19,7 @@ public class GameQuest {
 	private Player sponsor;
 	private boolean over;
 
+	static final private Logger logger = Logger.getLogger(GameQuest.class);
 	
 	/**
 	 * @param quest
@@ -101,17 +104,17 @@ public class GameQuest {
 		if(over || this.players.size() == 0) return;
 		
 		if(stages.get(currentStage).isTestStage()) {
-			System.out.println("Playing in a test stage...");
+			logger.info("Playing in a test stage...");
 			Player remaining = players.stream().max((p1, p2) -> {
 				if(p1.getOfferedBids() > p2.getOfferedBids()) return -1;
 				if(p1.getOfferedBids() == p2.getOfferedBids()) return 0;
 				return 1;
 			}).get();
 			
-			System.out.println("Remaining player is " + remaining.getId());
+			logger.info("Remaining player is " + remaining.getId());
 			
 			if(remaining.getOfferedBids() == 0) {
-				System.out.println("Everyone dropped of the test!");
+				logger.info("Everyone dropped of the test!");
 				this.over = true;
 				this.players.clear();
 			}
@@ -125,15 +128,15 @@ public class GameQuest {
 			return;
 		}
 		
-		System.out.println("Playing a foe stage!");
+		logger.info("Playing a foe stage!");
 		
 		List<Player> remaining = players.stream().filter(p -> p.getBattlePoints() >= stages.get(currentStage).getTotalPower()).collect(Collectors.toList());
 		this.players.forEach(p -> p.clearTemp());
-		System.out.println("Done playing the stage...");
-		System.out.println(remaining.size() + " players are now in the quest.");
+		logger.info("Done playing the stage...");
+		logger.info(remaining.size() + " players are now in the quest.");
 		this.players = remaining;
 		if(currentStage == (quest.getStages() - 1) || this.players.size() < 1)  {
-			System.out.println("No players or we played all stages! Quest is over.");
+			logger.info("No players or we played all stages! Quest is over.");
 			this.over = true;
 		}
 		advanceStage();	
