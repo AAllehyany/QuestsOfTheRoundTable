@@ -155,17 +155,19 @@ public class GameController implements Initializable {
 				if(model.getCurrentQuest().isOver()) {
 					System.out.println("No one left, quest over!");
 					this.endQuest();
+					this.updateAll();
+					return;
 				}
-				else {
-					System.out.println("Received player submission for quest!");
-					System.out.println("Moving to next player in quest!");
-					model.nextPlayer();
-					Player p = model.getPlayerByIndex(model.getCurrentPlayer());
-					while(!(model.getCurrentQuest().isPlayer(p))) {
-						System.out.println("Player not in a quest, moving to next one!");
-						model.nextPlayer();
-					}
-				}
+			}
+			
+			System.out.println("Received player submission for quest!");
+			System.out.println("Moving to next player in quest!");
+			model.nextPlayer();
+			Player p = model.getPlayerByIndex(model.getCurrentPlayer());
+			while(!(model.getCurrentQuest().isPlayer(p))) {
+				System.out.println("Player not in a quest, moving to next one!");
+				model.nextPlayer();
+				p = model.getPlayerByIndex(model.getCurrentPlayer());
 			}
 			
 			this.updateAll();
@@ -326,7 +328,19 @@ public class GameController implements Initializable {
 		if(joined == 0) {
 			this.endQuest();
 		} else {
-			model.setPhase(Phase.PlayQuest);
+			this.playQuest();
+			
+		}
+		
+	}
+
+	public void playQuest() {
+		model.setPhase(Phase.PlayQuest);
+		Player p = model.getPlayerByIndex(model.getCurrentPlayer());
+		while(!(model.getCurrentQuest().isPlayer(p))) {
+			System.out.println("Player not in a quest, moving to next one!");
+			model.nextPlayer();
+			p = model.getPlayerByIndex(model.getCurrentPlayer());
 		}
 		
 	}

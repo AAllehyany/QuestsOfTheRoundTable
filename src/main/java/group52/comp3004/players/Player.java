@@ -180,6 +180,8 @@ public class Player {
 		card.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
 				
+				if(id != game.getPlayerByIndex(game.getCurrentPlayer()).getId()) return;
+				
 				//change so card click behaviour changes based on the phase
 				
 				if(game.getPhase() == Phase.SetupQuest) {
@@ -246,17 +248,20 @@ public class Player {
 						System.out.println(card.getName()+ " clicked");
 						temp.add(card);
 						hand.remove(card);
-						controller.updateAll();
+					}
+					else {
+						int countAmours = (int) temp.stream().filter(c -> c instanceof Amour).count();
+						if(card instanceof Amour && countAmours > 0) return;
+						
+						card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
+						System.out.println(card.getName()+ " clicked");
+						temp.add(card);
+						hand.remove(card);
 					}
 					
-					int countAmours = (int) temp.stream().filter(c -> c instanceof Amour).count();
-					if(card instanceof Amour && countAmours > 0) return;
-					
-					card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
-					System.out.println(card.getName()+ " clicked");
-					temp.add(card);
-					hand.remove(card);
 					controller.updateAll();
+					
+					
 				}
 				else{
 				
@@ -267,7 +272,7 @@ public class Player {
 					controller.updateAll();	
 				}
 				
-				controller.updateAll();
+				//controller.updateAll();
 				/*
 				 if(game.getPhase() == SetupQuest){
 				 	//add foes and weapons to quest

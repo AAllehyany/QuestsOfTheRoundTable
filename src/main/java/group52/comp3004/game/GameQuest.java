@@ -147,7 +147,7 @@ public class GameQuest {
 
 	public boolean isPlayer(Player player) {
 		// TODO Auto-generated method stub
-		return this.players.contains(player) || player == sponsor;
+		return this.players.contains(player); // || player == sponsor;
 	}
 	
 	public int getNumCardsPlayedBySponsor() {
