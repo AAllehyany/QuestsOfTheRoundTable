@@ -61,14 +61,14 @@ public class GameController implements Initializable {
 
 	public GameController() {
 		model = new GameState();
-		Player demo = new Player(1, this, model);
-		Player demow = new Player(2, this, model);
-		Player demoww = new Player(3, this, model);
-		Player demowww= new Player(4, this, model);
-		model.addPlayer(demo);
-		model.addPlayer(demow);
-		model.addPlayer(demoww);
-		model.addPlayer(demowww);
+//		Player demo = new Player(1, this, model);
+//		Player demow = new Player(2, this, model);
+//		Player demoww = new Player(3, this, model);
+//		Player demowww= new Player(4, this, model);
+//		model.addPlayer(demo);
+//		model.addPlayer(demow);
+//		model.addPlayer(demoww);
+//		model.addPlayer(demowww);
 		stageSize.set(0);
 		playerControllers = new ArrayList<>();
 		middleController = null;
@@ -88,9 +88,9 @@ public class GameController implements Initializable {
 		
 		gamepane.setAlignment(Pos.CENTER);
 		
-		twoPlayers.setOnAction(e -> this.startGame());
-		threePlayers.setOnAction(e -> this.startGame());
-		fourPlayers.setOnAction(e -> this.startGame());
+		twoPlayers.setOnAction(e -> this.startGame(2));
+		threePlayers.setOnAction(e -> this.startGame(3));
+		fourPlayers.setOnAction(e -> this.startGame(4));
 		battle.setOnAction(null);
 		battle.setVisible(false);
 		
@@ -220,7 +220,7 @@ public class GameController implements Initializable {
 	//PURPOSE: Execute the start game phase
 	//		*adds all play areas to the game
 	//		*move to phase TurnStart after
-	public void startGame() {
+	public void startGame(int p) {
 		System.out.println("Starting Game");
 		//remove the startGame button
 		threePlayers.setOnAction(null);
@@ -230,6 +230,11 @@ public class GameController implements Initializable {
 		twoPlayers.setOnAction(null);
 		twoPlayers.setVisible(false);
 
+		// create players
+		for(int i=0;i<p;i++) {
+			Player player = new Player(i, this, model);
+			model.addPlayer(player);
+		}
 		
 		//call GUI creation methods
 		this.createMiddleArea();
