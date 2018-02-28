@@ -146,6 +146,13 @@ public class GameController implements Initializable {
 				this.updateAll();
 			}
 			else {
+				//move temp cards into middle area
+				for(int i = 0; i < model.getCurrentQuest().getStages().size(); i++) {
+					AdventureCard card = current.getTemp().get(i);
+					middleController.addStage(stages.get(i), model.getResourceManager());			
+				}
+				
+				//cards are moved into quest
 				current.getTemp().clear();
 				this.updateAll();
 				this.runQuest();
