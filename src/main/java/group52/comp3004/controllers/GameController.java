@@ -17,6 +17,7 @@ import group52.comp3004.cards.Tourneys;
 import group52.comp3004.cards.Weapon;
 import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
+import group52.comp3004.game.GameTourney;
 import group52.comp3004.game.Phase;
 import group52.comp3004.game.Stage;
 import group52.comp3004.players.Player;
@@ -54,7 +55,7 @@ public class GameController implements Initializable {
 	
 	private GameState model;
 	
-	private int readyCounter;
+	private int readyCounter, readyCounter1;
 	
 	//Constructor
 
@@ -72,6 +73,7 @@ public class GameController implements Initializable {
 		playerControllers = new ArrayList<>();
 		middleController = null;
 		readyCounter = 0;
+		readyCounter1 =0;
 	}
 
 	public DoubleProperty stageSizeProperty() {
@@ -89,6 +91,7 @@ public class GameController implements Initializable {
 		twoPlayers.setOnAction(e -> this.startGame());
 		threePlayers.setOnAction(e -> this.startGame());
 		fourPlayers.setOnAction(e -> this.startGame());
+		battle.setOnAction(null);
 		battle.setVisible(false);
 		
 		//finishSponsor.setOnAction(e -> this.handleReady());
@@ -170,6 +173,47 @@ public class GameController implements Initializable {
 		}
 	}
 
+	@FXML
+	private void battle() {
+		Phase phase = model.getPhase();
+		System.out.println("ready for battle!");
+		if(phase == Phase.SetUpTourney) {
+			System.out.println("Playing in a Tournament!");
+			System.out.println("Num players ready: " + readyCounter1);
+			readyCounter1++;
+			System.out.println("Num players ready: " + readyCounter1);
+			GameTourney tourney = model.getCurrentTourney();
+			int numPlayers = tourney.getPlayers().size();
+			
+			System.out.println("Num players in tourney so far: " + numPlayers);
+			if(numPlayers == readyCounter1) {
+				System.out.println("Everyone is ready!");
+				model.getCurrentTourney().winner();
+				model.getCurrentTourney().awardShields();
+				readyCounter1 = 0;
+				this.endTourney();
+				this.updateAll();
+				if(model.getCurrentTourney().isOver()) {
+					System.out.println("tournament over!");
+					this.endTourney();
+					this.updateAll();
+					return;
+				}
+			}
+			
+			System.out.println("Received player submission for tournament!");
+			System.out.println("Moving to next player in tourney!");
+			model.nextPlayer();
+			Player p = model.getPlayerByIndex(model.getCurrentPlayer());
+			while(!(model.getCurrentTourney().isPlayer(p))) {
+				System.out.println("Player not in a tournament, moving to next one!");
+				model.nextPlayer();
+				p = model.getPlayerByIndex(model.getCurrentPlayer());
+			}
+			
+			this.updateAll();
+		}
+	}
 	/*****************************************************************************************************/
 	//GAME STATE EXECUTION METHODS
 	/*****************************************************************************************************/
@@ -266,13 +310,14 @@ public class GameController implements Initializable {
 			}
 			model.nextPlayer();
 		}
-		model.setPhase(Phase.SetUpTourney);
+		model.getCurrentTourney().dealCards();
+		updateAll();
 		this.setUpTourney();
 	}
 
 	private void setUpTourney() {
-		battle.setVisible(true);
-		battle.setOnAction(e ->model.nextPlayer());
+		System.out.println("          ->Setup Tourney");
+		model.setPhase(Phase.SetUpTourney);
 	}
 
 	//PURPOSE: Execute RunTourney Phase
@@ -427,10 +472,18 @@ public class GameController implements Initializable {
 
 	//PURPOSE: Execute EndQuest Phase
 
+	public void endTourney() {
+		model.endTourney();
+		model.setPhase(Phase.TurnEnd);
+		this.readyCounter1=0;
+		this.updateAll();
+		this.endTurn();
+	}
 	public void endQuest() {
 		model.endQuest();
 		//move to next phase
 		model.setPhase(Phase.TurnEnd);
+		this.readyCounter=0;
 		this.updateAll();
 		this.endTurn();
 	}
@@ -580,6 +633,9 @@ public class GameController implements Initializable {
 				Button readyButton = new Button("Ready");
 				readyButton.setOnAction(e -> this.handleReady());
 				gamepane.add(readyButton, 1, 4, 1, 1);
+				Button readyBattle = new Button("Ready for battle");
+				readyBattle.setOnAction(e -> this.battle());
+				gamepane.add(readyBattle, 6, 4, 1, 1);
 			}
 
 			catch(Exception ex) {
