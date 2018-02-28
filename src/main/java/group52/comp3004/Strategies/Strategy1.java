@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
+import group52.comp3004.cards.Amour;
 import group52.comp3004.cards.CardComparator;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.Tests;
@@ -168,12 +169,17 @@ public class Strategy1 extends AbstractAI{
 			for(int i=0;i<p.getHand().size();i++) {
 				if(!(p.getHand().get(i) instanceof Tests || p.getHand().get(i) instanceof Foe) &&
 						!stageCards.contains(p.getHand().get(i))) {
-					stageCards.add(p.getHand().get(i));
+					if(p.getHand().get(i) instanceof Amour) {
+						if(!containsAmour(stageCards) && !p.hasAmour()) stageCards.add(p.getHand().get(i));
+					}else {
+						stageCards.add(p.getHand().get(i));
+					}
 				}
 			}
 		}else {
 			while(stageCards.size()<2) {
-				if(!p.hasAmour() && p.hasAmourInHand()) stageCards.add(p.getAmourInHand());
+				if(!p.hasAmour() && p.hasAmourInHand() && 
+						!containsAmour(stageCards)) stageCards.add(p.getAmourInHand());
 				else if(p.hasAllyInHand()) stageCards.add(p.getStrongestAllyInHand(state));
 				else stageCards.add(getWeakestWeapon(state,p,stageCards));
 			}

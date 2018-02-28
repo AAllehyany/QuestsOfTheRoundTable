@@ -3,6 +3,7 @@ package group52.comp3004.Strategies;
 import java.util.ArrayList;
 
 import group52.comp3004.cards.AdventureCard;
+import group52.comp3004.cards.Amour;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.QuestCard;
 import group52.comp3004.cards.StoryCard;
@@ -81,5 +82,12 @@ public abstract class AbstractAI{
 			if(p.getHand().get(i) instanceof Foe) return (Foe) p.getHand().remove(i);
 		}
 		return null;
+	}
+	
+	public boolean containsAmour(ArrayList<AdventureCard> cards) {
+		for(int i=0;i<cards.size();i++) {
+			if(cards.get(i) instanceof Amour) return true;
+		}
+		return false;
 	}
 }

@@ -46,6 +46,7 @@ public class AITest {
 		Weapon excalibur = new Weapon("Excalibur", resman, 30);
 		Weapon dagger = new Weapon("Dagger", resman, 5);
 		Weapon horse = new Weapon("Horse", resman, 10);
+		Weapon sword = new Weapon("Sword", resman, 10);
 		Ally kp = new Ally("King_Pellinore", resman, 10, 0, "Questing_Beast_Search", 0, 4);
 		Ally sg = new Ally("Sir_Gawain", resman, 10, 0, "Green_Knight_Quest", 20, 0);
 		Ally sp = new Ally("Sir_Percival", resman, 5, 0, "Holy_Grail", 20, 0);
@@ -289,6 +290,67 @@ public class AITest {
 			assertEquals(bknight, quest.get(1).getFoe());
 			assertEquals(35, quest.get(1).getFoe().getBp(state));
 			assertEquals(mordred, quest.get(0).getFoe());
+			
+			// Test playing through quest
+			state.setRevealedCard(bh);
+			state.setQuest();
+			p1.setHand(new ArrayList<AdventureCard>());
+			p2.setHand(new ArrayList<AdventureCard>());
+			p3.setHand(new ArrayList<AdventureCard>());
+			p4.setHand(new ArrayList<AdventureCard>());
+			p2.addCardToHand(a);
+			p2.addCardToHand(a);
+			p2.addCardToHand(kp);
+			p2.addCardToHand(sp);
+			p2.addCardToHand(excalibur);
+			ArrayList<AdventureCard> stageCards = s1.playStage(state, p2);
+			assertEquals(2, stageCards.size());
+			assertEquals(a, stageCards.get(0));
+			assertEquals(kp, stageCards.get(1));
+			p2.addTemp(a);
+			p2.addField(kp);
+			state.getCurrentQuest().advanceStage();
+			stageCards = s1.playStage(state, p2);
+			assertEquals(2, stageCards.size());
+			assert(stageCards.contains(sp));
+			assert(stageCards.contains(excalibur));
+			p3.addCardToHand(a);
+			p3.addCardToHand(excalibur);
+			p3.addCardToHand(dagger);
+			p3.addCardToHand(dagger);
+			p3.addCardToHand(sg);
+			stageCards = s1.playStage(state, p3);
+			assertEquals(4, stageCards.size());
+			assert(stageCards.contains(sg));
+			assert(stageCards.contains(excalibur));
+			assert(stageCards.contains(a));
+			assert(stageCards.contains(dagger));
+			
+			state.setRevealedCard(gk);
+			state.setQuest();
+			p1.setHand(new ArrayList<AdventureCard>());
+			p1.addCardToHand(a);
+			p1.addCardToHand(kp);
+			p1.addCardToHand(sg);
+			p1.addCardToHand(dagger);
+			p1.addCardToHand(dagger);
+			p1.addCardToHand(excalibur);
+			p1.addCardToHand(horse);
+			stageCards = s1.playStage(state, p1);
+			assertEquals(2, stageCards.size());
+			assert(stageCards.contains(a));
+			assert(stageCards.contains(sg));
+			state.getCurrentQuest().advanceStage();
+			stageCards = s1.playStage(state, p1);
+			assertEquals(2, stageCards.size());
+			assert(stageCards.contains(kp));
+			assert(stageCards.contains(dagger));
+			state.getCurrentQuest().advanceStage();
+			stageCards = s1.playStage(state, p1);
+			assertEquals(3, stageCards.size());
+			assert(stageCards.contains(horse));
+			assert(stageCards.contains(dagger));
+			assert(stageCards.contains(excalibur));
 		}
 		
 		@Test
@@ -444,5 +506,70 @@ public class AITest {
 			assertEquals(mordred, stages.get(2).getFoe());
 			assert(stages.get(3).isTestStage());
 			assertEquals(dragon, stages.get(4).getFoe());
+			
+			// Test playing through quest
+			state.setRevealedCard(bh);
+			state.setQuest();
+			p1.setHand(new ArrayList<AdventureCard>());
+			p2.setHand(new ArrayList<AdventureCard>());
+			p3.setHand(new ArrayList<AdventureCard>());
+			p4.setHand(new ArrayList<AdventureCard>());
+			p1.addCardToHand(a);
+			p1.addCardToHand(dagger);
+			p1.addCardToHand(excalibur);
+			ArrayList<AdventureCard> stageCards = s2.playStage(state, p1);
+			assertEquals(1, stageCards.size());
+			assert(stageCards.contains(a));
+			p1.addTemp(stageCards);
+			p1.clearTemp();
+			state.getCurrentQuest().advanceStage();
+			stageCards = s2.playStage(state, p1);
+			for(int i=0;i<stageCards.size();i++) System.out.println(stageCards.get(i).getName());
+			assertEquals(2, stageCards.size());
+			assert(stageCards.contains(dagger));
+			assert(stageCards.contains(excalibur));
+			
+			state.setRevealedCard(hg);
+			state.setQuest();
+			p2.addCardToHand(a);
+			p2.addCardToHand(kp);
+			p2.addCardToHand(sg);
+			p2.addCardToHand(horse);
+			p2.addCardToHand(horse);
+			p2.addCardToHand(sword);
+			p2.addCardToHand(sword);
+			p2.addCardToHand(dagger);
+			p2.addCardToHand(dagger);
+			stageCards = s2.playStage(state, p2);
+			assertEquals(1, stageCards.size());
+			assert(stageCards.contains(a));
+			p2.addTemp(stageCards);
+			p2.clearTemp();
+			state.getCurrentQuest().advanceStage();
+			stageCards = s2.playStage(state, p2);
+			assertEquals(1, stageCards.size());
+			assert(stageCards.contains(kp));
+			p2.addTemp(stageCards);
+			p2.clearTemp();
+			state.getCurrentQuest().advanceStage();
+			stageCards = s2.playStage(state, p2);
+			assertEquals(1, stageCards.size());
+			assert(stageCards.contains(sg));
+			p2.addTemp(stageCards);
+			p2.clearTemp();
+			state.getCurrentQuest().advanceStage();
+			stageCards = s2.playStage(state, p2);
+			assertEquals(2, stageCards.size());
+			assert(stageCards.contains(dagger));
+			assert(stageCards.contains(sword));
+			p2.addTemp(stageCards);
+			p2.clearTemp();
+			state.getCurrentQuest().advanceStage();
+			state.getCurrentQuest().advanceStage();
+			stageCards = s2.playStage(state, p2);
+			assertEquals(3, stageCards.size());
+			assert(stageCards.contains(dagger));
+			assert(stageCards.contains(sword));
+			assert(stageCards.contains(horse));
 		}
 }

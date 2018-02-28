@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import group52.comp3004.Strategies.AbstractAI;
+import group52.comp3004.Strategies.Strategy1;
+import group52.comp3004.Strategies.Strategy2;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Amour;
@@ -40,6 +43,7 @@ public class Player {
 	private boolean stoppedBidding;
 	private int offeredBids;
 	private ArrayList<AdventureCard> tempWeapons;
+	private AbstractAI strategy;
 	
 	public Player(Integer id, GameController gc, GameState gs) {
 		this.id = id;
@@ -59,6 +63,30 @@ public class Player {
 		bidPoints = 0;
 		offeredBids = 0;
 		tempWeapons = new ArrayList<>();
+		strategy = null;
+	}
+	
+	public Player(Integer id, GameController gc, GameState gs, int s) {
+		this.id = id;
+		shields = 10;
+		rank = Rank.Squire;
+		battlePoints = 5;
+		requiredShields = 15;
+		minShields = 10;
+		weapons = new ArrayList<Integer>();
+		hand = new ArrayList<>();
+		field = new ArrayList<>();
+		temp = new ArrayList<>();
+		quest = null;
+		tourney = null;
+		controller = gc;
+		game = gs;
+		bidPoints = 0;
+		offeredBids = 0;
+		tempWeapons = new ArrayList<>();
+		if(s==1) strategy = new Strategy1();
+		else if(s==2) strategy = new Strategy2();
+		else strategy = null;
 	}
 	
 	public Player(Integer id) {
@@ -342,9 +370,14 @@ public class Player {
 	public void addTemp(AdventureCard card) {
 		this.temp.add(card);
 	}
+	
+	public void addTemp(ArrayList<AdventureCard> cards) {
+		for(int i=0;i<cards.size();i++) this.temp.add(cards.get(i));
+	}
+	
 	public void clearAlly() {
 		
-		for(int i=0;i<this.temp.size();i++) {
+		for(int i=0;i<this.field.size();i++) {
 			if(this.field.get(i) instanceof Ally) {
 				this.field.remove(this.temp.get(i));
 			}
