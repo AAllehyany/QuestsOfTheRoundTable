@@ -139,6 +139,48 @@ public class GameQuest {
 		advanceStage();	
 	}
 	
+	public void playStage(GameState state) {
+		if(over || this.players.size() == 0) return;
+		
+		if(stages.get(currentStage).isTestStage()) {
+			System.out.println("Playing in a test stage...");
+			Player remaining = players.stream().max((p1, p2) -> {
+				if(p1.getOfferedBids() > p2.getOfferedBids()) return -1;
+				if(p1.getOfferedBids() == p2.getOfferedBids()) return 0;
+				return 1;
+			}).get();
+			
+			System.out.println("Remaining player is " + remaining.getId());
+			
+			if(remaining.getOfferedBids() == 0) {
+				System.out.println("Everyone dropped of the test!");
+				this.over = true;
+				this.players.clear();
+			}
+			else {
+				this.players.clear();
+				this.players.add(remaining);
+			}
+			
+			advanceStage();
+			
+			return;
+		}
+		
+		System.out.println("Playing a foe stage!");
+		
+		List<Player> remaining = players.stream().filter(p -> p.getBattlePoints(state) >= stages.get(currentStage).getTotalPower(state)).collect(Collectors.toList());
+		this.players.forEach(p -> p.clearTemp());
+		System.out.println("Done playing the stage...");
+		System.out.println(remaining.size() + " players are now in the quest.");
+		this.players = remaining;
+		if(currentStage == (quest.getStages() - 1) || this.players.size() < 1)  {
+			System.out.println("No players or we played all stages! Quest is over.");
+			this.over = true;
+		}
+		advanceStage();	
+	}
+	
 	public int getNumStages() {
 		return this.quest.getStages();
 	}
@@ -164,8 +206,16 @@ public class GameQuest {
 		return this.players.contains(player); // || player == sponsor;
 	}
 	
+	public Player getSponsor() {
+		return this.sponsor;
+	}
+	
+	public void setSponsor(Player player) {
+		this.sponsor = player;
+	}
+	
 	public int getNumCardsPlayedBySponsor() {
-		return this.getStages().stream().mapToInt(s -> s.totalCardsPlayed()).sum();
+		return this.getStages().stream().mapToInt(s -> s.totalCardsPlayed()).sum() + stages.size();
 	}
 	
 	public void dealCardsToSponsor() {

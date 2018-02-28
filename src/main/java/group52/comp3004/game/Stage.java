@@ -31,6 +31,10 @@ public class Stage {
 		return testStage ? 0 : foe.getBp();
 	}
 	
+	public int getTotalPower(GameState state) {
+		return testStage ? 0 : foe.getBp(state);
+	}
+	
 	public boolean isTestStage() {
 		return testStage;
 	}

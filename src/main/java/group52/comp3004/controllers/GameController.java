@@ -488,7 +488,10 @@ public class GameController implements Initializable {
 	}
 
 	public void playQuest() {
-		
+		ArrayList<Player> players = new ArrayList<Player>(model.getCurrentQuest().getPlayers());
+		for(int i=0;i<players.size();i++) {
+			players.get(i).addCardToHand(model.getAdventureDeck().drawCard());
+		}
 		if(model.getCurrentQuest().getStages().get(model.getCurrentQuest().getCurrentStage()).isTestStage()) {
 			int stoppedBidding = 0;
 			while(stoppedBidding < model.getCurrentQuest().getPlayers().size()) {
