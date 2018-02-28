@@ -288,6 +288,7 @@ public class GameController implements Initializable {
 			    break;
 			}
 			model.nextPlayer();
+			this.updateAll();
 		}
 		
 		if(!sponsored) this.endTurn();
@@ -323,6 +324,7 @@ public class GameController implements Initializable {
 			    //break;
 			}
 			model.nextPlayer();
+			this.updateAll();
 		}
 		
 		if(joined == 0) {
@@ -342,6 +344,8 @@ public class GameController implements Initializable {
 			model.nextPlayer();
 			p = model.getPlayerByIndex(model.getCurrentPlayer());
 		}
+		
+		this.updateAll();
 		
 	}
 
@@ -433,7 +437,8 @@ public class GameController implements Initializable {
 	public void updateAll() {
 		//update player hand and field arraylists for each player
 		for(int i = 0; i < this.playerControllers.size(); i++) {
-			Player player = this.model.getPlayerByIndex(i);
+			int index = (model.getCurrentPlayer() + i) % model.getAllPlayers().size();
+			Player player = this.model.getPlayerByIndex(index);
 			ArrayList<AdventureCard> field = new ArrayList<>();
 			field.addAll(player.getField());
 			field.addAll(player.getTemp());
