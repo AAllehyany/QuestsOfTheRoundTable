@@ -241,6 +241,7 @@ public class GameController implements Initializable {
 			System.out.println("Unknown card type added to story");
 			model.setPhase(Phase.Broken);
 		}
+		//this.updateAll();
 	}
 
 	//PURPOSE: Execute the event behaviour contained in the event card
@@ -364,6 +365,8 @@ public class GameController implements Initializable {
 		middleController.reset();
 		//move to next phase
 		model.setPhase(Phase.TurnStart);
+		model.nextTurn();
+		this.updateAll();
 		this.startTurn();
 	}	
 
