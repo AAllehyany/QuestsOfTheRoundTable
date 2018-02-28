@@ -48,7 +48,7 @@ public class GameController implements Initializable {
 	private MiddleAreaController middleController;
 
 	@FXML
-	private Button twoPlayers, threePlayers, fourPlayers;
+	private Button twoPlayers, threePlayers, fourPlayers,battle;
 	@FXML
 	private Button finishSponsor;
 	
@@ -89,6 +89,7 @@ public class GameController implements Initializable {
 		twoPlayers.setOnAction(e -> this.startGame());
 		threePlayers.setOnAction(e -> this.startGame());
 		fourPlayers.setOnAction(e -> this.startGame());
+		battle.setVisible(false);
 		
 		//finishSponsor.setOnAction(e -> this.handleReady());
 	}
@@ -225,7 +226,7 @@ public class GameController implements Initializable {
 
 		else if(model.getRevealedCard() instanceof Tourneys) {System.out.println("    -->Tourney");
 			model.setPhase(Phase.SponsorTourney);
-			//this.sponsorTourney();
+			this.sponsorTourney();
 		}
 		else if(model.getRevealedCard() instanceof QuestCard) {System.out.println("    -->Quest");
 			model.setPhase(Phase.SponsorQuest);
@@ -254,9 +255,24 @@ public class GameController implements Initializable {
 	}
 	//PURPOSE: Execute JoinTourney Phase
 	public void joinTourney() {
-		//move to next phase
-		model.setPhase(Phase.RunTourney);
-		this.runTourney();
+		model.setTourney();
+		for(int i = 0; i < model.getAllPlayers().size(); i++) {
+			Optional<ButtonType> result = makeAlertBox("tournament", "Tournament " + model.getRevealed().getName(),
+					"Do you want to join the tournament, player " + model.getCurrentPlayer() + "?");
+			if (result.get() == ButtonType.OK){
+				System.out.println(" player " + model.getCurrentPlayer()+ "joined the tournament");
+				model.getCurrentTourney().addPlayer(model.getPlayerByIndex(model.getCurrentPlayer()));
+				model.setPhase(Phase.JoinTourney);
+			}
+			model.nextPlayer();
+		}
+		model.setPhase(Phase.SetUpTourney);
+		this.setUpTourney();
+	}
+
+	private void setUpTourney() {
+		battle.setVisible(true);
+		battle.setOnAction(e ->model.nextPlayer());
 	}
 
 	//PURPOSE: Execute RunTourney Phase
