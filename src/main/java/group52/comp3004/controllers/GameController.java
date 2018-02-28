@@ -237,23 +237,43 @@ public class GameController implements Initializable {
 		twoPlayers.setOnAction(null);
 		twoPlayers.setVisible(false);
 		
+		int AICounter = 0;
 		// create players
 		for(int i=0;i<p;i++) {
 			model.addPlayer(new Player(i, this, model));
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Player " + i);
-			alert.setHeaderText("Would you like this player to be a human or an AI?");
-			alert.setContentText("Select your option.");
-			ButtonType human = new ButtonType("Human");
-			ButtonType strategy1 = new ButtonType("Strategy 1");
-			ButtonType strategy2 = new ButtonType("Strategy 2");
-			ButtonType cancel = new ButtonType("Cancel");
-			alert.getButtonTypes().setAll(human, strategy1, strategy2, cancel);
-			Optional<ButtonType> result = alert.showAndWait();
-			if(result.get() == human) model.getPlayerByIndex(i).setAI(0);
-			else if(result.get()==strategy1) model.getPlayerByIndex(i).setAI(1);
-			else if(result.get()==strategy2) model.getPlayerByIndex(i).setAI(2);
-			else this.endGame();
+			if(i==p-1 && AICounter==i) {
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Player " + i);
+				alert.setHeaderText("Would you like this player to be a human or an AI?");
+				alert.setContentText("Select your option.");
+				ButtonType human = new ButtonType("Human");
+				ButtonType cancel = new ButtonType("Cancel");
+				alert.getButtonTypes().setAll(human, cancel);
+				Optional<ButtonType> result = alert.showAndWait();
+				if(result.get() == human) model.getPlayerByIndex(i).setAI(0);
+				else this.endGame();
+			}else{
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Player " + i);
+				alert.setHeaderText("Would you like this player to be a human or an AI?");
+				alert.setContentText("Select your option.");
+				ButtonType human = new ButtonType("Human");
+				ButtonType strategy1 = new ButtonType("Strategy 1");
+				ButtonType strategy2 = new ButtonType("Strategy 2");
+				ButtonType cancel = new ButtonType("Cancel");
+				alert.getButtonTypes().setAll(human, strategy1, strategy2, cancel);
+				Optional<ButtonType> result = alert.showAndWait();
+				if(result.get() == human) model.getPlayerByIndex(i).setAI(0);
+				else if(result.get()==strategy1) {
+					model.getPlayerByIndex(i).setAI(1);
+					AICounter++;
+				}
+				else if(result.get()==strategy2) {
+					model.getPlayerByIndex(i).setAI(2);
+					AICounter++;
+				}
+				else this.endGame();
+			}
 		}
 		
 		//call GUI creation methods
@@ -302,10 +322,12 @@ public class GameController implements Initializable {
 
 		else if(model.getRevealedCard() instanceof Tourneys) {System.out.println("    -->Tourney");
 			model.setPhase(Phase.SponsorTourney);
+			model.setTourney();
 			this.sponsorTourney();
 		}
 		else if(model.getRevealedCard() instanceof QuestCard) {System.out.println("    -->Quest");
 			model.setPhase(Phase.SponsorQuest);
+			model.setQuest();
 			this.sponsorQuest();
 		}
 		else {
@@ -338,12 +360,20 @@ public class GameController implements Initializable {
 	public void joinTourney() {
 		model.setTourney();
 		for(int i = 0; i < model.getAllPlayers().size(); i++) {
-			Optional<ButtonType> result = makeAlertBox("tournament", "Tournament " + model.getRevealed().getName(),
-					"Do you want to join the tournament, player " + model.getCurrentPlayer() + "?");
-			if (result.get() == ButtonType.OK){
-				System.out.println(" player " + model.getCurrentPlayer()+ "joined the tournament");
-				model.getCurrentTourney().addPlayer(model.getPlayerByIndex(model.getCurrentPlayer()));
-				model.setPhase(Phase.JoinTourney);
+			if(model.getPlayerByIndex(i).getAI()==null) {
+				Optional<ButtonType> result = makeAlertBox("tournament", "Tournament " + model.getRevealed().getName(),
+						"Do you want to join the tournament, player " + model.getCurrentPlayer() + "?");
+				if (result.get() == ButtonType.OK){
+					System.out.println(" player " + model.getCurrentPlayer()+ "joined the tournament");
+					model.getCurrentTourney().addPlayer(model.getPlayerByIndex(model.getCurrentPlayer()));
+					model.setPhase(Phase.JoinTourney);
+				}
+			}else {
+				if(model.getPlayerByIndex(i).getAI().doIParticipateInTournament(model)) {
+					System.out.println(" player " + model.getCurrentPlayer()+ "joined the tournament");
+					model.getCurrentTourney().addPlayer(model.getPlayerByIndex(model.getCurrentPlayer()));
+					model.setPhase(Phase.JoinTourney);
+				}
 			}
 			model.nextPlayer();
 		}
@@ -372,15 +402,33 @@ public class GameController implements Initializable {
 		
 		for(int i = 0; i < model.getAllPlayers().size(); i++) {
 			Player player = model.getPlayerByIndex(model.getCurrentPlayer());
-			Optional<ButtonType> result = makeAlertBox("Quest sponsoring", "Quest " + model.getRevealed().getName(),
-					"Do you want to sponsor the quest, player " + player.getId() + "?");
-
-			if (result.get() == ButtonType.OK){
-				System.out.println("Quest sponsored by player " + model.getCurrentPlayer());
-				model.setQuest();
-				this.setupQuest();
-				sponsored = true;
-			    break;
+			if(player.getAI()==null) {
+				boolean numTests = player.hasTest();
+				int numFoes = player.countFoes();
+				if(numTests) numFoes++;
+				if(numFoes>=((QuestCard) model.getRevealed()).getStages()){
+					Optional<ButtonType> result = makeAlertBox("Quest sponsoring", "Quest " + model.getRevealed().getName(),
+							"Do you want to sponsor the quest, player " + player.getId() + "?");
+			
+					if (result.get() == ButtonType.OK){
+						System.out.println("Quest sponsored by player " + model.getCurrentPlayer());
+						model.setQuest();
+						this.setupQuest();
+						sponsored = true;
+					    break;
+					}
+				}
+			}else {
+				if(player.getAI().doISponsorQuest(model, player)){
+					System.out.println("Quest sponsored by player " + model.getCurrentPlayer());
+					ArrayList<Stage> quest = player.getAI().createQuest(model, player);
+					model.setQuest();
+					quest.forEach(s->model.getCurrentQuest().addStage(s));
+					this.updateAll();
+					this.runQuest();
+					sponsored = true;
+				    break;
+				}
 			}
 			model.nextPlayer();
 			this.updateAll();
@@ -410,13 +458,21 @@ public class GameController implements Initializable {
 				continue;
 			}
 			Player player = model.getPlayerByIndex(model.getCurrentPlayer());
-			Optional<ButtonType> result = makeAlertBox("Quest Joining", "Quest " + model.getCurrentQuest().getQuest().getName(),
-					"Do you want to play in the quest, player " + player.getId() + "?");
-
-			if (result.get() == ButtonType.OK){
-				model.joinQuest();
-				joined += 1;
-			    //break;
+			if(player.getAI()==null) {
+				Optional<ButtonType> result = makeAlertBox("Quest Joining", "Quest " + model.getCurrentQuest().getQuest().getName(),
+						"Do you want to play in the quest, player " + player.getId() + "?");
+	
+				if (result.get() == ButtonType.OK){
+					model.joinQuest();
+					joined += 1;
+				    //break;
+				}
+			}else {
+				if(player.getAI().doIParticipateInQuest(model, player)){
+					model.joinQuest();
+					joined += 1;
+				    //break;
+				}
 			}
 			model.nextPlayer();
 			this.updateAll();
@@ -444,43 +500,53 @@ public class GameController implements Initializable {
 					p = model.getPlayerByIndex(model.getCurrentPlayer());
 				}
 				
-				TextInputDialog dialog = new TextInputDialog("");
-				dialog.setTitle("Test Quest Stage");
-				dialog.setHeaderText("Playing in a test quest stage. Max bid is: " + model.getMaxBid());
-				dialog.setContentText("Enter a bid higher than max bid, Player " + p.getId() + ":");
-
-				// Traditional way to get the response value.
-				Optional<String> result = dialog.showAndWait();
-				if (result.isPresent()){
-				   int numOffer = Integer.parseInt(result.get());
-				   boolean stopped = false;
-				   while(numOffer <= model.getMaxBid()) {
-					    TextInputDialog dialog1 = new TextInputDialog("");
-						dialog.setTitle("Test Quest Stage");
-						dialog.setHeaderText("Playing in a test quest stage. Max bid is: " + model.getMaxBid());
-						dialog.setContentText("You entered an invalid bid. Enter a bid higher than max bid, Player " + p.getId() + ":");
-
-						// Traditional way to get the response value.
-						Optional<String> result2 = dialog.showAndWait();
-						
-						if(result2.isPresent()) {
-							numOffer = Integer.parseInt(result2.get());
-						}
-						else {
-							stopped = true;
-						}
-				   }
-				   
-				   if(stopped) {
-					   model.playerStopBidding();
-					   stoppedBidding++;
-				   }
-				   else {
-					   model.bidCards(numOffer);
-				   }
-				} else {
-					model.playerStopBidding();
-					stoppedBidding++;
+				if(p.getAI()==null) {
+					TextInputDialog dialog = new TextInputDialog("");
+					dialog.setTitle("Test Quest Stage");
+					dialog.setHeaderText("Playing in a test quest stage. Max bid is: " + model.getMaxBid());
+					dialog.setContentText("Enter a bid higher than max bid, Player " + p.getId() + ":");
+	
+					// Traditional way to get the response value.
+					Optional<String> result = dialog.showAndWait();
+					if (result.isPresent()){
+					   int numOffer = Integer.parseInt(result.get());
+					   boolean stopped = false;
+					   while(numOffer <= model.getMaxBid()) {
+						    TextInputDialog dialog1 = new TextInputDialog("");
+							dialog.setTitle("Test Quest Stage");
+							dialog.setHeaderText("Playing in a test quest stage. Max bid is: " + model.getMaxBid());
+							dialog.setContentText("You entered an invalid bid. Enter a bid higher than max bid, Player " + p.getId() + ":");
+	
+							// Traditional way to get the response value.
+							Optional<String> result2 = dialog.showAndWait();
+							
+							if(result2.isPresent()) {
+								numOffer = Integer.parseInt(result2.get());
+							}
+							else {
+								stopped = true;
+							}
+					   }
+					   
+					   if(stopped) {
+						   model.playerStopBidding();
+						   stoppedBidding++;
+					   }
+					   else {
+						   model.bidCards(numOffer);
+					   }
+					} else {
+						model.playerStopBidding();
+						stoppedBidding++;
+					}
+				}else {
+					int AIBid = p.getAI().nextBid(model, p);
+					if(AIBid>model.getMaxBid()) {
+						model.bidCards(AIBid);
+					}else {
+						model.playerStopBidding();
+						stoppedBidding++;
+					}
 				}
 			}
 			

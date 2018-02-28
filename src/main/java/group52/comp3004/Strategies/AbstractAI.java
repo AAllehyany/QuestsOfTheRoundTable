@@ -17,6 +17,10 @@ public abstract class AbstractAI{
 	public abstract boolean doIParticipateInTournament(GameState state);
 	
 	public boolean doISponsorQuest(GameState state, Player p) {
+		if(state.getCurrentQuest()==null) {
+			System.out.println("NO QUEST");
+			return false;
+		}
 		if(otherEvolve(state, p)) return false;
 		int test = 0;
 		if(p.hasTest()) test = 1;

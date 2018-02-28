@@ -117,6 +117,10 @@ public class Player {
 		else this.strategy = null;
 	}
 	
+	public AbstractAI getAI() {
+		return this.strategy;
+	}
+	
 	public Integer getShields() {
 		return shields;
 	}
