@@ -239,4 +239,9 @@ public class GameState {
 	public List<Player> getWinners() {
 		return this.players.stream().filter(player -> player.getRank() == Rank.KnightOfTheRoundTable).collect(Collectors.toList());
 	}
+
+	public void endTourney() {
+		this.currentTourney.end();
+		currentTourney = null;
+	}
 }

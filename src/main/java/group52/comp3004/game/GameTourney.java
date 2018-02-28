@@ -36,10 +36,9 @@ public class GameTourney {
 	
 	//Why need to add tourney inside player?
 	public void addPlayer(Player player) {
-		if(!this.players.contains(player) && player.getTourney() == null) {
+
 			this.players.add(player);
 			player.setTourney(this);
-		}
 	}
 
 	public boolean isOver() {
@@ -48,7 +47,7 @@ public class GameTourney {
 	
 	public void dealCards() {
 		for(int i=0;i<this.players.size();i++) {
-			this.players.get(i).getGame().dealToPlayer(1);
+			this.players.get(i).getGame().dealToPlayer(i);
 		}
 			
 	}
@@ -83,18 +82,21 @@ public class GameTourney {
 				this.count.add(player.get(i));
 			}else if(player.get(i).getBattlePoints()==highest.getBattlePoints()) {
 				this.count.add(player.get(i));
-			}else {
-				System.out.println("no");
 			}
 		}
 		return this.count;
 	}
 	public void awardShields() {
-		 this.winner.forEach(p -> p.addShields(tourney.getShields() + bonus));
+		 this.winner.forEach(p -> p.addShields(players.size()+tourney.getShields() + bonus));
 	}
 	
 	public void end() {
 		this.over = true;
 		bonus = 0;
+	}
+
+	public boolean isPlayer(Player player) {
+		// TODO Auto-generated method stub
+		return this.players.contains(player); // || player == sponsor;
 	}
 }

@@ -238,11 +238,28 @@ public class Player {
 					controller.updateAll();	
 				}
 				else if(game.getPhase() == Phase.SetUpTourney) {
-					card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
-					System.out.println(card.getName()+ "played in tournament");
-					temp.add(card);
-					hand.remove(card);
-					controller.updateAll();	
+					if(!(card instanceof Ally) && !(card instanceof Amour) && !(card instanceof Weapon)) {
+						return;
+					}
+					
+					if(card instanceof Weapon) {
+						if(!canPlayWeapon((Weapon) card)) return;
+						card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
+						System.out.println(card.getName()+ " clicked");
+						temp.add(card);
+						hand.remove(card);
+					}
+					else {
+						int countAmours = (int) temp.stream().filter(c -> c instanceof Amour).count();
+						if(card instanceof Amour && countAmours > 0) return;
+						
+						card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
+						System.out.println(card.getName()+ " clicked");
+						temp.add(card);
+						hand.remove(card);
+					}
+					
+					controller.updateAll();
 				}
 				else if(game.getPhase() == Phase.PlayQuest) {
 					if(!(card instanceof Ally) && !(card instanceof Amour) && !(card instanceof Weapon)) {
