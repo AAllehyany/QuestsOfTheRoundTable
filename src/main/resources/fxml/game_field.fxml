@@ -58,7 +58,7 @@
    	<!-- <Button fx:id="dealtoplayer1" text="playrandomcardforplayer" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="4" /> -->
    
     <Button fx:id="finishSponsor" text="Ready" GridPane.columnIndex="2" GridPane.columnSpan="1" GridPane.rowIndex="4" />
-    <Button fx:id="battle" text="Ready For Battle!" GridPane.columnIndex="6" GridPane.columnSpan="1" GridPane.rowIndex="4" />
+    <Button fx:id="battle" text="Ready For Battle!" GridPane.columnIndex="5" GridPane.columnSpan="1" GridPane.rowIndex="4" />
    	<Button fx:id="fourPlayers" text="4 Players" GridPane.columnIndex="3" GridPane.columnSpan="4" GridPane.rowIndex="2" />
       <Button fx:id="twoPlayers" text="2 Players" GridPane.columnIndex="3" GridPane.rowIndex="1" />
       <Button fx:id="threePlayers" text="4 Players" GridPane.columnIndex="3" GridPane.columnSpan="4" GridPane.rowIndex="2" />
