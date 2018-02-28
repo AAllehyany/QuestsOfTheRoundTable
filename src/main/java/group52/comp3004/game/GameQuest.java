@@ -101,7 +101,7 @@ public class GameQuest {
 		if(over || this.players.size() == 0) return;
 		
 		if(stages.get(currentStage).isTestStage()) {
-			
+			System.out.println("Playing in a test stage...");
 			Player remaining = players.stream().max((p1, p2) -> {
 				if(p1.getOfferedBids() > p2.getOfferedBids()) return -1;
 				if(p1.getOfferedBids() == p2.getOfferedBids()) return 0;
@@ -111,10 +111,17 @@ public class GameQuest {
 			return;
 		}
 		
+		System.out.println("Playing a foe stage!");
+		
 		List<Player> remaining = players.stream().filter(p -> p.getBattlePoints() >= stages.get(currentStage).getTotalPower()).collect(Collectors.toList());
 		this.players.forEach(p -> p.clearTemp());
+		System.out.println("Done playing the stage...");
+		System.out.println(remaining.size() + " players are now in the quest.");
 		this.players = remaining;
-		if(currentStage == (quest.getStages() - 1) || this.players.size() < 1)  this.over = true;
+		if(currentStage == (quest.getStages() - 1) || this.players.size() < 1)  {
+			System.out.println("No players or we played all stages! Quest is over.");
+			this.over = true;
+		}
 		advanceStage();	
 	}
 	

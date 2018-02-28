@@ -20,4 +20,5 @@ public enum Phase {
 	RunTourney, //Compare bids and hand out shields to the winner
 	
 	Broken //The game is broken, despair
+, PlayQuest // Playing in the quest
 }

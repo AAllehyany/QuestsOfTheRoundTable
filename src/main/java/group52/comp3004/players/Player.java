@@ -235,6 +235,29 @@ public class Player {
 					hand.remove(card);
 					controller.updateAll();	
 				}
+				else if(game.getPhase() == Phase.PlayQuest) {
+					if(!(card instanceof Ally) && !(card instanceof Amour) && !(card instanceof Weapon)) {
+						return;
+					}
+					
+					if(card instanceof Weapon) {
+						if(!canPlayWeapon((Weapon) card)) return;
+						card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
+						System.out.println(card.getName()+ " clicked");
+						temp.add(card);
+						hand.remove(card);
+						controller.updateAll();
+					}
+					
+					int countAmours = (int) temp.stream().filter(c -> c instanceof Amour).count();
+					if(card instanceof Amour && countAmours > 0) return;
+					
+					card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
+					System.out.println(card.getName()+ " clicked");
+					temp.add(card);
+					hand.remove(card);
+					controller.updateAll();
+				}
 				else{
 				
 					card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
@@ -243,6 +266,8 @@ public class Player {
 					hand.remove(card);
 					controller.updateAll();	
 				}
+				
+				controller.updateAll();
 				/*
 				 if(game.getPhase() == SetupQuest){
 				 	//add foes and weapons to quest

@@ -15,6 +15,7 @@ import group52.comp3004.cards.StoryCard;
 import group52.comp3004.cards.Tests;
 import group52.comp3004.cards.Tourneys;
 import group52.comp3004.cards.Weapon;
+import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
 import group52.comp3004.game.Phase;
 import group52.comp3004.game.Stage;
@@ -33,7 +34,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.transform.Rotate;
-import javafx.scene.transform.Scale;
 import javafx.scene.transform.Translate;
 
 
@@ -53,6 +53,8 @@ public class GameController implements Initializable {
 	
 	private GameState model;
 	
+	private int readyCounter;
+	
 	//Constructor
 
 	public GameController() {
@@ -68,6 +70,7 @@ public class GameController implements Initializable {
 		stageSize.set(0);
 		playerControllers = new ArrayList<>();
 		middleController = null;
+		readyCounter = 0;
 	}
 
 	public DoubleProperty stageSizeProperty() {
@@ -93,8 +96,9 @@ public class GameController implements Initializable {
 	private void handleReady() {
 		Phase phase = model.getPhase();
 		System.out.println("Clicking ready!");
+		Player current = model.getPlayerByIndex(model.getCurrentPlayer());
 		if(phase == Phase.SetupQuest) {
-			Player current = model.getPlayerByIndex(model.getCurrentPlayer());
+			
 			ArrayList<AdventureCard> cards = current.getTemp();
 			ArrayList<Stage> stages = new ArrayList<>();
 			Foe currentFoe = null;
@@ -135,6 +139,37 @@ public class GameController implements Initializable {
 				this.updateAll();
 				this.runQuest();
 			}
+		} else if(phase == Phase.PlayQuest) {
+			System.out.println("Playing in a Quest!");
+			System.out.println("Num players ready: " + readyCounter);
+			readyCounter++;
+			System.out.println("Num players ready: " + readyCounter);
+			GameQuest quest = model.getCurrentQuest();
+			int numPlayers = quest.getPlayers().size();
+			
+			System.out.println("Num players in quest so far: " + numPlayers);
+			if(numPlayers == readyCounter) {
+				System.out.println("Everyone is ready!");
+				model.playCurrentQuestStage();
+				readyCounter = 0;
+				if(model.getCurrentQuest().isOver()) {
+					System.out.println("No one left, quest over!");
+					this.endQuest();
+				}
+				else {
+					System.out.println("Received player submission for quest!");
+					System.out.println("Moving to next player in quest!");
+					model.nextPlayer();
+					Player p = model.getPlayerByIndex(model.getCurrentPlayer());
+					while(!(model.getCurrentQuest().isPlayer(p))) {
+						System.out.println("Player not in a quest, moving to next one!");
+						model.nextPlayer();
+					}
+				}
+			}
+			
+			this.updateAll();
+			
 		}
 	}
 
@@ -272,7 +307,10 @@ public class GameController implements Initializable {
 		int joined = 0;
 		model.setPhase(Phase.RunQuest);
 		for(int i = 0; i < model.getAllPlayers().size(); i++) {
-			//if(model.getCurrentPlayer() == model.getSponsorIndex()) continue;
+			if(model.getCurrentPlayer() == model.getSponsorIndex()) {
+				model.nextPlayer();
+				continue;
+			}
 			Player player = model.getPlayerByIndex(model.getCurrentPlayer());
 			Optional<ButtonType> result = makeAlertBox("Quest Joining", "Quest " + model.getCurrentQuest().getQuest().getName(),
 					"Do you want to play in the quest, player " + player.getId() + "?");
@@ -285,7 +323,11 @@ public class GameController implements Initializable {
 			model.nextPlayer();
 		}
 		
-		if(joined == 0) this.endQuest();
+		if(joined == 0) {
+			this.endQuest();
+		} else {
+			model.setPhase(Phase.PlayQuest);
+		}
 		
 	}
 
