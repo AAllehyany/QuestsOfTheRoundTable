@@ -154,7 +154,7 @@ public class GameState {
 		if(revealedCard != null && revealedCard instanceof Tourneys)
 		{
 			currentSponsor = currentPlayer;
-			currentTourney = new GameTourney((Tourneys) revealedCard, getPlayerByIndex(currentSponsor));
+			currentTourney = new GameTourney((Tourneys) revealedCard);
 			this.players.get(currentPlayer).setTourney(currentTourney);
 			this.phase = Phase.RunTourney;
 		}

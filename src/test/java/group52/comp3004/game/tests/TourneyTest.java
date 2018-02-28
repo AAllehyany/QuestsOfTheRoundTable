@@ -20,7 +20,7 @@ class TourneyTest {
 	@Test
 	public void testawardshield() {
 		camelot = new Tourneys("Camelot", resman, 3);
-		tournament = new GameTourney(camelot, new Player(1));
+		tournament = new GameTourney(camelot);
 		Ally a1 = new Ally("Sir_Gawain", resman, 20, 0, "Green_Knight", 20, 0);
 		Ally a2 = new Ally("King_Arthur", resman, 10, 2);
 
@@ -44,8 +44,39 @@ class TourneyTest {
 		System.out.println(tournament.winner().get(0));
 		tournament.awardShields();
 		tournament.end();
-		assertEquals(13, (int) p1.getShields());
+		assertEquals(16, (int) p1.getShields());
 		assertEquals(10, (int) p2.getShields());
+		assertEquals(10, (int) p3.getShields());
+	}
+	@Test
+	public void testTie() {
+		camelot = new Tourneys("Camelot", resman, 3);
+		tournament = new GameTourney(camelot);
+		Ally a1 = new Ally("Sir_Gawain", resman, 20, 0, "Green_Knight", 20, 0);
+		Ally a2 = new Ally("Sir_Gawain", resman, 20, 0, "Green_Knight", 20, 0);
+
+		Player p1 = new Player(2);
+		Player p2 = new Player(3);
+		Player p3 = new Player(4);
+		
+		
+		tournament.addPlayer(p1);
+		tournament.addPlayer(p2);
+		tournament.addPlayer(p3);
+		p1.addField(a1);
+		p2.addField(a2);
+		System.out.println(p2.getBattlePoints());
+		System.out.println(p1.getBattlePoints());
+		
+		
+		assertEquals(10, (int) p1.getShields());
+		assertEquals(10, (int) p2.getShields());
+		assertEquals(10, (int) p3.getShields());
+		System.out.println(tournament.winner().get(0));
+		tournament.awardShields();
+		tournament.end();
+		assertEquals(16, (int) p1.getShields());
+		assertEquals(16, (int) p2.getShields());
 		assertEquals(10, (int) p3.getShields());
 	}
 
