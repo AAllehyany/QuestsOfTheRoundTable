@@ -186,6 +186,7 @@ public class GameState {
 		currentSponsor = -1;
 		currentQuest = null;
 		this.bonusShields=0;
+		players.forEach(p -> p.removeQuest());
 		
 		
 		// remove all allies and all cards and make people draw (call quest end)
@@ -209,6 +210,10 @@ public class GameState {
 	
 	public void playCurrentQuestStage() {
 		if(currentQuest != null) currentQuest.playStage();
+	}
+	
+	public int getMaxBid() {
+		return this.maxBid;
 	}
 	
 	public Player getCurrentSponsor() {

@@ -30,6 +30,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -163,14 +164,7 @@ public class GameController implements Initializable {
 			System.out.println("Received player submission for quest!");
 			System.out.println("Moving to next player in quest!");
 			model.nextPlayer();
-			Player p = model.getPlayerByIndex(model.getCurrentPlayer());
-			while(!(model.getCurrentQuest().isPlayer(p))) {
-				System.out.println("Player not in a quest, moving to next one!");
-				model.nextPlayer();
-				p = model.getPlayerByIndex(model.getCurrentPlayer());
-			}
-			
-			this.updateAll();
+			this.playQuest();
 			
 		}
 	}
@@ -338,13 +332,78 @@ public class GameController implements Initializable {
 	}
 
 	public void playQuest() {
-		model.setPhase(Phase.PlayQuest);
-		Player p = model.getPlayerByIndex(model.getCurrentPlayer());
-		while(!(model.getCurrentQuest().isPlayer(p))) {
-			System.out.println("Player not in a quest, moving to next one!");
-			model.nextPlayer();
-			p = model.getPlayerByIndex(model.getCurrentPlayer());
+		
+		if(model.getCurrentQuest().getStages().get(model.getCurrentQuest().getCurrentStage()).isTestStage()) {
+			int stoppedBidding = 0;
+			while(stoppedBidding < model.getCurrentQuest().getPlayers().size()) {
+				model.nextPlayer();
+				Player p = model.getPlayerByIndex(model.getCurrentPlayer());
+				while(!(model.getCurrentQuest().isPlayer(p))) {
+					System.out.println("Player not in a quest, moving to next one!");
+					model.nextPlayer();
+					p = model.getPlayerByIndex(model.getCurrentPlayer());
+				}
+				
+				TextInputDialog dialog = new TextInputDialog("");
+				dialog.setTitle("Test Quest Stage");
+				dialog.setHeaderText("Playing in a test quest stage. Max bid is: " + model.getMaxBid());
+				dialog.setContentText("Enter a bid higher than max bid, Player " + p.getId() + ":");
+
+				// Traditional way to get the response value.
+				Optional<String> result = dialog.showAndWait();
+				if (result.isPresent()){
+				   int numOffer = Integer.parseInt(result.get());
+				   boolean stopped = false;
+				   while(numOffer <= model.getMaxBid()) {
+					    TextInputDialog dialog1 = new TextInputDialog("");
+						dialog.setTitle("Test Quest Stage");
+						dialog.setHeaderText("Playing in a test quest stage. Max bid is: " + model.getMaxBid());
+						dialog.setContentText("You entered an invalid bid. Enter a bid higher than max bid, Player " + p.getId() + ":");
+
+						// Traditional way to get the response value.
+						Optional<String> result2 = dialog.showAndWait();
+						
+						if(result2.isPresent()) {
+							numOffer = Integer.parseInt(result2.get());
+						}
+						else {
+							stopped = true;
+						}
+				   }
+				   
+				   if(stopped) {
+					   model.playerStopBidding();
+					   stoppedBidding++;
+				   }
+				   else {
+					   model.bidCards(numOffer);
+				   }
+				} else {
+					model.playerStopBidding();
+					stoppedBidding++;
+				}
+			}
+			
+			GameQuest quest = model.getCurrentQuest();
+			System.out.println("Playing a test stage");
+			model.playCurrentQuestStage();
+			if(model.getCurrentQuest().isOver()) {
+				System.out.println("No one left, quest over!");
+				this.endQuest();
+				this.updateAll();
+				return;
+			}
 		}
+		else {
+			model.setPhase(Phase.PlayQuest);
+			Player p = model.getPlayerByIndex(model.getCurrentPlayer());
+			while(!(model.getCurrentQuest().isPlayer(p))) {
+				System.out.println("Player not in a quest, moving to next one!");
+				model.nextPlayer();
+				p = model.getPlayerByIndex(model.getCurrentPlayer());
+			}
+		}
+		
 		
 		this.updateAll();
 		
