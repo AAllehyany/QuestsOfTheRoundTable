@@ -49,7 +49,6 @@
 
 	</rowConstraints>
    <children>
-      <Button mnemonicParsing="false" text="3 Players" GridPane.columnIndex="3" GridPane.rowIndex="3" />
    
    	
    

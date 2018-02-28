@@ -111,6 +111,12 @@ public class Player {
 		return id;
 	}
 	
+	public void setAI(int ai) {
+		if(ai==1) this.strategy = new Strategy1();
+		else if(ai==2) this.strategy = new Strategy2();
+		else this.strategy = null;
+	}
+	
 	public Integer getShields() {
 		return shields;
 	}

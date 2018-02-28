@@ -93,6 +93,7 @@ public class GameController implements Initializable {
 		fourPlayers.setOnAction(e -> this.startGame(4));
 		battle.setOnAction(null);
 		battle.setVisible(false);
+		finishSponsor.setVisible(false);
 		
 		//finishSponsor.setOnAction(e -> this.handleReady());
 	}
@@ -214,6 +215,7 @@ public class GameController implements Initializable {
 			this.updateAll();
 		}
 	}
+	
 	/*****************************************************************************************************/
 	//GAME STATE EXECUTION METHODS
 	/*****************************************************************************************************/
@@ -229,11 +231,24 @@ public class GameController implements Initializable {
 		fourPlayers.setVisible(false);
 		twoPlayers.setOnAction(null);
 		twoPlayers.setVisible(false);
-
+		
 		// create players
 		for(int i=0;i<p;i++) {
-			Player player = new Player(i, this, model);
-			model.addPlayer(player);
+			model.addPlayer(new Player(i, this, model));
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Player " + i);
+			alert.setHeaderText("Would you like this player to be a human or an AI?");
+			alert.setContentText("Select your option.");
+			ButtonType human = new ButtonType("Human");
+			ButtonType strategy1 = new ButtonType("Strategy 1");
+			ButtonType strategy2 = new ButtonType("Strategy 2");
+			ButtonType cancel = new ButtonType("Cancel");
+			alert.getButtonTypes().setAll(human, strategy1, strategy2, cancel);
+			Optional<ButtonType> result = alert.showAndWait();
+			if(result.get() == human) model.getPlayerByIndex(i).setAI(0);
+			else if(result.get()==strategy1) model.getPlayerByIndex(i).setAI(1);
+			else if(result.get()==strategy2) model.getPlayerByIndex(i).setAI(2);
+			else this.endGame();
 		}
 		
 		//call GUI creation methods
@@ -333,6 +348,8 @@ public class GameController implements Initializable {
 	}
 	//PURPOSE: Execute SponsorQuest Phase
 	public void sponsorQuest() {
+		
+		finishSponsor.setVisible(true);
 		
 		boolean sponsored = false;
 		
@@ -505,7 +522,7 @@ public class GameController implements Initializable {
 
 	//PURPOSE: Execute GameOver Phase
 	public void endGame() {
-
+		
 	}
 
 
