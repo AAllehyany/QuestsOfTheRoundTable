@@ -48,6 +48,7 @@ public class GameTourney {
 	public void dealCards() {
 		for(int i=0;i<this.players.size();i++) {
 			this.players.get(i).getGame().dealToPlayer(i);
+			System.out.println("hello");
 		}
 			
 	}
