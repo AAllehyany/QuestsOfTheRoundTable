@@ -30,6 +30,7 @@ public class Player {
 	private Integer id;
 	private Integer shields;
 	private Rank rank;
+	private Integer rankBP;
 	private Integer battlePoints;
 	private Integer requiredShields;
 	private List<Integer> weapons;
@@ -113,6 +114,10 @@ public class Player {
 	
 	public Integer getId() {
 		return id;
+	}
+	
+	public Integer getRankBP() {
+		return this.battlePoints;
 	}
 	
 	public void setAI(int ai) {
