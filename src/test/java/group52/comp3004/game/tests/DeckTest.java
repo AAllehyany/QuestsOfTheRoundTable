@@ -3,6 +3,8 @@ package group52.comp3004.game.tests;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import group52.comp3004.ResourceManager;
@@ -17,12 +19,12 @@ public class DeckTest {
 	JFXPanel jfxPanel = new JFXPanel();
 	public ResourceManager resman = new ResourceManager();
 	
-	Card excalibur = new Weapon("Excalibur", resman, 30);
-	Card horse = new Weapon("Horse", resman, 10);
-	Card sword = new Weapon("Sword", resman, 10);
+	AdventureCard excalibur = new Weapon("Excalibur", resman, 30);
+	AdventureCard horse = new Weapon("Horse", resman, 10);
+	AdventureCard sword = new Weapon("Sword", resman, 10);
 	AdventureCard dagger = new Weapon("Dagger", resman, 5);
 	AdventureCard dagger2 = new Weapon("Dagger", resman, 5);
-	Card lance = new Weapon("Lance", resman, 20);
+	AdventureCard lance = new Weapon("Lance", resman, 20);
 	Weapon battleax = new Weapon("Battle_Ax", resman, 15);
 
 	@Test
@@ -68,6 +70,17 @@ public class DeckTest {
 		aDeck.addCard(battleax);
 		Card discarded = aDeck.discardCard(excalibur);
 		assertEquals("Excalibur", (String) discarded.getName());
+	}
+	
+	@Test
+	public void testDiscardArrayListCard() {
+		Deck<AdventureCard> aDeck = new Deck<AdventureCard>(Deck.createAdventureDeck(resman));
+		ArrayList<AdventureCard> cards = new ArrayList<AdventureCard>();
+		cards.add(excalibur);
+		cards.add(sword);
+		cards.add(lance);
+		aDeck.discardCard(cards);
+		assertEquals(3,cards.size());
 	}
 	
 	public void testDrawEmptyDeck() {

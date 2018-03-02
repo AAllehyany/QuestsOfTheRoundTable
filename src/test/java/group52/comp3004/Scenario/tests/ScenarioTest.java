@@ -133,12 +133,11 @@ public class ScenarioTest {
 		for(int i=0;i<state.getCurrentQuest().getPlayers().size();i++) {
 			state.getCurrentQuest().getPlayers().get(i).addCardToHand(state.getAdventureDeck().drawCard());
 		}
-		state.getCurrentQuest().awardShields();
+		state.getCurrentQuest().end(state, 0);
 		assertEquals(10, (int) p1.getShields());
 		assertEquals(10, (int) p2.getShields());
 		assertEquals(12, (int) p3.getShields());
 		assertEquals(10, (int) p4.getShields());
-		state.getCurrentQuest().dealCardsToSponsor();
 		assertEquals(14, p1.getHand().size());
 	}
 	

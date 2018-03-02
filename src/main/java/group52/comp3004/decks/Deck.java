@@ -5,12 +5,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.log4j.Logger;
+
 import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Amour;
 import group52.comp3004.cards.Arms;
 import group52.comp3004.cards.Camelot;
+import group52.comp3004.cards.Card;
 import group52.comp3004.cards.Deed;
 import group52.comp3004.cards.EventCard;
 import group52.comp3004.cards.Favor;
@@ -30,6 +33,8 @@ public class Deck<T> {
 	List<T> cards;
 	int size;
 	ArrayList<T> discard = new ArrayList<T>();
+	
+	static final private Logger logger = Logger.getLogger(Deck.class);
 	
 	public Deck() {
 		this.cards = new ArrayList<T>();
@@ -68,11 +73,14 @@ public class Deck<T> {
 	}
 	
 	public T discardCard(T c) {
+		Card card = (Card) c;
+		logger.info("Discarded: " + card.getName());
 		discard.add(c);
 		return c;
 	}
 	
 	public ArrayList<T> discardCard(ArrayList<T> cards){
+		cards.stream().forEach(c -> logger.info("Discarded: " + ((Card) c).getName()));
 		discard.addAll(cards);
 		return cards;
 	}
