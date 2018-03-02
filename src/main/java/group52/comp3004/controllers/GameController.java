@@ -152,8 +152,8 @@ public class GameController implements Initializable {
 			else {
 				//move temp cards into middle area
 				for(int i = 0; i < model.getCurrentQuest().getStages().size(); i++) {
-					AdventureCard card = current.getTemp().get(i);
-					middleController.addStage(stages.get(i), model.getResourceManager());			
+					middleController.addStage(stages.get(i), model.getResourceManager());
+					//if(i == 0) middleController.setStageArrow(0);
 				}
 				
 				//cards are moved into quest
@@ -498,7 +498,10 @@ public class GameController implements Initializable {
 		
 	}
 
-	public void playQuest() {
+	public void playQuest() {	
+		//move the stage indicator one over
+		//middleController.setStageArrow(model.getCurrentQuest().getCurrentStage());
+		
 		ArrayList<Player> players = new ArrayList<Player>(model.getCurrentQuest().getPlayers());
 		for(int i=0;i<players.size();i++) {
 			players.get(i).addCardToHand(model.getAdventureDeck().drawCard());

@@ -10,6 +10,7 @@
 
 <StackPane id="portrait" fx:id="portrait" prefHeight="100.0" prefWidth="100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group52.comp3004.controllers.PortraitAreaController">
    <children>
-      <HBox fx:id="shields1"/>
+   		<Text fx:id="playerId" text="PlayerId"/>
+   		<HBox fx:id="shields1"/>
    </children>
 </StackPane>

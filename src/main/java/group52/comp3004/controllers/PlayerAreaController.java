@@ -41,7 +41,7 @@ public class PlayerAreaController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		logger.info("player area loaded");
 	}
-
+	
 	//update card that are in the field
 	public void setField(ArrayList<AdventureCard> cards) {
 		this.fieldAreaController.updateCards(cards);

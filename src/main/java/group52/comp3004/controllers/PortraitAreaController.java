@@ -9,11 +9,15 @@ import org.apache.log4j.Logger;
 import group52.comp3004.players.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.Image;
+import javafx.geometry.VPos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 public class PortraitAreaController implements Initializable {
 	
@@ -21,6 +25,8 @@ public class PortraitAreaController implements Initializable {
 	private StackPane portrait;
 	@FXML
 	private HBox shields1;
+	@FXML
+	private Text playerId;
 	private int numShields;
 	private int TYPES_OF_SHIELDS = 15;
 	
@@ -36,7 +42,14 @@ public class PortraitAreaController implements Initializable {
     	rand = new Random();
 	}
     
-    public void playerInfo(Player player){
+    public void playerInfo(Player player){	
+    	//set the player's id
+    	this.playerId.setText(""+player.getId());
+		this.playerId.setFill(Color.WHITE);
+		this.playerId.setFont(new Font(12));
+		this.playerId.setTextOrigin(VPos.BOTTOM);
+		this.playerId.setTextAlignment(TextAlignment.RIGHT);
+		
     	int currentShields = player.getShields() - player.getMinShields();
     	//need to add more shields
     	if(currentShields > numShields) {

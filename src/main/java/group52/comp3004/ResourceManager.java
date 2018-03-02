@@ -22,6 +22,8 @@ public class ResourceManager {//ISSSUE: multiple resource managers are being mad
 	private ImagePattern storyBack;
 	private Image 		 swordImg;
 	private ImagePattern sword;
+	private Image 		 arrowImg;
+	private ImagePattern arrow;
 	
 	final static Logger logger = Logger.getLogger(ResourceManager.class);
 	//private HashMap<String, Image> frontsImg;
@@ -49,6 +51,10 @@ public class ResourceManager {//ISSSUE: multiple resource managers are being mad
 		//load the sword icon
 		swordImg = new Image("image/swordIcon.png");
 		sword = new ImagePattern(swordImg);
+		
+		//load the arrow icon
+		arrowImg = new Image("image/Up-Arrow.png");
+		arrow = new ImagePattern(arrowImg);
 		//System.out.println("Resource manager loaded");
 
 		logger.debug("Resource manager loaded");
@@ -97,5 +103,10 @@ public class ResourceManager {//ISSSUE: multiple resource managers are being mad
 	//PURPOSE: Return the sword image pattern
 	public ImagePattern getSword() {
 		return sword;
+	}
+	
+	//PURPOSE: Return the arrow image pattern
+	public ImagePattern getArrow() {
+		return arrow;
 	}
 }
