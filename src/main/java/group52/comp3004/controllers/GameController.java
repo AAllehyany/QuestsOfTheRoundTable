@@ -61,6 +61,8 @@ public class GameController implements Initializable {
 	
 	private int readyCounter, readyCounter1;
 	
+	private int currentStageQuest;
+	
 	//Constructor
 
 	public GameController() {
@@ -152,7 +154,7 @@ public class GameController implements Initializable {
 				//move temp cards into middle area
 				for(int i = 0; i < model.getCurrentQuest().getStages().size(); i++) {
 					middleController.addStage(stages.get(i), model.getResourceManager());
-					//if(i == 0) middleController.setStageArrow(0);
+					
 				}
 				
 				//cards are moved into quest
@@ -179,6 +181,8 @@ public class GameController implements Initializable {
 					this.updateAll();
 					return;
 				}
+				middleController.setStageArrow(model.getCurrentQuest().getCurrentStage());
+				
 			}
 			
 			logger.info("Received player submission for quest!");
@@ -192,7 +196,7 @@ public class GameController implements Initializable {
 	@FXML
 	private void battle() {
 		Phase phase = model.getPhase();
-		System.out.println("ready for battle!");
+		logger.info("ready for battle!");
 		if(phase == Phase.SetUpTourney) {
 			logger.info("Playing in a Tournament!");
 			logger.info("Num players ready: " + readyCounter1);
@@ -506,6 +510,7 @@ public class GameController implements Initializable {
 		if(joined == 0) {
 			this.endQuest();
 		} else {
+			middleController.setStageArrow(model.getCurrentQuest().getCurrentStage());
 			this.playQuest();
 			
 		}
