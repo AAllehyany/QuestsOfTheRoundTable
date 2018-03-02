@@ -370,24 +370,33 @@ public class GameController implements Initializable {
 	//PURPOSE: Execute JoinTourney Phase
 	public void joinTourney() {
 		model.setTourney();
+		int joined = 0;
 		for(int i = 0; i < model.getAllPlayers().size(); i++) {
 			if(model.getPlayerByIndex(i).getAI()==null) {
 				Optional<ButtonType> result = makeAlertBox("tournament", "Tournament " + model.getRevealed().getName(),
 						"Do you want to join the tournament, player " + model.getCurrentPlayer() + "?");
 				if (result.get() == ButtonType.OK){
-					System.out.println(" player " + model.getCurrentPlayer()+ "joined the tournament");
+					joined++;
+					logger.info(" player " + model.getCurrentPlayer()+ "joined the tournament");
 					model.getCurrentTourney().addPlayer(model.getPlayerByIndex(model.getCurrentPlayer()));
 					model.setPhase(Phase.JoinTourney);
 				}
 			}else {
 				if(model.getPlayerByIndex(i).getAI().doIParticipateInTournament(model)) {
-					System.out.println(" player " + model.getCurrentPlayer()+ "joined the tournament");
+					logger.info(" player " + model.getCurrentPlayer()+ "joined the tournament");
 					model.getCurrentTourney().addPlayer(model.getPlayerByIndex(model.getCurrentPlayer()));
 					model.setPhase(Phase.JoinTourney);
+					joined++;
 				}
 			}
 			model.nextPlayer();
 		}
+		
+		if(joined < 1) {
+			this.endTurn();
+			return;
+		}
+		
 		model.getCurrentTourney().dealCards();
 		updateAll();
 		this.setUpTourney();
@@ -528,7 +537,7 @@ public class GameController implements Initializable {
 					if (result.isPresent()){
 					   int numOffer = Integer.parseInt(result.get());
 					   boolean stopped = false;
-					   while(numOffer <= model.getMaxBid()) {
+					   while(numOffer <= model.getMaxBid() || numOffer > p.getHand().size()) {
 						    TextInputDialog dialog1 = new TextInputDialog("");
 							dialog.setTitle("Test Quest Stage");
 							dialog.setHeaderText("Playing in a test quest stage. Max bid is: " + model.getMaxBid());
@@ -576,6 +585,8 @@ public class GameController implements Initializable {
 				this.updateAll();
 				return;
 			}
+			
+			model.setPhase(Phase.DiscardForTest);
 		}
 		else {
 			model.setPhase(Phase.PlayQuest);
@@ -615,6 +626,9 @@ public class GameController implements Initializable {
 
 	//PURPOSE: Execute TurnEnd Phase
 	public void endTurn() {
+		while(model.getAllPlayers().get(model.getCurrentPlayer()).getHand().size()>12) {
+			// discard cards until 12 in hand
+		}
 		middleController.reset();
 		//move to next phase
 		model.setPhase(Phase.TurnStart);
@@ -653,6 +667,7 @@ public class GameController implements Initializable {
 			logger.info("Discarded card: " + card.getName());
 			Player player =this.model.getPlayerByIndex(index);
 			player.discard(card);
+			model.getAdventureDeck().discardCard(card);
 			this.playerControllers.get(index).update(player.getHand(),player.getField(), player);
 		}
 	}

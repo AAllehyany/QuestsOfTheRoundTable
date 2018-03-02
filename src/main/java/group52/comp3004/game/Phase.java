@@ -22,5 +22,5 @@ public enum Phase {
 	Broken //The game is broken, despair
 , PlayQuest // Playing in the quest
 , SecondRound,
-Arms
+Arms, DiscardForTest
 }
