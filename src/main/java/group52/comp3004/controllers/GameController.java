@@ -623,6 +623,9 @@ public class GameController implements Initializable {
 
 	//PURPOSE: Execute TurnEnd Phase
 	public void endTurn() {
+		while(model.getAllPlayers().get(model.getCurrentPlayer()).getHand().size()>12) {
+			// discard cards until 12 in hand
+		}
 		middleController.reset();
 		//move to next phase
 		model.setPhase(Phase.TurnStart);
@@ -661,6 +664,7 @@ public class GameController implements Initializable {
 			logger.info("Discarded card: " + card.getName());
 			Player player =this.model.getPlayerByIndex(index);
 			player.discard(card);
+			model.getAdventureDeck().discardCard(card);
 			this.playerControllers.get(index).update(player.getHand(),player.getField(), player);
 		}
 	}
