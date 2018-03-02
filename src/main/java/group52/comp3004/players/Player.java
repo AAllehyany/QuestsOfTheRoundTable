@@ -314,6 +314,7 @@ public class Player {
 						card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
 						logger.info(card.getName()+ " discarded");
 						hand.remove(card);
+						controller.updateAll();
 					}
 				}
 				else if(game.getPhase() == Phase.PlayQuest) {

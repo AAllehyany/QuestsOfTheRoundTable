@@ -364,7 +364,8 @@ public class GameController implements Initializable {
 	}
 
 	private void handleArms() {
-		
+		logger.info("player" +model.getCurrentPlayer() + "needs to discard two allies or one weapon, hit discard when done");
+		model.setPhase(Phase.Arms);
 		this.updateAll();
 	}
 
@@ -376,6 +377,7 @@ public class GameController implements Initializable {
 		model.setPhase(Phase.TurnEnd);
 		this.discardBeforeEnd();
 	}
+	
 	//PURPOSE: Execute SponsorTourney Phase
 	public void sponsorTourney() {
 		//move to next phase
