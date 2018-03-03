@@ -105,9 +105,19 @@ public class GameController implements Initializable {
 	}
 	@FXML
 	private void discard() {
-		logger.info("cards discarded");
-		model.setPhase(Phase.TurnEnd);
-		this.endTurn();
+		if(model.getPhase()==Phase.DiscardForTest) {
+			for(int i = 0; i < model.getAllPlayers().size(); i++) {
+				if(model.getPlayerByIndex(model.getCurrentPlayer()).getHand().size()>12) {
+					logger.info("has to discard card");
+				}else {
+					model.nextPlayer();
+				}
+			}
+		}
+			logger.info("cards discarded");
+			model.setPhase(Phase.TurnEnd);
+			this.endTurn();
+
 	}
 	@FXML
 	private void handleReady() {
@@ -217,7 +227,7 @@ public class GameController implements Initializable {
 					model.getCurrentTourney().battle(model.getCurrentTourney().getPlayers());
 					model.getCurrentTourney().awardShields();
 					readyCounter1 = 0;
-					this.endTourney();
+					model.getCurrentTourney().end();
 					this.updateAll();
 					if(model.getCurrentTourney().isOver()) {
 						logger.info("tournament over!");
@@ -650,10 +660,14 @@ public class GameController implements Initializable {
 
 	//PURPOSE: Execute TurnEnd Phase
 	public void discardBeforeEnd() {
-		while(model.getAllPlayers().get(model.getCurrentPlayer()).getHand().size()>12) {
-			System.out.println("Player " + model.getCurrentPlayer() + " has more than 12 cards in hand");
-			// discard cards until 12 in hand
-			this.discard();
+		for(int i=0;i<model.getAllPlayers().size();i++) {
+			if(model.getAllPlayers().get(model.getCurrentPlayer()).getHand().size()>12) {
+				System.out.println("Player " + model.getCurrentPlayer() + " has more than 12 cards in hand");
+				// discard cards until 12 in hand
+				model.setPhase(Phase.DiscardForTest);
+				
+				
+			}
 		}
 	}
 	public void endTurn() {
