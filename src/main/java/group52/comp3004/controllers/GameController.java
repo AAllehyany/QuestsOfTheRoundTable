@@ -224,7 +224,7 @@ public class GameController implements Initializable {
 				logger.info("Num players in tourney so far: " + numPlayers);
 				if(numPlayers == readyCounter1) {
 					logger.info("Everyone is ready!");
-					model.getCurrentTourney().battle(model.getCurrentTourney().getPlayers());
+					model.getCurrentTourney().winner();
 					model.getCurrentTourney().awardShields();
 					readyCounter1 = 0;
 					model.getCurrentTourney().end();
