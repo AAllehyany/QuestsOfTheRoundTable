@@ -631,9 +631,9 @@ public class GameController implements Initializable {
 
 	//PURPOSE: Execute TurnEnd Phase
 	public void endTurn() {
-		while(model.getAllPlayers().get(model.getCurrentPlayer()).getHand().size()>12) {
-			// discard cards until 12 in hand
-		}
+//		while(model.getAllPlayers().get(model.getCurrentPlayer()).getHand().size()>12) {
+//			// discard cards until 12 in hand
+//		}
 		middleController.reset();
 		//move to next phase
 		model.setPhase(Phase.TurnStart);
