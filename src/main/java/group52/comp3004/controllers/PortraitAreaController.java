@@ -48,7 +48,7 @@ public class PortraitAreaController implements Initializable {
 		this.playerId.setFill(Color.WHITE);
 		this.playerId.setFont(new Font(12));
 		this.playerId.setTextOrigin(VPos.BOTTOM);
-		this.playerId.setTextAlignment(TextAlignment.RIGHT);
+		//this.playerId.setTextAlignment(TextAlignment.RIGHT);
 		
     	int currentShields = player.getShields() - player.getMinShields();
     	//need to add more shields
