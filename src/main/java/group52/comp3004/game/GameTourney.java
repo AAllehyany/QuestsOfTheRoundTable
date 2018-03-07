@@ -111,6 +111,8 @@ public List<Player> secondBattle(List<Player> player) {
 			this.getPlayers().get(i).clearTemp();
 		}
 		this.over = true;
+		this.count.clear();
+		this.count1.clear();
 		bonus = 0;
 	}
 

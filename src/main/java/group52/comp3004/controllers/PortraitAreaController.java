@@ -16,6 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
@@ -44,11 +45,13 @@ public class PortraitAreaController implements Initializable {
     
     public void playerInfo(Player player){	
     	//set the player's id
-    	this.playerId.setText(""+player.getId());
-		this.playerId.setFill(Color.WHITE);
-		this.playerId.setFont(new Font(12));
-		this.playerId.setTextOrigin(VPos.BOTTOM);
-		//this.playerId.setTextAlignment(TextAlignment.RIGHT);
+    	this.playerId.setText("ID: "+player.getId()+
+    			"\nBattle Power: "+player.getRankBP()+
+    			"\nRank: "+player.getRank());
+		this.playerId.setFill(Color.BLACK);
+		this.playerId.setFont(Font.font("Times", FontWeight.BOLD, 12));
+		this.playerId.setTextOrigin(VPos.TOP);
+		this.playerId.setTextAlignment(TextAlignment.CENTER);
 		
     	int currentShields = player.getShields() - player.getMinShields();
     	//need to add more shields

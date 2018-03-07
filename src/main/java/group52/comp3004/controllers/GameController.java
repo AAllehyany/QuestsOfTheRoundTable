@@ -61,6 +61,8 @@ public class GameController implements Initializable {
 	
 	private int readyCounter, readyCounter1;
 	
+	private int currentStageQuest;
+	
 	//Constructor
 
 	public GameController() {
@@ -103,9 +105,19 @@ public class GameController implements Initializable {
 	}
 	@FXML
 	private void discard() {
-		logger.info("cards discarded");
-		model.setPhase(Phase.TurnEnd);
-		this.endTurn();
+		if(model.getPhase()==Phase.DiscardForTest) {
+			for(int i = 0; i < model.getAllPlayers().size(); i++) {
+				if(model.getPlayerByIndex(model.getCurrentPlayer()).getHand().size()>12) {
+					logger.info("has to discard card");
+				}else {
+					model.nextPlayer();
+				}
+			}
+		}
+			logger.info("cards discarded");
+			model.setPhase(Phase.TurnEnd);
+			this.endTurn();
+
 	}
 	@FXML
 	private void handleReady() {
@@ -153,7 +165,7 @@ public class GameController implements Initializable {
 				//move temp cards into middle area
 				for(int i = 0; i < model.getCurrentQuest().getStages().size(); i++) {
 					middleController.addStage(stages.get(i), model.getResourceManager());
-					//if(i == 0) middleController.setStageArrow(0);
+					
 				}
 				
 				//cards are moved into quest
@@ -180,6 +192,8 @@ public class GameController implements Initializable {
 					this.updateAll();
 					return;
 				}
+				middleController.setStageArrow(model.getCurrentQuest().getCurrentStage());
+				
 			}
 			
 			logger.info("Received player submission for quest!");
@@ -193,40 +207,51 @@ public class GameController implements Initializable {
 	@FXML
 	private void battle() {
 		Phase phase = model.getPhase();
-		System.out.println("ready for battle!");
+		logger.info("ready for battle!");
 		if(phase == Phase.SetUpTourney) {
-			logger.info("Playing in a Tournament!");
-			logger.info("Num players ready: " + readyCounter1);
-			readyCounter1++;
-			logger.info("Num players ready: " + readyCounter1);
-			GameTourney tourney = model.getCurrentTourney();
-			int numPlayers = tourney.getPlayers().size();
-			
-			logger.info("Num players in tourney so far: " + numPlayers);
-			if(numPlayers == readyCounter1) {
-				logger.info("Everyone is ready!");
-				model.getCurrentTourney().battle(model.getCurrentTourney().getPlayers());
+			if(model.getCurrentTourney().getPlayers().size()==1) {
+				System.out.println("Only 1 player joined the tournament, he wins");
 				model.getCurrentTourney().awardShields();
-				readyCounter1 = 0;
 				this.endTourney();
-				this.updateAll();
-				if(model.getCurrentTourney().isOver()) {
-					logger.info("tournament over!");
-					this.endTourney();
+			}else{
+				logger.info("Playing in a Tournament!");
+				logger.info("Num players ready: " + readyCounter1);
+				readyCounter1++;
+				logger.info("Num players ready: " + readyCounter1);
+				GameTourney tourney = model.getCurrentTourney();
+				int numPlayers = tourney.getPlayers().size();
+				
+				logger.info("Num players in tourney so far: " + numPlayers);
+				if(numPlayers == readyCounter1) {
+					logger.info("Everyone is ready!");
+					model.getCurrentTourney().winner();
+					model.getCurrentTourney().awardShields();
+					readyCounter1 = 0;
+					model.getCurrentTourney().end();
 					this.updateAll();
-					return;
+					if(model.getCurrentTourney().isOver()) {
+						logger.info("tournament over!");
+						this.endTourney();
+						this.updateAll();
+						return;
+					}
+			}
+				logger.info("Received player submission for tournament!");
+				logger.info("Moving to next player in tourney!");
+				model.nextPlayer();
+				Player p = model.getPlayerByIndex(model.getCurrentPlayer());
+				while(!(model.getCurrentTourney().isPlayer(p))) {
+					
+						logger.info("Player not in a tournament, moving to next one!");
+						model.nextPlayer();
+						p = model.getPlayerByIndex(model.getCurrentPlayer());
+					
+
 				}
+				
+
 			}
 			
-			logger.info("Received player submission for tournament!");
-			logger.info("Moving to next player in tourney!");
-			model.nextPlayer();
-			Player p = model.getPlayerByIndex(model.getCurrentPlayer());
-			while(!(model.getCurrentTourney().isPlayer(p))) {
-				logger.info("Player not in a tournament, moving to next one!");
-				model.nextPlayer();
-				p = model.getPlayerByIndex(model.getCurrentPlayer());
-			}
 			
 			this.updateAll();
 		}
@@ -349,8 +374,9 @@ public class GameController implements Initializable {
 	}
 
 	private void handleArms() {
-		
-		
+		logger.info("player" +model.getCurrentPlayer() + "needs to discard two allies or one weapon, hit discard when done");
+		model.setPhase(Phase.Arms);
+		this.updateAll();
 	}
 
 	//PURPOSE: Execute the event behaviour contained in the event card
@@ -359,8 +385,9 @@ public class GameController implements Initializable {
 			((EventCard)model.getRevealedCard()).run(model);
 		//move to next phase
 		model.setPhase(Phase.TurnEnd);
-		this.endTurn();
+		this.discardBeforeEnd();
 	}
+	
 	//PURPOSE: Execute SponsorTourney Phase
 	public void sponsorTourney() {
 		//move to next phase
@@ -393,7 +420,7 @@ public class GameController implements Initializable {
 		}
 		
 		if(joined < 1) {
-			this.endTurn();
+			this.discardBeforeEnd();
 			return;
 		}
 		
@@ -403,15 +430,21 @@ public class GameController implements Initializable {
 	}
 
 	private void setUpTourney() {
-		logger.info("          ->Setup Tourney");
-		model.setPhase(Phase.SetUpTourney);
+		if(model.getCurrentTourney().getPlayers().size()==0) {
+			System.out.println("no one joins the tournament");
+			this.endTourney();}
+		else {
+				logger.info("          ->Setup Tourney");
+				model.setPhase(Phase.SetUpTourney);
+			}
+
 	}
 
 	//PURPOSE: Execute RunTourney Phase
 	public void runTourney() {
 		//move to next phase
 		model.setPhase(Phase.TurnEnd);
-		this.endTurn();
+		this.discardBeforeEnd();
 	}
 	//PURPOSE: Execute SponsorQuest Phase
 	public void sponsorQuest() {
@@ -454,7 +487,7 @@ public class GameController implements Initializable {
 			this.updateAll();
 		}
 		
-		if(!sponsored) this.endTurn();
+		if(!sponsored) this.discardBeforeEnd();
 	}
 
 	//PURPOSE: Execute SetupQuest Phase
@@ -501,6 +534,7 @@ public class GameController implements Initializable {
 		if(joined == 0) {
 			this.endQuest();
 		} else {
+			middleController.setStageArrow(model.getCurrentQuest().getCurrentStage());
 			this.playQuest();
 			
 		}
@@ -613,7 +647,7 @@ public class GameController implements Initializable {
 		model.setPhase(Phase.TurnEnd);
 		this.readyCounter1=0;
 		this.updateAll();
-		this.endTurn();
+		this.discardBeforeEnd();
 	}
 	public void endQuest() {
 		model.endQuest();
@@ -621,14 +655,23 @@ public class GameController implements Initializable {
 		model.setPhase(Phase.TurnEnd);
 		this.readyCounter=0;
 		this.updateAll();
-		this.endTurn();
+		this.discardBeforeEnd();
 	}
 
 	//PURPOSE: Execute TurnEnd Phase
-	public void endTurn() {
-		while(model.getAllPlayers().get(model.getCurrentPlayer()).getHand().size()>12) {
-			// discard cards until 12 in hand
+	public void discardBeforeEnd() {
+		for(int i=0;i<model.getAllPlayers().size();i++) {
+			if(model.getAllPlayers().get(model.getCurrentPlayer()).getHand().size()>12) {
+				System.out.println("Player " + model.getCurrentPlayer() + " has more than 12 cards in hand");
+				// discard cards until 12 in hand
+				model.setPhase(Phase.DiscardForTest);
+				
+				
+			}
 		}
+	}
+	public void endTurn() {
+
 		middleController.reset();
 		//move to next phase
 		model.setPhase(Phase.TurnStart);
