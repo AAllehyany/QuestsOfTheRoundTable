@@ -24,39 +24,11 @@ import group52.comp3004.game.GameTourney;
 import group52.comp3004.game.Phase;
 import group52.comp3004.game.Stage;
 import group52.comp3004.players.Player;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextInputDialog;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.transform.Rotate;
-import javafx.scene.transform.Translate;
 
-
-
-public class GameController implements Initializable {
+public class GameController{
 
 	final static Logger logger = Logger.getLogger(GameController.class);
-	@FXML
-	private GridPane gamepane;
-	private DoubleProperty stageSize = new SimpleDoubleProperty();
-	private List<PlayerAreaController> playerControllers;
-	private MiddleAreaController middleController;
 
-	@FXML
-	private Button twoPlayers, threePlayers, fourPlayers,battle;
-	@FXML
-	private Button finishSponsor;
-	
 	private GameState model;
 	
 	private int readyCounter, readyCounter1;
@@ -64,46 +36,11 @@ public class GameController implements Initializable {
 	private int currentStageQuest;
 	
 	//Constructor
-
 	public GameController() {
-		model = new GameState();
-//		Player demo = new Player(1, this, model);
-//		Player demow = new Player(2, this, model);
-//		Player demoww = new Player(3, this, model);
-//		Player demowww= new Player(4, this, model);
-//		model.addPlayer(demo);
-//		model.addPlayer(demow);
-//		model.addPlayer(demoww);
-//		model.addPlayer(demowww);
-		stageSize.set(0);
-		playerControllers = new ArrayList<>();
-		middleController = null;
 		readyCounter = 0;
 		readyCounter1 =0;
 	}
 
-	public DoubleProperty stageSizeProperty() {
-		return stageSize;
-	}
-	
-
-	//PURPOSE: Controller Initialization
-	@Override
-	public void initialize(URL location, ResourceBundle resources)  {
-		logger.info("Game controller created");
-		
-		gamepane.setAlignment(Pos.CENTER);
-		
-		twoPlayers.setOnAction(e -> this.startGame(2));
-		threePlayers.setOnAction(e -> this.startGame(3));
-		fourPlayers.setOnAction(e -> this.startGame(4));
-		battle.setOnAction(null);
-		battle.setVisible(false);
-		finishSponsor.setVisible(false);
-		
-		//finishSponsor.setOnAction(e -> this.handleReady());
-	}
-	@FXML
 	private void discard() {
 		if(model.getPhase()==Phase.DiscardForTest) {
 			for(int i = 0; i < model.getAllPlayers().size(); i++) {
@@ -119,7 +56,7 @@ public class GameController implements Initializable {
 			this.endTurn();
 
 	}
-	@FXML
+
 	private void handleReady() {
 		Phase phase = model.getPhase();
 		logger.info("Clicking ready!");
@@ -164,7 +101,6 @@ public class GameController implements Initializable {
 			else {
 				//move temp cards into middle area
 				for(int i = 0; i < model.getCurrentQuest().getStages().size(); i++) {
-					middleController.addStage(stages.get(i), model.getResourceManager());
 					
 				}
 				
@@ -192,8 +128,6 @@ public class GameController implements Initializable {
 					this.updateAll();
 					return;
 				}
-				middleController.setStageArrow(model.getCurrentQuest().getCurrentStage());
-				
 			}
 			
 			logger.info("Received player submission for quest!");
@@ -204,7 +138,6 @@ public class GameController implements Initializable {
 		}
 	}
 
-	@FXML
 	private void battle() {
 		Phase phase = model.getPhase();
 		logger.info("ready for battle!");
@@ -265,41 +198,15 @@ public class GameController implements Initializable {
 	//		*move to phase TurnStart after
 	public void startGame(int p) {
 		logger.info("Starting Game");
-		//remove the startGame button
-		threePlayers.setOnAction(null);
-		threePlayers.setVisible(false);
-		fourPlayers.setOnAction(null);	
-		fourPlayers.setVisible(false);
-		twoPlayers.setOnAction(null);
-		twoPlayers.setVisible(false);
 		
 		int AICounter = 0;
 		// create players
 		for(int i=0;i<p;i++) {
 			model.addPlayer(new Player(i, this, model));
 			if(i==p-1 && AICounter==i) {
-				Alert alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle("Player " + i);
-				alert.setHeaderText("Would you like this player to be a human or an AI?");
-				alert.setContentText("Select your option.");
-				ButtonType human = new ButtonType("Human");
-				ButtonType cancel = new ButtonType("Cancel");
-				alert.getButtonTypes().setAll(human, cancel);
-				Optional<ButtonType> result = alert.showAndWait();
-				if(result.get() == human) model.getPlayerByIndex(i).setAI(0);
-				else this.endGame();
+
 			}else{
-				Alert alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle("Player " + i);
-				alert.setHeaderText("Would you like this player to be a human or an AI?");
-				alert.setContentText("Select your option.");
-				ButtonType human = new ButtonType("Human");
-				ButtonType strategy1 = new ButtonType("Strategy 1");
-				ButtonType strategy2 = new ButtonType("Strategy 2");
-				ButtonType cancel = new ButtonType("Cancel");
-				alert.getButtonTypes().setAll(human, strategy1, strategy2, cancel);
-				Optional<ButtonType> result = alert.showAndWait();
-				if(result.get() == human) model.getPlayerByIndex(i).setAI(0);
+			/*	if(result.get() == human) model.getPlayerByIndex(i).setAI(0);
 				else if(result.get()==strategy1) {
 					model.getPlayerByIndex(i).setAI(1);
 					AICounter++;
@@ -308,15 +215,9 @@ public class GameController implements Initializable {
 					model.getPlayerByIndex(i).setAI(2);
 					AICounter++;
 				}
-				else this.endGame();
+				else this.endGame();*/
 			}
 		}
-		
-		//call GUI creation methods
-		this.createMiddleArea();
-		this.createPlayerAreas();
-		this.addAdventureDeck();
-		this.addStoryDeck();
 
 		this.updateInfo();
 		this.model.dealCardsToPlayers();
@@ -342,8 +243,7 @@ public class GameController implements Initializable {
 	//		*next phase depends on type of card dealt
 	public void revealStory() {
 		//reveal story card
-		middleController.reset();
-		middleController.addStory(model.dealStoryCard());
+
 		//move to next phase depending on card type
 		if(model.getRevealedCard() instanceof EventCard) {System.out.println("    -->Event");
 			if(model.getRevealedCard().getName()=="Call_to_Arms") {
@@ -394,21 +294,20 @@ public class GameController implements Initializable {
 		model.setPhase(Phase.JoinTourney);
 		this.joinTourney();
 	}
+	
 	//PURPOSE: Execute JoinTourney Phase
 	public void joinTourney() {
 		model.setTourney();
 		int joined = 0;
 		for(int i = 0; i < model.getAllPlayers().size(); i++) {
 			if(model.getPlayerByIndex(i).getAI()==null) {
-				Optional<ButtonType> result = makeAlertBox("tournament", "Tournament " + model.getRevealed().getName(),
-						"Do you want to join the tournament, player " + model.getCurrentPlayer() + "?");
-				if (result.get() == ButtonType.OK){
+				//Code for joining
 					joined++;
 					logger.info(" player " + model.getCurrentPlayer()+ "joined the tournament");
 					model.getCurrentTourney().addPlayer(model.getPlayerByIndex(model.getCurrentPlayer()));
 					model.setPhase(Phase.JoinTourney);
 				}
-			}else {
+			//Code for joining
 				if(model.getPlayerByIndex(i).getAI().doIParticipateInTournament(model)) {
 					logger.info(" player " + model.getCurrentPlayer()+ "joined the tournament");
 					model.getCurrentTourney().addPlayer(model.getPlayerByIndex(model.getCurrentPlayer()));
@@ -417,7 +316,6 @@ public class GameController implements Initializable {
 				}
 			}
 			model.nextPlayer();
-		}
 		
 		if(joined < 1) {
 			this.discardBeforeEnd();
@@ -448,9 +346,6 @@ public class GameController implements Initializable {
 	}
 	//PURPOSE: Execute SponsorQuest Phase
 	public void sponsorQuest() {
-		
-		finishSponsor.setVisible(true);
-		
 		boolean sponsored = false;
 		
 		for(int i = 0; i < model.getAllPlayers().size(); i++) {
@@ -460,16 +355,13 @@ public class GameController implements Initializable {
 				int numFoes = player.countFoes();
 				if(numTests) numFoes++;
 				if(numFoes>=((QuestCard) model.getRevealed()).getStages()){
-					Optional<ButtonType> result = makeAlertBox("Quest sponsoring", "Quest " + model.getRevealed().getName(),
-							"Do you want to sponsor the quest, player " + player.getId() + "?");
+					//getting quest sponsorship
 			
-					if (result.get() == ButtonType.OK){
+					//yes
 						System.out.println("Quest sponsored by player " + model.getCurrentPlayer());
 						model.setQuest();
 						this.setupQuest();
 						sponsored = true;
-					    break;
-					}
 				}
 			}else {
 				if(player.getAI().doISponsorQuest(model, player)){
@@ -512,19 +404,15 @@ public class GameController implements Initializable {
 			}
 			Player player = model.getPlayerByIndex(model.getCurrentPlayer());
 			if(player.getAI()==null) {
-				Optional<ButtonType> result = makeAlertBox("Quest Joining", "Quest " + model.getCurrentQuest().getQuest().getName(),
-						"Do you want to play in the quest, player " + player.getId() + "?");
+				//get ask to play quest
 	
-				if (result.get() == ButtonType.OK){
+				//yes
 					model.joinQuest();
 					joined += 1;
-				    //break;
-				}
 			}else {
 				if(player.getAI().doIParticipateInQuest(model, player)){
 					model.joinQuest();
 					joined += 1;
-				    //break;
 				}
 			}
 			model.nextPlayer();
@@ -534,7 +422,7 @@ public class GameController implements Initializable {
 		if(joined == 0) {
 			this.endQuest();
 		} else {
-			middleController.setStageArrow(model.getCurrentQuest().getCurrentStage());
+			//move quest arrow
 			this.playQuest();
 			
 		}
@@ -561,7 +449,7 @@ public class GameController implements Initializable {
 				}
 				
 				if(p.getAI()==null) {
-					TextInputDialog dialog = new TextInputDialog("");
+					/*TextInputDialog dialog = new TextInputDialog("");
 					dialog.setTitle("Test Quest Stage");
 					dialog.setHeaderText("Playing in a test quest stage. Max bid is: " + model.getMaxBid());
 					dialog.setContentText("Enter a bid higher than max bid, Player " + p.getId() + ":");
@@ -598,7 +486,7 @@ public class GameController implements Initializable {
 					} else {
 						model.playerStopBidding();
 						stoppedBidding++;
-					}
+					}*/
 				}else {
 					int AIBid = p.getAI().nextBid(model, p);
 					if(AIBid>model.getMaxBid()) {
@@ -671,8 +559,6 @@ public class GameController implements Initializable {
 		}
 	}
 	public void endTurn() {
-
-		middleController.reset();
 		//move to next phase
 		model.setPhase(Phase.TurnStart);
 		model.nextTurn();
@@ -695,14 +581,12 @@ public class GameController implements Initializable {
 	}
 
 
-
 	//CLICK EVENT: A card in the hand has been clicked
 	public void handCardOnClick(AdventureCard card, int index) {
 		logger.info("Clicked card: " + card.getName());
 		if(!(card instanceof Ally)) return;
 		Player player = this.model.getPlayerByIndex(index);
 		player.playCardToField((Ally) card);
-		this.playerControllers.get(index).update(player.getHand(),player.getField(), player);
 	}
 
 	public void discardOnClick(AdventureCard card, int index) {
@@ -711,7 +595,6 @@ public class GameController implements Initializable {
 			Player player =this.model.getPlayerByIndex(index);
 			player.discard(card);
 			model.getAdventureDeck().discardCard(card);
-			this.playerControllers.get(index).update(player.getHand(),player.getField(), player);
 		}
 	}
 
@@ -720,37 +603,19 @@ public class GameController implements Initializable {
 		logger.info("Dealt card");
 		this.model.dealToPlayer(index);
 		Player player = this.model.getPlayerByIndex(index);
-		this.playerControllers.get(index).update(player.getHand(),player.getField(),player);
-	}
-
-	private Optional<ButtonType> makeAlertBox(String title, String header, String context) {
-		
-		
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle(title);
-		alert.setHeaderText(header);
-		alert.setContentText(context);
-
-		Optional<ButtonType> result = alert.showAndWait();
-		
-		return result;
 	}
 
 	//
 	public void updateInfo() {
 		for(int i = 0; i < model.numPlayers(); i++) {
 			Player player = this.model.getPlayerByIndex(i);
-			this.playerControllers.get(i).updateInfo(player);
 		}
 	}
 
-
-
 	//PURPOSE: Update cards for all controllers in game
-
 	public void updateAll() {
 		//update player hand and field arraylists for each player
-		for(int i = 0; i < this.playerControllers.size(); i++) {
+		/*for(int i = 0; i < this.playerControllers.size(); i++) {
 			if(model.getCurrentPlayer()!=i) {
 				for(AdventureCard c :model.getPlayerByIndex(i).getHand()) {
 					c.flipDown();
@@ -769,98 +634,6 @@ public class GameController implements Initializable {
 			field.addAll(player.getTemp());
 			
 			this.playerControllers.get(i).update(player.getHand(),field,player);
-		}
-		//update middle area
-		//middleController.setStoryCard(model.getRevealedCard());
-
+		}*/
 	}	
-
-	
-
-	/*********************************************************************************************/
-
-	//GUI Initialization Methods
-
-	/*********************************************************************************************/
-
-	//PURPOSE: Load in the FXML files for the middle area
-
-	public void createMiddleArea() {
-		try {
-			FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/fxml/middle_area.fxml"));
-			StackPane middle = loader1.load();
-			gamepane.add(middle, 2, 2, 4, 2);
-			middleController = loader1.getController();
-		}
-
-		catch(Exception ex) {
-			System.out.println(ex.getMessage());
-		}
-	}
-
-	//PURPOSE: Load in the FXML files for the player areas
-
-	public void createPlayerAreas() {
-		for(int i = 0; i < model.numPlayers(); i++) {
-			final int index = i;
-			try {
-				FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/fxml/player_area.fxml"));
-				GridPane player = loader2.load();
-				PlayerAreaController controller = loader2.getController();
-				//controller.setHandClickBehaviour(card -> handCardOnClick((AdventureCard) card, index));
-				this.playerControllers.add(controller);
-				//add the player areas to the 
-				if(index == 0) gamepane.add(player, 1, 6, 4, 2);
-				else if(index == 1) {	
-					player.getTransforms().add(new Rotate(90, Rotate.Z_AXIS));
-					gamepane.add(player, 2, 0, 2, 4);
-				}
-				else if(index == 2) {
-					player.getTransforms().add(new Rotate(180, Rotate.Z_AXIS));
-					gamepane.add(player, 7, 3, 4, 2);
-				}
-				else if(index == 3) {
-					player.getTransforms().add(new Rotate(270, Rotate.Z_AXIS));
-					player.getTransforms().add(new Translate(-140, 0));
-					gamepane.add(player, 6, 6, 1, 4);
-				}
-				
-				Button readyButton = new Button("Ready");
-				readyButton.setOnAction(e -> this.handleReady());
-				gamepane.add(readyButton, 1, 4, 1, 1);
-				Button readyBattle = new Button("Ready for battle");
-				readyBattle.setOnAction(e -> this.battle());
-				gamepane.add(readyBattle, 6, 4, 1, 1);
-				Button discardButton = new Button("Discard");
-				discardButton.setOnAction(e -> this.discard());
-				gamepane.add(discardButton, 7, 4, 1, 1);
-			}
-
-			catch(Exception ex) {
-				logger.fatal(ex.getMessage());
-			}
-		}
-	}
-
-	//PURPOSE: add Adventure Deck GUI item
-	public void addAdventureDeck() {
-		AdventureCard adventureDeck = new AdventureCard("Sword", model.getResourceManager());
-		adventureDeck.setFaceDown();
-		StackPane aPane = new StackPane();
-		aPane.setAlignment(Pos.CENTER);
-		aPane.getChildren().add(adventureDeck);
-		gamepane.add(adventureDeck, 0, 5);
-	}
-
-	//PURPOSE: add Story Deck GUI item
-	//	-->Incomplete
-	public void addStoryDeck() {
-		StoryCard storyDeck = new StoryCard("Boar_Hunt", model.getResourceManager());
-		storyDeck.setFaceDown();
-		HBox sPane = new HBox();
-		sPane.setAlignment(Pos.CENTER);
-		sPane.getChildren().add(storyDeck);
-		gamepane.add(storyDeck, 7, 5);	
-	}
-
 }

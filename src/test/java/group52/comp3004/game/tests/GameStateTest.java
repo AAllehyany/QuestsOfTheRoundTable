@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import group52.comp3004.GameStateDemo;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.QuestCard;
 import group52.comp3004.cards.Weapon;
@@ -20,18 +19,6 @@ import javafx.embed.swing.JFXPanel;
 
 public class GameStateTest {
 	JFXPanel jfxPanel = new JFXPanel();
-	
-	@Test
-	public void testAddsPlayer() {
-		GameStateDemo game = new GameStateDemo();
-		
-		assertEquals(new ArrayList<String>(), game.getPlayers());
-		
-		game.addPlayer("xXEdgyXx");
-		
-		assertEquals(Arrays.asList("xXEdgyXx"), game.getPlayers());
-	}
-
 	
 	@Test
 	public void testChangesTurnProperly() {
@@ -111,7 +98,7 @@ public class GameStateTest {
 	@Test
 	public void testPlaysQuestProperly() {	
 		GameState gs = new GameState();
-		QuestCard quest = new QuestCard("Rescue_Maiden", gs.getResourceManager(), 3);
+		QuestCard quest = new QuestCard("Rescue_Maiden", 3);
 		
 		Player p1 = new Player(123);
 		Player p2 = new Player(1234);
@@ -178,22 +165,22 @@ public class GameStateTest {
 		
 
 		
-		gs.playCardToTemp(new Weapon("Horse", gs.getResourceManager(), 10));
+		gs.playCardToTemp(new Weapon("Horse", 10));
 		assertEquals(0, p2.getTemp().size());
 		
 		gs.setPhase(Phase.SetupQuest);
-		gs.setUpQuestStage(new Foe("Giant", gs.getResourceManager(), 10, 15, "Hi"));
+		gs.setUpQuestStage(new Foe("Giant", 10, 15, "Hi"));
 		
 		assertEquals(1, gs.getCurrentQuest().getStages().size());
 		
-		gs.setUpQuestStage(new Foe("Mordred", gs.getResourceManager(), 20, 15, "Hi"));
-		gs.setUpQuestStage(new Foe("Dragon", gs.getResourceManager(), 15, 15, "Hi")); // test foes increasing power
+		gs.setUpQuestStage(new Foe("Mordred", 20, 15, "Hi"));
+		gs.setUpQuestStage(new Foe("Dragon", 15, 15, "Hi")); // test foes increasing power
 		assertEquals(2, gs.getCurrentQuest().getStages().size());
 		
-		gs.setUpQuestStage(new Foe("Saxons", gs.getResourceManager(), 26, 15, "Hi"));
+		gs.setUpQuestStage(new Foe("Saxons", 26, 15, "Hi"));
 		assertEquals(3, gs.getCurrentQuest().getStages().size());
 		
-		gs.setUpQuestStage(new Foe("Saxons", gs.getResourceManager(), 27, 15, "Hi"));
+		gs.setUpQuestStage(new Foe("Saxons", 27, 15, "Hi"));
 		assertEquals(3, gs.getCurrentQuest().getStages().size()); // test only set up up to stage nums
 		
 		// test in quest player turns

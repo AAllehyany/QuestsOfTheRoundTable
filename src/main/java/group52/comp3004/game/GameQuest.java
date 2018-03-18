@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Amour;
 import group52.comp3004.cards.QuestCard;
-import group52.comp3004.cards.Tests;
 import group52.comp3004.players.Player;
 
 public class GameQuest {

@@ -1,10 +1,9 @@
 package group52.comp3004.game.tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Foe;
@@ -17,9 +16,7 @@ public class FoeTest {
 	JFXPanel jfxPanel = new JFXPanel();
 	
 	@Test
-	public void testMordred() {
-		
-		ResourceManager resman = new ResourceManager();
+	public void testMordred() {	
 		
 		GameState state = new GameState();
 		Player p1 = new Player(1);
@@ -31,9 +28,9 @@ public class FoeTest {
 		
 		Deck<AdventureCard> aDeck = new Deck<AdventureCard>();
 		
-		Foe mordred = new Foe("Mordred", resman, 30);
-		Ally merlin = new Ally("Merlin", resman);
-		Ally arthur = new Ally("King_Arthur", resman, 10, 2);
+		Foe mordred = new Foe("Mordred", 30);
+		Ally merlin = new Ally("Merlin");
+		Ally arthur = new Ally("King_Arthur", 10, 2);
 		p1.addField(merlin);
 		p1.addField(arthur);
 		p2.addCardToHand(mordred);

@@ -21,9 +21,6 @@ import group52.comp3004.controllers.GameController;
 import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
 import group52.comp3004.game.GameTourney;
-import group52.comp3004.game.Phase;
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
 
 public class Player {
 	
@@ -224,7 +221,7 @@ public class Player {
 	
 	public void addCardToHand(AdventureCard card) {
 		logger.info("Adding "+card.getName()+" to hand");
-		card.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+		/*card.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent e) {
 				
 				if(id != game.getPlayerByIndex(game.getCurrentPlayer()).getId()) return;
@@ -258,7 +255,6 @@ public class Player {
 							}
 							
 							if(temp.size() > 0 && !(temp.get(temp.size() - 1) instanceof Tests)) {
-								card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
 								logger.info(card.getName()+ " clicked");
 								temp.add(card);
 								tempWeapons.add(card);
@@ -269,7 +265,6 @@ public class Player {
 						}
 						else {
 							tempWeapons.clear();
-							card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
 							logger.info(card.getName()+ " clicked");
 							temp.add(card);
 							hand.remove(card);
@@ -279,7 +274,6 @@ public class Player {
 					}
 				}
 				else if(game.getPhase()==Phase.HandleEvent){
-					card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
 					logger.info(card.getName()+ " discarded");
 					hand.remove(card);
 					controller.updateAll();	
@@ -291,7 +285,6 @@ public class Player {
 					
 					if(card instanceof Weapon) {
 						if(!canPlayWeapon((Weapon) card)) return;
-						card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
 						logger.info(card.getName()+ " clicked");
 						temp.add(card);
 						hand.remove(card);
@@ -299,8 +292,7 @@ public class Player {
 					else {
 						int countAmours = (int) temp.stream().filter(c -> c instanceof Amour).count();
 						if(card instanceof Amour && countAmours > 0) return;
-						
-						card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
+			
 						logger.info(card.getName()+ " clicked");
 						temp.add(card);
 						hand.remove(card);
@@ -311,7 +303,6 @@ public class Player {
 					if(!(card instanceof Ally) && !(card instanceof Weapon)) {
 						return;
 					}else{
-						card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
 						logger.info(card.getName()+ " discarded");
 						hand.remove(card);
 						controller.updateAll();
@@ -324,7 +315,6 @@ public class Player {
 					
 					if(card instanceof Weapon) {
 						if(!canPlayWeapon((Weapon) card)) return;
-						card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
 						logger.info(card.getName()+ " clicked");
 						temp.add(card);
 						hand.remove(card);
@@ -333,7 +323,6 @@ public class Player {
 						int countAmours = (int) temp.stream().filter(c -> c instanceof Amour).count();
 						if(card instanceof Amour && countAmours > 0) return;
 						
-						card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
 						logger.info(card.getName()+ " clicked");
 						temp.add(card);
 						hand.remove(card);
@@ -345,38 +334,13 @@ public class Player {
 				}
 				else{
 				
-					card.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);//isnt removing the card
 					logger.info(card.getName()+ " clicked");
 					field.add(card);
 					hand.remove(card);
 					controller.updateAll();	
-				}
-				
-				//controller.updateAll();
-				/*
-				 if(game.getPhase() == SetupQuest){
-				 	//add foes and weapons to quest
-				 	hand.remove(card);
-				 	controller.updateAll();	
-				 }
-				 else if(game.getPhase() == RunQuest){
-				 	//add weapons and allies
-				 	field.add(card);
-					hand.remove(card);	
-					controller.updateAll();	
-				 }
-				 else if(game.getPhase() == RunTourney){
-				 	//add weapons to tourney
-				 	hand.remove(card);	
-					controller.updateAll();	
-				 }
-				 else{
-				 	//do nothing
-				 }
-				 */
-				
+				}				
 			}
-		});
+		});*/
 		this.hand.add(card);
 	}
 	

@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
-import group52.comp3004.cards.Amour;
 import group52.comp3004.cards.CardComparator;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.Tests;

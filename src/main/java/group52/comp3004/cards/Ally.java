@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
-import group52.comp3004.ResourceManager;
 import group52.comp3004.game.*;
 import group52.comp3004.players.Player;
 
@@ -20,16 +19,16 @@ public class Ally extends AdventureCard
 	// TODO special abilities
 	
 	// used for allies without special cases (should not be used for Merlin)
-	public Ally(String name, ResourceManager rm, int bp, int bids) {
-		super(name, rm);
+	public Ally(String name, int bp, int bids) {
+		super(name);
 		this.bp = bp;
 		this.bids = bids;
 		if(name.equals("Merlin")) this.merlin = true;	
 	}
 	
 	// used for allies with special cases (should not be used for Merlin)
-	public Ally(String name, ResourceManager rm, int bp, int bids, String prereq, int bonusbp, int bonusbid) {
-		super(name, rm);
+	public Ally(String name, int bp, int bids, String prereq, int bonusbp, int bonusbid) {
+		super(name);
 		this.bp = bp;
 		this.bids = bids;
 		this.prereq = prereq;
@@ -39,8 +38,8 @@ public class Ally extends AdventureCard
 	}
 	
 	// should only be used for Merlin
-	public Ally(String name, ResourceManager rm) {
-		super(name, rm);
+	public Ally(String name) {
+		super(name);
 		if(name.equals("Merlin")) this.merlin = true;
 	}
 	
