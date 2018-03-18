@@ -559,6 +559,13 @@ public class GameController{
 		}
 	}
 	public void endTurn() {
+<<<<<<< HEAD
+=======
+//		while(model.getAllPlayers().get(model.getCurrentPlayer()).getHand().size()>12) {
+//			// discard cards until 12 in hand
+//		}
+		middleController.reset();
+>>>>>>> 12c0822f276d400b24ba1b5fb7c8c338533557c0
 		//move to next phase
 		model.setPhase(Phase.TurnStart);
 		model.nextTurn();

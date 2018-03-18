@@ -20,7 +20,7 @@ import group52.comp3004.players.Player;
 public class Strategy1 extends AbstractAI{
 	
 	static final private Logger logger = Logger.getLogger(Strategy1.class);
-	public boolean doIParticipateInTournament(GameState state) {
+	public boolean doIParticipateInTournament(GameState state, Player p) {
 		if(anyEvolve(state)) return true;
 		return false;
 	}

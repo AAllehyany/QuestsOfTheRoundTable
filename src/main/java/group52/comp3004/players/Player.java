@@ -211,6 +211,10 @@ public class Player {
 		return hand;
 	}
 	
+	public int getHandSize() {
+		return hand.size();
+	}
+	
 	public void setHand(ArrayList<AdventureCard> hand) {
 		this.hand.clear();
 		for(int i=0;i<hand.size();i++) {
