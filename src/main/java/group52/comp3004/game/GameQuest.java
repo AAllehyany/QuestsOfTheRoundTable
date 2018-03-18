@@ -55,6 +55,15 @@ public class GameQuest {
 		return stages;
 	}
 	
+	public ArrayList<Integer> getStageCardNum(){
+		ArrayList<Integer> cNum = new ArrayList<Integer>();
+		for(int i=0;i>stages.size();i++) {
+			if(stages.get(i).isTestStage()) cNum.add(1);
+			else cNum.add(1+stages.get(i).getFoe().getWeapons().size());
+		}
+		return cNum;
+	}
+	
 	public boolean canAddStage() {
 		return this.stages.size() < quest.getStages();
 	}

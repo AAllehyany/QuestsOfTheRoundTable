@@ -21,7 +21,7 @@ public class Strategy2 extends AbstractAI{
 	
 	public Strategy2() {}
 	
-	public boolean doIParticipateInTournament(GameState state) {
+	public boolean doIParticipateInTournament(GameState state, Player p) {
 		return true;
 	}
 	
@@ -127,16 +127,6 @@ public class Strategy2 extends AbstractAI{
 		}
 		
 		return stages;
-	}
-	
-	private Foe getWeakestFoe(GameState state, Player p) {
-		p.sortHand(state);
-		for(int i=p.getHand().size()-1;i>=0;i--) {
-			if(p.getHand().get(i) instanceof Foe) {
-				return (Foe) p.getHand().remove(i);
-			}
-		}
-		return null;
 	}
 	
 	public ArrayList<AdventureCard> playStage(GameState state, Player p){

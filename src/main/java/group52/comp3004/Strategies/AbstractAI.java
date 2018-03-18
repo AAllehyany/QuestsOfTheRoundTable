@@ -16,7 +16,7 @@ import group52.comp3004.game.Stage;
 import group52.comp3004.players.Player;
 
 public abstract class AbstractAI{
-	public abstract boolean doIParticipateInTournament(GameState state);
+	public abstract boolean doIParticipateInTournament(GameState state, Player p);
 	
 	static final private Logger logger = Logger.getLogger(AbstractAI.class);
 	public boolean doISponsorQuest(GameState state, Player p) {
@@ -96,5 +96,15 @@ public abstract class AbstractAI{
 			if(cards.get(i) instanceof Amour) return true;
 		}
 		return false;
+	}
+	
+	protected Foe getWeakestFoe(GameState state, Player p) {
+		p.sortHand(state);
+		for(int i=p.getHand().size()-1;i>=0;i--) {
+			if(p.getHand().get(i) instanceof Foe) {
+				return (Foe) p.getHand().remove(i);
+			}
+		}
+		return null;
 	}
 }
