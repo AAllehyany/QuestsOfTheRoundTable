@@ -409,7 +409,7 @@ public class GameController implements Initializable {
 					model.setPhase(Phase.JoinTourney);
 				}
 			}else {
-				if(model.getPlayerByIndex(i).getAI().doIParticipateInTournament(model)) {
+				if(model.getPlayerByIndex(i).getAI().doIParticipateInTournament(model, model.getPlayerByIndex(i))) {
 					logger.info(" player " + model.getCurrentPlayer()+ "joined the tournament");
 					model.getCurrentTourney().addPlayer(model.getPlayerByIndex(model.getCurrentPlayer()));
 					model.setPhase(Phase.JoinTourney);

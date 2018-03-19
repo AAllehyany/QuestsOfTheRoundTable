@@ -158,11 +158,11 @@ public class AITest {
 			
 			// Tournament Testing
 			state.setRevealedCard(york);
-			assertEquals(false, (boolean) s1.doIParticipateInTournament(state));
+			assertEquals(false, (boolean) s1.doIParticipateInTournament(state, p1));
 			state.addPlayer(p3);
 			state.addPlayer(p4);
 			p1.addShields(4);
-			assertEquals(true, (boolean) s1.doIParticipateInTournament(state));
+			assertEquals(true, (boolean) s1.doIParticipateInTournament(state, p1));
 			
 			state.setTourney();
 			GameTourney t = state.getCurrentTourney();
@@ -375,7 +375,7 @@ public class AITest {
 			
 			// Tournament Testing
 			state.setRevealedCard(camelot);
-			assertEquals(true, (boolean) s2.doIParticipateInTournament(state));
+			assertEquals(true, (boolean) s2.doIParticipateInTournament(state, p1));
 			
 			p1.addCardToHand(gknight);
 			p1.addCardToHand(mordred);
