@@ -1,10 +1,9 @@
 package group52.comp3004.game.tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Camelot;
 import group52.comp3004.cards.Deed;
@@ -16,12 +15,10 @@ import group52.comp3004.cards.Realm;
 import group52.comp3004.cards.Recognition;
 import group52.comp3004.game.GameState;
 import group52.comp3004.players.Player;
-import javafx.embed.swing.JFXPanel;
 
 class EventTest {
-	JFXPanel jfxPanel = new JFXPanel();
 	private GameState model;
-	private ResourceManager resman = new ResourceManager();
+	
 	@Test
 	public void testDeed() {
 		model = new GameState();
@@ -31,7 +28,7 @@ class EventTest {
 		model.addPlayer(a);
 		model.addPlayer(b);
 		model.addPlayer(c);
-		EventCard Deed =  new EventCard("Chivalrous_Deed",resman, new Deed());
+		EventCard Deed =  new EventCard("Chivalrous_Deed",new Deed());
 		Deed.run(model);
 		assertEquals(13, (int) a.getShields());
 		assertEquals(13, (int) b.getShields());
@@ -46,7 +43,7 @@ class EventTest {
 		model.addPlayer(a);
 		model.addPlayer(b);
 		model.addPlayer(c);
-		EventCard Pox =  new EventCard("Pox",resman, new Pox());
+		EventCard Pox =  new EventCard("Pox",new Pox());
 		Pox.run(model);
 		
 		assertEquals(10, (int) a.getShields());
@@ -62,7 +59,7 @@ class EventTest {
 		model.addPlayer(a);
 		model.addPlayer(b);
 		model.addPlayer(c);
-		EventCard Plague =  new EventCard("Plague",resman, new Plague());
+		EventCard Plague =  new EventCard("Plague",new Plague());
 		Plague.run(model);
 		
 		assertEquals(10, (int) a.getShields());
@@ -79,7 +76,7 @@ class EventTest {
 		model.addPlayer(a);
 		model.addPlayer(b);
 		model.addPlayer(c);
-		EventCard Recog =  new EventCard("King's_Recognition",resman, new Recognition());
+		EventCard Recog =  new EventCard("King's_Recognition",new Recognition());
 		Recog.run(model);
 	
 		assertEquals(2, (int) model.getBonusShields());
@@ -93,7 +90,7 @@ class EventTest {
 		model.addPlayer(a);
 		model.addPlayer(b);
 		model.addPlayer(c);
-		EventCard Favor =  new EventCard("Queen's_Favor",resman, new Favor());
+		EventCard Favor =  new EventCard("Queen's_Favor",new Favor());
 		Favor.run(model);
 		
 		assertEquals(2, (int) a.getHand().size());
@@ -106,8 +103,8 @@ class EventTest {
 		Player a = new Player(1);
 		Player b = new Player(2);
 		Player c = new Player(3);
-		Ally a1 = new Ally("Sir_Gawain", resman, 10, 0, "Green_Knight", 20, 0);
-		Ally a2 = new Ally("King_Arthur", resman, 10, 2);
+		Ally a1 = new Ally("Sir_Gawain", 10, 0, "Green_Knight", 20, 0);
+		Ally a2 = new Ally("King_Arthur", 10, 2);
 		model.addPlayer(a);
 		model.addPlayer(b);
 		model.addPlayer(c);
@@ -117,7 +114,7 @@ class EventTest {
 		b.addField(a2);
 		assertEquals(1, (int) a.getField().size());
 		assertEquals(1, (int) b.getField().size());
-		EventCard Camelot =  new EventCard("Called_to_Camelot",resman, new Camelot());
+		EventCard Camelot =  new EventCard("Called_to_Camelot",new Camelot());
 		Camelot.run(model);
 		
 		assertEquals(1, (int) a.getField().size());
@@ -134,7 +131,7 @@ class EventTest {
 		model.addPlayer(a);
 		model.addPlayer(b);
 		model.addPlayer(c);
-		EventCard Favor =  new EventCard("Queen's_Favor",resman, new Favor());
+		EventCard Favor =  new EventCard("Queen's_Favor",new Favor());
 		Favor.run(model);
 		
 		assertEquals(2, (int) a.getHand().size());
@@ -151,7 +148,7 @@ class EventTest {
 		model.addPlayer(a);
 		model.addPlayer(b);
 		model.addPlayer(c);
-		EventCard Realm =  new EventCard("Queen's_Favor",resman, new Realm());
+		EventCard Realm =  new EventCard("Queen's_Favor",new Realm());
 		Realm.run(model);
 		
 		assertEquals(2, (int) a.getHand().size());

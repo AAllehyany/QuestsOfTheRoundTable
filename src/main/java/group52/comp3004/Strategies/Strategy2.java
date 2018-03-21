@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
-import group52.comp3004.cards.Amour;
 import group52.comp3004.cards.CardComparator;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.Tests;
@@ -55,7 +54,6 @@ public class Strategy2 extends AbstractAI{
 				weps.replace(ws.get(pos), weps.get(ws.get(pos))-1);
 				if(weps.get(ws.get(pos))==0) {
 					weps.remove(ws.remove(pos));
-//					pos++;
 				}
 				pos--;
 			}
@@ -94,8 +92,6 @@ public class Strategy2 extends AbstractAI{
 	
 	public ArrayList<Stage> createQuest(GameState state, Player p){
 		ArrayList<Stage> stages = new ArrayList<Stage>();
-		
-		p.sortHand(state);
 		GameQuest q = state.getCurrentQuest();
 		for(int i=0;i<q.getNumStages();i++) {
 			if(i<q.getNumStages()-2) {
@@ -110,17 +106,7 @@ public class Strategy2 extends AbstractAI{
 					stages.add(stage);
 				}
 			}else {
-				Foe f = getStrongestFoe(state, p);
-				int j=0;
-				while(f.getBp(state)<40 && j<p.getHand().size()) {
-					if(p.getHand().get(j) instanceof Weapon) {
-						if(f.addWeapon((Weapon) p.getHand().get(j))) {
-							p.getHand().remove(j);
-							j--;
-						}
-					}
-					j++;
-				}
+				Foe f = makeFoe(state, p, 40);
 				Stage stage = new Stage(f);
 				stages.add(stage);
 			}

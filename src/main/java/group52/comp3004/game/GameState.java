@@ -1,4 +1,4 @@
-package group52.comp3004.game;
+	package group52.comp3004.game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 
-import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.QuestCard;
@@ -28,7 +27,6 @@ public class GameState {
 	private GameQuest currentQuest;
 	private GameTourney currentTourney;
 	private StoryCard revealedCard;
-	private static ResourceManager resman = null;
 	private Integer maxBid;
 	private Integer bonusShields;
 	
@@ -39,7 +37,6 @@ public class GameState {
 	
 	public GameState(List<Player> players) {
 		super();
-		if(resman == null) resman = new ResourceManager();
 		this.players = players;
 		this.currentTurn = 0;
 		this.currentPlayer = 0;
@@ -49,14 +46,13 @@ public class GameState {
 	
 	public GameState() {//<- Issue model loading twice?
 		super();
-		if(resman == null) resman = new ResourceManager();
 		this.players = new ArrayList<>();
 		this.currentTurn = 0;
 		this.currentPlayer = 0;
 		this.currentSponsor = -1;
 		phase = Phase.TurnStart;		
-		adventureDeck = new Deck<AdventureCard>(Deck.createAdventureDeck(resman));
-		storyDeck = new Deck<StoryCard>(Deck.createStoryDeck(resman));
+		adventureDeck = new Deck<AdventureCard>(Deck.createAdventureDeck());
+		storyDeck = new Deck<StoryCard>(Deck.createStoryDeck());
 		currentQuest = null;
 		revealedCard = null;
 		maxBid = 0;
@@ -239,8 +235,7 @@ public class GameState {
 	public void setPhase(Phase phase) { this.phase = phase; }
 	public Phase getPhase() { return this.phase; }
 	public int getBonusShields() {	return this.bonusShields;}
-	public ResourceManager getResourceManager() { return resman; }
-	
+
 	public List<Player> getAllPlayers() { return this.players; }
 	
 	public Deck<AdventureCard> getAdventureDeck() { return adventureDeck; }

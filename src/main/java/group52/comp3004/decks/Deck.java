@@ -7,9 +7,8 @@ import java.util.Random;
 
 import org.apache.log4j.Logger;
 
-import group52.comp3004.ResourceManager;
+import group52.comp3004.cards.CardFactory;
 import group52.comp3004.cards.AdventureCard;
-import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Amour;
 import group52.comp3004.cards.Arms;
 import group52.comp3004.cards.Camelot;
@@ -28,7 +27,7 @@ import group52.comp3004.cards.Tests;
 import group52.comp3004.cards.Tourneys;
 import group52.comp3004.cards.Weapon;
 
-public class Deck<T> {
+public class Deck<T> extends CardFactory{
 	
 	List<T> cards;
 	int size;
@@ -86,72 +85,76 @@ public class Deck<T> {
 	}
 	
 	//PURPOSE: Builds the adventure deck
-	public static ArrayList<AdventureCard> createAdventureDeck(ResourceManager resman) {
+	public static ArrayList<AdventureCard> createAdventureDeck() {
 			
 		ArrayList<AdventureCard> cards = new ArrayList<>(Arrays.asList(
-				new Ally("Sir_Galahad", resman, 15, 0),
-				new Ally("Sir_Lancelot", resman, 15, 0),
-				new Ally("King_Arthur", resman, 10, 0),
-				new Ally("Sir_Tristan", resman, 10, 0),
-				new Ally("King_Pellinore", resman, 10, 0),
-				new Ally("Sir_Gawain", resman, 10, 0),
-				new Ally("Sir_Percival", resman, 5, 0),
-				new Ally("Queen_Guinevere", resman, 0, 0),
-				new Ally("Queen_Iseult", resman, 0, 0),
-				new Ally("Merlin", resman, 0, 0)));
+				createAlly("Sir_Galahad", 15, 0),
+				createAlly("Sir_Lancelot", 15, 0),
+				createAlly("King_Arthur", 10, 0),
+				createAlly("Sir_Tristan", 10, 0),
+				createAlly("King_Pellinore", 10, 0),
+				createAlly("Sir_Gawain", 10, 0),
+				createAlly("Sir_Percival", 5, 0),
+				createAlly("Queen_Guinevere", 0, 0),
+				createAlly("Queen_Iseult", 0, 0),
+				createAlly("Merlin", 0, 0)));
 		
-		for(int i = 0; i < 2; i++) cards.add(new Weapon("Excalibur", resman, 30));
-		for(int i = 0; i < 6; i++) cards.add(new Weapon("Lance", resman, 30));
-		for(int i = 0; i < 8; i++) cards.add(new Weapon("Battle_Ax", resman, 30));
-		for(int i = 0; i < 16; i++) cards.add(new Weapon("Sword", resman, 10));
-		for(int i = 0; i < 11; i++) cards.add(new Weapon("Horse", resman, 10));
-		for(int i = 0; i < 6; i++) cards.add(new Weapon("Dagger", resman, 5));
-		for(int i = 0; i < 1; i++) cards.add(new Foe("Dragon", resman, 50, 70, "Slay_the_Dragon"));
-		for(int i = 0; i < 2; i++) cards.add(new Foe("Giant", resman, 40));
-		for(int i = 0; i < 4; i++) cards.add(new Foe("Mordred", resman, 30));
-		for(int i = 0; i < 2; i++) cards.add(new Foe("Green_Knight", resman, 25, 40, "Green_Knight"));
-		for(int i = 0; i < 3; i++) cards.add(new Foe("Black_Knight", resman, 25, 35, "Rescue_Maiden"));
-		for(int i = 0; i < 6; i++) cards.add(new Foe("Evil_Knight", resman, 20, 30, "Enchanted_Forest"));
-		for(int i = 0; i < 8; i++) cards.add(new Foe("Saxon_Knight", resman, 15, 25, "Repel_Saxon_Raiders"));
-		for(int i = 0; i < 7; i++) cards.add(new Foe("Robber_Knight", resman, 15));
-		for(int i = 0; i < 5; i++) cards.add(new Foe("Saxons", resman, 10, 20, "Repel_Saxon_Raiders"));
-		for(int i = 0; i < 4; i++) cards.add(new Foe("Boar", resman, 5, 15, "Boar_Hunt"));
-		for(int i = 0; i < 8; i++) cards.add(new Foe("Thieves", resman, 5));
-		for(int i = 0; i < 2; i++) cards.add(new Tests("Valor", resman, 3));
-		for(int i = 0; i < 2; i++) cards.add(new Tests("Temptation", resman, 3));
-		for(int i = 0; i < 2; i++) cards.add(new Tests("Morgan_Le_Fey", resman, 3));
-		for(int i = 0; i < 2; i++) cards.add(new Tests("Questing_Beast", resman, 4));
-		for(int i = 0; i < 8; i++) cards.add(new Amour("Amour", resman, 10, 2));
+		for(int i = 0; i < 2; i++) cards.add(createWeapon("Excalibur", 30));
+		for(int i = 0; i < 6; i++) cards.add(createWeapon("Lance", 30));
+		for(int i = 0; i < 8; i++) cards.add(createWeapon("Battle_Ax", 30));
+		for(int i = 0; i < 16; i++) cards.add(createWeapon("Sword", 10));
+		for(int i = 0; i < 11; i++) cards.add(createWeapon("Horse", 10));
+		for(int i = 0; i < 6; i++) cards.add(createWeapon("Dagger", 5));
+		for(int i = 0; i < 1; i++) cards.add(createFoe("Dragon", 50, 70, "Slay_the_Dragon"));
+		for(int i = 0; i < 2; i++) cards.add(createFoe("Giant", 40));
+		for(int i = 0; i < 4; i++) cards.add(createFoe("Mordred", 30));
+		for(int i = 0; i < 2; i++) cards.add(createFoe("Green_Knight", 25, 40, "Green_Knight"));
+		for(int i = 0; i < 3; i++) cards.add(createFoe("Black_Knight", 25, 35, "Rescue_Maiden"));
+		for(int i = 0; i < 6; i++) cards.add(createFoe("Evil_Knight", 20, 30, "Enchanted_Forest"));
+		for(int i = 0; i < 8; i++) cards.add(createFoe("Saxon_Knight", 15, 25, "Repel_Saxon_Raiders"));
+		for(int i = 0; i < 7; i++) cards.add(createFoe("Robber_Knight", 15));
+		for(int i = 0; i < 5; i++) cards.add(createFoe("Saxons", 10, 20, "Repel_Saxon_Raiders"));
+		for(int i = 0; i < 4; i++) cards.add(createFoe("Boar", 5, 15, "Boar_Hunt"));
+		for(int i = 0; i < 8; i++) cards.add(createFoe("Thieves", 5));
+		for(int i = 0; i < 2; i++) cards.add(createTests("Valor", 3));
+		for(int i = 0; i < 2; i++) cards.add(createTests("Temptation", 3));
+		for(int i = 0; i < 2; i++) cards.add(createTests("Morgan_Le_Fey", 3));
+		for(int i = 0; i < 2; i++) cards.add(createTests("Questing_Beast", 4));
+		for(int i = 0; i < 8; i++) cards.add(createAmour("Amour", 10, 2));
+		
+		for(int i=0;i<cards.size();i++) cards.get(i).setID(i);
 		
 		return cards;
 	}
 	
 	//PURPOSE: Builds the story deck
-	public static ArrayList<StoryCard> createStoryDeck(ResourceManager resman){
+	public static ArrayList<StoryCard> createStoryDeck(){
 		ArrayList<StoryCard> cards= new ArrayList<>(Arrays.asList(
-				new EventCard("Pox", resman, new Pox()),
-				new EventCard("Plague", resman, new Plague()),
-				new EventCard("Chivalrous_Deed", resman, new Deed()),
-				new EventCard("Prosperity", resman, new Realm()),
-				new EventCard("Call_to_Arms", resman, new Arms()),
-				new QuestCard("Holy_Grail", resman, 5),
-				new QuestCard("Green_Knight_Quest", resman, 4),
-				new QuestCard("Questing_Beast_Search", resman, 4),
-				new QuestCard("Queens_Honor", resman, 4),
-				new QuestCard("Rescue_Maiden", resman, 3),
-				new QuestCard("Enchanted_Forest", resman, 3),
-				new QuestCard("Slay_the_Dragon", resman, 3),
-				new Tourneys("Camelot", resman, 3), 
-				new Tourneys("Orkney", resman, 2),
-				new Tourneys("Tintagel", resman, 1),
-				new Tourneys("York", resman, 0)));
+				createEvent("Pox", new Pox()),
+				createEvent("Plague", new Plague()),
+				createEvent("Chivalrous_Deed", new Deed()),
+				createEvent("Prosperity", new Realm()),
+				createEvent("Call_to_Arms", new Arms()),
+				createQuest("Holy_Grail", 5),
+				createQuest("Green_Knight_Quest", 4),
+				createQuest("Questing_Beast_Search", 4),
+				createQuest("Queens_Honor", 4),
+				createQuest("Rescue_Maiden", 3),
+				createQuest("Enchanted_Forest", 3),
+				createQuest("Slay_the_Dragon", 3),
+				createTourney("Camelot", 3), 
+				createTourney("Orkney", 2),
+				createTourney("Tintagel", 1),
+				createTourney("York", 0)));
 				
-		for(int i = 0; i < 2; i++) cards.add(new QuestCard("Arthurs_Enemy", resman, 3));
-		for(int i = 0; i < 2; i++) cards.add(new QuestCard("Boar_Hunt", resman, 2));
-		for(int i = 0; i < 2; i++) cards.add(new QuestCard("Repel_Saxon_Raiders", resman, 2));
-		for(int i = 0; i < 2; i++) cards.add(new EventCard("King's_Recognition", resman, new Recognition()));
-		for(int i = 0; i < 2; i++) cards.add(new EventCard("Queen's_Favor", resman, new Favor()));
-		for(int i = 0; i < 2; i++) cards.add(new EventCard("Called_to_Camelot", resman,new Camelot()));
+		for(int i = 0; i < 2; i++) cards.add(createQuest("Arthurs_Enemy", 3));
+		for(int i = 0; i < 2; i++) cards.add(createQuest("Boar_Hunt", 2));
+		for(int i = 0; i < 2; i++) cards.add(createQuest("Repel_Saxon_Raiders", 2));
+		for(int i = 0; i < 2; i++) cards.add(createEvent("King's_Recognition", new Recognition()));
+		for(int i = 0; i < 2; i++) cards.add(createEvent("Queen's_Favor", new Favor()));
+		for(int i = 0; i < 2; i++) cards.add(createEvent("Called_to_Camelot", new Camelot()));
+		
+		for(int i=0;i<cards.size();i++) cards.get(i).setID(i);
 		
 		return cards;
 	}

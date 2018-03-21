@@ -1,6 +1,5 @@
 package group52.comp3004.cards;
 
-import group52.comp3004.ResourceManager;
 import group52.comp3004.game.GameState;
 
 public class AdventureCard extends Card{
@@ -9,14 +8,9 @@ public class AdventureCard extends Card{
 	protected int bp;
 	protected int bids;
 	
-	public AdventureCard(String name, ResourceManager rm ) {
-		super(name, rm);
+	public AdventureCard(String name) {
+		super(name);
 		this.description = null;
-		
-		//get face resources
-		front = resman.getFront(name, 'a');
-		back = resman.getAdventureBack();
-		this.setFill(front);
 	}
 	
 	public void setDes(String description) {

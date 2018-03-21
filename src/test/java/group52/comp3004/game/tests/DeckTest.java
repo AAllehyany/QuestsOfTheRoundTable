@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Card;
 import group52.comp3004.cards.Weapon;
@@ -15,17 +14,13 @@ import group52.comp3004.decks.Deck;
 import javafx.embed.swing.JFXPanel;
 
 public class DeckTest {
-	
-	JFXPanel jfxPanel = new JFXPanel();
-	public ResourceManager resman = new ResourceManager();
-	
-	AdventureCard excalibur = new Weapon("Excalibur", resman, 30);
-	AdventureCard horse = new Weapon("Horse", resman, 10);
-	AdventureCard sword = new Weapon("Sword", resman, 10);
-	AdventureCard dagger = new Weapon("Dagger", resman, 5);
-	AdventureCard dagger2 = new Weapon("Dagger", resman, 5);
-	AdventureCard lance = new Weapon("Lance", resman, 20);
-	Weapon battleax = new Weapon("Battle_Ax", resman, 15);
+	AdventureCard excalibur = new Weapon("Excalibur", 30);
+	AdventureCard horse = new Weapon("Horse", 10);
+	AdventureCard sword = new Weapon("Sword", 10);
+	AdventureCard dagger = new Weapon("Dagger", 5);
+	AdventureCard dagger2 = new Weapon("Dagger", 5);
+	AdventureCard lance = new Weapon("Lance", 20);
+	Weapon battleax = new Weapon("Battle_Ax", 15);
 
 	@Test
 	public void testEquals() {
@@ -74,7 +69,7 @@ public class DeckTest {
 	
 	@Test
 	public void testDiscardArrayListCard() {
-		Deck<AdventureCard> aDeck = new Deck<AdventureCard>(Deck.createAdventureDeck(resman));
+		Deck<AdventureCard> aDeck = new Deck<AdventureCard>(Deck.createAdventureDeck());
 		ArrayList<AdventureCard> cards = new ArrayList<AdventureCard>();
 		cards.add(excalibur);
 		cards.add(sword);

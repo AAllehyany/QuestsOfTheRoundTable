@@ -1,25 +1,20 @@
 package group52.comp3004.game.tests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import group52.comp3004.players.Player;
-import javafx.embed.swing.JFXPanel;
-import group52.comp3004.cards.Weapon;
-import group52.comp3004.ResourceManager;
-import group52.comp3004.cards.Foe;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-class WeaponTest {
-	JFXPanel jfxPanel = new JFXPanel();
-	public ResourceManager resman = new ResourceManager();
+import group52.comp3004.cards.Foe;
+import group52.comp3004.cards.Weapon;
+import group52.comp3004.players.Player;
 
-	Weapon excalibur = new Weapon("Excalibur", resman, 30);
-	Weapon horse = new Weapon("Horse", resman, 10);
-	Weapon sword = new Weapon("Sword", resman, 10);
-	Weapon dagger = new Weapon("Dagger", resman, 5);
-	Weapon lance = new Weapon("Lance", resman, 20);
-	Weapon battleax = new Weapon("Battle_Ax", resman, 15);
+class WeaponTest {
+	Weapon excalibur = new Weapon("Excalibur", 30);
+	Weapon horse = new Weapon("Horse", 10);
+	Weapon sword = new Weapon("Sword", 10);
+	Weapon dagger = new Weapon("Dagger", 5);
+	Weapon lance = new Weapon("Lance", 20);
+	Weapon battleax = new Weapon("Battle_Ax", 15);
 
 	@Test
 	void playerAddWeapon() {	
@@ -58,14 +53,14 @@ class WeaponTest {
 	
 	@Test
 	void foeAddWeapon() {
-		Foe giant = new Foe("Giant", resman, 40);
+		Foe giant = new Foe("Giant", 40);
 		giant.addWeapon(dagger);
 		assertEquals(45, (int) giant.getBp());
 	}
 	
 	@Test
 	void foeAddSameWeapon() {
-		Foe giant = new Foe("Giant", resman, 40);
+		Foe giant = new Foe("Giant", 40);
 		giant.addWeapon(dagger);
 		boolean result = giant.addWeapon(dagger);
 		assertEquals(false, (boolean) result);
@@ -74,7 +69,7 @@ class WeaponTest {
 	
 	@Test
 	void foeAddMultipleWeapon() {
-		Foe giant = new Foe("Giant", resman, 40);
+		Foe giant = new Foe("Giant", 40);
 		giant.addWeapon(dagger);
 		giant.addWeapon(lance);
 		giant.addWeapon(battleax);
@@ -83,7 +78,7 @@ class WeaponTest {
 
 	@Test
 	void foeClearWeapon() {
-		Foe giant = new Foe("Giant", resman, 40);
+		Foe giant = new Foe("Giant", 40);
 		giant.addWeapon(dagger);
 		giant.addWeapon(lance);
 		giant.addWeapon(battleax);

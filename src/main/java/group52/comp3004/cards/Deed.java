@@ -1,11 +1,8 @@
 package group52.comp3004.cards;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
 
 import group52.comp3004.game.GameState;
-import group52.comp3004.players.Player;
 import group52.comp3004.players.Rank;
 
 public class Deed implements EventBehaviour{

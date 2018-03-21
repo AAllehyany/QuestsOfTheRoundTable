@@ -1,16 +1,20 @@
 package group52.comp3004.Strategies;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
 import group52.comp3004.cards.AdventureCard;
+import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Amour;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.QuestCard;
 import group52.comp3004.cards.StoryCard;
 import group52.comp3004.cards.Tests;
 import group52.comp3004.cards.Tourneys;
+import group52.comp3004.cards.Weapon;
 import group52.comp3004.game.GameState;
 import group52.comp3004.game.Stage;
 import group52.comp3004.players.Player;
@@ -106,5 +110,40 @@ public abstract class AbstractAI{
 			}
 		}
 		return null;
+	}
+	
+	protected Foe makeFoe(GameState state, Player p, int bp) {
+		Foe f = getStrongestFoe(state, p);
+		ArrayDeque<AdventureCard> weps = new ArrayDeque<AdventureCard>();
+		p.sortHand(state);
+		for(int i=0;i<p.getHandSize();i++) {
+			if(p.getHand().get(i) instanceof Weapon && !weps.contains(p.getHand().get(i)))
+				weps.addLast(p.getHand().get(i));
+		}
+		int curbp = f.getBp(state);
+		while(curbp<bp){
+			Weapon w = (Weapon) weps.removeFirst();
+			f.addWeapon(w);
+			p.getHand().remove(w);
+			curbp += w.getBp();
+		}
+		return f;
+	}
+	
+	protected int countWAA(GameState state, Player p, int stages) {
+		int WAA = 0;
+		if(p.hasAmourInHand() && !p.hasAmour()) WAA++;
+		HashMap<AdventureCard, Integer> weps = new HashMap<AdventureCard, Integer>();
+		for(int i=0;i<p.getHandSize();i++) {
+			if(p.getHand().get(i) instanceof Weapon) {
+				if(!weps.containsKey(p.getHand().get(i))) weps.put(p.getHand().get(i), 1);
+				else weps.replace(p.getHand().get(i), weps.get(p.getHand().get(i))+1);
+			}else if(p.getHand().get(i) instanceof Ally) WAA++;
+		}
+		ArrayList<Integer> wepNums = new ArrayList<Integer>(weps.values());
+		for(int i=0;i<wepNums.size();i++) {
+			WAA += Math.min(stages, wepNums.get(i));
+		}
+		return WAA;
 	}
 }

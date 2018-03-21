@@ -4,7 +4,6 @@ import java.util.HashSet;
 
 import org.apache.log4j.Logger;
 
-import group52.comp3004.ResourceManager;
 import group52.comp3004.decks.Deck;
 import group52.comp3004.game.GameState;
 import group52.comp3004.players.Player;
@@ -18,8 +17,8 @@ public class Foe extends AdventureCard{
 	
 	final static Logger logger = Logger.getLogger(Foe.class);
 	// Constructor for Foes with only one battle power
-	public Foe(String name, ResourceManager rm, int bp) {
-		super(name, rm);
+	public Foe(String name, int bp) {
+		super(name);
 		this.bp = bp;
 		this.highBp = bp;
 		this.weapons = new HashSet<Weapon>();
@@ -29,8 +28,8 @@ public class Foe extends AdventureCard{
 	
 	// Construct for Foes with 2 battle powers. highBp is the higher battle power (not what 
 	// needs to be added to achieve this battle power)
-	public Foe(String name, ResourceManager rm, int bp, int highBp, String quest) {
-		super(name, rm);
+	public Foe(String name, int bp, int highBp, String quest) {
+		super(name);
 		this.bp = bp;
 		this.highBp = highBp;
 		this.weapons = new HashSet<Weapon>();

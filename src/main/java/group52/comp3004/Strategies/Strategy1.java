@@ -26,26 +26,8 @@ public class Strategy1 extends AbstractAI{
 	}
 	
 	public boolean doIParticipateInQuest(GameState state, Player p) {
-		p.sortHand(state);
 		if(p.countFoes(20)<2) return false;
-		int sum = 0;
-		HashMap<Weapon, Integer> wepNum = new HashMap<Weapon, Integer>();
-		for(int i=0;i<p.getHand().size();i++) {
-			if(p.getHand().get(i) instanceof Ally) {
-				sum++;
-			}
-			if(p.getHand().get(i) instanceof Weapon) {
-				Weapon w = (Weapon) p.getHand().get(i);
-				if(wepNum.containsKey(w)) wepNum.replace(w, wepNum.get(w)+1);
-				else wepNum.put((Weapon) p.getHand().get(i), 1);
-			}
-		}
-		if(p.hasAmourInHand()) sum++;
-		int AA = sum;
-		ArrayList<Integer> weps = new ArrayList<Integer>(wepNum.values());
-		for(int i=0;i<weps.size();i++) {
-			sum += Math.min(weps.get(i), state.getCurrentQuest().getNumStages()-AA/2);
-		}
+		int sum = countWAA(state, p, state.getCurrentQuest().getNumStages());
 		if(sum<state.getCurrentQuest().getNumStages()*2) return false;
 		return true;
 	}
@@ -98,65 +80,34 @@ public class Strategy1 extends AbstractAI{
 	public ArrayList<Stage> createQuest(GameState state, Player p){
 		p.sortHand(state);
 		ArrayList<Stage> quest = new ArrayList<Stage>();
-		ArrayList<Weapon> wepdupes = new ArrayList<Weapon>();
+		ArrayList<AdventureCard> wepdupes = new ArrayList<AdventureCard>();
 		ArrayList<AdventureCard> dupes = p.getDuplicates();
 		for(int i=0;i<dupes.size();i++) {
-			if(dupes.get(i) instanceof Weapon) wepdupes.add((Weapon) dupes.get(i));
+			if(dupes.get(i) instanceof Weapon) wepdupes.add(dupes.get(i));
 		}
 		wepdupes.sort(new CardComparator());
 		for(int i=0;i<state.getCurrentQuest().getNumStages();i++) {
 			if(i==0) {
-				Foe f = this.getStrongestFoe(state, p);
-				int j = 0;
-				while(f.getBp(state) < 50 && j<p.getHand().size()) {
-					if(p.getHand().get(i) instanceof Weapon) {
-						f.addWeapon((Weapon) p.getHand().remove(j));
-					}
-					j++;
-				}
+				Foe f = makeFoe(state, p, 50);
 				Stage stage = new Stage(f);
-				quest.add(stage);
+				quest.add(0, stage);
 			}else if(i==1) {
 				if(p.hasTest()) {
 					Stage stage = new Stage(getTest(p));
 					quest.add(0, stage);
 				}else {
 					Foe f = this.getStrongestFoe(state, p);
-					Weapon wep = null;
-					if(!(wepdupes.isEmpty())) {
-						wep = wepdupes.remove(0);
-						f.addWeapon(wep);
-					}
-					while(quest.get(0).getFoe().getBp(state)<=f.getBp(state)) {
-						f.clearWeapons();
-						wep = wepdupes.remove(0);
-						f.addWeapon(wep);
-					}
-					if(wep!=null) p.getHand().remove(wep);
+					giveWeapon(state, p, f, wepdupes, quest.get(0).getTotalPower(state));
 					Stage stage = new Stage(f);
 					quest.add(0, stage);
 				}
 			}else {
 				Foe f = this.getStrongestFoe(state, p);
-				Weapon wep = null;
-				if(!(wepdupes.isEmpty())) {
-					wep = wepdupes.remove(0);
-					f.addWeapon(wep);
-				}
 				if(quest.get(0).isTestStage()) {
-					while(quest.get(1).getFoe().getBp(state)<=f.getBp(state)) {
-						f.clearWeapons();
-						wep = wepdupes.remove(0);
-						f.addWeapon(wep);
-					}
+					giveWeapon(state, p, f, wepdupes, quest.get(1).getTotalPower(state));
 				}else {
-					while(quest.get(0).getFoe().getBp(state)<=f.getBp(state)) {
-						f.clearWeapons();
-						wep = wepdupes.remove(0);
-						f.addWeapon(wep);
-					}
+					giveWeapon(state, p, f, wepdupes, quest.get(0).getTotalPower(state));
 				}
-				if(wep!=null) p.getHand().remove(wep);
 				Stage stage = new Stage(f);
 				quest.add(0, stage);
 			}
@@ -166,6 +117,16 @@ public class Strategy1 extends AbstractAI{
 			stages.add(quest.get(i));
 		}
 		return quest;
+	}
+	
+	private void giveWeapon(GameState state, Player p, Foe f, ArrayList<AdventureCard> weps, int last) {
+		for(int i=0;i<weps.size();i++) {
+			if(f.getBp(state)+weps.get(i).getBp()<last) {
+				f.addWeapon((Weapon) weps.get(i));
+				p.getHand().remove(weps.remove(i));
+				return;
+			}
+		}
 	}
 	
 	public ArrayList<AdventureCard> playStage(GameState state, Player p){

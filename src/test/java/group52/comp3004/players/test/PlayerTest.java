@@ -4,22 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import group52.comp3004.ResourceManager;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Weapon;
 import group52.comp3004.players.Player;
 import group52.comp3004.players.Rank;
-import javafx.embed.swing.JFXPanel;
 
 public class PlayerTest {
-	private ResourceManager resman = new ResourceManager();
-	JFXPanel jfxPanel = new JFXPanel();
-	
 	@Test
 	public void testShieldsDoNotGoBelowRank() {
 		Player p = new Player(5);
@@ -80,12 +74,12 @@ public class PlayerTest {
 		
 		assertEquals(5, (int) p.getBattlePoints());
 		
-		p.addField(new Ally("King_Arthur", resman, 15, 0));
+		p.addField(new Ally("King_Arthur", 15, 0));
 		
 		assertEquals(20, (int) p.getBattlePoints());
 		
-		p.addTemp(new Ally("King_Arthur", resman, 15, 0));
-		p.addTemp(new Weapon("Horse", resman, 10));
+		p.addTemp(new Ally("King_Arthur", 15, 0));
+		p.addTemp(new Weapon("Horse", 10));
 		
 		assertEquals(45, (int) p.getBattlePoints());
 	}
@@ -94,7 +88,7 @@ public class PlayerTest {
 	public void testDoesNotPlayCardNotInHand() {
 		Player p = new Player(1337);
 		
-		Ally c = new Ally("King_Arthur", resman, 16, 0);
+		Ally c = new Ally("King_Arthur", 16, 0);
 		
 		p.playCardToField(c);
 		
@@ -112,7 +106,7 @@ public class PlayerTest {
 	public void testDoesNotBidMoreThanInHand() {
 		Player p = new Player(1337);
 		
-		Ally c = new Ally("King_Arthur", resman, 16, 0);
+		Ally c = new Ally("King_Arthur", 16, 0);
 		ArrayList<AdventureCard> bids = new ArrayList();
 		p.addCardToHand(c);
 		p.addCardToHand(c);

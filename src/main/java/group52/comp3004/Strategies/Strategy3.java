@@ -47,27 +47,6 @@ public class Strategy3 extends AbstractAI{
 		return false;
 	}
 	
-	private int countWAA(GameState state, Player p, int stages) {
-		int WAA = 0;
-		boolean hasA = false;
-		HashMap<AdventureCard, Integer> weps = new HashMap<AdventureCard, Integer>();
-		for(int i=0;i<p.getHandSize();i++) {
-			if(p.getHand().get(i) instanceof Weapon) {
-				if(!weps.containsKey(p.getHand().get(i))) weps.put(p.getHand().get(i), 1);
-				else weps.replace(p.getHand().get(i), weps.get(p.getHand().get(i))+1);
-			}else if(p.getHand().get(i) instanceof Ally) WAA++;
-			else if(p.getHand().get(i) instanceof Amour && !hasA) {
-				WAA++;
-				hasA = true;
-			}
-		}
-		ArrayList<Integer> wepNums = new ArrayList<Integer>(weps.values());
-		for(int i=0;i<wepNums.size();i++) {
-			WAA += Math.min(stages, wepNums.get(i));
-		}
-		return WAA;
-	}
-	
 	public int nextBid(GameState state, Player p) {
 		return p.countFoes(25);
 	}
@@ -119,17 +98,7 @@ public class Strategy3 extends AbstractAI{
 					stages.add(stage);
 				}
 			}else {
-				Foe f = getStrongestFoe(state, p);
-				int j=0;
-				while(f.getBp(state)<max*10 && j<p.getHand().size()) {
-					if(p.getHand().get(j) instanceof Weapon) {
-						if(f.addWeapon((Weapon) p.getHand().get(j))) {
-							p.getHand().remove(j);
-							j--;
-						}
-					}
-					j++;
-				}
+				Foe f = makeFoe(state, p, max*10);
 				Stage stage = new Stage(f);
 				stages.add(stage);
 			}

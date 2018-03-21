@@ -2,11 +2,11 @@ package group52.comp3004.game;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import group52.comp3004.cards.QuestCard;
 import group52.comp3004.cards.Tourneys;
 import group52.comp3004.players.Player;
+
+
 public class GameTourney {
 	private final Tourneys tourney;
 	private List<Player> players;
