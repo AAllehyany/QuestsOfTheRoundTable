@@ -7,6 +7,11 @@ import org.apache.log4j.Logger;
 import group52.comp3004.game.*;
 import group52.comp3004.players.Player;
 
+/**
+ * Adds functionally for ally type adventure cards.
+ * @author Sandy
+ *
+ */
 public class Ally extends AdventureCard
 {
 	private int bids;
@@ -17,8 +22,13 @@ public class Ally extends AdventureCard
 	
 	final static Logger logger = Logger.getLogger(Ally.class);
 	// TODO special abilities
-	
-	// used for allies without special cases (should not be used for Merlin)
+
+	/**
+	 * Constructor for ally without a special case. <p>Should not be used for Merlin</p>
+	 * @param name The type of card. Needs to match a image file in order to load the correct face.
+	 * @param bp Battle point value of the ally
+	 * @param bids ?
+	 */
 	public Ally(String name, int bp, int bids) {
 		super(name);
 		this.bp = bp;
@@ -26,7 +36,15 @@ public class Ally extends AdventureCard
 		if(name.equals("Merlin")) this.merlin = true;	
 	}
 	
-	// used for allies with special cases (should not be used for Merlin)
+	/**
+	 * Constructor for ally with a special case. <p>Should not be used for Merlin</p>
+	 * @param name The type of card. Needs to match a image file in order to load the correct face.
+	 * @param bp Battle point value of the ally
+	 * @param bids ?
+	 * @param prereq ?
+	 * @param bonusbp ?
+	 * @param bonusbid ?
+	 */
 	public Ally(String name, int bp, int bids, String prereq, int bonusbp, int bonusbid) {
 		super(name);
 		this.bp = bp;
@@ -37,13 +55,21 @@ public class Ally extends AdventureCard
 		if(name.equals("Merlin")) this.merlin = true;
 	}
 	
-	// should only be used for Merlin
+	/**
+	 * Constructor for Merlin ally cards. Set Merlin boolean to true if name is Merlin. <p>Should only be used for Merlin</p>
+	 * @param name The type of card. Needs to match a image file in order to load the correct face.
+	 */
 	public Ally(String name) {
 		super(name);
 		if(name.equals("Merlin")) this.merlin = true;
 	}
 	
-	// determine if an ally's special ability is satisfied
+	/**
+	 * Determine if an ally's special ability is satisfied. -->? meaning?
+	 * @param state the current conditions of the game
+	 * @return True: Can use the ally's special ability
+	 * 		   <p>False: Unable to use special ability
+	 */
 	public boolean bonusSatisfied(GameState state) {
 		if(this.prereq==null) return false;
 		if(state.getCurrentQuest()!=null && 
@@ -62,7 +88,12 @@ public class Ally extends AdventureCard
 		return false;
 	}
 	
-	// spaghetti code to start Merlin's special ability
+	/**
+	 * ?needs description?
+	 * @param state current conditions of the game
+	 * @param stage ?
+	 * @return
+	 */
 	public ArrayList<AdventureCard> StartMerlinSpecial(GameState state, int stage) {
 		ArrayList<AdventureCard> cards = new ArrayList<AdventureCard>();
 		if(!this.merlin) {
@@ -89,7 +120,12 @@ public class Ally extends AdventureCard
 		}
 	}
 	
-	// spaghetti code to end Merlin's special ability
+	/**
+	 * ?needs description?
+	 * @param cards ?
+	 * @return True: ?
+	 * 		   <p>False: ?
+	 */
 	public boolean EndMerlinSpecial(ArrayList<AdventureCard> cards) {
 		if(!this.merlin) return false;
 		for(int i=0;i<cards.size();i++) {

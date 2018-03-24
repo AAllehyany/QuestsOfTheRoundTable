@@ -1,6 +1,10 @@
 package group52.comp3004.cards;
 
-
+/**
+ * Assigns a short form to each type of card in the game.
+ * @author Sandy
+ *
+ */
 public enum CardType {
 	//ADVENTURE DECK:
 	

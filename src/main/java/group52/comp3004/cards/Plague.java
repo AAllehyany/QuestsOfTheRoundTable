@@ -4,6 +4,11 @@ import org.apache.log4j.Logger;
 
 import group52.comp3004.game.GameState;
 
+/**
+ * Implements Plague event
+ * @author Sandy
+ *
+ */
 public class Plague implements EventBehaviour{
 	final static Logger logger = Logger.getLogger(Plague.class);
 	@Override

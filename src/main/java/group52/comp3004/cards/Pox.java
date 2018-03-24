@@ -4,6 +4,11 @@ import org.apache.log4j.Logger;
 
 import group52.comp3004.game.GameState;
 
+/**
+ * Implements Pox event
+ * @author Sandy
+ *
+ */
 public class Pox implements EventBehaviour{
 	final static Logger logger = Logger.getLogger(Pox.class);
 	@Override

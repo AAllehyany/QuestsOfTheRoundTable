@@ -5,6 +5,11 @@ import org.apache.log4j.Logger;
 import group52.comp3004.game.GameState;
 import group52.comp3004.players.Rank;
 
+/**
+ * Implements Queen's Favour event
+ * @author Sandy
+ *
+ */
 public class Favor implements EventBehaviour{
 	private Rank lowestRank;
 	
