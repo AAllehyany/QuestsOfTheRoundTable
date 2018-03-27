@@ -17,6 +17,11 @@ import group52.comp3004.game.GameTourney;
 import group52.comp3004.game.Stage;
 import group52.comp3004.players.Player;
 
+/**
+ * ?Needs an explaination of stategy goals? ?Does implemented functions from AbstractAI change behaviour much for different strats? 
+ * @author Sandy
+ *
+ */
 public class Strategy1 extends AbstractAI{
 	
 	static final private Logger logger = Logger.getLogger(Strategy1.class);

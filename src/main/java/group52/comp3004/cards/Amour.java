@@ -15,8 +15,8 @@ public class Amour extends AdventureCard{
 	/**
 	 * Constructor for amour cards
 	 * @param name The type of card. Needs to match a image file in order to load the correct face.
-	 * @param bp Battle point value of the ally
-	 * @param bids ?
+	 * @param bp Battle point value of the amour
+	 * @param bids The number of bids the amour provides to a test
 	 */
 	public Amour(String name, int bp, int bids){
 		super(name);

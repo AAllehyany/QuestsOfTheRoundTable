@@ -5,7 +5,7 @@ import java.util.Comparator;
 import group52.comp3004.game.GameState;
 
 /**
- * ?
+ * Sorts a list of cards by battle power in a decreasing order.
  * @author Sandy
  *
  */

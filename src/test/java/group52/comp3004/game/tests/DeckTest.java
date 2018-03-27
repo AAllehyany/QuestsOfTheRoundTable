@@ -49,7 +49,7 @@ public class DeckTest {
 		aDeck.addCard(dagger);
 		aDeck.addCard(lance);
 		aDeck.addCard(battleax);
-		Card fdraw = aDeck.drawCard();
+		Card fdraw = aDeck.draw();
 		assertEquals(5, (int) aDeck.getSize());
 		assertEquals(false, (boolean) (fdraw==null));
 	}
@@ -63,7 +63,7 @@ public class DeckTest {
 		aDeck.addCard(dagger);
 		aDeck.addCard(lance);
 		aDeck.addCard(battleax);
-		Card discarded = aDeck.discardCard(excalibur);
+		Card discarded = aDeck.discard(excalibur);
 		assertEquals("Excalibur", (String) discarded.getName());
 	}
 	
@@ -74,16 +74,16 @@ public class DeckTest {
 		cards.add(excalibur);
 		cards.add(sword);
 		cards.add(lance);
-		aDeck.discardCard(cards);
+		aDeck.discard(cards);
 		assertEquals(3,cards.size());
 	}
 	
 	public void testDrawEmptyDeck() {
 		Deck<Card> aDeck = new Deck<Card>();
-		aDeck.discardCard(excalibur);
-		aDeck.discardCard(horse);
-		aDeck.discardCard(sword);
-		aDeck.drawCard();
+		aDeck.discard(excalibur);
+		aDeck.discard(horse);
+		aDeck.discard(sword);
+		aDeck.draw();
 		assertEquals(2, (int) aDeck.getSize());
 	}
 

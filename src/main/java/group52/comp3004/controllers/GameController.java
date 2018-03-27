@@ -1,20 +1,14 @@
 package group52.comp3004.controllers;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
 
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
-import group52.comp3004.cards.Arms;
 import group52.comp3004.cards.EventCard;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.QuestCard;
-import group52.comp3004.cards.StoryCard;
 import group52.comp3004.cards.Tests;
 import group52.comp3004.cards.Tourneys;
 import group52.comp3004.cards.Weapon;
@@ -435,7 +429,7 @@ public class GameController{
 		
 		ArrayList<Player> players = new ArrayList<Player>(model.getCurrentQuest().getPlayers());
 		for(int i=0;i<players.size();i++) {
-			players.get(i).addCardToHand(model.getAdventureDeck().drawCard());
+			players.get(i).addCardToHand(model.getAdventureDeck().draw());
 		}
 		if(model.getCurrentQuest().getStages().get(model.getCurrentQuest().getCurrentStage()).isTestStage()) {
 			int stoppedBidding = 0;
@@ -597,7 +591,7 @@ public class GameController{
 			logger.info("Discarded card: " + card.getName());
 			Player player =this.model.getPlayerByIndex(index);
 			player.discard(card);
-			model.getAdventureDeck().discardCard(card);
+			model.getAdventureDeck().discard(card);
 		}
 	}
 

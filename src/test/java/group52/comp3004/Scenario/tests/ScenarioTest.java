@@ -68,23 +68,23 @@ public class ScenarioTest {
 		p1.addCardToHand(boar);
 		p1.addCardToHand(dagger);
 		for(int i=0;i<8;i++) {
-			p1.addCardToHand(state.getAdventureDeck().drawCard());
+			p1.addCardToHand(state.getAdventureDeck().draw());
 		}
 		assertEquals(12, p1.getHand().size());
 		for(int i=0;i<12;i++) {
-			p2.addCardToHand(state.getAdventureDeck().drawCard());
+			p2.addCardToHand(state.getAdventureDeck().draw());
 		}
 		assertEquals(12, p2.getHand().size());
 		p3.addCardToHand(horse);
 		p3.addCardToHand(excalibur);
 		for(int i=0;i<10;i++) {
-			p3.addCardToHand(state.getAdventureDeck().drawCard());
+			p3.addCardToHand(state.getAdventureDeck().draw());
 		}
 		assertEquals(12, p3.getHand().size());
 		p4.addCardToHand(axe);
 		p4.addCardToHand(lance);
 		for(int i=0;i<10;i++) {
-			p4.addCardToHand(state.getAdventureDeck().drawCard());
+			p4.addCardToHand(state.getAdventureDeck().draw());
 		}
 		assertEquals(12, p4.getHand().size());
 		
@@ -114,7 +114,7 @@ public class ScenarioTest {
 		state.getCurrentQuest().playStage(state);
 		assertEquals(2, state.getCurrentQuest().getPlayers().size());
 		for(int i=0;i<state.getCurrentQuest().getPlayers().size();i++) {
-			state.getCurrentQuest().getPlayers().get(i).addCardToHand(state.getAdventureDeck().drawCard());
+			state.getCurrentQuest().getPlayers().get(i).addCardToHand(state.getAdventureDeck().draw());
 		}
 		assertEquals(12, p3.getHand().size());
 		assertEquals(12, p4.getHand().size());
@@ -126,7 +126,7 @@ public class ScenarioTest {
 		state.getCurrentQuest().playStage(state);
 		assertEquals(1, state.getCurrentQuest().getPlayers().size());
 		for(int i=0;i<state.getCurrentQuest().getPlayers().size();i++) {
-			state.getCurrentQuest().getPlayers().get(i).addCardToHand(state.getAdventureDeck().drawCard());
+			state.getCurrentQuest().getPlayers().get(i).addCardToHand(state.getAdventureDeck().draw());
 		}
 		state.getCurrentQuest().end(state, 0);
 		assertEquals(10, (int) p1.getShields());

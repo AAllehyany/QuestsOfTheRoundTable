@@ -27,7 +27,7 @@ public class Ally extends AdventureCard
 	 * Constructor for ally without a special case. <p>Should not be used for Merlin</p>
 	 * @param name The type of card. Needs to match a image file in order to load the correct face.
 	 * @param bp Battle point value of the ally
-	 * @param bids ?
+	 * @param bids The additional points that the ally adds to a test.
 	 */
 	public Ally(String name, int bp, int bids) {
 		super(name);
@@ -40,10 +40,10 @@ public class Ally extends AdventureCard
 	 * Constructor for ally with a special case. <p>Should not be used for Merlin</p>
 	 * @param name The type of card. Needs to match a image file in order to load the correct face.
 	 * @param bp Battle point value of the ally
-	 * @param bids ?
-	 * @param prereq ?
-	 * @param bonusbp ?
-	 * @param bonusbid ?
+	 * @param bids The additional points that the ally adds to a test.
+	 * @param prereq The required card(s) that need to be in play in order for a special ability to be used.
+	 * @param bonusbp The amount of bonus battle points the ally gives when its special ability is used.
+	 * @param bonusbid The amount of bonus bids that the ally gives with its special ability.
 	 */
 	public Ally(String name, int bp, int bids, String prereq, int bonusbp, int bonusbid) {
 		super(name);
@@ -65,7 +65,7 @@ public class Ally extends AdventureCard
 	}
 	
 	/**
-	 * Determine if an ally's special ability is satisfied. -->? meaning?
+	 * Determine if an ally's special ability can be used
 	 * @param state the current conditions of the game
 	 * @return True: Can use the ally's special ability
 	 * 		   <p>False: Unable to use special ability
@@ -89,10 +89,11 @@ public class Ally extends AdventureCard
 	}
 	
 	/**
-	 * ?needs description?
+	 * Merlin's special ability is to see a single stage in a quest. This function flips the stage selected by the parameter stage.
+	 * <p>Should be followed by an EndMerlinSpecial flip the card back over when player is done.
 	 * @param state current conditions of the game
-	 * @param stage ?
-	 * @return
+	 * @param stage The stage of the quest that the player has selected. Returns error if stage number is greater than numbers of stages in quest..
+	 * @return list of all the cards in the selected stage
 	 */
 	public ArrayList<AdventureCard> StartMerlinSpecial(GameState state, int stage) {
 		ArrayList<AdventureCard> cards = new ArrayList<AdventureCard>();
@@ -121,10 +122,12 @@ public class Ally extends AdventureCard
 	}
 	
 	/**
-	 * ?needs description?
-	 * @param cards ?
-	 * @return True: ?
-	 * 		   <p>False: ?
+	 * Executed when player has finished looking at a selected stage. Flips the selected stage cards back over.
+	 * <p>Needs to be used after a StartMerlinSpecial call</p>
+	 * If boolean returns false then a card that is not Merlin has used his ability and an error has occured.
+	 * @param cards the list of stage cards from 
+	 * @return True: Successfully turned down all cards
+	 * 		   <p>False: Card to that is not Merlin tried to use his special ability
 	 */
 	public boolean EndMerlinSpecial(ArrayList<AdventureCard> cards) {
 		if(!this.merlin) return false;
@@ -134,13 +137,17 @@ public class Ally extends AdventureCard
 		return true;
 	}
 
-	// get an ally's battle power
+	/**
+	 * Get the total battle power provided by an ally. Total power is base bp plus what is provided by the bonus if the special ability is active.
+	 */
 	public int getBp(GameState state) {
 		if (bonusSatisfied(state)) return bp+bonusbp;
 		return bp;
 	}
 	
-	// get an ally's bids added
+	/**
+	 * Get the total bid amount provided by an ally. Total power is base bid plus what is provided by the bonus if the special ability is active.
+	 */
 	public int getBids(GameState state) {
 		if (bonusSatisfied(state)) return bids+bonusbid;
 		return bids;

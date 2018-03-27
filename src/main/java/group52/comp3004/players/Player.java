@@ -22,6 +22,11 @@ import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
 import group52.comp3004.game.GameTourney;
 
+/**
+ * Stores all required information about an individual player 
+ * @author Sandy
+ *
+ */
 public class Player {
 	
 	private Integer id;
@@ -47,6 +52,13 @@ public class Player {
 	
 	
 	static final private Logger logger = Logger.getLogger(Player.class);
+	
+	/**
+	 * ?Use of each constructor?
+	 * @param id Player id number. Used for internal testing.
+	 * @param gc ?Used in iter 2?
+	 * @param gs the current conditions of the game
+	 */
 	public Player(Integer id, GameController gc, GameState gs) {
 		this.id = id;
 		shields = 10;
@@ -68,6 +80,13 @@ public class Player {
 		strategy = null;
 	}
 	
+	/**
+	 *  ?Use of each constructor?
+	 * @param id Player id number. Used for internal testing.
+	 * @param gc ?used in iter 2?
+	 * @param gs the current conditions of the game
+	 * @param s
+	 */
 	public Player(Integer id, GameController gc, GameState gs, int s) {
 		this.id = id;
 		shields = 10;
@@ -91,6 +110,10 @@ public class Player {
 		else strategy = null;
 	}
 	
+	/**
+	 *  ?Use of each constructor?
+	 * @param id Player id number. Used for internal testing.
+	 */
 	public Player(Integer id) {
 		this.id = id;
 		shields = 10;
@@ -109,95 +132,180 @@ public class Player {
 		tempWeapons = new ArrayList<>();
 	}
 	
+	/**
+	 * Get the id property
+	 */
 	public Integer getId() {
 		return id;
 	}
 	
+	/**
+	 * Get the default amount of battle point given by the players rank
+	 */
 	public Integer getRankBP() {
 		return this.battlePoints;
 	}
 	
+	/**
+	 * Sets the player to an AI rather than a player.
+	 * @param ai Which ai strategy to use. Corresponds to the number in the AI class names.
+	 */
 	public void setAI(int ai) {
 		if(ai==1) this.strategy = new Strategy1();
 		else if(ai==2) this.strategy = new Strategy2();
 		else this.strategy = null;
 	}
 	
+	/**
+	 * Get the strategy used by an AI player.
+	 */
 	public AbstractAI getAI() {
 		return this.strategy;
 	}
 	
+	/**
+	 * Get current number of shields owned by player.
+	 * <p>Stored as total shields owned. So need to get subtract requirement for current rank to get shields to display</p>
+	 * @return
+	 */
 	public Integer getShields() {
 		return shields;
 	}
 	
+	/**
+	 * Get player's current rank.
+	 * @return
+	 */
 	public Rank getRank() {
 		return rank;
 	}
 	
+	/**
+	 * Change the game state to a new one.
+	 * @param game the current conditions of the game
+	 */
 	public void setGame(GameState game) {
 		this.game = game;
 	}
 	
+	/**
+	 * Get the current conditions of the game
+	 * @return
+	 */
 	public GameState getGame() {
 		return this.game;
 	}
 	
+	/**
+	 * ?
+	 * @return
+	 */
 	public GameQuest getQuest() {
 		return this.quest;
 	}
 	
+	/**
+	 * ?
+	 * @param quest
+	 */
 	public void setQuest(GameQuest quest) {
 		this.quest = quest;
 		//quest.addPlayer(this);
 	}
 	
+	/**
+	 * ?what does second part do?
+	 * @param state
+	 * @return ?
+	 */
 	public Integer getBidPoints(GameState state) {
 		return bidPoints + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum();
 	}
 	
+	/**
+	 * ?what does second part do?
+	 * @return ?
+	 */
 	public Integer getBidPoints() {
 		return bidPoints + temp.stream().mapToInt(c -> c.getBids()).sum() + field.stream().mapToInt(c -> c.getBids()).sum();
 	}
 	
-	
+	/**
+	 * ?offered bids does what?
+	 * @param bids Number of cards bids
+	 */
 	public void bidCards(int bids) {
 		if(validBid(bids) && !stoppedBidding) this.offeredBids = bids;
 	}
 	
-	
+	/**
+	 * Ensures that the player has the number of cards bid or that the bid is not negative
+	 * @param num Number of cards bid
+	 */
 	public boolean validBid(int num) {
 		return num <= this.hand.size() && num >= 0;
 	}
 	
+	/**
+	 * ?Offered bids does what?
+	 * @return
+	 */
 	public int getOfferedBids() {
 		return this.offeredBids;
 	}
 	
+	/**
+	 * ?what does second part do?
+	 * @param state ?
+	 * @return ?
+	 */
 	public Integer getBattlePoints(GameState state) {
 		return battlePoints + temp.stream().mapToInt(c -> c.getBp()).sum() + field.stream().mapToInt(c -> c.getBp(state)).sum();
 	}
 	
+	/**
+	 * ?what does second part do?
+	 * @return ?
+	 */
 	public Integer getBattlePoints() {
 		return battlePoints + temp.stream().mapToInt(c -> c.getBp()).sum() + field.stream().mapToInt(c -> c.getBp()).sum();
 	}
 	
+	/**
+	 * Empty list of weapons that the player has equiped.
+	 */
 	public void clearWeapons() {
 		this.weapons.clear();
 	}
 
+	/**
+	 * Get number of shields required to for next rank of player
+	 */
 	public Integer getRequiredShields() {
 		return requiredShields;
 	}
 	
+	/**
+	 * Get the current floor of shield that a player can have.
+	 * <p>Increases when a player ranks up</p>
+	 * @return
+	 */
 	public int getMinShields() {
 		return minShields;
 	}
 	
+	/**
+	 * Equip a new weapon. Needs a test to ensure that weapon isn't already equiped.
+	 * @param weapon ?
+	 */
 	public void addWeapon(Integer weapon) {
 		this.weapons.add(weapon);
 	}
 	
+	/**
+	 * Add shields to player. If player now has less than minimum amount sets to minimum. If player has more then requiredShields rank up player.
+	 * @param shields
+	 */
 	public void addShields(Integer shields) {		
 		this.shields += shields;
 		if(this.shields < minShields) this.shields = minShields;
@@ -206,15 +314,25 @@ public class Player {
 		}
 	}
 	
-	
+	/**
+	 * Get a list of cards in the player's hand
+	 */
 	public ArrayList<AdventureCard> getHand() {
 		return hand;
 	}
 	
+	/**
+	 * Get number of cards in the player's hand.
+	 * @return
+	 */
 	public int getHandSize() {
 		return hand.size();
 	}
 	
+	/**
+	 * Give a player a whole new hand of cards.
+	 * @param hand
+	 */
 	public void setHand(ArrayList<AdventureCard> hand) {
 		this.hand.clear();
 		for(int i=0;i<hand.size();i++) {
@@ -222,7 +340,10 @@ public class Player {
 		}
 	}
 	
-	
+	/**
+	 * ?
+	 * @param card
+	 */
 	public void addCardToHand(AdventureCard card) {
 		logger.info("Adding "+card.getName()+" to hand");
 		/*card.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -348,25 +469,43 @@ public class Player {
 		this.hand.add(card);
 	}
 	
+	/**
+	 * ?
+	 */
 	public void tempToHand() {
 		temp.forEach(c -> addCardToHand(c));
 		temp.clear();
 	}
 	
+	/**
+	 * Tests if player already has the weapon equipped
+	 * @param weapon That will be attempted to be equipped
+	 */
 	public boolean canPlayWeapon(Weapon weapon) {
 		return !this.temp.contains(weapon);
 	}
 	
+	/**
+	 * The card is in player's hand.
+	 */
 	public boolean hasCardInHand(AdventureCard card) {
 		return this.hand.contains(card);
 	}
 	
+	/**
+	 * ?
+	 * @param card
+	 */
 	public void playCardToField(Ally card) {//why only Ally
 		if(!hasCardInHand(card)) return;
 		this.field.add(card);
 		this.hand.remove(card);
 	}
 	
+	/**
+	 * ?
+	 * @param card
+	 */
 	public void playToTemp(AdventureCard card) {//whats this for
 		if(!this.hasCardInHand(card)) return;
 		if(card instanceof Weapon && !canPlayWeapon((Weapon) card)) return;
@@ -375,19 +514,33 @@ public class Player {
 		this.hand.remove(card);
 	}
 	
-	public void addField(Ally card) {
+	/**
+	 * ?
+	 * @param card
+	 */
+	public void addField(Ally card) {//why only ally
 		this.field.add(card);
 		this.hand.remove(card);
 	}
 	
-	public void addTemp(AdventureCard card) {
+	/**
+	 * ?
+	 * @param card
+	 */
+	public void addTemp(AdventureCard card) {//why all adventure cards
 		this.temp.add(card);
 	}
 	
+	/**
+	 * ?
+	 */
 	public void addTemp(ArrayList<AdventureCard> cards) {
 		for(int i=0;i<cards.size();i++) this.temp.add(cards.get(i));
 	}
 	
+	/**
+	 * Remove all allies from the playing field.
+	 */
 	public void clearAlly() {
 		
 		for(int i=0;i<this.field.size();i++) {
@@ -396,6 +549,11 @@ public class Player {
 			}
 		}
 	}
+	
+	/**
+	 * ?
+	 * @return
+	 */
 	public ArrayList<AdventureCard> clearTemp() {
 		ArrayList<AdventureCard> a = new ArrayList<AdventureCard>();
 		ArrayList<AdventureCard> weps = new ArrayList<AdventureCard>();
@@ -425,6 +583,9 @@ public class Player {
 		
 	}
 
+	/**
+	 * Rank up the player. Used defined Rank enum for ranks.
+	 */
 	private void updateRank() {
 		minShields = requiredShields;
 		if(rank == Rank.Squire) {
@@ -442,25 +603,39 @@ public class Player {
 		}
 	}
 
+	/**
+	 * Get the list of cards that the player has equipped.
+	 */
 	public ArrayList<AdventureCard> getField() {
 		return this.field;
 	}
-
+	
+	/**
+	 * ?
+	 * @return
+	 */
 	public ArrayList<AdventureCard> getTemp() {
 		return this.temp;
 	}
 	
-	//not sure what it is
+	/**
+	 * ? duplicate?
+	 * @param ally
+	 * @return
+	 */
 	public AdventureCard removeAlly(Ally ally) {
-		// TODO Auto-generated method stub
 		this.field.remove(ally);
 		return ally;
 	}
 	
 	
-	/* Sort a players hand from highest battle power to lowest battle power for each type
-	 of card. Allies are set as first, then amours, then weapons, then foes, then tests. Foes
-	 and allies are sorted depending on the current GameState*/
+	/**
+	 * Sort a players hand from highest battle power to lowest battle power for each type
+	 * of card. 
+	 * <p>Allies are set as first, then amours, then weapons, then foes, then tests.</p> 
+	 * <p>Foes and allies are sorted depending on the current GameState</p>
+	 * @param state the current conditions of the game
+	 */
 	public void sortHand(GameState state) {
 		ArrayList<AdventureCard> foes = new ArrayList<AdventureCard>();
 		ArrayList<AdventureCard> tests = new ArrayList<AdventureCard>();
@@ -486,7 +661,10 @@ public class Player {
 		this.hand.addAll(tests);
 	}
 	
-	// Get any duplicates from a players hand
+	/**
+	 * Get a list of any duplicated cards in hand. ?What is it used for?
+	 * @return 
+	 */
 	public ArrayList<AdventureCard> getDuplicates(){
 		ArrayList<AdventureCard> dupes = new ArrayList<AdventureCard>();
 		HashSet<AdventureCard> cards = new HashSet<AdventureCard>();
@@ -496,7 +674,9 @@ public class Player {
 		return dupes;
 	}
 	
-	// Determine if a player has a test in their hand
+	/**
+	 * Tests if there is a test card in the hand.
+	 */
 	public boolean hasTest() {
 		for(int i=0;i<this.hand.size();i++) {
 			if(this.hand.get(i) instanceof Tests) return true;
@@ -504,12 +684,16 @@ public class Player {
 		return false;
 	}
 	
-	// count the number of tests in a player's hand
+	/**
+	 * Get the number of test cards in the players hand. Used to judge if a player can set up a quest.
+	 */
 	public int countTests() {
 		return this.hand.stream().filter(c -> c instanceof Tests).collect(Collectors.toList()).size();
 	}
 	
-	// count the number of foes in a player's hand
+	/**
+	 * Get the number of foe cards in the player's hand. Used to judge if a player can set up a quest.
+	 */
 	public int countFoes() {
 		int count = 0;
 		for(int i=0;i<this.hand.size();i++) {
@@ -518,7 +702,11 @@ public class Player {
 		return count;
 	}
 	
-	// count the number of foes less than a certain battle power in a player's hand
+	/**
+	 * Get the number of foes less than a certain battle power in a player's hand. Used to judge if a player can set up a quest.
+	 * @param bp The battle power trying to pass
+	 * @return
+	 */
 	public int countFoes(int bp) {
 		int count =0;
 		for(int i=0;i<this.hand.size();i++) {
@@ -527,7 +715,11 @@ public class Player {
 		return count;
 	}
 	
-	// get the foes less than a certain battle power in a player's hand
+	/**
+	 * Get the foes less than a certain battle power in a player's hand. ?What is it used for?
+	 * @param bp The battle power trying to pass
+	 * @return List of foes in hand that has a battle power greater than bp
+	 */
 	public ArrayList<AdventureCard> getFoes(int bp){
 		ArrayList<AdventureCard> foes = new ArrayList<AdventureCard>();
 		for(int i=0;i<this.hand.size();i++) {
@@ -538,7 +730,12 @@ public class Player {
 		return foes;
 	}
 	
-	// get the foes of unique battle powers in a player's hand depending on the GameState
+	// 
+	/**
+	 * get the foes of unique battle powers in a player's hand depending on the GameState. ?Duplicate?
+	 * @param state the current conditions of the game 
+	 * @return
+	 */
 	public ArrayList<AdventureCard> getUniqueFoes(GameState state){
 		ArrayList<AdventureCard> uFoes = new ArrayList<AdventureCard>();
 		HashSet<Integer> bps = new HashSet<Integer>();
@@ -553,6 +750,11 @@ public class Player {
 	}
 	
 	// count the foes of unique battle powers in a player's hand depending on the GameState
+	/**
+	 * ?Duplicate?
+	 * @param state the current conditions of the game
+	 * @return
+	 */
 	public int numUniqueFoes(GameState state) {
 		int numUFoes = 0;
 		HashSet<Integer> bps = new HashSet<Integer>();
@@ -565,6 +767,9 @@ public class Player {
 		return numUFoes;
 	}
 	
+	/**
+	 * Discard an adventure card from hand
+	 */
 	public void discard(AdventureCard card) {
 		this.hand.remove(card);
 	}
@@ -576,6 +781,9 @@ public class Player {
 		return false;
 	}
 	
+	/**
+	 * Test for whether there is an amour in the player's hand.
+	 */
 	public boolean hasAmourInHand() {
 		for(int i=0;i<this.hand.size();i++) {
 			if(this.hand.get(i) instanceof Amour) return true;
@@ -583,6 +791,10 @@ public class Player {
 		return false;
 	}
 	
+	/**
+	 * ?What is it used for?
+	 * @return
+	 */
 	public AdventureCard getAmourInHand() {
 		for(int i=0;i<this.hand.size();i++) {
 			if(this.hand.get(i) instanceof Amour) return this.hand.remove(i);
@@ -590,6 +802,10 @@ public class Player {
 		return null;
 	}
 	
+	/**
+	 * Test for whether there is an ally in the player's hand.
+	 * @return
+	 */
 	public boolean hasAllyInHand() {
 		for(int i=0;i<this.hand.size();i++) {
 			if(this.hand.get(i) instanceof Ally) return true;
@@ -597,6 +813,11 @@ public class Player {
 		return false;
 	}
 	
+	/**
+	 * ?What is this used for?
+	 * @param state the current conditions of the game
+	 * @return
+	 */
 	public AdventureCard getStrongestAllyInHand(GameState state) {
 		this.sortHand(state);
 		for(int i=0;i<this.hand.size();i++) {
@@ -604,30 +825,52 @@ public class Player {
 		}
 		return null;
 	}
-
+	
+	/**
+	 * ?bidding is over for all players or just this one?
+	 */
 	public void stopBidding() {
 		this.stoppedBidding = true;
 		
 	}
 	
+	/**
+	 * ?Duplicate?
+	 * @return
+	 */
 	public boolean hasStoppedBidding() {
 		return this.stoppedBidding;
 	}
 
+	/**
+	 * Remove the player's shields. Can not remove more shield then the minimum. Minimum represents the zero value of each rank.
+	 * @param i number of sheilds to be removed
+	 */
 	public void removeShield(int i) {
 		this.shields = shields-i;
 		if (this.shields<this.minShields) this.shields = this.minShields;
 		
 	}
-
+	
+	/**
+	 * Get the tourney property ?Use in player class?
+	 * @return
+	 */
 	public GameTourney getTourney() {
 		return this.tourney;
 	}
 	
+	/**
+	 * ?Use in player class?
+	 * @param tourney
+	 */
 	public void setTourney(GameTourney tourney) {
 		this.tourney = tourney;
 	}
 
+	/**
+	 * Remove player from quest ?What is it used for?
+	 */
 	public void removeQuest() {
 		this.quest = null;
 	}

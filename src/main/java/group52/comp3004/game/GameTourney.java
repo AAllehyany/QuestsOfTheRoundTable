@@ -6,7 +6,12 @@ import java.util.List;
 import group52.comp3004.cards.Tourneys;
 import group52.comp3004.players.Player;
 
-
+/**
+ * Handles set up, playing, and ending a tourney state.
+ * <p>Tourneys is the card itself. GameTourney handles the quest game play.</p>
+ * @author Sandy
+ *
+ */
 public class GameTourney {
 	private final Tourneys tourney;
 	private List<Player> players;
@@ -16,6 +21,10 @@ public class GameTourney {
 	private List<Player> winner;
 	private boolean over;
 	
+	/**
+	 * Constructor for a new tourney.
+	 * @param tourney The specific tourney card drawn. Important since each card awards a different number of bonus shields.
+	 */
 	public GameTourney(Tourneys tourney) {
 		this.tourney = tourney;
 		this.players = new ArrayList<Player>();
@@ -27,25 +36,43 @@ public class GameTourney {
 		this.over= false;
 	}
 	
+	/**
+	 * Get the tourney card drawn.
+	 * @return
+	 */
 	public Tourneys getTourney() {
 		return tourney;
 	}
 	
+	/**
+	 * Get list of players involved in the tourney.
+	 * @return
+	 */
 	public List<Player> getPlayers() {
 		return this.players;
 	}
 	
 	//Why need to add tourney inside player?
+	/**
+	 * ?
+	 * @param player
+	 */
 	public void addPlayer(Player player) {
-
 			this.players.add(player);
 			player.setTourney(this);
 	}
 
+	/**
+	 * Tests whether the tourney is complete.
+	 * @return true if tourney is over.
+	 */		
 	public boolean isOver() {
 		return this.over;
 	}
 	
+	/**
+	 * ?
+	 */
 	public void dealCards() {
 		for(int i=0;i<this.players.size();i++) {
 			this.players.get(i).getGame().dealToPlayer(i);
@@ -53,6 +80,10 @@ public class GameTourney {
 			
 	}
 	
+	/**
+	 * ?
+	 * @return
+	 */
 	public List<Player> winner() {
 		List<Player> win= battle(this.players);
 		if(this.players.size()==1) {
@@ -68,9 +99,13 @@ public class GameTourney {
 			}
 		}
 		return this.winner;
-
-
 	}
+	
+	/**
+	 * ?
+	 * @param player
+	 * @return
+	 */
 public List<Player> secondBattle(List<Player> player) {
 	    this.count1.clear();
 		Player highest= player.get(0);
@@ -86,6 +121,12 @@ public List<Player> secondBattle(List<Player> player) {
 		}
 		return this.count1;
 	}
+
+	/**
+	 * ?
+	 * @param player
+	 * @return
+	 */
 	public List<Player> battle(List<Player> player) {
 		this.count.clear();
 		Player highest= player.get(0);
@@ -102,10 +143,17 @@ public List<Player> secondBattle(List<Player> player) {
 		}
 		return this.count;
 	}
+	
+	/**
+	 * Award shields to winner equal to number of players in tourney plus the bonus provided by the card.
+	 */
 	public void awardShields() {
 		 this.winner.forEach(p -> p.addShields(players.size()+tourney.getShields() + bonus));
 	}
 	
+	/**
+	 * Handle end of tourney. 
+	 */
 	public void end() {
 		for(int i =0;i<this.players.size();i++) {
 			this.getPlayers().get(i).clearTemp();
@@ -116,8 +164,12 @@ public List<Player> secondBattle(List<Player> player) {
 		bonus = 0;
 	}
 
+	/**
+	 * ?
+	 * @param player
+	 * @return
+	 */
 	public boolean isPlayer(Player player) {
-		// TODO Auto-generated method stub
 		return this.players.contains(player); // || player == sponsor;
 	}
 }
