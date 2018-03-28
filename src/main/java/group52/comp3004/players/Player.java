@@ -127,13 +127,6 @@ public class Player {
 	}
 	
 	/**
-	 * Get the default amount of battle point given by the players rank
-	 */
-	public Integer getRankBP() {
-		return this.battlePoints;
-	}
-	
-	/**
 	 * Sets the player to an AI rather than a player.
 	 * @param ai Which ai strategy to use. Corresponds to the number in the AI class names.
 	 */
@@ -320,8 +313,9 @@ public class Player {
 	 * ?
 	 */
 	public void tempToHand() {
-		temp.forEach(c -> addCardToHand(c));
-		temp.forEach(c -> logger.info(c.getName() + " removed from temp"));
+		temp.forEach(c -> {addCardToHand(c);
+			logger.info(c.getName() + " removed from temp");
+		});
 		temp.clear();
 	}
 	
@@ -336,20 +330,10 @@ public class Player {
 	 * ?
 	 * @param card
 	 */
-	public void playCardToField(Ally card) {//why only Ally
-		if(!hasCardInHand(card)) return;
-		this.field.add(card);
-		this.discard(card);
-	}
-	
-	/**
-	 * ?
-	 * @param card
-	 */
 	public void playToTemp(AdventureCard card) {//whats this for
 		if(!this.hasCardInHand(card)) return;
 		if(this.temp.contains(card)) return;
-		
+		logger.info(card.getName() + " added to temp");
 		this.temp.add(card);
 		this.discard(card);
 	}
@@ -388,6 +372,12 @@ public class Player {
 		return allies;
 	}
 	
+	public void tempToField(AdventureCard c) {
+		logger.info(c.getName() + " moved from temp to field");
+		field.add(c);
+		return;
+	}
+	
 	/**
 	 * ?
 	 * @return
@@ -398,7 +388,7 @@ public class Player {
 		
 		for(int i=0;i<this.temp.size();i++) {
 			if(this.temp.get(i) instanceof Ally) {
-				this.field.add(this.temp.get(i));
+				this.tempToField(this.temp.get(i));
 			}else if(this.temp.get(i) instanceof Amour) {
 				a.add(this.temp.get(i));
 			}else if(this.temp.get(i) instanceof Weapon) weps.add(this.temp.get(i));
@@ -413,7 +403,7 @@ public class Player {
 	public ArrayList<AdventureCard> emptyTemp(){
 		ArrayList<AdventureCard> cards = new ArrayList<AdventureCard>();
 		for(int i=0;i<this.temp.size();i++) {
-			if(this.temp.get(i) instanceof Ally) this.field.add(this.temp.get(i));
+			if(this.temp.get(i) instanceof Ally) this.tempToField(this.temp.get(i));
 			else cards.add(this.temp.get(i));
 		}
 		this.temp.clear();
