@@ -16,7 +16,6 @@ import group52.comp3004.cards.CardComparator;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.Tests;
 import group52.comp3004.cards.Weapon;
-import group52.comp3004.controllers.GameController;
 import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
 import group52.comp3004.game.GameTourney;
@@ -48,12 +47,11 @@ public class Player {
 	static final private Logger logger = Logger.getLogger(Player.class);
 	
 	/**
-	 * ?Use of each constructor?
+	 * Used for human construction
 	 * @param id Player id number. Used for internal testing.
-	 * @param gc ?Used in iter 2?
 	 * @param gs the current conditions of the game
 	 */
-	public Player(Integer id, GameController gc, GameState gs) {
+	public Player(Integer id, GameState gs) {
 		this.id = id;
 		shields = 10;
 		rank = Rank.Squire;
@@ -72,13 +70,12 @@ public class Player {
 	}
 	
 	/**
-	 *  ?Use of each constructor?
+	 *  USed for AI player construction
 	 * @param id Player id number. Used for internal testing.
-	 * @param gc ?used in iter 2?
 	 * @param gs the current conditions of the game
 	 * @param s
 	 */
-	public Player(Integer id, GameController gc, GameState gs, int s) {
+	public Player(Integer id, GameState gs, int s) {
 		this.id = id;
 		shields = 10;
 		rank = Rank.Squire;
@@ -100,7 +97,7 @@ public class Player {
 	}
 	
 	/**
-	 *  ?Use of each constructor?
+	 *  Used for testing when there isn't a game state.
 	 * @param id Player id number. Used for internal testing.
 	 */
 	public Player(Integer id) {
@@ -183,7 +180,7 @@ public class Player {
 	}
 	
 	/**
-	 * ?
+	 * Gets quest property. Used for testing
 	 * @return
 	 */
 	public GameQuest getQuest() {
@@ -191,7 +188,7 @@ public class Player {
 	}
 	
 	/**
-	 * ?
+	 * Sets quest property. Used for testing
 	 * @param quest
 	 */
 	public void setQuest(GameQuest quest) {
@@ -199,9 +196,9 @@ public class Player {
 	}
 	
 	/**
-	 * ?what does second part do?
-	 * @param state
-	 * @return ?
+	 * Gets the total bids of the player(Rank bp, weapon bp, ally bp) 
+	 * @param state The current conditions of the game
+	 * @return total bids
 	 */
 	public Integer getBidPoints(GameState state) {
 		logger.info("Player " + id + " offers " + bidPoints + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum() + " bids");
@@ -257,8 +254,12 @@ public class Player {
 	public int getMinShields() {
 		return minShields;
 	}
-	
-	public void addShields(Integer shields) {
+
+		/**
+	 * Add shields to player. If player now has less than minimum amount sets to minimum. If player has more then requiredShields rank up player.
+	 * @param shields
+	 */
+	public void addShields(Integer shields) {		
 		logger.info("Player: " + this.id + " received " + shields + " shields");
 		this.shields += shields;
 		if(this.shields < minShields) this.shields = minShields;
@@ -338,13 +339,21 @@ public class Player {
 		this.discard(card);
 	}
 	
-	public void addField(Ally card) {
+	/**
+	 * ?
+	 * @param card
+	 */
+	public void addField(Ally card) {//why only ally
 		logger.info(card.getName() + " added to field");
 		this.field.add(card);
 		this.discard(card);
 	}
 	
-	public void addTemp(AdventureCard card) {
+	/**
+	 * ?
+	 * @param card
+	 */
+	public void addTemp(AdventureCard card) {//why all adventure cards
 		logger.info(card.getName() + " added to temp");
 		this.temp.add(card);
 	}

@@ -61,9 +61,9 @@ public class Stage {
 	}
 	
 	/**
-	 * ?
-	 * @param state
-	 * @return
+	 * Gets the total battle power provided by a stage.
+	 * @param state The current conditions of the game
+	 * @return the stage's battle power
 	 */
 	public int getTotalPower(GameState state) {
 		if(!testStage) logger.info("Battle power of the stage is " + foe.getBp(state));
