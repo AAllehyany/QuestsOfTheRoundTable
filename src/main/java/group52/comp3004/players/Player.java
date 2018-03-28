@@ -1,15 +1,13 @@
 package group52.comp3004.players;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 
 import group52.comp3004.Strategies.AbstractAI;
 import group52.comp3004.Strategies.Strategy1;
 import group52.comp3004.Strategies.Strategy2;
+import group52.comp3004.Strategies.Strategy3;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Amour;
@@ -27,10 +25,8 @@ public class Player {
 	private Integer id;
 	private Integer shields;
 	private Rank rank;
-	private Integer rankBP;
 	private Integer battlePoints;
 	private Integer requiredShields;
-	private List<Integer> weapons;
 	private int minShields;
 	private ArrayList<AdventureCard> hand;
 	private ArrayList<AdventureCard> field;
@@ -38,15 +34,13 @@ public class Player {
 	private GameState game;
 	private GameQuest quest;
 	private GameTourney tourney;
-	private GameController controller;
 	private Integer bidPoints;
 	private boolean stoppedBidding;
 	private int offeredBids;
-	private ArrayList<AdventureCard> tempWeapons;
 	private AbstractAI strategy;
 	
-	
 	static final private Logger logger = Logger.getLogger(Player.class);
+	
 	public Player(Integer id, GameController gc, GameState gs) {
 		this.id = id;
 		shields = 10;
@@ -54,17 +48,14 @@ public class Player {
 		battlePoints = 5;
 		requiredShields = 15;
 		minShields = 10;
-		weapons = new ArrayList<Integer>();
 		hand = new ArrayList<>();
 		field = new ArrayList<>();
 		temp = new ArrayList<>();
 		quest = null;
 		tourney = null;
-		controller = gc;
 		game = gs;
 		bidPoints = 0;
 		offeredBids = 0;
-		tempWeapons = new ArrayList<>();
 		strategy = null;
 	}
 	
@@ -75,19 +66,17 @@ public class Player {
 		battlePoints = 5;
 		requiredShields = 15;
 		minShields = 10;
-		weapons = new ArrayList<Integer>();
 		hand = new ArrayList<>();
 		field = new ArrayList<>();
 		temp = new ArrayList<>();
 		quest = null;
 		tourney = null;
-		controller = gc;
 		game = gs;
 		bidPoints = 0;
 		offeredBids = 0;
-		tempWeapons = new ArrayList<>();
 		if(s==1) strategy = new Strategy1();
 		else if(s==2) strategy = new Strategy2();
+		else if(s==3) strategy = new Strategy3();
 		else strategy = null;
 	}
 	
@@ -98,7 +87,6 @@ public class Player {
 		battlePoints = 5;
 		requiredShields = 15;
 		minShields = 10;
-		weapons = new ArrayList<Integer>();
 		hand = new ArrayList<>();
 		field = new ArrayList<>();
 		temp = new ArrayList<>();
@@ -106,7 +94,6 @@ public class Player {
 		tourney = null;
 		bidPoints = 0;
 		offeredBids = 0;
-		tempWeapons = new ArrayList<>();
 	}
 	
 	public Integer getId() {
@@ -118,9 +105,15 @@ public class Player {
 	}
 	
 	public void setAI(int ai) {
-		if(ai==1) this.strategy = new Strategy1();
-		else if(ai==2) this.strategy = new Strategy2();
-		else this.strategy = null;
+		if(ai==1) { 
+			logger.info("Player: " + this.id + " set to AI strategy 1");
+			this.strategy = new Strategy1();
+		}else if(ai==2) {
+			logger.info("Player: " + this.id + " set to AI strategy 2");
+			this.strategy = new Strategy2();
+		}else if(ai==3) {
+			logger.info("Player: " + this.id + " set to AI strategy 3");
+		}else this.strategy = null;
 	}
 	
 	public AbstractAI getAI() {
@@ -149,15 +142,11 @@ public class Player {
 	
 	public void setQuest(GameQuest quest) {
 		this.quest = quest;
-		//quest.addPlayer(this);
 	}
 	
 	public Integer getBidPoints(GameState state) {
+		logger.info("Player " + id + " offers " + bidPoints + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum() + " bids");
 		return bidPoints + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum();
-	}
-	
-	public Integer getBidPoints() {
-		return bidPoints + temp.stream().mapToInt(c -> c.getBids()).sum() + field.stream().mapToInt(c -> c.getBids()).sum();
 	}
 	
 	
@@ -175,15 +164,8 @@ public class Player {
 	}
 	
 	public Integer getBattlePoints(GameState state) {
+		logger.info("Player: " + id + " has " + battlePoints + temp.stream().mapToInt(c -> c.getBp()).sum() + field.stream().mapToInt(c -> c.getBp(state)).sum() + " battle points");
 		return battlePoints + temp.stream().mapToInt(c -> c.getBp()).sum() + field.stream().mapToInt(c -> c.getBp(state)).sum();
-	}
-	
-	public Integer getBattlePoints() {
-		return battlePoints + temp.stream().mapToInt(c -> c.getBp()).sum() + field.stream().mapToInt(c -> c.getBp()).sum();
-	}
-	
-	public void clearWeapons() {
-		this.weapons.clear();
 	}
 
 	public Integer getRequiredShields() {
@@ -194,11 +176,8 @@ public class Player {
 		return minShields;
 	}
 	
-	public void addWeapon(Integer weapon) {
-		this.weapons.add(weapon);
-	}
-	
-	public void addShields(Integer shields) {		
+	public void addShields(Integer shields) {
+		logger.info("Player: " + this.id + " received " + shields + " shields");
 		this.shields += shields;
 		if(this.shields < minShields) this.shields = minShields;
 		if(this.shields >= this.requiredShields) {
@@ -215,156 +194,61 @@ public class Player {
 		return hand.size();
 	}
 	
-	public void setHand(ArrayList<AdventureCard> hand) {
-		this.hand.clear();
-		for(int i=0;i<hand.size();i++) {
-			this.hand.add(hand.get(i));
-		}
+	public boolean isHandFull() {
+		if(hand.size()<=12) return false;
+		logger.info("Player has " + (hand.size()-12) + " too many cards");
+		return true;
+	}
+	
+	public ArrayList<AdventureCard> setHand(ArrayList<AdventureCard> cards) {
+		ArrayList<AdventureCard> discards = new ArrayList<AdventureCard>();
+		for(int i=0;i<hand.size();i++) discards.add(hand.get(i));
+		for(int i=0;i<discards.size();i++) this.discard(discards.get(i));
+		for(int i=0;i<cards.size();i++) this.addCardToHand(cards.get(i));
+		return discards;
 	}
 	
 	
 	public void addCardToHand(AdventureCard card) {
-		logger.info("Adding "+card.getName()+" to hand");
-		/*card.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent e) {
-				
-				if(id != game.getPlayerByIndex(game.getCurrentPlayer()).getId()) return;
-				
-				//change so card click behaviour changes based on the phase
-				
-				if(game.getPhase() == Phase.SetupQuest) {
-					if(!(card instanceof Foe) && !(card instanceof Tests) && !(card instanceof Weapon)) {
-						logger.info("Clicking illegal card for setting quest");
-					}
-					else {
-						int numFoes = (int) temp.stream().filter(c -> c instanceof Foe).count();
-						int numTests = (int) temp.stream().filter(c -> c instanceof Tests).count();
-						
-						if(card instanceof Tests && numTests > 0) {
-							return;
-						}
-						
-						if(!(card instanceof Weapon)) {
-							
-							if((numFoes + numTests) >= game.getCurrentQuest().getNumStages()) {
-								return;
-							}
-						}
-						
-						
-						// check for adding weapons.
-						if( card instanceof Weapon ) {
-							if(tempWeapons.stream().map(c -> c.getName()).collect(Collectors.toList()).contains(card.getName())) {
-								return;
-							}
-							
-							if(temp.size() > 0 && !(temp.get(temp.size() - 1) instanceof Tests)) {
-								logger.info(card.getName()+ " clicked");
-								temp.add(card);
-								tempWeapons.add(card);
-								hand.remove(card);
-								controller.updateAll();
-							}
-								
-						}
-						else {
-							tempWeapons.clear();
-							logger.info(card.getName()+ " clicked");
-							temp.add(card);
-							hand.remove(card);
-							controller.updateAll();	
-						}
-						
-					}
-				}
-				else if(game.getPhase()==Phase.HandleEvent){
-					logger.info(card.getName()+ " discarded");
-					hand.remove(card);
-					controller.updateAll();	
-				}
-				else if(game.getPhase() == Phase.SetUpTourney || game.getPhase() == Phase.SecondRound) {
-					if(!(card instanceof Ally) && !(card instanceof Amour) && !(card instanceof Weapon)) {
-						return;
-					}
-					
-					if(card instanceof Weapon) {
-						if(!canPlayWeapon((Weapon) card)) return;
-						logger.info(card.getName()+ " clicked");
-						temp.add(card);
-						hand.remove(card);
-					}
-					else {
-						int countAmours = (int) temp.stream().filter(c -> c instanceof Amour).count();
-						if(card instanceof Amour && countAmours > 0) return;
-			
-						logger.info(card.getName()+ " clicked");
-						temp.add(card);
-						hand.remove(card);
-					}
-					
-					controller.updateAll();
-				}else if(game.getPhase() == Phase.Arms) {
-					if(!(card instanceof Ally) && !(card instanceof Weapon)) {
-						return;
-					}else{
-						logger.info(card.getName()+ " discarded");
-						hand.remove(card);
-						controller.updateAll();
-					}
-				}
-				else if(game.getPhase() == Phase.PlayQuest) {
-					if(!(card instanceof Ally) && !(card instanceof Amour) && !(card instanceof Weapon)) {
-						return;
-					}
-					
-					if(card instanceof Weapon) {
-						if(!canPlayWeapon((Weapon) card)) return;
-						logger.info(card.getName()+ " clicked");
-						temp.add(card);
-						hand.remove(card);
-					}
-					else {
-						int countAmours = (int) temp.stream().filter(c -> c instanceof Amour).count();
-						if(card instanceof Amour && countAmours > 0) return;
-						
-						logger.info(card.getName()+ " clicked");
-						temp.add(card);
-						hand.remove(card);
-					}
-					
-					controller.updateAll();
-					
-					
-				}
-				else{
-				
-					logger.info(card.getName()+ " clicked");
-					field.add(card);
-					hand.remove(card);
-					controller.updateAll();	
-				}				
-			}
-		});*/
+		logger.info("Adding " + card.getName() + " to hand");
 		this.hand.add(card);
 	}
 	
 	public void tempToHand() {
 		temp.forEach(c -> addCardToHand(c));
+		temp.forEach(c -> logger.info(c.getName() + " removed from temp"));
 		temp.clear();
 	}
 	
-	public boolean canPlayWeapon(Weapon weapon) {
+	public boolean canPlayWeapon(AdventureCard weapon) {
 		return !this.temp.contains(weapon);
 	}
 	
 	public boolean hasCardInHand(AdventureCard card) {
 		return this.hand.contains(card);
 	}
+
+	// Determine if a player has a test in their hand
+	public boolean hasTest() {
+		for(int i=0;i<this.getHand().size();i++) {
+			if(this.getHand().get(i) instanceof Tests) return true;
+		}
+		return false;
+	}
+	
+	// count the number of foes in a player's hand
+	public int countFoes() {
+		int count = 0;
+		for(int i=0;i<this.getHand().size();i++) {
+			if(this.getHand().get(i) instanceof Foe) count++;
+		}
+		return count;
+	}
 	
 	public void playCardToField(Ally card) {//why only Ally
 		if(!hasCardInHand(card)) return;
 		this.field.add(card);
-		this.hand.remove(card);
+		this.discard(card);
 	}
 	
 	public void playToTemp(AdventureCard card) {//whats this for
@@ -372,30 +256,37 @@ public class Player {
 		if(card instanceof Weapon && !canPlayWeapon((Weapon) card)) return;
 		
 		this.temp.add(card);
-		this.hand.remove(card);
+		this.discard(card);
 	}
 	
 	public void addField(Ally card) {
+		logger.info(card.getName() + " added to field");
 		this.field.add(card);
-		this.hand.remove(card);
+		this.discard(card);
 	}
 	
 	public void addTemp(AdventureCard card) {
+		logger.info(card.getName() + " added to temp");
 		this.temp.add(card);
 	}
 	
 	public void addTemp(ArrayList<AdventureCard> cards) {
-		for(int i=0;i<cards.size();i++) this.temp.add(cards.get(i));
+		for(int i=0;i<cards.size();i++) this.addTemp(cards.get(i));
 	}
 	
-	public void clearAlly() {
-		
+	public ArrayList<AdventureCard> clearAlly() {
+		ArrayList<AdventureCard> allies = new ArrayList<AdventureCard>();
 		for(int i=0;i<this.field.size();i++) {
 			if(this.field.get(i) instanceof Ally) {
-				this.field.remove(this.temp.get(i));
+				allies.add(this.field.get(i));
 			}
 		}
+		for(int i=0;i<allies.size();i++) 
+			logger.info(allies.get(i).getName() + " removed from player " + id + "'s field");
+		this.field.clear();
+		return allies;
 	}
+	
 	public ArrayList<AdventureCard> clearTemp() {
 		ArrayList<AdventureCard> a = new ArrayList<AdventureCard>();
 		ArrayList<AdventureCard> weps = new ArrayList<AdventureCard>();
@@ -408,36 +299,40 @@ public class Player {
 			}else if(this.temp.get(i) instanceof Weapon) weps.add(this.temp.get(i));
 		}
 		
-		
 		this.temp = a;
-		
+		for(int i=0;i<weps.size();i++) 
+			logger.info(weps.get(i).getName() + " removed from player " + id + "'s temp");
 		return weps;
-		
-		/*this.temp.forEach(card -> {
-			if(card instanceof Ally) {
-				this.field.add(card);
-			}else if(card instanceof Amour) {
-				amour = (Amour) card;
-			}
-		});
+	}
+	
+	public ArrayList<AdventureCard> emptyTemp(){
+		ArrayList<AdventureCard> cards = new ArrayList<AdventureCard>();
+		for(int i=0;i<this.temp.size();i++) {
+			if(this.temp.get(i) instanceof Ally) this.field.add(this.temp.get(i));
+			else cards.add(this.temp.get(i));
+		}
 		this.temp.clear();
-		if(amour!=null)this.temp.add(amour);*/
-		
+		for(int i=0;i<cards.size();i++)
+			logger.info(cards.get(i).getName() + " removed from player " + id + "'s temp");
+		return cards;
 	}
 
 	private void updateRank() {
 		minShields = requiredShields;
 		if(rank == Rank.Squire) {
+			logger.info("Player: " + this.id + " moved up to rank: Knight");
 			requiredShields = 22;
 			rank = Rank.Knight;
 			battlePoints = 10;
 		}
 		else if(rank == Rank.Knight) {
+			logger.info("Player: " + this.id + " moved up to rank: Champion Knight");
 			requiredShields = 32;
 			rank = Rank.ChampionKnight;
 			battlePoints = 20;
 		}
 		else if(rank == Rank.ChampionKnight) {
+			logger.info("Player: " + this.id + " moved up to rank: Knight of the Round Table");
 			rank = Rank.KnightOfTheRoundTable;
 		}
 	}
@@ -450,10 +345,10 @@ public class Player {
 		return this.temp;
 	}
 	
-	//not sure what it is
+	//used for Mordred
 	public AdventureCard removeAlly(Ally ally) {
-		// TODO Auto-generated method stub
 		this.field.remove(ally);
+		logger.info("Removed " + ally.getName() + " from player " + id + "'s field");
 		return ally;
 	}
 	
@@ -485,129 +380,15 @@ public class Player {
 		this.hand.addAll(foes);
 		this.hand.addAll(tests);
 	}
-	
-	// Get any duplicates from a players hand
-	public ArrayList<AdventureCard> getDuplicates(){
-		ArrayList<AdventureCard> dupes = new ArrayList<AdventureCard>();
-		HashSet<AdventureCard> cards = new HashSet<AdventureCard>();
-		for(int i=0;i<this.hand.size();i++) {
-			if(!cards.add(this.hand.get(i))) dupes.add(this.hand.get(i));
-		}
-		return dupes;
-	}
-	
-	// Determine if a player has a test in their hand
-	public boolean hasTest() {
-		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Tests) return true;
-		}
-		return false;
-	}
-	
-	// count the number of tests in a player's hand
-	public int countTests() {
-		return this.hand.stream().filter(c -> c instanceof Tests).collect(Collectors.toList()).size();
-	}
-	
-	// count the number of foes in a player's hand
-	public int countFoes() {
-		int count = 0;
-		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Foe) count++;
-		}
-		return count;
-	}
-	
-	// count the number of foes less than a certain battle power in a player's hand
-	public int countFoes(int bp) {
-		int count =0;
-		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Foe && this.hand.get(i).getBp()<bp) count++;
-		}
-		return count;
-	}
-	
-	// get the foes less than a certain battle power in a player's hand
-	public ArrayList<AdventureCard> getFoes(int bp){
-		ArrayList<AdventureCard> foes = new ArrayList<AdventureCard>();
-		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Foe && this.hand.get(i).getBp()<bp) {
-				foes.add(this.hand.get(i));
-			}
-		}
-		return foes;
-	}
-	
-	// get the foes of unique battle powers in a player's hand depending on the GameState
-	public ArrayList<AdventureCard> getUniqueFoes(GameState state){
-		ArrayList<AdventureCard> uFoes = new ArrayList<AdventureCard>();
-		HashSet<Integer> bps = new HashSet<Integer>();
-		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Foe) {
-				Foe f;
-				f = (Foe) this.hand.get(i);
-				if(bps.add(f.getBp(state))) uFoes.add(this.hand.get(i));
-			}
-		}
-		return uFoes;
-	}
-	
-	// count the foes of unique battle powers in a player's hand depending on the GameState
-	public int numUniqueFoes(GameState state) {
-		int numUFoes = 0;
-		HashSet<Integer> bps = new HashSet<Integer>();
-		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Foe) {
-				Foe f = (Foe) this.hand.get(i);
-				if(bps.add(f.getBp(state))) numUFoes++;
-			}
-		}
-		return numUFoes;
-	}
-	
-	public void discard(AdventureCard card) {
-		this.hand.remove(card);
-	}
-	// Determine if a player has an amour in their hand
-	public boolean hasAmour() {
-		for(int i=0;i<this.temp.size();i++) {
-			if (this.temp.get(i) instanceof Amour) return true;
-		}
-		return false;
-	}
-	
-	public boolean hasAmourInHand() {
-		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Amour) return true;
-		}
-		return false;
-	}
-	
-	public AdventureCard getAmourInHand() {
-		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Amour) return this.hand.remove(i);
-		}
-		return null;
-	}
-	
-	public boolean hasAllyInHand() {
-		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Ally) return true;
-		}
-		return false;
-	}
-	
-	public AdventureCard getStrongestAllyInHand(GameState state) {
-		this.sortHand(state);
-		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Ally) return this.hand.remove(i);
-		}
-		return null;
-	}
 
+	public AdventureCard discard(AdventureCard card) {
+		logger.info("Removed " + card.getName() + " form player " + this.id + "'s hand");
+		this.hand.remove(card);
+		return card;
+	}
+	
 	public void stopBidding() {
-		this.stoppedBidding = true;
-		
+		this.stoppedBidding = true;	
 	}
 	
 	public boolean hasStoppedBidding() {
@@ -615,6 +396,7 @@ public class Player {
 	}
 
 	public void removeShield(int i) {
+		logger.info("Player: " + this.id + " lost " + i + " shields");
 		this.shields = shields-i;
 		if (this.shields<this.minShields) this.shields = this.minShields;
 		

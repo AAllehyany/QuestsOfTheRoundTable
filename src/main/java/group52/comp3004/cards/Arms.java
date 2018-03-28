@@ -13,7 +13,7 @@ public class Arms implements EventBehaviour{
 	final static Logger logger = Logger.getLogger(Arms.class);
 	@Override
 	public void handle(GameState gamestate) {
-		
+		logger.info("		->Arms");
 		for(int i=0;i<gamestate.numPlayers();i++) {
 			if(gamestate.getPlayerByIndex(i).getRank()== Rank.ChampionKnight){
 				highestRank = Rank.ChampionKnight;

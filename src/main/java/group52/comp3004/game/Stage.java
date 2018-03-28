@@ -2,6 +2,8 @@ package group52.comp3004.game;
 
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.Tests;
@@ -12,6 +14,8 @@ public class Stage {
 	private final Tests test;
 	
 	private final boolean testStage;
+	
+	private static final Logger logger = Logger.getLogger(Stage.class);
 	
 	/**
 	 * @param foe
@@ -41,11 +45,8 @@ public class Stage {
 		return cards;
 	}
 	
-	public int getTotalPower() {
-		return testStage ? 0 : foe.getBp();
-	}
-	
 	public int getTotalPower(GameState state) {
+		if(!testStage) logger.info("Battle power of the stage is " + foe.getBp(state));
 		return testStage ? 0 : foe.getBp(state);
 	}
 	

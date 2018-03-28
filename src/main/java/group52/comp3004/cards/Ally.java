@@ -100,13 +100,21 @@ public class Ally extends AdventureCard
 
 	// get an ally's battle power
 	public int getBp(GameState state) {
-		if (bonusSatisfied(state)) return bp+bonusbp;
+		if (bonusSatisfied(state)) {
+			logger.info(super.getName() + " adds " + (bp+bonusbp) + " battle points");
+			return bp+bonusbp;
+		}
+		logger.info(super.getName() + " adds " + bp + " battle points");
 		return bp;
 	}
 	
 	// get an ally's bids added
 	public int getBids(GameState state) {
-		if (bonusSatisfied(state)) return bids+bonusbid;
+		if (bonusSatisfied(state)) {
+			logger.info(super.getName() + " adds " + (bids+bonusbid) + " bids");
+			return bids+bonusbid;
+		}
+		logger.info(super.getName() + " adds " + bids + " bids");
 		return bids;
 	}
 	

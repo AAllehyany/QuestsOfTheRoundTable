@@ -3,6 +3,8 @@ package group52.comp3004.Strategies;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.log4j.Logger;
+
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.CardComparator;
@@ -17,18 +19,23 @@ import group52.comp3004.players.Player;
 public class Strategy2 extends AbstractAI{
 	private boolean havebid = false;
 	private int prevbp = 0;
+	private final static Logger logger = Logger.getLogger(Strategy2.class);
 	
 	public Strategy2() {}
 	
 	public boolean doIParticipateInTournament(GameState state, Player p) {
+		logger.info("Player " + p.getId() + " is participating in the tournament");
 		return true;
 	}
 	
 	public boolean doIParticipateInQuest(GameState state, Player p) {
-		if(p.countFoes(25)<2) return false;
+		if(this.countFoes(p, 25)<2) {
+			logger.info("Player " + p.getId() + " does not have enough foes to discard for tests, so wil not participate in the quest");
+			return false;
+		}
 		p.sortHand(state);
 		int AA = 0;
-		if (p.hasAmourInHand()) AA++;
+		if (this.hasAmourInHand(p)) AA++;
 		HashMap<AdventureCard, Integer> weps = new HashMap<AdventureCard, Integer>();
 		ArrayList<AdventureCard> weakAllies = new ArrayList<AdventureCard>();
 		for(int i=0;i<p.getHand().size();i++) {
@@ -57,36 +64,46 @@ public class Strategy2 extends AbstractAI{
 				}
 				pos--;
 			}
-			if(curbp<runningbp+10) return false;
+			if(curbp<runningbp+10) {
+				logger.info("Player " + p.getId() + " does not have enough cards to play, so will not participate in the quest");
+				return false;
+			}
 			runningbp = curbp;
 			curbp = constbp;
 			pos = ws.size()-1;
 		}
 		this.resetBid();
 		this.prevbp = p.getBattlePoints(state);
+		logger.info("Player " + p.getId() + " will partcipate in the quest");
 		return true;
 	}
 	
 	public int nextBid(GameState state, Player p) {
-		if(havebid) return p.countFoes(25) + p.getDuplicates().size();
+		if(havebid) {
+			logger.info("Player " + p.getId() + " bids " + (this.countFoes(p, 25)+this.getDuplicates(p).size()) + " cards as its second bid");
+			return this.countFoes(p, 25) + this.getDuplicates(p).size();
+		}
 		else {
+			logger.info("Player " + p.getId() + " bids " + this.countFoes(p, 25) + " cards for its first bid");
 			havebid = true;
-			return p.countFoes(25);
+			return this.countFoes(p, 25);
 		}
 	}
 	
 	public ArrayList<AdventureCard> discardAfterWinningTest(GameState state, Player p){
 		ArrayList<AdventureCard> discards = new ArrayList<AdventureCard>();
-		discards.addAll(p.getFoes(25));
+		discards.addAll(this.getFoes(p, 25));
 		if(havebid) {
-			discards.addAll(p.getDuplicates());
+			discards.addAll(this.getDuplicates(p));
 		}
 		havebid = false;
-		for(int i=0;i<discards.size();i++) p.getHand().remove(discards.get(i));
+		for(int i=0;i<discards.size();i++) {
+			p.discard(discards.get(i));
+		}
 		return discards;
 	}
 	
-	public void resetBid() {
+	private void resetBid() {
 		this.havebid = false;
 	}
 	
@@ -98,7 +115,7 @@ public class Strategy2 extends AbstractAI{
 				Stage stage = new Stage(getWeakestFoe(state, p));
 				stages.add(stage);
 			}else if(i==q.getNumStages()-2) {
-				if(p.hasTest()) {
+				if(this.hasTest(p)) {
 						Stage stage = new Stage(getTest(p));
 						stages.add(stage);
 				}else {
@@ -111,7 +128,15 @@ public class Strategy2 extends AbstractAI{
 				stages.add(stage);
 			}
 		}
-		
+		for(int i=0;i<stages.size();i++) {
+			if(stages.get(i).isTestStage())
+				logger.info("Stage " + i+1 + ": " + stages.get(i).getTest().getName());
+			else {
+				logger.info("Stage " + i+1 + ": " + stages.get(i).getFoe().getName());
+				if(!stages.get(i).getFoe().getWeapons().isEmpty())
+					logger.info("with weapons: " + stages.get(i).getFoe().getWeapons().stream().map(w -> w.getName() + " "));
+			}
+		}
 		return stages;
 	}
 	
@@ -120,32 +145,25 @@ public class Strategy2 extends AbstractAI{
 		ArrayList<AdventureCard> stageCards = new ArrayList<AdventureCard>();
 		int stagebp = p.getBattlePoints(state);
 		p.sortHand(state);
-		if(!p.hasAmour() && p.hasAmourInHand() && !containsAmour(stageCards)) {
-			stageCards.add(p.getAmourInHand());
+		if(!this.hasAmour(p) && this.hasAmourInHand(p) && !containsAmour(stageCards)) {
+			stageCards.add(this.getAmourInHand(p));
 			stagebp+=10;
 		}else {
-			if(p.hasAllyInHand()) {
-				stageCards.add(p.getStrongestAllyInHand(state));
-				stagebp += stageCards.get(0).getBp();
+			if(this.hasAllyInHand(p)) {
+				AdventureCard a = this.getStrongestAllyInHand(state, p);
+				stageCards.add(a);
+				stagebp += a.getBp();
 			}
-			if(stagebp<prevbp+10) {
-				HashMap<AdventureCard, Integer> wepNum = new HashMap<AdventureCard, Integer>();
+			while(stagebp<prevbp+10){
+				ArrayList<AdventureCard> weapons = new ArrayList<AdventureCard>();
 				for(int i=0;i<p.getHand().size();i++) {
-					if(p.getHand().get(i) instanceof Weapon) {
-						if(wepNum.containsKey(p.getHand().get(i))) {
-							wepNum.replace(p.getHand().get(i), wepNum.get(p.getHand().get(i))+1);
-						}else wepNum.put(p.getHand().get(i), 1);
-					}
+					if(!(weapons.contains(p.getHand().get(i)) && stageCards.contains(p.getHand().get(i))) &&
+							p.getHand().get(i) instanceof Weapon)
+							weapons.add(p.getHand().get(i));
 				}
-				ArrayList<AdventureCard> weps = new ArrayList<AdventureCard>(wepNum.keySet());
-				weps.sort(new CardComparator());
-				int pos = weps.size()-1;
-				while(stagebp<prevbp+10 && pos>=0) {
-					stageCards.add(weps.get(pos));
-					stagebp += weps.get(pos).getBp();
-					p.getHand().remove(weps.get(pos));
-					pos--;
-				}
+				AdventureCard wep = this.getWeakestWeapon(state, p, weapons);
+				stageCards.add(wep);
+				stagebp += wep.getBp();
 			}
 		}
 		prevbp = stagebp;
@@ -167,7 +185,7 @@ public class Strategy2 extends AbstractAI{
 			}
 			i++;
 		}
-		for(i=0;i<tourneyCards.size();i++) p.getHand().remove(tourneyCards.get(i));
+		for(i=0;i<tourneyCards.size();i++) p.discard(tourneyCards.get(i));
 		return tourneyCards;
 	}
 }

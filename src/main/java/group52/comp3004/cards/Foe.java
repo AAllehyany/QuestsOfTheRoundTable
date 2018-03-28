@@ -16,6 +16,7 @@ public class Foe extends AdventureCard{
 	private HashSet<String> quests = new HashSet<String>();
 	
 	final static Logger logger = Logger.getLogger(Foe.class);
+	
 	// Constructor for Foes with only one battle power
 	public Foe(String name, int bp) {
 		super(name);
@@ -39,17 +40,13 @@ public class Foe extends AdventureCard{
 		// TODO Auto-generated constructor stub
 	}
 	
-	// getBp used in the case that the GameState can affect a Foe's battle power
 	public int getBp(GameState state) {
 		if(state.getCurrentQuest()!=null && 
 				quests.contains(state.getCurrentQuest().getQuest().getName())){
+			logger.info(super.getName() + " has battle power " + this.highBp + weapons.stream().mapToInt(w -> w.getBp()).sum());
 			return this.highBp + weapons.stream().mapToInt(w -> w.getBp()).sum();
 		}
-		return this.bp + weapons.stream().mapToInt(w -> w.getBp()).sum();
-	}
-	
-	// getBp used in the case that GameState does not matter
-	public int getBp() {
+		logger.info(super.getName() + " has battle power " + this.bp + weapons.stream().mapToInt(w -> w.getBp()).sum());
 		return this.bp + weapons.stream().mapToInt(w -> w.getBp()).sum();
 	}
 	
@@ -84,8 +81,8 @@ public class Foe extends AdventureCard{
     		return false;
     	}
     	adventureDeck.discardCard(state.getPlayerByIndex(player).removeAlly(ally));
+    	owner.discard(this);
     	adventureDeck.discardCard(this);
-    	owner.getHand().remove(this);
     	return true;
     }
 }

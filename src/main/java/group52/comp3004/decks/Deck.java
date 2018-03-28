@@ -47,6 +47,7 @@ public class Deck<T>{
 	}
 	
 	public void addCard(T card) {
+		logger.info("Added: " + ((Card) card).getName());
 		this.cards.add(card);
 		size++;
 	}
@@ -79,6 +80,7 @@ public class Deck<T>{
 	
 	//PURPOSE: Builds the adventure deck
 	public static ArrayList<AdventureCard> createAdventureDeck() {
+		logger.info("Creating Adventure Deck");
 			
 		ArrayList<AdventureCard> cards = new ArrayList<>(Arrays.asList(
 				CardFactory.createAlly("Sir_Galahad", 15, 0),
@@ -122,6 +124,8 @@ public class Deck<T>{
 	
 	//PURPOSE: Builds the story deck
 	public static ArrayList<StoryCard> createStoryDeck(){
+		logger.info("Creating Story Deck");
+		
 		ArrayList<StoryCard> cards= new ArrayList<>(Arrays.asList(
 				CardFactory.createEvent("Pox", new Pox()),
 				CardFactory.createEvent("Plague", new Plague()),
