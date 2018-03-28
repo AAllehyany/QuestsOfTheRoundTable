@@ -104,27 +104,6 @@ public class GameTourney {
 	}
 	
 	/**
-	 * ?
-	 * @param player
-	 * @return
-	 */
-public List<Player> secondBattle(List<Player> player) {
-	    this.count1.clear();
-		Player highest= player.get(0);
-		this.count1.add(player.get(0));
-		for(int i=1;i<player.size();i++) {
-			if(player.get(i).getBattlePoints()>highest.getBattlePoints()) {
-				highest =player.get(i);
-				this.count1.clear();
-				this.count1.add(player.get(i));
-			}else if(player.get(i).getBattlePoints()==highest.getBattlePoints()) {
-				this.count1.add(player.get(i));
-			}
-		}
-		return this.count1;
-	}
-	
-	/**
 	 * Award shields to winner equal to number of players in tourney plus the bonus provided by the card.
 	 */
 	public void awardShields() {

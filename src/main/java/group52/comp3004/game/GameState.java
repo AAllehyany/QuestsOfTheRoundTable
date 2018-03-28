@@ -76,7 +76,6 @@ public class GameState {
 	public void dealCardsToPlayers() {
 		this.players.forEach(player -> {
 			for(int i = 0; i < 12; i++) {
-				logger.info("Card "+i+" dealt");
 				player.addCardToHand(adventureDeck.draw());
 			}
 		});
@@ -321,7 +320,7 @@ public class GameState {
 	 * Resets game state back to normal when a tourney has ended.
 	 */
 	public void endTourney() {
-		this.currentTourney.end();
+		this.currentTourney.end(this);
 		currentTourney = null;
 	}
 	

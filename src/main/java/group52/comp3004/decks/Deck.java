@@ -112,28 +112,6 @@ import group52.comp3004.cards.Weapon;
 			return obj;
 		}
 		
-		/**
-		 * Add a card to the discard deck. Card comes either the player's hand or a play area.
-		 * @param c card to be discarded.
-		 * @return return the card back for purpose of error checking. Not used in actual play.
-		 */
-		public T discard(T c) {
-			Card card = (Card) c;
-			logger.info("Discarded: " + card.getName());
-			discard.add(c);
-			return c;
-		}
-		
-		/**
-		 * Add a group of cards to the discard deck. Cards comes either the player's hand or a play area.
-		 * @param cards cards to be discarded.
-		 * @return return the cards back for purpose of error checking. Not used in actual play.
-		 */
-		public ArrayList<T> discard(ArrayList<T> objects){
-			objects.stream().forEach(c -> discard(c));
-			return objects;
-		}
-		
 		//PURPOSE: Builds the adventure deck ?stay or go?
 		public static ArrayList<AdventureCard> createAdventureDeck() {
 				

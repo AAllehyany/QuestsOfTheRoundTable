@@ -155,6 +155,7 @@ public class GameQuest {
 	 */
 	public void addPlayer(Player player) {
 		if(!this.players.contains(player) && player.getQuest() == null) {
+			logger.info("Player " + player.getId() + " joined quest");
 			this.players.add(player);
 			player.setQuest(this);
 		}
@@ -168,17 +169,17 @@ public class GameQuest {
 		if(over || this.players.size() == 0) return;
 		
 		if(stages.get(currentStage).isTestStage()) {
-			System.out.println("Playing in a test stage...");
+			logger.info("Playing in a test stage...");
 			Player remaining = players.stream().max((p1, p2) -> {
 				if(p1.getOfferedBids() > p2.getOfferedBids()) return -1;
 				if(p1.getOfferedBids() == p2.getOfferedBids()) return 0;
 				return 1;
 			}).get();
 			
-			System.out.println("Remaining player is " + remaining.getId());
+			logger.info("Remaining player is " + remaining.getId());
 			
 			if(remaining.getOfferedBids() == 0) {
-				System.out.println("Everyone dropped of the test!");
+				logger.info("Everyone dropped of the test!");
 				this.over = true;
 				this.players.clear();
 			}
@@ -192,17 +193,17 @@ public class GameQuest {
 			return;
 		}
 		
-		System.out.println("Playing a foe stage!");
+		logger.info("Playing a foe stage!");
 		
 		List<Player> remaining = players.stream().filter(p -> p.getBattlePoints(state) >= stages.get(currentStage).getTotalPower(state)).collect(Collectors.toList());
 		ArrayList<AdventureCard> discard = new ArrayList<AdventureCard>();
 		for(int i=0;i<players.size();i++) discard.addAll(players.get(i).clearTemp());
-		state.getAdventureDeck().discard(discard);
-		System.out.println("Done playing the stage...");
-		System.out.println(remaining.size() + " players are now in the quest.");
+		state.getAdventureDeck().discardCard(discard);
+		logger.info("Done playing the stage...");
+		logger.info(remaining.size() + " players are now in the quest.");
 		this.players = remaining;
 		if(currentStage == (quest.getStages() - 1) || this.players.size() < 1)  {
-			System.out.println("No players or we played all stages! Quest is over.");
+			logger.info("No players or we played all stages! Quest is over.");
 			this.over = true;
 		}
 		advanceStage();	
@@ -297,14 +298,14 @@ public class GameQuest {
 			p.getTemp().clear();
 			for(int j=0;j<p.getTemp().size();j++) {
 				if(p.getTemp().get(j) instanceof Amour) {
-					state.getAdventureDeck().discard(p.getTemp().get(j));
+					state.getAdventureDeck().discardCard(p.getTemp().get(j));
 					p.getTemp().remove(j);
 					break;
 				}
 			}
 		}
 		for(int i=0;i<this.getNumStages();i++) {
-			state.getAdventureDeck().discard(this.stages.get(i).getCards());
+			state.getAdventureDeck().discardCard(this.stages.get(i).getCards());
 		}
 		awardShields(bonus);
 	}
