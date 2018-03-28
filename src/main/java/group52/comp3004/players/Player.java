@@ -397,27 +397,28 @@ public class Player {
 		
 		for(int i=0;i<this.temp.size();i++) {
 			if(this.temp.get(i) instanceof Ally) {
-				this.field.add(this.temp.get(i));
+				this.tempToField(this.temp.get(i));
 			}else if(this.temp.get(i) instanceof Amour) {
 				a.add(this.temp.get(i));
 			}else if(this.temp.get(i) instanceof Weapon) weps.add(this.temp.get(i));
 		}
 		
-		
 		this.temp = a;
-		
+		for(int i=0;i<weps.size();i++) 
+			logger.info(weps.get(i).getName() + " removed from player " + id + "'s temp");
 		return weps;
-		
-		/*this.temp.forEach(card -> {
-			if(card instanceof Ally) {
-				this.field.add(card);
-			}else if(card instanceof Amour) {
-				amour = (Amour) card;
-			}
-		});
+	}
+	
+	public ArrayList<AdventureCard> emptyTemp(){
+		ArrayList<AdventureCard> cards = new ArrayList<AdventureCard>();
+		for(int i=0;i<this.temp.size();i++) {
+			if(this.temp.get(i) instanceof Ally) this.tempToField(this.temp.get(i));
+			else cards.add(this.temp.get(i));
+		}
 		this.temp.clear();
-		if(amour!=null)this.temp.add(amour);*/
-		
+		for(int i=0;i<cards.size();i++)
+			logger.info(cards.get(i).getName() + " removed from player " + id + "'s temp");
+		return cards;
 	}
 
 	/**
@@ -426,16 +427,19 @@ public class Player {
 	private void updateRank() {
 		minShields = requiredShields;
 		if(rank == Rank.Squire) {
+			logger.info("Player: " + this.id + " moved up to rank: Knight");
 			requiredShields = 22;
 			rank = Rank.Knight;
 			battlePoints = 10;
 		}
 		else if(rank == Rank.Knight) {
+			logger.info("Player: " + this.id + " moved up to rank: Champion Knight");
 			requiredShields = 32;
 			rank = Rank.ChampionKnight;
 			battlePoints = 20;
 		}
 		else if(rank == Rank.ChampionKnight) {
+			logger.info("Player: " + this.id + " moved up to rank: Knight of the Round Table");
 			rank = Rank.KnightOfTheRoundTable;
 		}
 	}
@@ -462,6 +466,7 @@ public class Player {
 	 */
 	public AdventureCard removeAlly(Ally ally) {
 		this.field.remove(ally);
+		logger.info("Removed " + ally.getName() + " from player " + id + "'s field");
 		return ally;
 	}
 	
@@ -497,19 +502,16 @@ public class Player {
 		this.hand.addAll(foes);
 		this.hand.addAll(tests);
 	}
-	
+
 	/**
-	 * Get a list of any duplicated cards in hand. ?What is it used for?
-	 * @return 
+	 * Discard an adventure card from hand
 	 */
-	public ArrayList<AdventureCard> getDuplicates(){
-		ArrayList<AdventureCard> dupes = new ArrayList<AdventureCard>();
-		HashSet<AdventureCard> cards = new HashSet<AdventureCard>();
-		for(int i=0;i<this.hand.size();i++) {
-			if(!cards.add(this.hand.get(i))) dupes.add(this.hand.get(i));
-		}
-		return dupes;
+	public AdventureCard discard(AdventureCard card) {
+		logger.info("Removed " + card.getName() + " form player " + this.id + "'s hand");
+		this.hand.remove(card);
+		return card;
 	}
+	
 	
 	/**
 	 * Tests if there is a test card in the hand.
@@ -519,13 +521,6 @@ public class Player {
 			if(this.hand.get(i) instanceof Tests) return true;
 		}
 		return false;
-	}
-	
-	/**
-	 * Get the number of test cards in the players hand. Used to judge if a player can set up a quest.
-	 */
-	public int countTests() {
-		return this.hand.stream().filter(c -> c instanceof Tests).collect(Collectors.toList()).size();
 	}
 	
 	/**
@@ -540,135 +535,10 @@ public class Player {
 	}
 	
 	/**
-	 * Get the number of foes less than a certain battle power in a player's hand. Used to judge if a player can set up a quest.
-	 * @param bp The battle power trying to pass
-	 * @return
-	 */
-	public int countFoes(int bp) {
-		int count =0;
-		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Foe && this.hand.get(i).getBp()<bp) count++;
-		}
-		return count;
-	}
-	
-	/**
-	 * Get the foes less than a certain battle power in a player's hand. ?What is it used for?
-	 * @param bp The battle power trying to pass
-	 * @return List of foes in hand that has a battle power greater than bp
-	 */
-	public ArrayList<AdventureCard> getFoes(int bp){
-		ArrayList<AdventureCard> foes = new ArrayList<AdventureCard>();
-		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Foe && this.hand.get(i).getBp()<bp) {
-				foes.add(this.hand.get(i));
-			}
-		}
-		return foes;
-	}
-	
-	// 
-	/**
-	 * get the foes of unique battle powers in a player's hand depending on the GameState. ?Duplicate?
-	 * @param state the current conditions of the game 
-	 * @return
-	 */
-	public ArrayList<AdventureCard> getUniqueFoes(GameState state){
-		ArrayList<AdventureCard> uFoes = new ArrayList<AdventureCard>();
-		HashSet<Integer> bps = new HashSet<Integer>();
-		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Foe) {
-				Foe f;
-				f = (Foe) this.hand.get(i);
-				if(bps.add(f.getBp(state))) uFoes.add(this.hand.get(i));
-			}
-		}
-		return uFoes;
-	}
-	
-	// count the foes of unique battle powers in a player's hand depending on the GameState
-	/**
-	 * ?Duplicate?
-	 * @param state the current conditions of the game
-	 * @return
-	 */
-	public int numUniqueFoes(GameState state) {
-		int numUFoes = 0;
-		HashSet<Integer> bps = new HashSet<Integer>();
-		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Foe) {
-				Foe f = (Foe) this.hand.get(i);
-				if(bps.add(f.getBp(state))) numUFoes++;
-			}
-		}
-		return numUFoes;
-	}
-	
-	/**
-	 * Discard an adventure card from hand
-	 */
-	public void discard(AdventureCard card) {
-		this.hand.remove(card);
-	}
-	// Determine if a player has an amour in their hand
-	public boolean hasAmour() {
-		for(int i=0;i<this.temp.size();i++) {
-			if (this.temp.get(i) instanceof Amour) return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * Test for whether there is an amour in the player's hand.
-	 */
-	public boolean hasAmourInHand() {
-		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Amour) return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * ?What is it used for?
-	 * @return
-	 */
-	public AdventureCard getAmourInHand() {
-		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Amour) return this.hand.remove(i);
-		}
-		return null;
-	}
-	
-	/**
-	 * Test for whether there is an ally in the player's hand.
-	 * @return
-	 */
-	public boolean hasAllyInHand() {
-		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Ally) return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * ?What is this used for?
-	 * @param state the current conditions of the game
-	 * @return
-	 */
-	public AdventureCard getStrongestAllyInHand(GameState state) {
-		this.sortHand(state);
-		for(int i=0;i<this.hand.size();i++) {
-			if(this.hand.get(i) instanceof Ally) return this.hand.remove(i);
-		}
-		return null;
-	}
-	
-	/**
 	 * ?bidding is over for all players or just this one?
 	 */
 	public void stopBidding() {
-		this.stoppedBidding = true;
-		
+		this.stoppedBidding = true;	
 	}
 	
 	/**
@@ -684,6 +554,7 @@ public class Player {
 	 * @param i number of sheilds to be removed
 	 */
 	public void removeShield(int i) {
+		logger.info("Player: " + this.id + " lost " + i + " shields");
 		this.shields = shields-i;
 		if (this.shields<this.minShields) this.shields = this.minShields;
 		
