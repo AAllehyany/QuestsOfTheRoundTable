@@ -1,12 +1,10 @@
 package group52.comp3004.Strategies;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
 import group52.comp3004.cards.AdventureCard;
-import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Amour;
 import group52.comp3004.cards.CardComparator;
 import group52.comp3004.cards.Foe;
@@ -26,29 +24,41 @@ public class Strategy1 extends AbstractAI{
 	
 	static final private Logger logger = Logger.getLogger(Strategy1.class);
 	public boolean doIParticipateInTournament(GameState state, Player p) {
-		if(anyEvolve(state)) return true;
+		if(anyEvolve(state)) {
+			logger.info("Player: " + p.getId() + " will not participate in the tournament");
+			return true;
+		}
+		logger.info("Player: " + p.getId() + " will participate in the tournament");
 		return false;
 	}
 	
 	public boolean doIParticipateInQuest(GameState state, Player p) {
-		if(p.countFoes(20)<2) return false;
+		if(this.countFoes(p, 20)<2) {
+			logger.info("Player: " + p.getId() + " does not have enough foes to discard, so will not participate in the quest");
+			return false;
+		}
 		int sum = countWAA(state, p, state.getCurrentQuest().getNumStages());
-		if(sum<state.getCurrentQuest().getNumStages()*2) return false;
+		if(sum<state.getCurrentQuest().getNumStages()*2) {
+			logger.info("Player: " + p.getId() + "does not have enough cards to play, so will not participate in the quest");
+			return false;
+		}
+		logger.info("Player: " + p.getId() + " will participate in the quest");
 		return true;
 	}
 	
 	public int nextBid(GameState state, Player p) {
-		return p.countFoes(20);
+		logger.info("Player: " + p.getId() + " bids " + this.countFoes(p, 20) + " cards");
+		return this.countFoes(p, 20);
 	}
 	
 	public ArrayList<AdventureCard> discardAfterWinningTest(GameState state, Player p){
-		ArrayList<AdventureCard> dcards = p.getFoes(20);
-		for(int i=0;i<dcards.size();i++) p.getHand().remove(dcards.get(i));
+		ArrayList<AdventureCard> dcards = this.getFoes(p, 20);
+		for(int i=0;i<dcards.size();i++) p.discard(dcards.get(i));
 		return dcards;
 	}
 
 	
-	public boolean tourneyEvolve(GameState state) {
+	private boolean tourneyEvolve(GameState state) {
 		GameTourney t = state.getCurrentTourney();
 		ArrayList<Player> players = new ArrayList<Player>(t.getPlayers());
 		for(int i=0;i<players.size();i++) {
@@ -62,23 +72,22 @@ public class Strategy1 extends AbstractAI{
 	
 	public ArrayList<AdventureCard> playTourney(GameState state, Player p){
 		ArrayList<AdventureCard> cards = new ArrayList<AdventureCard>();
-		ArrayList<AdventureCard> dupes = p.getDuplicates();
+		ArrayList<AdventureCard> dupes = this.getDuplicates(p);
 		if(tourneyEvolve(state)) {
 			for(int i=0;i<p.getHand().size();i++) {
 				if(!(p.getHand().get(i) instanceof Tests || p.getHand().get(i) instanceof Foe) &&
 						!cards.contains(p.getHand().get(i))) {
-					cards.add(p.getHand().remove(i));
-					i--;
+					cards.add(p.getHand().get(i));
 				}
 			}
 		}else {
 			for(int i=0;i<dupes.size();i++) {
 				if(dupes.get(i) instanceof Weapon && !cards.contains(dupes.get(i))) {
 					cards.add(dupes.get(i));
-					p.getHand().remove(dupes.get(i));
 				}
 			}
 		}
+		for(int i=0;i<cards.size();i++) p.discard(cards.get(i));
 		return cards;
 	}
 	
@@ -86,7 +95,7 @@ public class Strategy1 extends AbstractAI{
 		p.sortHand(state);
 		ArrayList<Stage> quest = new ArrayList<Stage>();
 		ArrayList<AdventureCard> wepdupes = new ArrayList<AdventureCard>();
-		ArrayList<AdventureCard> dupes = p.getDuplicates();
+		ArrayList<AdventureCard> dupes = this.getDuplicates(p);
 		for(int i=0;i<dupes.size();i++) {
 			if(dupes.get(i) instanceof Weapon) wepdupes.add(dupes.get(i));
 		}
@@ -121,6 +130,16 @@ public class Strategy1 extends AbstractAI{
 		for(int i=quest.size()-1;i>=0;i--) {
 			stages.add(quest.get(i));
 		}
+		logger.info("Player " + p.getId() + " created quest with stages: ");
+		for(int i=0;i<quest.size();i++) {
+			if(quest.get(i).isTestStage())
+				logger.info("Stage " + i+1 + ": " + quest.get(i).getTest().getName());
+			else {
+				logger.info("Stage " + i+1 + ": " + quest.get(i).getFoe().getName());
+				if(!quest.get(i).getFoe().getWeapons().isEmpty())
+					logger.info("with weapons: " + quest.get(i).getFoe().getWeapons().stream().map(w -> w.getName() + " "));
+			}
+		}
 		return quest;
 	}
 	
@@ -128,7 +147,7 @@ public class Strategy1 extends AbstractAI{
 		for(int i=0;i<weps.size();i++) {
 			if(f.getBp(state)+weps.get(i).getBp()<last) {
 				f.addWeapon((Weapon) weps.get(i));
-				p.getHand().remove(weps.remove(i));
+				p.discard(weps.remove(i));
 				return;
 			}
 		}
@@ -142,31 +161,21 @@ public class Strategy1 extends AbstractAI{
 				if(!(p.getHand().get(i) instanceof Tests || p.getHand().get(i) instanceof Foe) &&
 						!stageCards.contains(p.getHand().get(i))) {
 					if(p.getHand().get(i) instanceof Amour) {
-						if(!containsAmour(stageCards) && !p.hasAmour()) stageCards.add(p.getHand().get(i));
+						if(!this.containsAmour(stageCards) && !this.hasAmour(p)) stageCards.add(p.discard(p.getHand().get(i)));
 					}else {
-						stageCards.add(p.getHand().get(i));
+						stageCards.add(p.discard(p.getHand().get(i)));
 					}
 				}
 			}
 			for(int i=0;i<stageCards.size();i++) p.getHand().remove(stageCards.get(i));
 		}else {
 			while(stageCards.size()<2) {
-				if(!p.hasAmour() && p.hasAmourInHand() && 
-						!containsAmour(stageCards)) stageCards.add(p.getAmourInHand());
-				else if(p.hasAllyInHand()) stageCards.add(p.getStrongestAllyInHand(state));
+				if(!this.hasAmour(p) && this.hasAmourInHand(p) && 
+						!containsAmour(stageCards)) stageCards.add(this.getAmourInHand(p));
+				else if(this.hasAllyInHand(p)) stageCards.add(this.getStrongestAllyInHand(state, p));
 				else stageCards.add(getWeakestWeapon(state,p,stageCards));
 			}
 		}
 		return stageCards;
-	}
-	
-	private AdventureCard getWeakestWeapon(GameState state, Player p, ArrayList<AdventureCard> weapons) {
-		p.sortHand(state);
-		for(int i=p.getHand().size()-1;i>=0;i--) {
-			if(p.getHand().get(i) instanceof Weapon && !weapons.contains(p.getHand().get(i))) {
-				return p.getHand().remove(i);
-			}
-		}
-		return null;
 	}
 }

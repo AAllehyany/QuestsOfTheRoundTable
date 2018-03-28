@@ -26,6 +26,7 @@ public class AdventureCard extends Card{
 	 * @return battle points
 	 */
 	public int getBp(GameState state) {
+		logger.info(super.getName() + " adds " + bp + " battle points");
 		return this.bp;
 	}
 	
@@ -34,6 +35,7 @@ public class AdventureCard extends Card{
 	 * @return current battle points
 	 */
 	public int getBp() {
+		logger.info(super.getName() + " adds " + bp + " battle points");
 		return this.bp;
 	}
 	
@@ -43,6 +45,7 @@ public class AdventureCard extends Card{
 	 * @return cards bid
 	 */
 	public int getBids(GameState state) {
+		logger.info(super.getName() + " adds " + 0 + " bids");
 		return 0;
 	}
 	
@@ -51,6 +54,7 @@ public class AdventureCard extends Card{
 	 * @return cards bid
 	 */
 	public int getBids() {
+		logger.info(super.getName() + " adds " + 0 + " bids");
 		return 0;
 	}
 }

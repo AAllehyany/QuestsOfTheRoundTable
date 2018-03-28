@@ -21,7 +21,7 @@ public class Foe extends AdventureCard{
 	private HashSet<String> quests = new HashSet<String>();
 	
 	final static Logger logger = Logger.getLogger(Foe.class);
-	
+	// Constructor for Foes with only one battle power
 	/**
 	 * Constructor for foes with a single battle power value
 	 * @param name The type of card. Needs to match a image file in order to load the correct face.
@@ -54,7 +54,6 @@ public class Foe extends AdventureCard{
 		quests.add("Queens_Honor");
 		quests.add(quest);
 	}
-	
 	// getBp used in the case that the GameState can affect a Foe's battle power
 
 	/**
@@ -64,15 +63,10 @@ public class Foe extends AdventureCard{
 	public int getBp(GameState state) {
 		if(state.getCurrentQuest()!=null && 
 				quests.contains(state.getCurrentQuest().getQuest().getName())){
+			logger.info(super.getName() + " has battle power " + this.highBp + weapons.stream().mapToInt(w -> w.getBp()).sum());
 			return this.highBp + weapons.stream().mapToInt(w -> w.getBp()).sum();
 		}
-		return this.bp + weapons.stream().mapToInt(w -> w.getBp()).sum();
-	}
-
-	/**
-	 * ?how do changes work?
-	 */
-	public int getBp() {
+		logger.info(super.getName() + " has battle power " + this.bp + weapons.stream().mapToInt(w -> w.getBp()).sum());
 		return this.bp + weapons.stream().mapToInt(w -> w.getBp()).sum();
 	}
 	
@@ -132,6 +126,9 @@ public class Foe extends AdventureCard{
     		logger.info("INVALID ALLY\n");
     		return false;
     	}
+    	adventureDeck.discardCard(state.getPlayerByIndex(player).removeAlly(ally));
+    	owner.discard(this);
+    	adventureDeck.discardCard(this);
     	adventureDeck.discard(state.getPlayerByIndex(player).removeAlly(ally));
     	adventureDeck.discard(this);
     	owner.getHand().remove(this);

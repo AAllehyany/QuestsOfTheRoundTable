@@ -1,31 +1,32 @@
 	package group52.comp3004.decks;
 	
 	import java.util.ArrayList;
-	import java.util.Arrays;
-	import java.util.List;
-	import java.util.Random;
-	import org.apache.log4j.Logger;
-	import org.springframework.context.ApplicationContext;
-	import org.springframework.context.support.ClassPathXmlApplicationContext;
-	import group52.comp3004.cards.AdventureCard;
-	import group52.comp3004.cards.Ally;
-	import group52.comp3004.cards.Arms;
-	import group52.comp3004.cards.Camelot;
-	import group52.comp3004.cards.Card;
-	import group52.comp3004.cards.CardFactory;
-	import group52.comp3004.cards.Deed;
-	import group52.comp3004.cards.EventCard;
-	import group52.comp3004.cards.Favor;
-	import group52.comp3004.cards.Foe;
-	import group52.comp3004.cards.Plague;
-	import group52.comp3004.cards.Pox;
-	import group52.comp3004.cards.QuestCard;
-	import group52.comp3004.cards.Realm;
-	import group52.comp3004.cards.Recognition;
-	import group52.comp3004.cards.StoryCard;
-	import group52.comp3004.cards.Tests;
-	import group52.comp3004.cards.Tourneys;
-	import group52.comp3004.cards.Weapon;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
+import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import group52.comp3004.cards.AdventureCard;
+import group52.comp3004.cards.Ally;
+import group52.comp3004.cards.Arms;
+import group52.comp3004.cards.Camelot;
+import group52.comp3004.cards.Card;
+import group52.comp3004.cards.Deed;
+import group52.comp3004.cards.EventCard;
+import group52.comp3004.cards.Favor;
+import group52.comp3004.cards.Foe;
+import group52.comp3004.cards.Plague;
+import group52.comp3004.cards.Pox;
+import group52.comp3004.cards.QuestCard;
+import group52.comp3004.cards.Realm;
+import group52.comp3004.cards.Recognition;
+import group52.comp3004.cards.StoryCard;
+import group52.comp3004.cards.Tests;
+import group52.comp3004.cards.Tourneys;
+import group52.comp3004.cards.Weapon;
 	
 	/**
 	 * Utility function for creating game decks. Will be used to handle adventure and story decks. 
@@ -50,6 +51,18 @@
 		public Deck() {
 			this.draw = new ArrayList<T>();
 			size = 0;
+		}
+	
+		public T discardCard(T c) {
+			Card card = (Card) c;
+			logger.info("Discarded: " + card.getName());
+			discard.add(c);
+			return c;
+		}
+	
+		public ArrayList<T> discardCard(ArrayList<T> cards){
+			cards.stream().forEach(c -> this.discardCard(c));
+			return cards;
 		}
 		
 		/**
@@ -76,10 +89,6 @@
 			return size;
 		}
 		
-		/**
-		 * Add a new card to the draw deck.
-		 * @param card The card to be added to the deck
-		 */
 		public void addCard(T card) {
 			this.draw.add(card);
 			size++;
@@ -98,6 +107,7 @@
 			}
 			int index = rand.nextInt(draw.size());
 			obj = draw.remove(index);
+			logger.info("Removed one object from deck");
 			size--;
 			return obj;
 		}
@@ -120,8 +130,7 @@
 		 * @return return the cards back for purpose of error checking. Not used in actual play.
 		 */
 		public ArrayList<T> discard(ArrayList<T> objects){
-			objects.stream().forEach(c -> logger.info("Discarded: " + ((Card) c).getName()));
-			discard.addAll(objects);
+			objects.stream().forEach(c -> discard(c));
 			return objects;
 		}
 		

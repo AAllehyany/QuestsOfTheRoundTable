@@ -141,7 +141,11 @@ public class Ally extends AdventureCard
 	 * Get the total battle power provided by an ally. Total power is base bp plus what is provided by the bonus if the special ability is active.
 	 */
 	public int getBp(GameState state) {
-		if (bonusSatisfied(state)) return bp+bonusbp;
+		if (bonusSatisfied(state)) {
+			logger.info(super.getName() + " adds " + (bp+bonusbp) + " battle points");
+			return bp+bonusbp;
+		}
+		logger.info(super.getName() + " adds " + bp + " battle points");
 		return bp;
 	}
 	
@@ -149,7 +153,11 @@ public class Ally extends AdventureCard
 	 * Get the total bid amount provided by an ally. Total power is base bid plus what is provided by the bonus if the special ability is active.
 	 */
 	public int getBids(GameState state) {
-		if (bonusSatisfied(state)) return bids+bonusbid;
+		if (bonusSatisfied(state)) {
+			logger.info(super.getName() + " adds " + (bids+bonusbid) + " bids");
+			return bids+bonusbid;
+		}
+		logger.info(super.getName() + " adds " + bids + " bids");
 		return bids;
 	}
 	

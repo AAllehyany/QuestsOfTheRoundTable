@@ -45,7 +45,6 @@ public class GameState {
 	 * @param players list of players in the game
 	 */
 	public GameState(List<Player> players) {
-		super();
 		this.players = players;
 		this.currentTurn = 0;
 		this.currentPlayer = 0;
@@ -57,7 +56,6 @@ public class GameState {
 	 * 
 	 */
 	public GameState() {
-		super();
 		this.players = new ArrayList<>();
 		this.currentTurn = 0;
 		this.currentPlayer = 0;
@@ -188,7 +186,7 @@ public class GameState {
 		QuestCard quest = (QuestCard) revealedCard;
 		int numFoes = current.countFoes();
 		int numFoesMinusOne = numFoes - 1;
-		int numTests = current.countTests();
+		int numTests = current.hasTest() ? 1 : 0;
 		int stages = quest.getStages();
 		
 		return numFoes >= stages || numFoesMinusOne + numTests >= stages;
@@ -231,7 +229,7 @@ public class GameState {
 	public boolean setUpQuestStage(Foe foe) {
 		if(currentQuest != null && currentQuest.canAddStage() && currentSponsor == currentPlayer
 				&& phase == Phase.SetupQuest) {
-			currentQuest.addStage(new Stage(foe));
+			currentQuest.addStage(this, new Stage(foe));
 			return true;
 		}
 		
@@ -259,7 +257,7 @@ public class GameState {
 	 */
 	public void endQuest() {
 		
-		currentQuest.end(this.bonusShields);
+		currentQuest.end(this, this.bonusShields);
 		currentSponsor = -1;
 		currentQuest = null;
 		this.bonusShields=0;
@@ -300,7 +298,7 @@ public class GameState {
 	 * Handles play of the next stage in the quest.
 	 */
 	public void playCurrentQuestStage() {
-		if(currentQuest != null) currentQuest.playStage();
+		if(currentQuest != null) currentQuest.playStage(this);
 	}
 	
 	/**

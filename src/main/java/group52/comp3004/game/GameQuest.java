@@ -81,8 +81,7 @@ public class GameQuest {
 	public ArrayList<Integer> getStageCardNum(){
 		ArrayList<Integer> cNum = new ArrayList<Integer>();
 		for(int i=0;i>stages.size();i++) {
-			if(stages.get(i).isTestStage()) cNum.add(1);
-			else cNum.add(1+stages.get(i).getFoe().getWeapons().size());
+			cNum.add(stages.get(i).totalCardsPlayed());
 		}
 		return cNum;
 	}
@@ -109,7 +108,7 @@ public class GameQuest {
 	 * @return True Stage added correctly
 	 *     <p>False either trying to add a second test or the stage the less then previous one
 	 */
-	public boolean addStage(Stage stage) {
+	public boolean addStage(GameState state, Stage stage) {
 		
 		if(stage.isTestStage() && withTest) return false;
 		
@@ -119,9 +118,9 @@ public class GameQuest {
 			return true;
 		}
 		
-		Stage highestStage = stages.stream().max( (s1, s2) -> Integer.compare(s1.getTotalPower(), s2.getTotalPower())).orElse(null);
+		Stage highestStage = stages.stream().max( (s1, s2) -> Integer.compare(s1.getTotalPower(state), s2.getTotalPower(state))).orElse(null);
 		
-		if((highestStage == null || stage.getTotalPower() >= highestStage.getTotalPower()) && stages.size() < quest.getStages()) {
+		if((highestStage == null || stage.getTotalPower(state) >= highestStage.getTotalPower(state)) && stages.size() < quest.getStages()) {
 			stages.add(stage);
 			return true;
 		}
@@ -159,51 +158,6 @@ public class GameQuest {
 			this.players.add(player);
 			player.setQuest(this);
 		}
-	}
-	
-	/**
-	 * ?
-	 */
-	public void playStage() {
-		if(over || this.players.size() == 0) return;
-		
-		if(stages.get(currentStage).isTestStage()) {
-			logger.info("Playing in a test stage...");
-			Player remaining = players.stream().max((p1, p2) -> {
-				if(p1.getOfferedBids() > p2.getOfferedBids()) return -1;
-				if(p1.getOfferedBids() == p2.getOfferedBids()) return 0;
-				return 1;
-			}).get();
-			
-			logger.info("Remaining player is " + remaining.getId());
-			
-			if(remaining.getOfferedBids() == 0) {
-				logger.info("Everyone dropped of the test!");
-				this.over = true;
-				this.players.clear();
-			}
-			else {
-				this.players.clear();
-				this.players.add(remaining);
-			}
-			
-			advanceStage();
-			
-			return;
-		}
-		
-		logger.info("Playing a foe stage!");
-		
-		List<Player> remaining = players.stream().filter(p -> p.getBattlePoints() >= stages.get(currentStage).getTotalPower()).collect(Collectors.toList());
-		this.players.forEach(p -> p.clearTemp());
-		logger.info("Done playing the stage...");
-		logger.info(remaining.size() + " players are now in the quest.");
-		this.players = remaining;
-		if(currentStage == (quest.getStages() - 1) || this.players.size() < 1)  {
-			logger.info("No players or we played all stages! Quest is over.");
-			this.over = true;
-		}
-		advanceStage();	
 	}
 	
 	/**
@@ -339,6 +293,8 @@ public class GameQuest {
 		dealCardsToSponsor();
 		for(int i=0;i<state.getAllPlayers().size();i++) {
 			Player p = state.getPlayerByIndex(i);
+			state.getAdventureDeck().discardCard(p.getTemp());
+			p.getTemp().clear();
 			for(int j=0;j<p.getTemp().size();j++) {
 				if(p.getTemp().get(j) instanceof Amour) {
 					state.getAdventureDeck().discard(p.getTemp().get(j));

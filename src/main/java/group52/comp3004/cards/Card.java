@@ -101,6 +101,7 @@ public class Card{
 	 * @param id ID of the card
 	 */
 	public void setID(int id) {
+		logger.info("Card: " + this.name + " ID set to " + this.id);
 		this.id = id;
 	}
 	

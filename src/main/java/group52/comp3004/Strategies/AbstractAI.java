@@ -3,6 +3,8 @@ package group52.comp3004.Strategies;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 
@@ -47,10 +49,17 @@ public abstract class AbstractAI{
 			logger.info("NO QUEST");
 			return false;
 		}
-		if(otherEvolve(state, p)) return false;
+		if(otherEvolve(state, p)) {
+			logger.info("Player: " + p.getId() + " will not sponsor the quest, because another player might rank up");
+			return false;
+		}
 		int test = 0;
 		if(p.hasTest()) test = 1;
-		if(p.numUniqueFoes(state) +test<state.getCurrentQuest().getNumStages()) return false;
+		if(this.numUniqueFoes(state, p) +test<state.getCurrentQuest().getNumStages()) {
+			logger.info("Player: " + p.getId() + " will not sponsor the quest, because it does not have enough cards");
+			return false;
+		}
+		logger.info("Player: " + p.getId() + " will sponsor the quest");
 		return true;
 	}
 	
@@ -102,8 +111,140 @@ public abstract class AbstractAI{
 	 * @return the list of stages created by the ai
 	 */
 	public abstract ArrayList<AdventureCard> playStage(GameState state, Player p);
+
+	/**
+	 * Get a list of any duplicated cards in hand. ?What is it used for?
+	 * @return 
+	 */
+	protected ArrayList<AdventureCard> getDuplicates(Player p){
+		ArrayList<AdventureCard> dupes = new ArrayList<AdventureCard>();
+		HashSet<AdventureCard> cards = new HashSet<AdventureCard>();
+		for(int i=0;i<p.getHand().size();i++) {
+			if(!cards.add(p.getHand().get(i))) dupes.add(p.getHand().get(i));
+		}
+		return dupes;
+	}
 	
-	// Determine if any player can evolve before a quest or tournament starts
+	/**
+	 * Get the number of foes less than a certain battle power in a player's hand. Used to judge if a player can set up a quest.
+	 * @param bp The battle power trying to pass
+	 * @return
+	 */
+	protected int countFoes(Player p, int bp) {
+		int count =0;
+		for(int i=0;i<p.getHand().size();i++) {
+			if(p.getHand().get(i) instanceof Foe && p.getHand().get(i).getBp()<bp) count++;
+		}
+		return count;
+	}
+	
+	/**
+	 * Get the foes less than a certain battle power in a player's hand. ?What is it used for?
+	 * @param bp The battle power trying to pass
+	 * @return List of foes in hand that has a battle power greater than bp
+	 */
+	protected ArrayList<AdventureCard> getFoes(Player p, int bp){
+		ArrayList<AdventureCard> foes = new ArrayList<AdventureCard>();
+		for(int i=0;i<p.getHand().size();i++) {
+			if(p.getHand().get(i) instanceof Foe && p.getHand().get(i).getBp()<bp) {
+				foes.add(p.getHand().get(i));
+			}
+		}
+		return foes;
+	}
+	
+	/**
+	 * get the foes of unique battle powers in a player's hand depending on the GameState. ?Duplicate?
+	 * @param state the current conditions of the game 
+	 * @return
+	 */
+	protected ArrayList<AdventureCard> getUniqueFoes(GameState state, Player p){
+		ArrayList<AdventureCard> uFoes = new ArrayList<AdventureCard>();
+		HashSet<Integer> bps = new HashSet<Integer>();
+		for(int i=0;i<p.getHand().size();i++) {
+			if(p.getHand().get(i) instanceof Foe) {
+				Foe f;
+				f = (Foe) p.getHand().get(i);
+				if(bps.add(f.getBp(state))) uFoes.add(p.getHand().get(i));
+			}
+		}
+		return uFoes;
+	}
+	
+	/**
+	 * ?Duplicate?
+	 * @param state the current conditions of the game
+	 * @return
+	 */
+	protected int numUniqueFoes(GameState state, Player p) {
+		int numUFoes = 0;
+		HashSet<Integer> bps = new HashSet<Integer>();
+		for(int i=0;i<p.getHand().size();i++) {
+			if(p.getHand().get(i) instanceof Foe) {
+				Foe f = (Foe) p.getHand().get(i);
+				if(bps.add(f.getBp(state))) numUFoes++;
+			}
+		}
+		return numUFoes;
+	}
+	
+	// Determine if a player has an amour in their hand
+	protected boolean hasAmour(Player p) {
+		for(int i=0;i<p.getTemp().size();i++) {
+			if (p.getTemp().get(i) instanceof Amour) return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Test for whether there is an amour in the player's hand.
+	 */
+	protected boolean hasAmourInHand(Player p) {
+		for(int i=0;i<p.getHand().size();i++) {
+			if(p.getHand().get(i) instanceof Amour) return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * ?What is it used for?
+	 * @return
+	 */
+	protected AdventureCard getAmourInHand(Player p) {
+		for(int i=0;i<p.getHand().size();i++) {
+			if(p.getHand().get(i) instanceof Amour) {
+				return p.discard(p.getHand().get(i));
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Test for whether there is an ally in the player's hand.
+	 * @return
+	 */
+	protected boolean hasAllyInHand(Player p) {
+		for(int i=0;i<p.getHand().size();i++) {
+			if(p.getHand().get(i) instanceof Ally) return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * ?What is this used for?
+	 * @param state the current conditions of the game
+	 * @return
+	 */
+	protected AdventureCard getStrongestAllyInHand(GameState state, Player p) {
+		p.sortHand(state);
+		for(int i=0;i<p.getHand().size();i++) {
+			if(p.getHand().get(i) instanceof Ally) {
+				return p.discard(p.getHand().get(i));
+			}
+		}
+		return null;
+	}
+
 	/**
 	 * Determines if any player could update in rank. Used to decide whether to join quest or tournament starts.
 	 * <p>Includes self</p>
@@ -127,7 +268,6 @@ public abstract class AbstractAI{
 		return false;
 	}
 	
-	// Determine if another player can evolve before a quest or tournament starts
 	/**
 	 *Determines if any other player could update in rank. Used to decide whether to join quest or tournament starts.
 	 * <p>Discludes self</p> 
@@ -175,7 +315,7 @@ public abstract class AbstractAI{
 	public Foe getStrongestFoe(GameState state, Player p) {
 		p.sortHand(state);
 		for(int i=0;i<p.getHand().size();i++) {
-			if(p.getHand().get(i) instanceof Foe) return (Foe) p.getHand().remove(i);
+			if(p.getHand().get(i) instanceof Foe) return (Foe) p.discard(p.getHand().get(i));
 		}
 		return null;
 	}
@@ -201,9 +341,7 @@ public abstract class AbstractAI{
 	protected Foe getWeakestFoe(GameState state, Player p) {
 		p.sortHand(state);
 		for(int i=p.getHand().size()-1;i>=0;i--) {
-			if(p.getHand().get(i) instanceof Foe) {
-				return (Foe) p.getHand().remove(i);
-			}
+			if(p.getHand().get(i) instanceof Foe) return (Foe) p.discard(p.getHand().get(i));
 		}
 		return null;
 	}
@@ -224,10 +362,10 @@ public abstract class AbstractAI{
 				weps.addLast(p.getHand().get(i));
 		}
 		int curbp = f.getBp(state);
-		while(curbp<bp){
+		while(curbp<bp && !weps.isEmpty()){
 			Weapon w = (Weapon) weps.removeFirst();
 			f.addWeapon(w);
-			p.getHand().remove(w);
+			p.discard(w);
 			curbp += w.getBp();
 		}
 		return f;
@@ -242,7 +380,7 @@ public abstract class AbstractAI{
 	 */
 	protected int countWAA(GameState state, Player p, int stages) {
 		int WAA = 0;
-		if(p.hasAmourInHand() && !p.hasAmour()) WAA++;
+		if(this.hasAmourInHand(p) && !this.hasAmour(p)) WAA++;
 		HashMap<AdventureCard, Integer> weps = new HashMap<AdventureCard, Integer>();
 		for(int i=0;i<p.getHandSize();i++) {
 			if(p.getHand().get(i) instanceof Weapon) {
@@ -255,5 +393,15 @@ public abstract class AbstractAI{
 			WAA += Math.min(stages, wepNums.get(i));
 		}
 		return WAA;
+	}
+	
+	protected AdventureCard getWeakestWeapon(GameState state, Player p, ArrayList<AdventureCard> weapons) {
+		p.sortHand(state);
+		for(int i=p.getHand().size()-1;i>=0;i--) {
+			if(p.getHand().get(i) instanceof Weapon && !weapons.contains(p.getHand().get(i))) {
+				return p.discard(p.getHand().get(i));
+			}
+		}
+		return null;
 	}
 }

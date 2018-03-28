@@ -19,7 +19,7 @@ public class Arms implements EventBehaviour{
 	@Override	
 	//NOTE: how to write docs for behaviour classes
 	public void handle(GameState gamestate) {
-		
+		logger.info("		->Arms");
 		for(int i=0;i<gamestate.numPlayers();i++) {
 			if(gamestate.getPlayerByIndex(i).getRank()== Rank.ChampionKnight){
 				highestRank = Rank.ChampionKnight;

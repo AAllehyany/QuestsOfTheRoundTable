@@ -3,6 +3,8 @@ package group52.comp3004.game;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import group52.comp3004.cards.Tourneys;
 import group52.comp3004.players.Player;
 
@@ -16,10 +18,10 @@ public class GameTourney {
 	private final Tourneys tourney;
 	private List<Player> players;
 	private List<Player> count,count1;
-	//private Player sponsor;
 	private int bonus;
 	private List<Player> winner;
 	private boolean over;
+	static final private Logger logger = Logger.getLogger(GameTourney.class);
 	
 	/**
 	 * Constructor for a new tourney.
@@ -30,9 +32,7 @@ public class GameTourney {
 		this.players = new ArrayList<Player>();
 		this.count = new ArrayList<Player>();
 		this.count1 = new ArrayList<Player>();
-		//this.sponsor = sponsor;
 		this.winner=new ArrayList<Player>();
-		this.bonus=0;
 		this.over= false;
 	}
 	
@@ -58,8 +58,9 @@ public class GameTourney {
 	 * @param player
 	 */
 	public void addPlayer(Player player) {
-			this.players.add(player);
-			player.setTourney(this);
+		logger.info("Player: " + player.getId() + " joined the quest");
+		this.players.add(player);
+		player.setTourney(this);
 	}
 
 	/**
@@ -84,20 +85,21 @@ public class GameTourney {
 	 * ?
 	 * @return
 	 */
-	public List<Player> winner() {
-		List<Player> win= battle(this.players);
+	public List<Player> winner(GameState state) {
+		List<Player> win= battle(state, this.players);
 		if(this.players.size()==1) {
 			this.winner= this.players;
-			bonus=2;
 		}else {
 			int count = win.size();
 			if(count>1) {
-					this.winner = secondBattle(win);
+					this.winner = secondBattle(state, win);
 				}
 			else {
 				this.winner = win;
 			}
 		}
+		for(int i=0;i<winner.size();i++) 
+			logger.info("Player: " + winner.get(i).getId() + " won the tournament");
 		return this.winner;
 	}
 	
@@ -121,28 +123,6 @@ public List<Player> secondBattle(List<Player> player) {
 		}
 		return this.count1;
 	}
-
-	/**
-	 * ?
-	 * @param player
-	 * @return
-	 */
-	public List<Player> battle(List<Player> player) {
-		this.count.clear();
-		Player highest= player.get(0);
-
-		this.count.add(player.get(0));
-		for(int i=1;i<this.players.size();i++) {
-			if(player.get(i).getBattlePoints()>highest.getBattlePoints()) {
-				highest =player.get(i);
-				this.count.clear();
-				this.count.add(player.get(i));
-			}else if(player.get(i).getBattlePoints()==highest.getBattlePoints()) {
-				this.count.add(player.get(i));
-			}
-		}
-		return this.count;
-	}
 	
 	/**
 	 * Award shields to winner equal to number of players in tourney plus the bonus provided by the card.
@@ -150,18 +130,65 @@ public List<Player> secondBattle(List<Player> player) {
 	public void awardShields() {
 		 this.winner.forEach(p -> p.addShields(players.size()+tourney.getShields() + bonus));
 	}
+
+	/**
+	 * ?
+	 * @param player
+	 * @return
+	 */
+	public List<Player> secondBattle(GameState state, List<Player> player) {
+	    this.count1.clear();
+		int highest = 0;
+		this.count1.add(player.get(0));
+		for(int i=1;i<player.size();i++) {
+			if(player.get(i).getBattlePoints(state)>highest) {
+				highest =player.get(i).getBattlePoints(state);
+				this.count1.clear();
+				this.count1.add(player.get(i));
+			}else if(player.get(i).getBattlePoints(state)==highest) {
+				this.count1.add(player.get(i));
+			}
+		}
+		for(int i=0;i<player.size();i++) {
+			state.getAdventureDeck().discardCard(this.players.get(i).clearTemp());
+		}
+		for(int i=0;i<this.count1.size();i++) 
+			logger.info("Player: " + this.count.get(i).getId() + " won the second tournament round");
+		return this.count1;
+	}
 	
+	public List<Player> battle(GameState state, List<Player> player) {
+		this.count.clear();
+		int highest = 0;
+		for(int i=0;i<this.players.size();i++) {
+			if(player.get(i).getBattlePoints(state)>highest) {
+				highest = player.get(i).getBattlePoints(state);
+				this.count.clear();
+				this.count.add(player.get(i));
+			}else if(player.get(i).getBattlePoints(state)==highest) {
+				this.count.add(player.get(i));
+			}
+		}
+		for(int i=0;i<player.size();i++) {
+			state.getAdventureDeck().discardCard(this.players.get(i).clearTemp());
+		}
+		for(int i=0;i<count.size();i++) 
+			logger.info("Player: " + this.count.get(i).getId() + " won the first tournament round");
+		return this.count;
+	}
+	
+
 	/**
 	 * Handle end of tourney. 
 	 */
-	public void end() {
+	public void end(GameState state) {
 		for(int i =0;i<this.players.size();i++) {
-			this.getPlayers().get(i).clearTemp();
+			state.getAdventureDeck().discardCard(this.getPlayers().get(i).getTemp());
+			this.getPlayers().get(i).getTemp().clear();
 		}
 		this.over = true;
 		this.count.clear();
 		this.count1.clear();
-		bonus = 0;
 	}
 
 	/**
