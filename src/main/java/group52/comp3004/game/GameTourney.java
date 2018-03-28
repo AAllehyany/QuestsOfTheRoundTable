@@ -54,7 +54,7 @@ public class GameTourney {
 	
 	//Why need to add tourney inside player?
 	/**
-	 * ?
+	 * Adds a player to the tourney. Needs a separate list because not all players may have joined the tourney.
 	 * @param player
 	 */
 	public void addPlayer(Player player) {
@@ -71,7 +71,7 @@ public class GameTourney {
 	}
 	
 	/**
-	 * ?
+	 * Each player gets a card dealt to them at the start of a tourney.
 	 */
 	public void dealCards() {
 		for(int i=0;i<this.players.size();i++) {
@@ -165,9 +165,9 @@ public List<Player> secondBattle(List<Player> player) {
 	}
 
 	/**
-	 * ?
-	 * @param player
-	 * @return
+	 * Tests whether a player is a part of the tourney
+	 * @param player Player to search for
+	 * @return True if the player is participating in the tourney
 	 */
 	public boolean isPlayer(Player player) {
 		return this.players.contains(player); // || player == sponsor;

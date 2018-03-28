@@ -28,7 +28,7 @@ public abstract class AbstractAI{
 	static final private Logger logger = Logger.getLogger(AbstractAI.class);
 	
 	/**
-	 * 
+	 * Strategy decides whether to join tourney
 	 * @param state the current conditions of the game
 	 * @param p The ai player is using this strategy
 	 * @return True if conditions to participate in tourney are met
@@ -37,7 +37,7 @@ public abstract class AbstractAI{
 	
 	
 	/**
-	 * Handles decision for an AI to sponsor quest ?same for all ai?
+	 * Strategy decides whether to sponsor quest
 	 * @param state the current conditions of the game
 	 * @param p The ai player is using this strategy
 	 * @return True if conditions to sponsor quest are met
@@ -55,7 +55,7 @@ public abstract class AbstractAI{
 	}
 	
 	/**
-	 * 
+	 * Strategy decides whether to join quest
 	 * @param state the current conditions of the game
 	 * @param p The ai player is using this strategy
 	 * @return True if conditions to participate in quest are met
@@ -63,39 +63,40 @@ public abstract class AbstractAI{
 	public abstract boolean doIParticipateInQuest(GameState state, Player p);
 	
 	/**
-	 * 
+	 * Strategy decides how many cards to bid. All AIs submit a number of cards it would like to bid. 
+	 * <p>If that number is less then current test minimum the AI is knocked out of the test</p>
 	 * @param state the current conditions of the game
 	 * @param p The ai player is using this strategy
-	 * @return ?
+	 * @return number of cards AI wishes to bid
 	 */
 	public abstract int nextBid(GameState state, Player p);
 	
 	/**
-	 * 
+	 * Handles the dicision of which cards the AI will discard after winning the test
 	 * @param state the current conditions of the game
 	 * @param p The ai player is using this strategy
-	 * @return ?
+	 * @return List of cards to be discarded
 	 */
 	public abstract ArrayList<AdventureCard> discardAfterWinningTest(GameState state, Player p);
 	
 	/**
-	 * 
+	 * Handles behaviour for tourney play. 
 	 * @param state the current conditions of the game
 	 * @param p The ai player is using this strategy
-	 * @return ?
+	 * @return List of cards to be discarded
 	 */
 	public abstract ArrayList<AdventureCard> playTourney(GameState state, Player p);
 	
 	/**
-	 * 
+	 * Handles AI's decisions for building a quest after sponsoring
 	 * @param state the current conditions of the game
 	 * @param p The ai player is using this strategy
-	 * @return
+	 * @return List of stages created
 	 */
 	public abstract ArrayList<Stage> createQuest(GameState state, Player p);
 	
 	/**
-	 * 
+	 * Handles AI's decisions for which cards to play to be likely to pass a stage
 	 * @param state the current conditions of the game
 	 * @param p The ai player is using this strategy
 	 * @return the list of stages created by the ai
@@ -104,9 +105,10 @@ public abstract class AbstractAI{
 	
 	// Determine if any player can evolve before a quest or tournament starts
 	/**
-	 * ?
+	 * Determines if any player could update in rank. Used to decide whether to join quest or tournament starts.
+	 * <p>Includes self</p>
 	 * @param state the current conditions of the game
-	 * @return ?
+	 * @return True if there is a player that can evolve after quest/tourney
 	 */
 	public boolean anyEvolve(GameState state) {
 		ArrayList<Player> players = new ArrayList<Player>(state.getAllPlayers());
@@ -127,10 +129,11 @@ public abstract class AbstractAI{
 	
 	// Determine if another player can evolve before a quest or tournament starts
 	/**
-	 * 
+	 *Determines if any other player could update in rank. Used to decide whether to join quest or tournament starts.
+	 * <p>Discludes self</p> 
 	 * @param state the current conditions of the game
 	 * @param p The ai player is using this strategy
-	 * @return ?
+	 * @return True if there is another player that can evolve after quest/tourney
 	 */
 	public boolean otherEvolve(GameState state, Player p) {
 		ArrayList<Player> players = new ArrayList<Player>(state.getAllPlayers());
@@ -152,7 +155,7 @@ public abstract class AbstractAI{
 	}
 	
 	/**
-	 * 
+	 * Utility method for removing 
 	 * @param p The ai player is using this strategy
 	 * @return If a test is in ai player's hand the test card found otherwise null
 	 */

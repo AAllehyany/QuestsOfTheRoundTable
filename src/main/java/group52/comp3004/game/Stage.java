@@ -57,17 +57,18 @@ public class Stage {
 	}
 	
 	/**
-	 * ?
-	 * @return
+	 * Gets the total battle power provided by a stage.
+	 * <p>Used only for testing</p>
+	 * @return the stage's battle power
 	 */
 	public int getTotalPower() {
 		return testStage ? 0 : foe.getBp();
 	}
 	
 	/**
-	 * ?
-	 * @param state
-	 * @return
+	 * Gets the total battle power provided by a stage.
+	 * @param state The current conditions of the game
+	 * @return the stage's battle power
 	 */
 	public int getTotalPower(GameState state) {
 		return testStage ? 0 : foe.getBp(state);

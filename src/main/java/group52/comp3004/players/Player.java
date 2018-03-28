@@ -17,7 +17,6 @@ import group52.comp3004.cards.CardComparator;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.Tests;
 import group52.comp3004.cards.Weapon;
-import group52.comp3004.controllers.GameController;
 import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
 import group52.comp3004.game.GameTourney;
@@ -43,7 +42,6 @@ public class Player {
 	private GameState game;
 	private GameQuest quest;
 	private GameTourney tourney;
-	private GameController controller;
 	private Integer bidPoints;
 	private boolean stoppedBidding;
 	private int offeredBids;
@@ -54,12 +52,11 @@ public class Player {
 	static final private Logger logger = Logger.getLogger(Player.class);
 	
 	/**
-	 * ?Use of each constructor?
+	 * Used for human construction
 	 * @param id Player id number. Used for internal testing.
-	 * @param gc ?Used in iter 2?
 	 * @param gs the current conditions of the game
 	 */
-	public Player(Integer id, GameController gc, GameState gs) {
+	public Player(Integer id, GameState gs) {
 		this.id = id;
 		shields = 10;
 		rank = Rank.Squire;
@@ -72,7 +69,6 @@ public class Player {
 		temp = new ArrayList<>();
 		quest = null;
 		tourney = null;
-		controller = gc;
 		game = gs;
 		bidPoints = 0;
 		offeredBids = 0;
@@ -81,13 +77,12 @@ public class Player {
 	}
 	
 	/**
-	 *  ?Use of each constructor?
+	 *  USed for AI player construction
 	 * @param id Player id number. Used for internal testing.
-	 * @param gc ?used in iter 2?
 	 * @param gs the current conditions of the game
 	 * @param s
 	 */
-	public Player(Integer id, GameController gc, GameState gs, int s) {
+	public Player(Integer id, GameState gs, int s) {
 		this.id = id;
 		shields = 10;
 		rank = Rank.Squire;
@@ -100,7 +95,6 @@ public class Player {
 		temp = new ArrayList<>();
 		quest = null;
 		tourney = null;
-		controller = gc;
 		game = gs;
 		bidPoints = 0;
 		offeredBids = 0;
@@ -111,7 +105,7 @@ public class Player {
 	}
 	
 	/**
-	 *  ?Use of each constructor?
+	 *  Used for testing when there isn't a game state.
 	 * @param id Player id number. Used for internal testing.
 	 */
 	public Player(Integer id) {
@@ -197,7 +191,7 @@ public class Player {
 	}
 	
 	/**
-	 * ?
+	 * Gets quest property. Used for testing
 	 * @return
 	 */
 	public GameQuest getQuest() {
@@ -205,7 +199,7 @@ public class Player {
 	}
 	
 	/**
-	 * ?
+	 * Sets quest property. Used for testing
 	 * @param quest
 	 */
 	public void setQuest(GameQuest quest) {
@@ -214,9 +208,9 @@ public class Player {
 	}
 	
 	/**
-	 * ?what does second part do?
-	 * @param state
-	 * @return ?
+	 * Gets the total bids of the player(Rank bp, weapon bp, ally bp) 
+	 * @param state The current conditions of the game
+	 * @return total bids
 	 */
 	public Integer getBidPoints(GameState state) {
 		return bidPoints + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum();

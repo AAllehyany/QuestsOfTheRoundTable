@@ -106,8 +106,8 @@ public class GameQuest {
 	/**
 	 * Add a new stage to the quest. Can only add one test stage to a quest
 	 * @param stage The stage that is being added
-	 * @return True Stage added incorrectly
-	 *     <p>False either trying to add a second test or ?what does second if statement do? 
+	 * @return True Stage added correctly
+	 *     <p>False either trying to add a second test or the stage the less then previous one
 	 */
 	public boolean addStage(Stage stage) {
 		
@@ -144,7 +144,7 @@ public class GameQuest {
 	}
 	
 	/**
-	 * ?
+	 * Move on to the next stage
 	 */
 	public void advanceStage() {
 		if(currentStage < (quest.getStages() - 1)) currentStage += 1;
@@ -269,8 +269,8 @@ public class GameQuest {
 	}
 	
 	/**
-	 * Gives shields to the players that complete the quest ?
-//	 * @param bonus ?
+	 * Gives shields to the players that complete the quest. King's recognition adds bonus shields so that needed to be handled here
+	 * @param bonus The number of bonus shields awarded by King's recognition
 	 */
 	public void awardShields(int bonus) {
 		if(over) players.forEach(p -> p.addShields(quest.getStages() + bonus));
@@ -314,15 +314,15 @@ public class GameQuest {
 	}
 	
 	/**
-	 * ?
-	 * @return
+	 * Sponsor gets the number of cards played into a quest the by sponsor so they can draw that number cards after.
+	 * @return number of cards to draw
 	 */
 	public int getNumCardsPlayedBySponsor() {
 		return this.getStages().stream().mapToInt(s -> s.totalCardsPlayed()).sum() + stages.size();
 	}
 	
 	/**
-	 * ?
+	 * Deal number of cards equal to what the sponsor played to setup the quest
 	 */
 	public void dealCardsToSponsor() {
 		for(int i = 0; i< getNumCardsPlayedBySponsor(); i++)
@@ -332,7 +332,7 @@ public class GameQuest {
 	/**
 	 * Handles the a quest ending. All cards played into the quest are added to the discard pile and awards 
 	 * @param state The current conditions of the game.
-	 * @param bonus ?
+	 * @param bonus Represents the bonus shields given by King's recognition
 	 */
 	public void end(GameState state, int bonus) {
 		this.over = true;
@@ -354,7 +354,7 @@ public class GameQuest {
 	}
 	
 	/**
-	 * ?
+	 * Used for testing
 	 */
 	public void end() { 
 		this.over = true;
@@ -362,8 +362,8 @@ public class GameQuest {
 	}
 	
 	/**
-	 * ?
-	 * @param bonus ?
+	 * Used for testing that involves events
+	 * @param bonus Represents the bonus shields given by King's recognition
 	 */
 	public void end(int bonus) {
 		this.over = true;

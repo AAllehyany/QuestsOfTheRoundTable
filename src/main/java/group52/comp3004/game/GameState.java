@@ -110,7 +110,7 @@ public class GameState {
 	}
 	
 	/**
-	 * ?While statement?
+	 * Used for testing. Has test go to next player for quests.
 	 */
 	public void nextPlayer() {
 		currentPlayer = (currentPlayer + 1) % players.size();
@@ -240,7 +240,8 @@ public class GameState {
 	}
 	
 	/**
-	 * ?
+	 * Used when a player plays a card. The temp list holds all cards played and is cleared after a story is completed.
+	 * <p>Allies are moved to a separate list when temp is cleared</p>
 	 * @param card The card to be added to the list.
 	 * @return Card successfully added.
 	 */
