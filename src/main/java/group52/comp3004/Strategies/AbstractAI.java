@@ -21,10 +21,29 @@ import group52.comp3004.game.GameState;
 import group52.comp3004.game.Stage;
 import group52.comp3004.players.Player;
 
+/**
+ * abstract class to build the AI strategies over.
+ * @author Sandy
+ *
+ */
 public abstract class AbstractAI{
+	static final private Logger logger = Logger.getLogger(AbstractAI.class);
+	
+	/**
+	 * 
+	 * @param state the current conditions of the game
+	 * @param p The ai player is using this strategy
+	 * @return True if conditions to participate in tourney are met
+	 */
 	public abstract boolean doIParticipateInTournament(GameState state, Player p);
 	
-	static final private Logger logger = Logger.getLogger(AbstractAI.class);
+	
+	/**
+	 * Handles decision for an AI to sponsor quest ?same for all ai?
+	 * @param state the current conditions of the game
+	 * @param p The ai player is using this strategy
+	 * @return True if conditions to sponsor quest are met
+	 */
 	public boolean doISponsorQuest(GameState state, Player p) {
 		if(state.getCurrentQuest()==null) {
 			logger.info("NO QUEST");
@@ -35,7 +54,7 @@ public abstract class AbstractAI{
 			return false;
 		}
 		int test = 0;
-		if(this.hasTest(p)) test = 1;
+		if(p.hasTest()) test = 1;
 		if(this.numUniqueFoes(state, p) +test<state.getCurrentQuest().getNumStages()) {
 			logger.info("Player: " + p.getId() + " will not sponsor the quest, because it does not have enough cards");
 			return false;
@@ -44,14 +63,58 @@ public abstract class AbstractAI{
 		return true;
 	}
 	
+	/**
+	 * 
+	 * @param state the current conditions of the game
+	 * @param p The ai player is using this strategy
+	 * @return True if conditions to participate in quest are met
+	 */
 	public abstract boolean doIParticipateInQuest(GameState state, Player p);
+	
+	/**
+	 * 
+	 * @param state the current conditions of the game
+	 * @param p The ai player is using this strategy
+	 * @return ?
+	 */
 	public abstract int nextBid(GameState state, Player p);
+	
+	/**
+	 * 
+	 * @param state the current conditions of the game
+	 * @param p The ai player is using this strategy
+	 * @return ?
+	 */
 	public abstract ArrayList<AdventureCard> discardAfterWinningTest(GameState state, Player p);
+	
+	/**
+	 * 
+	 * @param state the current conditions of the game
+	 * @param p The ai player is using this strategy
+	 * @return ?
+	 */
 	public abstract ArrayList<AdventureCard> playTourney(GameState state, Player p);
+	
+	/**
+	 * 
+	 * @param state the current conditions of the game
+	 * @param p The ai player is using this strategy
+	 * @return
+	 */
 	public abstract ArrayList<Stage> createQuest(GameState state, Player p);
+	
+	/**
+	 * 
+	 * @param state the current conditions of the game
+	 * @param p The ai player is using this strategy
+	 * @return the list of stages created by the ai
+	 */
 	public abstract ArrayList<AdventureCard> playStage(GameState state, Player p);
 
-	// Get any duplicates from a players hand
+	/**
+	 * Get a list of any duplicated cards in hand. ?What is it used for?
+	 * @return 
+	 */
 	protected ArrayList<AdventureCard> getDuplicates(Player p){
 		ArrayList<AdventureCard> dupes = new ArrayList<AdventureCard>();
 		HashSet<AdventureCard> cards = new HashSet<AdventureCard>();
@@ -61,29 +124,11 @@ public abstract class AbstractAI{
 		return dupes;
 	}
 	
-	// Determine if a player has a test in their hand
-	protected boolean hasTest(Player p) {
-		for(int i=0;i<p.getHand().size();i++) {
-			if(p.getHand().get(i) instanceof Tests) return true;
-		}
-		return false;
-	}
-	
-	// count the number of tests in a player's hand
-	protected int countTests(Player p) {
-		return p.getHand().stream().filter(c -> c instanceof Tests).collect(Collectors.toList()).size();
-	}
-	
-	// count the number of foes in a player's hand
-	protected int countFoes(Player p) {
-		int count = 0;
-		for(int i=0;i<p.getHand().size();i++) {
-			if(p.getHand().get(i) instanceof Foe) count++;
-		}
-		return count;
-	}
-	
-	// count the number of foes less than a certain battle power in a player's hand
+	/**
+	 * Get the number of foes less than a certain battle power in a player's hand. Used to judge if a player can set up a quest.
+	 * @param bp The battle power trying to pass
+	 * @return
+	 */
 	protected int countFoes(Player p, int bp) {
 		int count =0;
 		for(int i=0;i<p.getHand().size();i++) {
@@ -92,7 +137,11 @@ public abstract class AbstractAI{
 		return count;
 	}
 	
-	// get the foes less than a certain battle power in a player's hand
+	/**
+	 * Get the foes less than a certain battle power in a player's hand. ?What is it used for?
+	 * @param bp The battle power trying to pass
+	 * @return List of foes in hand that has a battle power greater than bp
+	 */
 	protected ArrayList<AdventureCard> getFoes(Player p, int bp){
 		ArrayList<AdventureCard> foes = new ArrayList<AdventureCard>();
 		for(int i=0;i<p.getHand().size();i++) {
@@ -103,7 +152,11 @@ public abstract class AbstractAI{
 		return foes;
 	}
 	
-	// get the foes of unique battle powers in a player's hand depending on the GameState
+	/**
+	 * get the foes of unique battle powers in a player's hand depending on the GameState. ?Duplicate?
+	 * @param state the current conditions of the game 
+	 * @return
+	 */
 	protected ArrayList<AdventureCard> getUniqueFoes(GameState state, Player p){
 		ArrayList<AdventureCard> uFoes = new ArrayList<AdventureCard>();
 		HashSet<Integer> bps = new HashSet<Integer>();
@@ -117,7 +170,11 @@ public abstract class AbstractAI{
 		return uFoes;
 	}
 	
-	// count the foes of unique battle powers in a player's hand depending on the GameState
+	/**
+	 * ?Duplicate?
+	 * @param state the current conditions of the game
+	 * @return
+	 */
 	protected int numUniqueFoes(GameState state, Player p) {
 		int numUFoes = 0;
 		HashSet<Integer> bps = new HashSet<Integer>();
@@ -138,6 +195,9 @@ public abstract class AbstractAI{
 		return false;
 	}
 	
+	/**
+	 * Test for whether there is an amour in the player's hand.
+	 */
 	protected boolean hasAmourInHand(Player p) {
 		for(int i=0;i<p.getHand().size();i++) {
 			if(p.getHand().get(i) instanceof Amour) return true;
@@ -145,6 +205,10 @@ public abstract class AbstractAI{
 		return false;
 	}
 	
+	/**
+	 * ?What is it used for?
+	 * @return
+	 */
 	protected AdventureCard getAmourInHand(Player p) {
 		for(int i=0;i<p.getHand().size();i++) {
 			if(p.getHand().get(i) instanceof Amour) {
@@ -154,6 +218,10 @@ public abstract class AbstractAI{
 		return null;
 	}
 	
+	/**
+	 * Test for whether there is an ally in the player's hand.
+	 * @return
+	 */
 	protected boolean hasAllyInHand(Player p) {
 		for(int i=0;i<p.getHand().size();i++) {
 			if(p.getHand().get(i) instanceof Ally) return true;
@@ -161,6 +229,11 @@ public abstract class AbstractAI{
 		return false;
 	}
 	
+	/**
+	 * ?What is this used for?
+	 * @param state the current conditions of the game
+	 * @return
+	 */
 	protected AdventureCard getStrongestAllyInHand(GameState state, Player p) {
 		p.sortHand(state);
 		for(int i=0;i<p.getHand().size();i++) {
@@ -171,9 +244,12 @@ public abstract class AbstractAI{
 		return null;
 	}
 
-	
-	// Determine if any player can evolve before a quest or tournament starts
-	protected boolean anyEvolve(GameState state) {
+	/**
+	 * ?
+	 * @param state the current conditions of the game
+	 * @return ?
+	 */
+	public boolean anyEvolve(GameState state) {
 		ArrayList<Player> players = new ArrayList<Player>(state.getAllPlayers());
 		for(int i=0;i<players.size();i++) {
 			Player otherP = players.get(i);
@@ -190,8 +266,13 @@ public abstract class AbstractAI{
 		return false;
 	}
 	
-	// Determine if another player can evolve before a quest or tournament starts
-	protected boolean otherEvolve(GameState state, Player p) {
+	/**
+	 * 
+	 * @param state the current conditions of the game
+	 * @param p The ai player is using this strategy
+	 * @return ?
+	 */
+	public boolean otherEvolve(GameState state, Player p) {
 		ArrayList<Player> players = new ArrayList<Player>(state.getAllPlayers());
 		for(int i=0;i<players.size();i++) {
 			if(!players.get(i).equals(p)) {
@@ -210,14 +291,25 @@ public abstract class AbstractAI{
 		return false;
 	}
 	
-	protected Tests getTest(Player p) {
+	/**
+	 * 
+	 * @param p The ai player is using this strategy
+	 * @return If a test is in ai player's hand the test card found otherwise null
+	 */
+	public Tests getTest(Player p) {
 		for (int i=0;i<p.getHand().size();i++) {
 			if(p.getHand().get(i) instanceof Tests) return (Tests) p.getHand().get(i);
 		}
 		return null;
 	}
 	
-	protected Foe getStrongestFoe(GameState state, Player p) {
+	/**
+	 * 
+	 * @param state the current conditions of the game
+	 * @param p The ai player is using this strategy
+	 * @return the strongest foe card in ai player's hand. If no foe cards are in the hand then null
+	 */
+	public Foe getStrongestFoe(GameState state, Player p) {
 		p.sortHand(state);
 		for(int i=0;i<p.getHand().size();i++) {
 			if(p.getHand().get(i) instanceof Foe) return (Foe) p.discard(p.getHand().get(i));
@@ -225,13 +317,24 @@ public abstract class AbstractAI{
 		return null;
 	}
 	
-	protected boolean containsAmour(ArrayList<AdventureCard> cards) {
+	/**
+	 * 
+	 * @param cards list of cards ?used for both hand and field?
+	 * @return True if there is an amour in cards
+	 */
+	public boolean containsAmour(ArrayList<AdventureCard> cards) {
 		for(int i=0;i<cards.size();i++) {
 			if(cards.get(i) instanceof Amour) return true;
 		}
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param state the current conditions of the game
+	 * @param p The ai player is using this strategy
+	 * @return the weakest foe card in ai player's hand. If no foe cards are in the hand then null 
+	 */
 	protected Foe getWeakestFoe(GameState state, Player p) {
 		p.sortHand(state);
 		for(int i=p.getHand().size()-1;i>=0;i--) {
@@ -240,6 +343,13 @@ public abstract class AbstractAI{
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param state the current conditions of the game
+	 * @param p The ai player is using this strategy
+	 * @param bp ?
+	 * @return ?the foe to be added to a stage?
+	 */
 	protected Foe makeFoe(GameState state, Player p, int bp) {
 		Foe f = getStrongestFoe(state, p);
 		ArrayDeque<AdventureCard> weps = new ArrayDeque<AdventureCard>();
@@ -258,6 +368,13 @@ public abstract class AbstractAI{
 		return f;
 	}
 	
+	/**
+	 * 
+	 * @param state the current conditions of the game
+	 * @param p The ai player is using this strategy
+	 * @param stages ?
+	 * @return ?
+	 */
 	protected int countWAA(GameState state, Player p, int stages) {
 		int WAA = 0;
 		if(this.hasAmourInHand(p) && !this.hasAmour(p)) WAA++;

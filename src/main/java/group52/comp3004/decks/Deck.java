@@ -1,158 +1,212 @@
-package group52.comp3004.decks;
-
-import java.util.ArrayList;
+	package group52.comp3004.decks;
+	
+	import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import group52.comp3004.cards.AdventureCard;
+import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Arms;
 import group52.comp3004.cards.Camelot;
 import group52.comp3004.cards.Card;
-import group52.comp3004.cards.CardFactory;
 import group52.comp3004.cards.Deed;
+import group52.comp3004.cards.EventCard;
 import group52.comp3004.cards.Favor;
+import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.Plague;
 import group52.comp3004.cards.Pox;
+import group52.comp3004.cards.QuestCard;
 import group52.comp3004.cards.Realm;
 import group52.comp3004.cards.Recognition;
 import group52.comp3004.cards.StoryCard;
-
-public class Deck<T>{
+import group52.comp3004.cards.Tests;
+import group52.comp3004.cards.Tourneys;
+import group52.comp3004.cards.Weapon;
 	
-	List<T> cards;
-	int size;
-	ArrayList<T> discard = new ArrayList<T>();
-	
-	static final private Logger logger = Logger.getLogger(Deck.class);
-	
-	public Deck() {
-		this.cards = new ArrayList<T>();
-		size = 0;
-	}
-	
-	public Deck(List<T> cards) {
-		setCards(cards);
-	}
-	
-	public void setCards(List<T> cards) {
-		this.cards = cards;
-		size = cards.size();
-	}
-	
-	public int getSize() {
-		return size;
-	}
-	
-	public void addCard(T card) {
-		logger.info("Added: " + ((Card) card).getName());
-		this.cards.add(card);
-		size++;
-	}
-	
-	
-	public T drawCard() {
-		T card = null;
-		Random rand = new Random();
-		if(this.size<=0) {
-			this.setCards(this.discard);
+	/**
+	 * Utility function for creating game decks. Will be used to handle adventure and story decks. 
+	 * <p>Split into two separate lists
+	 * <p>	Deck 1: the draw deck called cards</p>
+	 * <p>	Deck 2: the discard pile called discard</p>
+	 * @author Sandy
+	 *
+	 * @param <T> The type of object that the deck is made of.
+	 */
+	public class Deck<T>{
+		static ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		List<T> draw;
+		int size;
+		ArrayList<T> discard = new ArrayList<T>();
+		
+		static final private Logger logger = Logger.getLogger(Deck.class);
+		
+		/**
+		 * Constructor for an empty placeholder deck
+		 */
+		public Deck() {
+			this.draw = new ArrayList<T>();
+			size = 0;
 		}
-		int index = rand.nextInt(cards.size());
-		card = cards.remove(index);
-		size--;
-		return card;
-	}
 	
-	public T discardCard(T c) {
-		Card card = (Card) c;
-		logger.info("Discarded: " + card.getName());
-		discard.add(c);
-		return c;
-	}
+		public T discardCard(T c) {
+			Card card = (Card) c;
+			logger.info("Discarded: " + card.getName());
+			discard.add(c);
+			return c;
+		}
 	
-	public ArrayList<T> discardCard(ArrayList<T> cards){
-		cards.stream().forEach(c -> logger.info("Discarded: " + ((Card) c).getName()));
-		discard.addAll(cards);
-		return cards;
-	}
-	
-	//PURPOSE: Builds the adventure deck
-	public static ArrayList<AdventureCard> createAdventureDeck() {
-		logger.info("Creating Adventure Deck");
-			
-		ArrayList<AdventureCard> cards = new ArrayList<>(Arrays.asList(
-				CardFactory.createAlly("Sir_Galahad", 15, 0),
-				CardFactory.createAlly("Sir_Lancelot", 15, 0),
-				CardFactory.createAlly("King_Arthur", 10, 0),
-				CardFactory.createAlly("Sir_Tristan", 10, 0),
-				CardFactory.createAlly("King_Pellinore", 10, 0),
-				CardFactory.createAlly("Sir_Gawain", 10, 0),
-				CardFactory.createAlly("Sir_Percival", 5, 0),
-				CardFactory.createAlly("Queen_Guinevere", 0, 0),
-				CardFactory.createAlly("Queen_Iseult", 0, 0),
-				CardFactory.createAlly("Merlin", 0, 0)));
+		public ArrayList<T> discardCard(ArrayList<T> cards){
+			cards.stream().forEach(c -> this.discardCard(c));
+			return cards;
+		}
 		
-		for(int i = 0; i < 2; i++) cards.add(CardFactory.createWeapon("Excalibur", 30));
-		for(int i = 0; i < 6; i++) cards.add(CardFactory.createWeapon("Lance", 30));
-		for(int i = 0; i < 8; i++) cards.add(CardFactory.createWeapon("Battle_Ax", 30));
-		for(int i = 0; i < 16; i++) cards.add(CardFactory.createWeapon("Sword", 10));
-		for(int i = 0; i < 11; i++) cards.add(CardFactory.createWeapon("Horse", 10));
-		for(int i = 0; i < 6; i++) cards.add(CardFactory.createWeapon("Dagger", 5));
-		for(int i = 0; i < 1; i++) cards.add(CardFactory.createFoe("Dragon", 50, 70, "Slay_the_Dragon"));
-		for(int i = 0; i < 2; i++) cards.add(CardFactory.createFoe("Giant", 40));
-		for(int i = 0; i < 4; i++) cards.add(CardFactory.createFoe("Mordred", 30));
-		for(int i = 0; i < 2; i++) cards.add(CardFactory.createFoe("Green_Knight", 25, 40, "Green_Knight"));
-		for(int i = 0; i < 3; i++) cards.add(CardFactory.createFoe("Black_Knight", 25, 35, "Rescue_Maiden"));
-		for(int i = 0; i < 6; i++) cards.add(CardFactory.createFoe("Evil_Knight", 20, 30, "Enchanted_Forest"));
-		for(int i = 0; i < 8; i++) cards.add(CardFactory.createFoe("Saxon_Knight", 15, 25, "Repel_Saxon_Raiders"));
-		for(int i = 0; i < 7; i++) cards.add(CardFactory.createFoe("Robber_Knight", 15));
-		for(int i = 0; i < 5; i++) cards.add(CardFactory.createFoe("Saxons", 10, 20, "Repel_Saxon_Raiders"));
-		for(int i = 0; i < 4; i++) cards.add(CardFactory.createFoe("Boar", 5, 15, "Boar_Hunt"));
-		for(int i = 0; i < 8; i++) cards.add(CardFactory.createFoe("Thieves", 5));
-		for(int i = 0; i < 2; i++) cards.add(CardFactory.createTests("Valor", 3));
-		for(int i = 0; i < 2; i++) cards.add(CardFactory.createTests("Temptation", 3));
-		for(int i = 0; i < 2; i++) cards.add(CardFactory.createTests("Morgan_Le_Fey", 3));
-		for(int i = 0; i < 2; i++) cards.add(CardFactory.createTests("Questing_Beast", 4));
-		for(int i = 0; i < 8; i++) cards.add(CardFactory.createAmour("Amour", 10, 2));
+		/**
+		 * Constructor for a deck that contains some initial cards. Only the cards list is changed. The discard list remains empty for this constructor.
+		 * @param cards The input cards that are used to initialize the cards list.
+		 */
+		public Deck(List<T> cards) {
+			setCards(cards);
+		}
+		/**
+		 * Replace the current deck with a new one.
+		 * @param draw The deck of cards
+		 */
+		public void setCards(List<T> cards) {
+			this.draw = cards;
+			size = cards.size();
+		}
 		
-		for(int i=0;i<cards.size();i++) cards.get(i).setID(i);
+		/**
+		 * Gets the size of the current draw deck.
+		 * @return
+		 */
+		public int getSize() {
+			return size;
+		}
 		
-		return cards;
-	}
-	
-	//PURPOSE: Builds the story deck
-	public static ArrayList<StoryCard> createStoryDeck(){
-		logger.info("Creating Story Deck");
+		public void addCard(T card) {
+			this.draw.add(card);
+			size++;
+		}
 		
-		ArrayList<StoryCard> cards= new ArrayList<>(Arrays.asList(
-				CardFactory.createEvent("Pox", new Pox()),
-				CardFactory.createEvent("Plague", new Plague()),
-				CardFactory.createEvent("Chivalrous_Deed", new Deed()),
-				CardFactory.createEvent("Prosperity", new Realm()),
-				CardFactory.createEvent("Call_to_Arms", new Arms()),
-				CardFactory.createQuest("Holy_Grail", 5),
-				CardFactory.createQuest("Green_Knight_Quest", 4),
-				CardFactory.createQuest("Questing_Beast_Search", 4),
-				CardFactory.createQuest("Queens_Honor", 4),
-				CardFactory.createQuest("Rescue_Maiden", 3),
-				CardFactory.createQuest("Enchanted_Forest", 3),
-				CardFactory.createQuest("Slay_the_Dragon", 3),
-				CardFactory.createTourney("Camelot", 3), 
-				CardFactory.createTourney("Orkney", 2),
-				CardFactory.createTourney("Tintagel", 1),
-				CardFactory.createTourney("York", 0)));
+		/**
+		 * Draw a card from the deck. The draw is from a random position in the deck so there is no need to worry about shuffle function.
+		 * <p>If there are no more cards to draw the discard list is moved back to the draw deck
+		 * @return
+		 */
+		public T draw() {
+			T obj = null;
+			Random rand = new Random();
+			if(this.size<=0) {
+				this.setCards(this.discard);
+			}
+			int index = rand.nextInt(draw.size());
+			obj = draw.remove(index);
+			logger.info("Removed one object from deck");
+			size--;
+			return obj;
+		}
+		
+		/**
+		 * Add a card to the discard deck. Card comes either the player's hand or a play area.
+		 * @param c card to be discarded.
+		 * @return return the card back for purpose of error checking. Not used in actual play.
+		 */
+		public T discard(T c) {
+			Card card = (Card) c;
+			logger.info("Discarded: " + card.getName());
+			discard.add(c);
+			return c;
+		}
+		
+		/**
+		 * Add a group of cards to the discard deck. Cards comes either the player's hand or a play area.
+		 * @param cards cards to be discarded.
+		 * @return return the cards back for purpose of error checking. Not used in actual play.
+		 */
+		public ArrayList<T> discard(ArrayList<T> objects){
+			objects.stream().forEach(c -> discard(c));
+			return objects;
+		}
+		
+		//PURPOSE: Builds the adventure deck ?stay or go?
+		public static ArrayList<AdventureCard> createAdventureDeck() {
 				
-		for(int i = 0; i < 2; i++) cards.add(CardFactory.createQuest("Arthurs_Enemy", 3));
-		for(int i = 0; i < 2; i++) cards.add(CardFactory.createQuest("Boar_Hunt", 2));
-		for(int i = 0; i < 2; i++) cards.add(CardFactory.createQuest("Repel_Saxon_Raiders", 2));
-		for(int i = 0; i < 2; i++) cards.add(CardFactory.createEvent("King's_Recognition", new Recognition()));
-		for(int i = 0; i < 2; i++) cards.add(CardFactory.createEvent("Queen's_Favor", new Favor()));
-		for(int i = 0; i < 2; i++) cards.add(CardFactory.createEvent("Called_to_Camelot", new Camelot()));
+			ArrayList<AdventureCard> cards = new ArrayList<>(Arrays.asList(
+					(Ally) context.getBean("Sir_Galahad"),
+					(Ally) context.getBean("Sir_Lancelot", 15, 0),
+					(Ally) context.getBean("King_Arthur", 10, 0),
+					(Ally) context.getBean("Sir_Tristan", 10, 0),
+					(Ally) context.getBean("King_Pellinore", 10, 0),
+					(Ally) context.getBean("Sir_Gawain", 10, 0),
+					(Ally) context.getBean("Sir_Percival", 5, 0),
+					(Ally) context.getBean("Queen_Guinevere"),
+					(Ally) context.getBean("Queen_Iseult"),
+					(Ally) context.getBean("Merlin")));
+			
+			for(int i = 0; i < 2; i++) cards.add((Weapon)context.getBean("Excalibur", 30));
+			for(int i = 0; i < 6; i++) cards.add((Weapon)context.getBean("Lance", 30));
+			for(int i = 0; i < 8; i++) cards.add((Weapon)context.getBean("Battle_Ax", 30));
+			for(int i = 0; i < 16; i++) cards.add((Weapon)context.getBean("Sword", 10));
+			for(int i = 0; i < 11; i++) cards.add((Weapon)context.getBean("Horse", 10));
+			for(int i = 0; i < 6; i++) cards.add((Weapon)context.getBean("Dagger", 5));
+			for(int i = 0; i < 1; i++) cards.add((Foe)context.getBean("Dragon", 50, 70, "Slay_the_Dragon"));
+			for(int i = 0; i < 2; i++) cards.add((Foe)context.getBean("Giant", 40));
+			for(int i = 0; i < 4; i++) cards.add((Foe)context.getBean("Mordred", 30));
+			for(int i = 0; i < 2; i++) cards.add((Foe)context.getBean("Green_Knight", 25, 40, "Green_Knight"));
+			for(int i = 0; i < 3; i++) cards.add((Foe)context.getBean("Black_Knight", 25, 35, "Rescue_Maiden"));
+			for(int i = 0; i < 6; i++) cards.add((Foe)context.getBean("Evil_Knight", 20, 30, "Enchanted_Forest"));
+			for(int i = 0; i < 8; i++) cards.add((Foe)context.getBean("Saxon_Knight", 15, 25, "Repel_Saxon_Raiders"));
+			for(int i = 0; i < 7; i++) cards.add((Foe)context.getBean("Robber_Knight", 15));
+			for(int i = 0; i < 5; i++) cards.add((Foe)context.getBean("Saxons", 10, 20, "Repel_Saxon_Raiders"));
+			for(int i = 0; i < 4; i++) cards.add((Foe)context.getBean("Boar", 5, 15, "Boar_Hunt"));
+			for(int i = 0; i < 8; i++) cards.add((Foe)context.getBean("Thieves", 5));
+			for(int i = 0; i < 2; i++) cards.add((Foe)context.getBean("Valor", 3));
+			for(int i = 0; i < 2; i++) cards.add((Tests)context.getBean("Temptation", 3));
+			for(int i = 0; i < 2; i++) cards.add((Tests)context.getBean("Morgan_Le_Fey", 3));
+			for(int i = 0; i < 2; i++) cards.add((Tests)context.getBean("Questing_Beast", 4));
+			for(int i = 0; i < 8; i++) cards.add((Tests)context.getBean("Amour", 10, 2));
+			
+			for(int i=0;i<cards.size();i++) cards.get(i).setID(i);
+			
+			return cards;
+		}
 		
-		for(int i=0;i<cards.size();i++) cards.get(i).setID(i);
-		
-		return cards;
+		//PURPOSE: Builds the story deck ?stay or go?
+		public static ArrayList<StoryCard> createStoryDeck(){
+			ArrayList<StoryCard> cards= new ArrayList<>(Arrays.asList(
+					(EventCard)context.getBean("Pox", (Pox)context.getBean("Pox")),
+					(EventCard)context.getBean("Plague", new Plague()),
+					(EventCard)context.getBean("Chivalrous_Deed", new Deed()),
+					(EventCard)context.getBean("Prosperity", new Realm()),
+					(EventCard)context.getBean("Call_to_Arms", new Arms()),
+					(QuestCard)context.getBean("Holy_Grail", 5),
+					(QuestCard)context.getBean("Green_Knight_Quest", 4),
+					(QuestCard)context.getBean("Questing_Beast_Search", 4),
+					(QuestCard)context.getBean("Queens_Honor", 4),
+					(QuestCard)context.getBean("Rescue_Maiden", 3),
+					(QuestCard)context.getBean("Enchanted_Forest", 3),
+					(QuestCard)context.getBean("Slay_the_Dragon", 3),
+					(Tourneys)context.getBean("Camelot", 3), 
+					(Tourneys)context.getBean("Orkney", 2),
+					(Tourneys)context.getBean("Tintagel", 1),
+					(Tourneys)context.getBean("York", 0)));
+					
+			for(int i = 0; i < 2; i++) cards.add((QuestCard)context.getBean("Arthurs_Enemy", 3));
+			for(int i = 0; i < 2; i++) cards.add((QuestCard)context.getBean("Boar_Hunt", 2));
+			for(int i = 0; i < 2; i++) cards.add((QuestCard)context.getBean("Repel_Saxon_Raiders", 2));
+			for(int i = 0; i < 2; i++) cards.add((EventCard)context.getBean("King's_Recognition", new Recognition()));
+			for(int i = 0; i < 2; i++) cards.add((EventCard)context.getBean("Queen's_Favor", new Favor()));
+			for(int i = 0; i < 2; i++) cards.add((EventCard)context.getBean("Called_to_Camelot", new Camelot()));
+			
+			for(int i=0;i<cards.size();i++) cards.get(i).setID(i);
+			
+			return cards;
+		}
+
 	}
-}

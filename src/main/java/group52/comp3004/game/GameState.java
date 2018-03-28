@@ -15,6 +15,11 @@ import group52.comp3004.decks.Deck;
 import group52.comp3004.players.Player;
 import group52.comp3004.players.Rank;
 
+/**
+ * Holds all the information about the current state of the game.
+ * @author Sandy
+ *
+ */
 public class GameState {
 	
 	private List<Player> players;
@@ -35,6 +40,10 @@ public class GameState {
 	 * @param players
 	 */
 	
+	/**
+	 * Constructor for a game state with the entered players
+	 * @param players list of players in the game
+	 */
 	public GameState(List<Player> players) {
 		this.players = players;
 		this.currentTurn = 0;
@@ -43,14 +52,17 @@ public class GameState {
 		logger.info("Model loaded (players)");
 	}
 	
-	public GameState() {//<- Issue model loading twice?
+	/**
+	 * 
+	 */
+	public GameState() {
 		this.players = new ArrayList<>();
 		this.currentTurn = 0;
 		this.currentPlayer = 0;
 		this.currentSponsor = -1;
 		phase = Phase.TurnStart;		
-		adventureDeck = new Deck<AdventureCard>(Deck.createAdventureDeck());
-		storyDeck = new Deck<StoryCard>(Deck.createStoryDeck());
+		adventureDeck = null;
+		storyDeck = null;
 		currentQuest = null;
 		revealedCard = null;
 		maxBid = 0;
@@ -58,32 +70,46 @@ public class GameState {
 		logger.info("Model loaded (void)");
 	}
 	
-	//PURPOSE: deal initial cards to all players
+	/**
+	 * Deals out all initial card out to the players
+	 */
 	public void dealCardsToPlayers() {
 		this.players.forEach(player -> {
 			for(int i = 0; i < 12; i++) {
 				logger.info("Card "+i+" dealt");
-				player.addCardToHand(adventureDeck.drawCard());
+				player.addCardToHand(adventureDeck.draw());
 			}
 		});
 	}
 
-	//deal a story card to the middle area
+	/**
+	 * Deal a story card into play
+	 * @return The story card dealt
+	 */
 	public StoryCard dealStoryCard() {
-		revealedCard = storyDeck.drawCard();
+		revealedCard = storyDeck.draw();
 		return revealedCard;
 	}
 
+	/**
+	 * add a player if there are less then four
+	 * @param player Player to be added
+	 */
 	public void addPlayer(Player player) {
 		if(players.size() < 4) players.add(player);
 	}
 
-
+	/**
+	 * Moves to next turn. 
+	 */
 	public void nextTurn() {
 		currentTurn = (currentTurn + 1) % players.size();
 		currentPlayer = currentTurn;
 	}
 	
+	/**
+	 * ?While statement?
+	 */
 	public void nextPlayer() {
 		currentPlayer = (currentPlayer + 1) % players.size();
 		
@@ -93,38 +119,66 @@ public class GameState {
 		}
 	}
 	
+	/**
+	 * Get the currentTurn property
+	 */
 	public int getCurrentTurn() {
 		return this.currentTurn;
 	}
 	
+	/**
+	 * Get the player who's turn it currently is
+	 */
 	public int getCurrentPlayer() {
 		return this.currentPlayer;
 	}
 	
+	/**
+	 * Get a player in the list of all players.
+	 * @param index Which player in the list
+	 * @return A player object
+	 */
 	public Player getPlayerByIndex(int index) {
 		return this.players.get(index);
 	}
 	
-	//Deals a new adventure cards to player
+	/**
+	 * deal a single card to a player
+	 * @param index Which player to deal the card to.
+	 */
 	public void dealToPlayer(int index) {
-		AdventureCard card = adventureDeck.drawCard();
+		AdventureCard card = adventureDeck.draw();
 		if(card != null)
 			this.players.get(index).addCardToHand(card);
 	}
 	
+	/**
+	 * Get the index of the player that sponsored the quest
+	 */
 	public int getSponsorIndex()
 	{
 		return this.currentSponsor;
 	}
 	
+	/**
+	 * Get the number of players in the game
+	 */
 	public int numPlayers() {
 		return this.players.size();
 	}
 	
+	/**
+	 * Add current player to the quest
+	 */
 	public void joinQuest() {
 		if(currentQuest != null && currentSponsor != currentPlayer) currentQuest.addPlayer(getPlayerByIndex(currentPlayer));
 	}
 	
+	/**
+	 * Judges whether a player is able to sponsor a quest. Checks to make sure that a story card was dealt and then insures 
+	 * <p>that the current player has enough cards to create the quest.</p>
+	 * @return true if the current player is capable of creating the quest.
+	 */
 	public boolean canSponsorQuest() {
 		if(revealedCard == null || !(revealedCard instanceof QuestCard)) return false;
 		
@@ -138,6 +192,10 @@ public class GameState {
 		return numFoes >= stages || numFoesMinusOne + numTests >= stages;
 	}
 	
+	/**
+	 * Called if the story card drawn at start of new turn is a quest. 
+	 * <p>Moves to SponsorQuest phase when finished.</p>
+	 */
 	public void setQuest() {
 		if(revealedCard != null && revealedCard instanceof QuestCard)
 		{
@@ -148,6 +206,11 @@ public class GameState {
 			this.phase = Phase.SponsorQuest;
 		}
 	}
+	
+	/**
+	 * Called if the story card drawn at start of new turn is a quest.
+	 * <p>Moves to RunTourney phase when complete</p>
+	 */
 	public void setTourney() {
 		if(revealedCard != null && revealedCard instanceof Tourneys)
 		{
@@ -158,6 +221,11 @@ public class GameState {
 		}
 	}
 	
+	/**
+	 * Adds a stage to a quest if possible.
+	 * @param foe The foe that makes up the stage.
+	 * @return True if stage successfully added. False otherwise.
+	 */
 	public boolean setUpQuestStage(Foe foe) {
 		if(currentQuest != null && currentQuest.canAddStage() && currentSponsor == currentPlayer
 				&& phase == Phase.SetupQuest) {
@@ -169,6 +237,11 @@ public class GameState {
 			
 	}
 	
+	/**
+	 * ?
+	 * @param card The card to be added to the list.
+	 * @return Card successfully added.
+	 */
 	public boolean playCardToTemp(AdventureCard card) {
 		if(currentPlayer == currentSponsor && phase != Phase.SetupQuest) return false;
 		if(!currentQuest.isPlayer(this.players.get(currentPlayer))) return false;
@@ -178,6 +251,9 @@ public class GameState {
 		return true;
 	}
 	
+	/**
+	 * Resets game state for next story card after quest is finished.
+	 */
 	public void endQuest() {
 		
 		currentQuest.end(this, this.bonusShields);
@@ -190,11 +266,19 @@ public class GameState {
 		// remove all allies and all cards and make people draw (call quest end)
 	}
 	
+	/**
+	 * Tests whether a player has an input number of bids and that number of bids is greater then the minimum playable.
+	 * @param bids Number of cards added to bid.
+	 * @return True if player is able to bid.
+	 */
 	public boolean canBidCards(int bids) {
 		return this.players.get(currentPlayer).validBid(bids) && bids > maxBid;
 	}
 	
-	
+	/**
+	 * Current player bids specified number of cards and the minimum number of bids to pass test is raised.
+	 * @param bids
+	 */
 	public void bidCards(int bids) {
 		if(canBidCards(bids)) {
 			this.players.get(currentPlayer).bidCards(bids);
@@ -202,21 +286,43 @@ public class GameState {
 		}
 	}
 	
+	/**
+	 * Handles situation where the player decides to stop bidding.
+	 */
 	public void playerStopBidding() {
 		this.players.get(currentPlayer).stopBidding();
 	}
 	
+	/**
+	 * Handles play of the next stage in the quest.
+	 */
 	public void playCurrentQuestStage() {
 		if(currentQuest != null) currentQuest.playStage(this);
 	}
 	
+	/**
+	 * get the number of bids that the next player must pass to continue the test.
+	 * @return
+	 */
 	public int getMaxBid() {
 		return this.maxBid;
 	}
 	
+	/**
+	 * Get the player who sponsored the quest.
+	 * @return A player object
+	 */
 	public Player getCurrentSponsor() {
 		if(currentSponsor != -1) return this.players.get(currentSponsor);
 		return null;
+	}
+	
+	/**
+	 * Resets game state back to normal when a tourney has ended.
+	 */
+	public void endTourney() {
+		this.currentTourney.end();
+		currentTourney = null;
 	}
 	
 	//GETTERS and SETTERS
@@ -240,10 +346,5 @@ public class GameState {
 	
 	public List<Player> getWinners() {
 		return this.players.stream().filter(player -> player.getRank() == Rank.KnightOfTheRoundTable).collect(Collectors.toList());
-	}
-
-	public void endTourney() {
-		this.currentTourney.end(this);
-		currentTourney = null;
 	}
 }

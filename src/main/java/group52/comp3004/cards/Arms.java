@@ -6,12 +6,18 @@ import group52.comp3004.game.GameState;
 import group52.comp3004.players.Player;
 import group52.comp3004.players.Rank;
 
+/**
+ * Implements King's Call to Arms event
+ * @author Sandy
+ *
+ */
 public class Arms implements EventBehaviour{
 
 	private Rank highestRank;
 	
 	final static Logger logger = Logger.getLogger(Arms.class);
-	@Override
+	@Override	
+	//NOTE: how to write docs for behaviour classes
 	public void handle(GameState gamestate) {
 		logger.info("		->Arms");
 		for(int i=0;i<gamestate.numPlayers();i++) {
@@ -40,7 +46,6 @@ public class Arms implements EventBehaviour{
 			}else {
 				gamestate.nextPlayer();
 			}
-
 		}
 		
 		logger.info("		->Arms");

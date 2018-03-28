@@ -15,6 +15,11 @@ import group52.comp3004.game.GameTourney;
 import group52.comp3004.game.Stage;
 import group52.comp3004.players.Player;
 
+/**
+ * ?Needs an explaination of stategy goals? ?Does implemented functions from AbstractAI change behaviour much for different strats? 
+ * @author Sandy
+ *
+ */
 public class Strategy1 extends AbstractAI{
 	
 	static final private Logger logger = Logger.getLogger(Strategy1.class);
@@ -101,7 +106,7 @@ public class Strategy1 extends AbstractAI{
 				Stage stage = new Stage(f);
 				quest.add(0, stage);
 			}else if(i==1) {
-				if(this.hasTest(p)) {
+				if(p.hasTest()) {
 					Stage stage = new Stage(getTest(p));
 					quest.add(0, stage);
 				}else {

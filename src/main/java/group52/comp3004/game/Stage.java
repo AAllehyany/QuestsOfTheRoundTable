@@ -8,6 +8,11 @@ import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.Tests;
 
+/**
+ * Holds all information about an individual stage of a quest.
+ * @author Sandy
+ *
+ */
 public class Stage {
 	
 	private final Foe foe;
@@ -18,7 +23,9 @@ public class Stage {
 	private static final Logger logger = Logger.getLogger(Stage.class);
 	
 	/**
-	 * @param foe
+	 * Constructor for a standard stage. Should be used only for foe stages.
+	 * <p>If stage is a test use other constructor</p>
+	 * @param foe The stage foe.
 	 */
 	public Stage(Foe foe) {
 		super();
@@ -27,6 +34,11 @@ public class Stage {
 		testStage = false;
 	}
 	
+	/**
+	 * Constructor for a standard stage. Should be used only for test stages.
+	 * <p>If stage is a foe use other constructor</p>
+	 * @param test The stage test.
+	 */
 	public Stage(Tests test) {
 		super();
 		this.foe = null;
@@ -34,6 +46,9 @@ public class Stage {
 		testStage = true;
 	}
 	
+	/**
+	 * Get a list of all cards used for the stage. 
+	 */
 	public ArrayList<AdventureCard> getCards(){
 		ArrayList<AdventureCard> cards = new ArrayList<AdventureCard>();
 		if(this.testStage) {
@@ -45,23 +60,44 @@ public class Stage {
 		return cards;
 	}
 	
+	/**
+	 * ?
+	 * @param state
+	 * @return
+	 */
 	public int getTotalPower(GameState state) {
 		if(!testStage) logger.info("Battle power of the stage is " + foe.getBp(state));
 		return testStage ? 0 : foe.getBp(state);
 	}
 	
+	/**
+	 * Is the stage a test.
+	 * @return True is a test. False if a foe stage.
+	 */
 	public boolean isTestStage() {
 		return testStage;
 	}
 	
+	/**
+	 * ?
+	 * @return
+	 */
 	public int totalCardsPlayed() {
 		return (testStage) ? 1 : 1 + this.foe.getWeapons().size();
 	}
 
+	/**
+	 * Get the foe card used in the stage.
+	 * @return Foe object
+	 */
 	public Foe getFoe() {
 		return foe;
 	}
 	
+	/**
+	 * Get the tests card used in the stage.
+	 * @return
+	 */
 	public Tests getTest() {
 		return test;
 	}

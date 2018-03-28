@@ -103,7 +103,7 @@ public class Strategy3 extends AbstractAI{
 				Stage stage = new Stage(getWeakestFoe(state, p));
 				stages.add(stage);
 			}else if(i==q.getNumStages()-2) {
-				if(this.hasTest(p)) {
+				if(p.hasTest()) {
 						Stage stage = new Stage(getTest(p));
 						stages.add(stage);
 				}else {

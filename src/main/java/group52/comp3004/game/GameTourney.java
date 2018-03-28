@@ -8,7 +8,12 @@ import org.apache.log4j.Logger;
 import group52.comp3004.cards.Tourneys;
 import group52.comp3004.players.Player;
 
-
+/**
+ * Handles set up, playing, and ending a tourney state.
+ * <p>Tourneys is the card itself. GameTourney handles the quest game play.</p>
+ * @author Sandy
+ *
+ */
 public class GameTourney {
 	private final Tourneys tourney;
 	private List<Player> players;
@@ -18,6 +23,10 @@ public class GameTourney {
 	private boolean over;
 	static final private Logger logger = Logger.getLogger(GameTourney.class);
 	
+	/**
+	 * Constructor for a new tourney.
+	 * @param tourney The specific tourney card drawn. Important since each card awards a different number of bonus shields.
+	 */
 	public GameTourney(Tourneys tourney) {
 		this.tourney = tourney;
 		this.players = new ArrayList<Player>();
@@ -27,25 +36,44 @@ public class GameTourney {
 		this.over= false;
 	}
 	
+	/**
+	 * Get the tourney card drawn.
+	 * @return
+	 */
 	public Tourneys getTourney() {
 		return tourney;
 	}
 	
+	/**
+	 * Get list of players involved in the tourney.
+	 * @return
+	 */
 	public List<Player> getPlayers() {
 		return this.players;
 	}
 	
 	//Why need to add tourney inside player?
+	/**
+	 * ?
+	 * @param player
+	 */
 	public void addPlayer(Player player) {
 		logger.info("Player: " + player.getId() + " joined the quest");
 		this.players.add(player);
 		player.setTourney(this);
 	}
 
+	/**
+	 * Tests whether the tourney is complete.
+	 * @return true if tourney is over.
+	 */		
 	public boolean isOver() {
 		return this.over;
 	}
 	
+	/**
+	 * ?
+	 */
 	public void dealCards() {
 		for(int i=0;i<this.players.size();i++) {
 			this.players.get(i).getGame().dealToPlayer(i);
@@ -53,6 +81,10 @@ public class GameTourney {
 			
 	}
 	
+	/**
+	 * ?
+	 * @return
+	 */
 	public List<Player> winner(GameState state) {
 		List<Player> win= battle(state, this.players);
 		if(this.players.size()==1) {
@@ -71,6 +103,39 @@ public class GameTourney {
 		return this.winner;
 	}
 	
+	/**
+	 * ?
+	 * @param player
+	 * @return
+	 */
+public List<Player> secondBattle(List<Player> player) {
+	    this.count1.clear();
+		Player highest= player.get(0);
+		this.count1.add(player.get(0));
+		for(int i=1;i<player.size();i++) {
+			if(player.get(i).getBattlePoints()>highest.getBattlePoints()) {
+				highest =player.get(i);
+				this.count1.clear();
+				this.count1.add(player.get(i));
+			}else if(player.get(i).getBattlePoints()==highest.getBattlePoints()) {
+				this.count1.add(player.get(i));
+			}
+		}
+		return this.count1;
+	}
+	
+	/**
+	 * Award shields to winner equal to number of players in tourney plus the bonus provided by the card.
+	 */
+	public void awardShields() {
+		 this.winner.forEach(p -> p.addShields(players.size()+tourney.getShields() + bonus));
+	}
+
+	/**
+	 * ?
+	 * @param player
+	 * @return
+	 */
 	public List<Player> secondBattle(GameState state, List<Player> player) {
 	    this.count1.clear();
 		int highest = 0;
@@ -112,10 +177,10 @@ public class GameTourney {
 		return this.count;
 	}
 	
-	public void awardShields() {
-		 this.winner.forEach(p -> p.addShields(players.size()+tourney.getShields()));
-	}
-	
+
+	/**
+	 * Handle end of tourney. 
+	 */
 	public void end(GameState state) {
 		for(int i =0;i<this.players.size();i++) {
 			state.getAdventureDeck().discardCard(this.getPlayers().get(i).getTemp());
@@ -126,8 +191,12 @@ public class GameTourney {
 		this.count1.clear();
 	}
 
+	/**
+	 * ?
+	 * @param player
+	 * @return
+	 */
 	public boolean isPlayer(Player player) {
-		// TODO Auto-generated method stub
 		return this.players.contains(player); // || player == sponsor;
 	}
 }

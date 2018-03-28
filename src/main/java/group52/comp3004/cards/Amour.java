@@ -4,20 +4,27 @@ import org.apache.log4j.Logger;
 
 import group52.comp3004.game.GameState;
 
+/**
+ * Adds functionally for amour type adventure cards
+ * @author Sandy
+ *
+ */
 public class Amour extends AdventureCard{
 	public String name;
 	private int bp;
 	private int bids;
 	private final static Logger logger = Logger.getLogger(Amour.class);
 	
+	/**
+	 * Constructor for amour cards
+	 * @param name The type of card. Needs to match a image file in order to load the correct face.
+	 * @param bp Battle point value of the amour
+	 * @param bids The number of bids the amour provides to a test
+	 */
 	public Amour(String name, int bp, int bids){
 		super(name);
 		this.bp = bp;
 		this.bids = bids;
-	}
-	
-	public int getBp(GameState state){
-		return this.bp;
 	}
 	
 	public int getBp() {
