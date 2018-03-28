@@ -9,7 +9,6 @@ import group52.comp3004.game.GameState;
  */
 public class AdventureCard extends Card{
 
-	private String description;
 	protected int bp;
 	protected int bids;
 	
@@ -19,33 +18,8 @@ public class AdventureCard extends Card{
 	 */
 	public AdventureCard(String name) {
 		super(name);
-		this.description = null;
 	}
-	
-	/**
-	 * 
-	 * @param c
-	 * @return
-	 */
-	public boolean equals(AdventureCard c) {
-		return c.getName().equals(this.getName());
-	}
-	
-	/**
-	 * Sets the cards description
-	 * @param description the new description to be set
-	 */
-	public void setDes(String description) {
-		this.description= description;
-	}
-	
-	/**
-	 * Get the current description
-	 * @return String of the stored description
-	 */
-	public String getDes() {
-		return this.description;
-	}
+
 	/**
 	 * Get the card's battle points. Uses the state determine if a special case needs to be considered.
 	 * @param state the current conditions of the game
