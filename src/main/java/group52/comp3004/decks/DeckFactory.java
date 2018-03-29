@@ -110,10 +110,11 @@ public class DeckFactory {
 		ArrayList<Card> cards = new ArrayList<Card>();
 
 		String line = null;
+		BufferedReader br = null;
 		
 		try {
 			FileReader fr = new FileReader(name);
-			BufferedReader br = new BufferedReader(fr);
+			br = new BufferedReader(fr);
 			while((line = br.readLine()) != null) {
 				ArrayList<String> params = new ArrayList<String>();
 				String param = null;
@@ -199,7 +200,13 @@ public class DeckFactory {
 		catch(IOException ex) {
 			logger.info("Error reading file " + name);
 		}
-		
+		finally {
+			try {
+				br.close();
+			} catch(IOException ex) {
+				logger.info("Error closing the buffered reader");
+			}
+		}
 		return deck;
 	}
 }
