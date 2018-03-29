@@ -90,6 +90,7 @@ import group52.comp3004.cards.Weapon;
 		}
 		
 		public void addCard(T card) {
+			logger.info("Added " + card + " to Deck");
 			this.draw.add(card);
 			size++;
 		}
