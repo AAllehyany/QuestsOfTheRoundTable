@@ -83,7 +83,7 @@ public class GameController{
 			if(currentFoe != null) stages.add(new Stage(currentFoe));
 			
 			
-			stages.forEach(s -> model.getCurrentQuest().addStage(s));
+			stages.forEach(s -> model.getCurrentQuest().addStage(this.model, s));
 			logger.info("Stages in the quest: " + model.getCurrentQuest().getStages().size());
 			logger.info("Prepared stages for the quest: " + stages.size());
 			if(model.getCurrentQuest().getStages().size() < stages.size() ||
@@ -151,10 +151,10 @@ public class GameController{
 				logger.info("Num players in tourney so far: " + numPlayers);
 				if(numPlayers == readyCounter1) {
 					logger.info("Everyone is ready!");
-					model.getCurrentTourney().winner();
+					model.getCurrentTourney().winner(this.model);
 					model.getCurrentTourney().awardShields();
 					readyCounter1 = 0;
-					model.getCurrentTourney().end();
+					model.getCurrentTourney().end(this.model);
 					this.updateAll();
 					if(model.getCurrentTourney().isOver()) {
 						logger.info("tournament over!");
@@ -196,7 +196,7 @@ public class GameController{
 		int AICounter = 0;
 		// create players
 		for(int i=0;i<p;i++) {
-			model.addPlayer(new Player(i, this, model));
+			model.addPlayer(new Player(i, model));
 			if(i==p-1 && AICounter==i) {
 
 			}else{
@@ -362,7 +362,7 @@ public class GameController{
 					System.out.println("Quest sponsored by player " + model.getCurrentPlayer());
 					ArrayList<Stage> quest = player.getAI().createQuest(model, player);
 					model.setQuest();
-					quest.forEach(s->model.getCurrentQuest().addStage(s));
+					quest.forEach(s->model.getCurrentQuest().addStage(this.model, s));
 					this.updateAll();
 					this.runQuest();
 					sponsored = true;
@@ -583,7 +583,7 @@ public class GameController{
 		logger.info("Clicked card: " + card.getName());
 		if(!(card instanceof Ally)) return;
 		Player player = this.model.getPlayerByIndex(index);
-		player.playCardToField((Ally) card);
+		player.addField((Ally) card);
 	}
 
 	public void discardOnClick(AdventureCard card, int index) {

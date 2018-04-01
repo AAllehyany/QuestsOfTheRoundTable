@@ -43,6 +43,7 @@ public class GameQuestTest {
 	
 	@Test
 	public void testFoePowerIncreasesInEachStage() {
+		state = new GameState();
 		journey = new QuestCard("Rescue_Maiden", 3);
 		quest = new GameQuest(journey, new Player(1));
 		
@@ -65,6 +66,7 @@ public class GameQuestTest {
 	
 	@Test 
 	public void testPlaysStage() {
+		state = new GameState();
 		journey = new QuestCard("Rescue_Maiden", 3);
 		quest = new GameQuest(journey, new Player(1));
 		

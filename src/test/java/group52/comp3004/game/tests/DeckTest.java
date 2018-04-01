@@ -11,7 +11,7 @@ import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Card;
 import group52.comp3004.cards.Weapon;
 import group52.comp3004.decks.Deck;
-import javafx.embed.swing.JFXPanel;
+import group52.comp3004.decks.DeckFactory;
 
 public class DeckTest {
 	AdventureCard excalibur = new Weapon("Excalibur", 30);
@@ -69,7 +69,7 @@ public class DeckTest {
 	
 	@Test
 	public void testDiscardArrayListCard() {
-		Deck<AdventureCard> aDeck = new Deck<AdventureCard>(Deck.createAdventureDeck());
+		Deck<AdventureCard> aDeck = DeckFactory.createAdventureDeck();
 		ArrayList<AdventureCard> cards = new ArrayList<AdventureCard>();
 		cards.add(excalibur);
 		cards.add(sword);

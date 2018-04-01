@@ -71,6 +71,13 @@ public class Foe extends AdventureCard{
 	}
 	
 	/**
+	 * Get a foe's set battle points (the lower points that is shown on the card)
+	 */
+	public int getBp() {
+		return this.bp;
+	}
+	
+	/**
 	 * Get the weapons equipped by the foe.
 	 * @return the set of all weapons
 	 */

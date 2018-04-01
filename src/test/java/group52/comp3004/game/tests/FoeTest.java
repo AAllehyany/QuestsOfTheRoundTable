@@ -31,6 +31,8 @@ public class FoeTest {
 		Foe mordred = new Foe("Mordred", 30);
 		Ally merlin = new Ally("Merlin");
 		Ally arthur = new Ally("King_Arthur", 10, 2);
+		p1.addCardToHand(arthur);
+		p1.addCardToHand(merlin);
 		p1.addField(merlin);
 		p1.addField(arthur);
 		p2.addCardToHand(mordred);

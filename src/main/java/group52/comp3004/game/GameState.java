@@ -12,6 +12,7 @@ import group52.comp3004.cards.QuestCard;
 import group52.comp3004.cards.StoryCard;
 import group52.comp3004.cards.Tourneys;
 import group52.comp3004.decks.Deck;
+import group52.comp3004.decks.DeckFactory;
 import group52.comp3004.players.Player;
 import group52.comp3004.players.Rank;
 
@@ -61,8 +62,8 @@ public class GameState {
 		this.currentPlayer = 0;
 		this.currentSponsor = -1;
 		phase = Phase.TurnStart;		
-		adventureDeck = null;
-		storyDeck = null;
+		adventureDeck = DeckFactory.createAdventureDeck();
+		storyDeck = DeckFactory.createStoryDeck();
 		currentQuest = null;
 		revealedCard = null;
 		maxBid = 0;

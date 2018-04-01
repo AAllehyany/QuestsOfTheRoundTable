@@ -162,8 +162,10 @@ public class Strategy2 extends AbstractAI{
 							weapons.add(p.getHand().get(i));
 				}
 				AdventureCard wep = this.getWeakestWeapon(state, p, weapons);
-				stageCards.add(wep);
-				stagebp += wep.getBp();
+				if(wep!=null) {
+					stageCards.add(wep);
+					stagebp += wep.getBp();
+				}else break;
 			}
 		}
 		prevbp = stagebp;
@@ -172,7 +174,7 @@ public class Strategy2 extends AbstractAI{
 	
 	public ArrayList<AdventureCard> playTourney(GameState state, Player p) {
 		ArrayList<AdventureCard> tourneyCards = new ArrayList<AdventureCard>();
-		int totalBP = 0;
+		int totalBP = p.getBattlePoints(state);
 		p.getHand().sort(new CardComparator(state));
 		int i=0;
 		while(totalBP<50 && i<p.getHand().size()) {

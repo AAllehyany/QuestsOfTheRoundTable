@@ -161,13 +161,13 @@ public class Strategy1 extends AbstractAI{
 				if(!(p.getHand().get(i) instanceof Tests || p.getHand().get(i) instanceof Foe) &&
 						!stageCards.contains(p.getHand().get(i))) {
 					if(p.getHand().get(i) instanceof Amour) {
-						if(!this.containsAmour(stageCards) && !this.hasAmour(p)) stageCards.add(p.discard(p.getHand().get(i)));
+						if(!this.containsAmour(stageCards) && !this.hasAmour(p)) stageCards.add((p.getHand().get(i)));
 					}else {
-						stageCards.add(p.discard(p.getHand().get(i)));
+						stageCards.add((p.getHand().get(i)));
 					}
 				}
 			}
-			for(int i=0;i<stageCards.size();i++) p.getHand().remove(stageCards.get(i));
+			for(int i=0;i<stageCards.size();i++) p.discard(stageCards.get(i));
 		}else {
 			while(stageCards.size()<2) {
 				if(!this.hasAmour(p) && this.hasAmourInHand(p) && 
