@@ -129,8 +129,8 @@ public class Foe extends AdventureCard{
     	adventureDeck.discardCard(state.getPlayerByIndex(player).removeAlly(ally));
     	owner.discard(this);
     	adventureDeck.discardCard(this);
-    	adventureDeck.discard(state.getPlayerByIndex(player).removeAlly(ally));
-    	adventureDeck.discard(this);
+    	adventureDeck.discardCard(state.getPlayerByIndex(player).removeAlly(ally));
+    	adventureDeck.discardCard(this);
     	owner.getHand().remove(this);
     	return true;
     }

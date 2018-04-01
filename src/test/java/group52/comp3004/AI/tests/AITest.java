@@ -72,74 +72,6 @@ public class AITest {
 		}
 		
 		@Test
-		public void testPlayerMethods() {
-			GameState state = new GameState();
-			Player p1 = new Player(0);
-			state.addPlayer(p1);
-			p1.addCardToHand(gknight);
-			p1.addCardToHand(mordred);
-			p1.addCardToHand(dagger);
-			p1.addCardToHand(excalibur);
-			p1.addCardToHand(a);
-			p1.addCardToHand(sg);
-			
-			assertEquals(false, (boolean) p1.hasTest());
-			p1.addCardToHand(qb);
-			assertEquals(true, (boolean) p1.hasTest());
-			
-			p1.addCardToHand(kp);
-			
-			p1.sortHand(state);
-			assertEquals(sg, (Ally) p1.getHand().get(0));
-			assertEquals(kp, (Ally) p1.getHand().get(1));
-			assertEquals(a, (Amour) p1.getHand().get(2));
-			assertEquals(excalibur, (Weapon) p1.getHand().get(3));
-			assertEquals(dagger, (Weapon) p1.getHand().get(4));
-			assertEquals(mordred, (Foe) p1.getHand().get(5));
-			assertEquals(gknight, (Foe) p1.getHand().get(6));
-			assertEquals(qb, (Tests) p1.getHand().get(7));
-			
-			state.setRevealedCard(gk);
-			state.setQuest();
-			p1.sortHand(state);
-			assertEquals(sg, (Ally) p1.getHand().get(0));
-			assertEquals(kp, (Ally) p1.getHand().get(1));
-			assertEquals(a, (Amour) p1.getHand().get(2));
-			assertEquals(excalibur, (Weapon) p1.getHand().get(3));
-			assertEquals(dagger, (Weapon) p1.getHand().get(4));
-			assertEquals(gknight, (Foe) p1.getHand().get(5));
-			assertEquals(mordred, (Foe) p1.getHand().get(6));
-			assertEquals(qb, (Tests) p1.getHand().get(7));
-			
-			assertEquals(true, (boolean) p1.getDuplicates().isEmpty());
-			
-			p1.addCardToHand(excalibur);
-			
-			assertEquals(1, (int) p1.getDuplicates().size());
-			assertEquals(excalibur, (Weapon) p1.getDuplicates().get(0));
-			
-			assertEquals(2, (int) p1.countFoes());
-			assertEquals(0, (int) p1.countFoes(5));
-			assertEquals(1, (int) p1.countFoes(30));
-			
-			assertEquals(2, (int) p1.getFoes(50).size());
-			assertEquals(1, (int) p1.getFoes(30).size());
-			
-			assertEquals(2, (int) p1.getUniqueFoes(state).size());
-			assertEquals(2, (int) p1.numUniqueFoes(state));
-			
-			p1.addCardToHand(giant);
-			assertEquals(2,  (int) p1.getUniqueFoes(state).size());
-			assertEquals(2, (int) p1.numUniqueFoes(state));
-			
-			p1.addCardToHand(bknight);
-			assertEquals(3, (int) p1.getUniqueFoes(state).size());
-			assertEquals(3, (int) p1.numUniqueFoes(state));
-			
-			assertEquals(10, (int) a.getBp());
-		}
-		
-		@Test
 		public void testStrategy1() {
 			GameState state = new GameState();
 			AbstractAI s1 = new Strategy1();
@@ -280,8 +212,8 @@ public class AITest {
 			p1.addCardToHand(giant);
 			p1.addCardToHand(dragon);
 			assertEquals(10, p1.getHand().size());
-			assertEquals(2, p1.getDuplicates().size());
-			assert(p1.getDuplicates().contains(dagger));
+			assertEquals(2, s1.getDuplicates(p1).size());
+			assert(s1.getDuplicates(p1).contains(dagger));
 			assert(s1.doISponsorQuest(state, p1));
 			quest = s1.createQuest(state, p1);
 			assertEquals(5, quest.size());
