@@ -228,14 +228,14 @@ public class Player {
 	public int getOfferedBids() {
 		return this.offeredBids;
 	}
-	
+
 	/**
 	 * ?what does second part do?
 	 * @param state ?
 	 * @return ?
 	 */
 	public Integer getBattlePoints(GameState state) {
-		logger.info("Player: " + id + " has " + battlePoints + temp.stream().mapToInt(c -> c.getBp()).sum() + field.stream().mapToInt(c -> c.getBp(state)).sum() + " battle points");
+		logger.info("Player: " + id + " has " + (battlePoints + temp.stream().mapToInt(c -> c.getBp()).sum() + field.stream().mapToInt(c -> c.getBp(state)).sum()) + " battle points");
 		return battlePoints + temp.stream().mapToInt(c -> c.getBp()).sum() + field.stream().mapToInt(c -> c.getBp(state)).sum();
 	}
 
@@ -328,6 +328,16 @@ public class Player {
 	}
 	
 	/**
+	 * Determine if a player can add a card to their temp container
+	 * @param card
+	 * @return
+	 */
+	public boolean canPlayTemp(AdventureCard card) {
+		if(this.hasCardInHand(card) && !this.temp.contains(card)) return true;
+		return false;
+	}
+	
+	/**
 	 * ?
 	 * @param card
 	 */
@@ -344,6 +354,7 @@ public class Player {
 	 * @param card
 	 */
 	public void addField(Ally card) {//why only ally
+		if(!this.hand.contains(card) || this.field.contains(card)) return;
 		logger.info(card.getName() + " added to field");
 		this.field.add(card);
 		this.discard(card);

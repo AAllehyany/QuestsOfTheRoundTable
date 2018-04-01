@@ -16,6 +16,7 @@ import group52.comp3004.players.Player;
 public class GameQuestTest {
 	private QuestCard journey;
 	private GameQuest quest;
+	private GameState state;
 	
 	@Test
 	public void testHasCorrectNumberOfStages() {
@@ -53,12 +54,12 @@ public class GameQuestTest {
 		Stage stage2 = new Stage(theBadBoy);
 		Stage stage3 = new Stage(extremelyNiceFoe);
 		
-		assert(quest.addStage(stage1));
-		assertFalse(quest.addStage(stage2));
-		assert(quest.addStage(stage3));
+		assert(quest.addStage(state, stage1));
+		assertFalse(quest.addStage(state, stage2));
+		assert(quest.addStage(state, stage3));
 		
-		assert(quest.addStage(stage3));
-		assertFalse(quest.addStage(stage3));
+		assert(quest.addStage(state, stage3));
+		assertFalse(quest.addStage(state, stage3));
 	}
 	
 	
@@ -75,9 +76,9 @@ public class GameQuestTest {
 		Stage stage2 = new Stage(theBadBoy);
 		Stage stage3 = new Stage(extremelyNiceFoe);
 		
-		quest.addStage(stage1);
-		quest.addStage(stage2);
-		quest.addStage(stage3);
+		quest.addStage(state, stage1);
+		quest.addStage(state, stage2);
+		quest.addStage(state, stage3);
 		
 		Player p1 = new Player(13);
 		Player p2 = new Player(22);
@@ -93,17 +94,17 @@ public class GameQuestTest {
 		assertEquals(0, quest.getCurrentStage());
 		assertFalse(quest.isOver());
 		
-		quest.playStage();
+		quest.playStage(state);
 		assertFalse(quest.isOver());
 		assertEquals(1, quest.getCurrentStage());
 		assertEquals(3, quest.getPlayers().size());
 		
-		quest.playStage();
+		quest.playStage(state);
 		assertFalse(quest.isOver());
 		assertEquals(2, quest.getCurrentStage());
 		assertEquals(3, quest.getPlayers().size());
 		
-		quest.playStage();
+		quest.playStage(state);
 		assert(quest.isOver());
 		assertEquals(2, quest.getCurrentStage());
 		assertEquals(0, quest.getPlayers().size());
@@ -111,6 +112,7 @@ public class GameQuestTest {
 	
 	@Test
 	public void testAwardsShields() {
+		state = new GameState();
 		journey = new QuestCard("Rescue_Maiden", 3);
 		quest = new GameQuest(journey, new Player(1));
 		
@@ -122,9 +124,9 @@ public class GameQuestTest {
 		Stage stage2 = new Stage(theBadBoy);
 		Stage stage3 = new Stage(extremelyNiceFoe);
 		
-		quest.addStage(stage1);
-		quest.addStage(stage2);
-		quest.addStage(stage3);
+		quest.addStage(state, stage1);
+		quest.addStage(state, stage2);
+		quest.addStage(state, stage3);
 		
 		Player p1 = new Player(13);
 		Player p2 = new Player(22);
@@ -167,9 +169,9 @@ public class GameQuestTest {
 		Stage stage2 = new Stage(theBadBoy);
 		Stage stage3 = new Stage(extremelyNiceFoe);
 		
-		quest.addStage(stage1);
-		quest.addStage(stage2);
-		quest.addStage(stage3);
+		quest.addStage(g, stage1);
+		quest.addStage(g, stage2);
+		quest.addStage(g, stage3);
 		
 		assertEquals(6, quest.getNumCardsPlayedBySponsor());
 		

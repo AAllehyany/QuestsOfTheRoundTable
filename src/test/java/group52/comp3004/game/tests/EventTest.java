@@ -117,8 +117,8 @@ class EventTest {
 		EventCard Camelot =  new EventCard("Called_to_Camelot",new Camelot());
 		Camelot.run(model);
 		
-		assertEquals(1, (int) a.getField().size());
-		assertEquals(1, (int) b.getField().size());
+		assertEquals(0, (int) a.getField().size());
+		assertEquals(0, (int) b.getField().size());
 		assertEquals(0, (int) c.getHand().size());
 	}
 	

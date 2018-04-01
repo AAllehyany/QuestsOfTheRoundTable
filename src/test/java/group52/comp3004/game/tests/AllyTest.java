@@ -43,7 +43,7 @@ public class AllyTest {
 		assertEquals(true, (boolean) a1.bonusSatisfied(state));
 		assertEquals(false, (boolean) a2.bonusSatisfied(state));
 		assertEquals(false, (boolean) a3.bonusSatisfied(state));
-		assertEquals(30, (int) a1.getBp(state));
+		assertEquals(20, (int) a1.getBp(state));
 		assertEquals(10, (int) a2.getBp(state));
 		assertEquals(2, (int) a2.getBids(state));
 		assertEquals(0, (int) a3.getBids(state));
@@ -52,7 +52,7 @@ public class AllyTest {
 		Ally sp = new Ally("Sir_Percival", 5, 0, "Holy_Grail", 20, 0);
 		state.setRevealedCard(hg);
 		state.setQuest();
-		assertEquals(25, (int) sp.getBp(state));
+		assertEquals(20, (int) sp.getBp(state));
 	}
 	
 	@Test
@@ -68,7 +68,7 @@ public class AllyTest {
 		p1.addField(a2);
 		GameState state = new GameState(players);
 		assertEquals(true, (boolean) a1.bonusSatisfied(state));
-		assertEquals(35, (int) p1.getBattlePoints(state));
+		assertEquals(25, (int) p1.getBattlePoints(state));
 	}
 	
 	@Test
@@ -94,9 +94,9 @@ public class AllyTest {
 		Stage s1 = new Stage(saxons);
 		Stage s2 = new Stage(giant);
 		Stage s3 = new Stage(dragon);
-		gq.addStage(s1);
-		gq.addStage(s2);
-		gq.addStage(s3);
+		gq.addStage(state, s1);
+		gq.addStage(state, s2);
+		gq.addStage(state, s3);
 		ArrayList<AdventureCard> s1cards = new ArrayList<AdventureCard>();
 		s1cards.add(saxons);
 		s1cards.add(dagger);

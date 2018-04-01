@@ -101,8 +101,8 @@ public class ScenarioTest {
 		p1.getHand().remove(sword);
 		assertEquals(8, p1.getHand().size());
 		Stage s2 = new Stage(b);
-		state.getCurrentQuest().addStage(s1);
-		state.getCurrentQuest().addStage(s2);
+		state.getCurrentQuest().addStage(state, s1);
+		state.getCurrentQuest().addStage(state, s2);
 		assertEquals(10, state.getCurrentQuest().getStage(0).getTotalPower(state));
 		assertEquals(30, state.getCurrentQuest().getStage(1).getTotalPower(state));
 		state.getCurrentQuest().addPlayer(p2);

@@ -63,10 +63,10 @@ public class Foe extends AdventureCard{
 	public int getBp(GameState state) {
 		if(state.getCurrentQuest()!=null && 
 				quests.contains(state.getCurrentQuest().getQuest().getName())){
-			logger.info(super.getName() + " has battle power " + this.highBp + weapons.stream().mapToInt(w -> w.getBp()).sum());
+			logger.info(super.getName() + " has battle power " + (this.highBp + weapons.stream().mapToInt(w -> w.getBp()).sum()));
 			return this.highBp + weapons.stream().mapToInt(w -> w.getBp()).sum();
 		}
-		logger.info(super.getName() + " has battle power " + this.bp + weapons.stream().mapToInt(w -> w.getBp()).sum());
+		logger.info(super.getName() + " has battle power " + (this.bp + weapons.stream().mapToInt(w -> w.getBp()).sum()));
 		return this.bp + weapons.stream().mapToInt(w -> w.getBp()).sum();
 	}
 	
@@ -126,11 +126,11 @@ public class Foe extends AdventureCard{
     		logger.info("INVALID ALLY\n");
     		return false;
     	}
-    	adventureDeck.discardCard(state.getPlayerByIndex(player).removeAlly(ally));
+    	adventureDeck.discard(state.getPlayerByIndex(player).removeAlly(ally));
     	owner.discard(this);
-    	adventureDeck.discardCard(this);
-    	adventureDeck.discardCard(state.getPlayerByIndex(player).removeAlly(ally));
-    	adventureDeck.discardCard(this);
+    	adventureDeck.discard(this);
+    	adventureDeck.discard(state.getPlayerByIndex(player).removeAlly(ally));
+    	adventureDeck.discard(this);
     	owner.getHand().remove(this);
     	return true;
     }

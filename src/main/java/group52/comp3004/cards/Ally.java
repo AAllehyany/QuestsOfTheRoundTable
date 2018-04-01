@@ -142,8 +142,8 @@ public class Ally extends AdventureCard
 	 */
 	public int getBp(GameState state) {
 		if (bonusSatisfied(state)) {
-			logger.info(super.getName() + " adds " + (bp+bonusbp) + " battle points");
-			return bp+bonusbp;
+			logger.info(super.getName() + " adds " + (bonusbp) + " battle points");
+			return bonusbp;
 		}
 		logger.info(super.getName() + " adds " + bp + " battle points");
 		return bp;
@@ -154,7 +154,7 @@ public class Ally extends AdventureCard
 	 */
 	public int getBids(GameState state) {
 		if (bonusSatisfied(state)) {
-			logger.info(super.getName() + " adds " + (bids+bonusbid) + " bids");
+			logger.info(super.getName() + " adds " + (bonusbid) + " bids");
 			return bids+bonusbid;
 		}
 		logger.info(super.getName() + " adds " + bids + " bids");

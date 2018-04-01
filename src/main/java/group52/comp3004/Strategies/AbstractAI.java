@@ -116,7 +116,7 @@ public abstract class AbstractAI{
 	 * Get a list of any duplicated cards in hand. ?What is it used for?
 	 * @return 
 	 */
-	protected ArrayList<AdventureCard> getDuplicates(Player p){
+	public ArrayList<AdventureCard> getDuplicates(Player p){
 		ArrayList<AdventureCard> dupes = new ArrayList<AdventureCard>();
 		HashSet<AdventureCard> cards = new HashSet<AdventureCard>();
 		for(int i=0;i<p.getHand().size();i++) {
