@@ -6,14 +6,16 @@ import org.junit.jupiter.api.Test;
 
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.Weapon;
+import group52.comp3004.game.GameState;
 import group52.comp3004.game.Stage;
 
 public class StageTest {
 	@Test
 	public void testHasCorrectBp() {
+		GameState state = new GameState();
 		Foe theNicefoe = new Foe("Saxons", 10, 20, "Hi");
 		Stage stage = new Stage(theNicefoe);
-		assertEquals(10, stage.getTotalPower());
+		assertEquals(10, stage.getTotalPower(state));
 	}
 	
 	@Test

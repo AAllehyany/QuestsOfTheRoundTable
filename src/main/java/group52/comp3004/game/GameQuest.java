@@ -198,7 +198,7 @@ public class GameQuest {
 		List<Player> remaining = players.stream().filter(p -> p.getBattlePoints(state) >= stages.get(currentStage).getTotalPower(state)).collect(Collectors.toList());
 		ArrayList<AdventureCard> discard = new ArrayList<AdventureCard>();
 		for(int i=0;i<players.size();i++) discard.addAll(players.get(i).clearTemp());
-		state.getAdventureDeck().discardCard(discard);
+		state.getAdventureDeck().discard(discard);
 		logger.info("Done playing the stage...");
 		logger.info(remaining.size() + " players are now in the quest.");
 		this.players = remaining;
@@ -294,18 +294,18 @@ public class GameQuest {
 		dealCardsToSponsor();
 		for(int i=0;i<state.getAllPlayers().size();i++) {
 			Player p = state.getPlayerByIndex(i);
-			state.getAdventureDeck().discardCard(p.getTemp());
+			state.getAdventureDeck().discard(p.getTemp());
 			p.getTemp().clear();
 			for(int j=0;j<p.getTemp().size();j++) {
 				if(p.getTemp().get(j) instanceof Amour) {
-					state.getAdventureDeck().discardCard(p.getTemp().get(j));
+					state.getAdventureDeck().discard(p.getTemp().get(j));
 					p.getTemp().remove(j);
 					break;
 				}
 			}
 		}
 		for(int i=0;i<this.getNumStages();i++) {
-			state.getAdventureDeck().discardCard(this.stages.get(i).getCards());
+			state.getAdventureDeck().discard(this.stages.get(i).getCards());
 		}
 		awardShields(bonus);
 	}

@@ -94,9 +94,9 @@ public class AllyTest {
 		Stage s1 = new Stage(saxons);
 		Stage s2 = new Stage(giant);
 		Stage s3 = new Stage(dragon);
-		gq.addStage(s1);
-		gq.addStage(s2);
-		gq.addStage(s3);
+		gq.addStage(state, s1);
+		gq.addStage(state, s2);
+		gq.addStage(state, s3);
 		ArrayList<AdventureCard> s1cards = new ArrayList<AdventureCard>();
 		s1cards.add(saxons);
 		s1cards.add(dagger);

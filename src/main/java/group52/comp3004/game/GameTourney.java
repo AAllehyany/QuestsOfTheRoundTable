@@ -129,7 +129,7 @@ public class GameTourney {
 			}
 		}
 		for(int i=0;i<player.size();i++) {
-			state.getAdventureDeck().discardCard(this.players.get(i).clearTemp());
+			state.getAdventureDeck().discard(this.players.get(i).clearTemp());
 		}
 		for(int i=0;i<this.count1.size();i++) 
 			logger.info("Player: " + this.count.get(i).getId() + " won the second tournament round");
@@ -149,7 +149,7 @@ public class GameTourney {
 			}
 		}
 		for(int i=0;i<player.size();i++) {
-			state.getAdventureDeck().discardCard(this.players.get(i).clearTemp());
+			state.getAdventureDeck().discard(this.players.get(i).clearTemp());
 		}
 		for(int i=0;i<count.size();i++) 
 			logger.info("Player: " + this.count.get(i).getId() + " won the first tournament round");
@@ -162,7 +162,7 @@ public class GameTourney {
 	 */
 	public void end(GameState state) {
 		for(int i =0;i<this.players.size();i++) {
-			state.getAdventureDeck().discardCard(this.getPlayers().get(i).getTemp());
+			state.getAdventureDeck().discard(this.getPlayers().get(i).getTemp());
 			this.getPlayers().get(i).getTemp().clear();
 		}
 		this.over = true;

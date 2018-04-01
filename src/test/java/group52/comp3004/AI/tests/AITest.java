@@ -111,30 +111,9 @@ public class AITest {
 			assertEquals(mordred, (Foe) p1.getHand().get(6));
 			assertEquals(qb, (Tests) p1.getHand().get(7));
 			
-			assertEquals(true, (boolean) p1.getDuplicates().isEmpty());
-			
 			p1.addCardToHand(excalibur);
 			
-			assertEquals(1, (int) p1.getDuplicates().size());
-			assertEquals(excalibur, (Weapon) p1.getDuplicates().get(0));
-			
 			assertEquals(2, (int) p1.countFoes());
-			assertEquals(0, (int) p1.countFoes(5));
-			assertEquals(1, (int) p1.countFoes(30));
-			
-			assertEquals(2, (int) p1.getFoes(50).size());
-			assertEquals(1, (int) p1.getFoes(30).size());
-			
-			assertEquals(2, (int) p1.getUniqueFoes(state).size());
-			assertEquals(2, (int) p1.numUniqueFoes(state));
-			
-			p1.addCardToHand(giant);
-			assertEquals(2,  (int) p1.getUniqueFoes(state).size());
-			assertEquals(2, (int) p1.numUniqueFoes(state));
-			
-			p1.addCardToHand(bknight);
-			assertEquals(3, (int) p1.getUniqueFoes(state).size());
-			assertEquals(3, (int) p1.numUniqueFoes(state));
 			
 			assertEquals(10, (int) a.getBp());
 		}
@@ -280,8 +259,6 @@ public class AITest {
 			p1.addCardToHand(giant);
 			p1.addCardToHand(dragon);
 			assertEquals(10, p1.getHand().size());
-			assertEquals(2, p1.getDuplicates().size());
-			assert(p1.getDuplicates().contains(dagger));
 			assert(s1.doISponsorQuest(state, p1));
 			quest = s1.createQuest(state, p1);
 			assertEquals(5, quest.size());

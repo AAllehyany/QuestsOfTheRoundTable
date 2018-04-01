@@ -6,16 +6,20 @@ import org.junit.jupiter.api.Test;
 
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Tourneys;
+import group52.comp3004.game.GameState;
 import group52.comp3004.game.GameTourney;
 import group52.comp3004.players.Player;
 
 class TourneyTest {
 	private Tourneys camelot;
 	private GameTourney tournament;
+	private GameState state;
+	
 	@Test
 	public void testawardshield() {
 		camelot = new Tourneys("Camelot", 3);
 		tournament = new GameTourney(camelot);
+		state = new GameState();
 		Ally a1 = new Ally("Sir_Gawain", 20, 0, "Green_Knight", 20, 0);
 		Ally a2 = new Ally("King_Arthur", 10, 2);
 
@@ -29,16 +33,16 @@ class TourneyTest {
 		tournament.addPlayer(p3);
 		p1.addField(a1);
 		p2.addField(a2);
-		System.out.println(p2.getBattlePoints());
-		System.out.println(p3.getBattlePoints());
+		System.out.println(p2.getBattlePoints(state));
+		System.out.println(p3.getBattlePoints(state));
 		
 		
 		assertEquals(10, (int) p1.getShields());
 		assertEquals(10, (int) p2.getShields());
 		assertEquals(10, (int) p3.getShields());
-		System.out.println(tournament.winner().get(0));
+		System.out.println(tournament.winner(state).get(0));
 		tournament.awardShields();
-		tournament.end();
+		tournament.end(state);
 		assertEquals(16, (int) p1.getShields());
 		assertEquals(10, (int) p2.getShields());
 		assertEquals(10, (int) p3.getShields());
@@ -47,6 +51,7 @@ class TourneyTest {
 	public void testTie() {
 		camelot = new Tourneys("Camelot", 3);
 		tournament = new GameTourney(camelot);
+		state = new GameState();
 		Ally a1 = new Ally("Sir_Gawain", 20, 0, "Green_Knight", 20, 0);
 		Ally a2 = new Ally("Sir_Gawain", 20, 0, "Green_Knight", 20, 0);
 
@@ -60,16 +65,16 @@ class TourneyTest {
 		tournament.addPlayer(p3);
 		p1.addField(a1);
 		p2.addField(a2);
-		System.out.println(p2.getBattlePoints());
-		System.out.println(p1.getBattlePoints());
+		System.out.println(p2.getBattlePoints(state));
+		System.out.println(p1.getBattlePoints(state));
 		
 		
 		assertEquals(10, (int) p1.getShields());
 		assertEquals(10, (int) p2.getShields());
 		assertEquals(10, (int) p3.getShields());
-		System.out.println(tournament.winner().get(0));
+		System.out.println(tournament.winner(state).get(0));
 		tournament.awardShields();
-		tournament.end();
+		tournament.end(state);
 		assertEquals(16, (int) p1.getShields());
 		assertEquals(16, (int) p2.getShields());
 		assertEquals(10, (int) p3.getShields());

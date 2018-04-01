@@ -53,15 +53,15 @@ import group52.comp3004.cards.Weapon;
 			size = 0;
 		}
 	
-		public T discardCard(T c) {
+		public T discard(T c) {
 			Card card = (Card) c;
 			logger.info("Discarded: " + card.getName());
 			discard.add(c);
 			return c;
 		}
 	
-		public ArrayList<T> discardCard(ArrayList<T> cards){
-			cards.stream().forEach(c -> this.discardCard(c));
+		public ArrayList<T> discard(ArrayList<T> cards){
+			cards.stream().forEach(c -> this.discard(c));
 			return cards;
 		}
 		

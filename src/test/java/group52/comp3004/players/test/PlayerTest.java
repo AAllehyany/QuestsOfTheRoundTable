@@ -10,10 +10,13 @@ import org.junit.jupiter.api.Test;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Weapon;
+import group52.comp3004.game.GameState;
 import group52.comp3004.players.Player;
 import group52.comp3004.players.Rank;
 
 public class PlayerTest {
+	private GameState state;
+	
 	@Test
 	public void testShieldsDoNotGoBelowRank() {
 		Player p = new Player(5);
@@ -70,18 +73,19 @@ public class PlayerTest {
 	
 	@Test
 	public void testGetsBPCorrectly() {
+		state = new GameState();
 		Player p = new Player(1337);
 		
-		assertEquals(5, (int) p.getBattlePoints());
+		assertEquals(5, (int) p.getBattlePoints(state));
 		
 		p.addField(new Ally("King_Arthur", 15, 0));
 		
-		assertEquals(20, (int) p.getBattlePoints());
+		assertEquals(20, (int) p.getBattlePoints(state));
 		
 		p.addTemp(new Ally("King_Arthur", 15, 0));
 		p.addTemp(new Weapon("Horse", 10));
 		
-		assertEquals(45, (int) p.getBattlePoints());
+		assertEquals(45, (int) p.getBattlePoints(state));
 	}
 	
 	@Test
@@ -90,12 +94,12 @@ public class PlayerTest {
 		
 		Ally c = new Ally("King_Arthur", 16, 0);
 		
-		p.playCardToField(c);
+		p.addField(c);
 		
 		assertEquals(new ArrayList<AdventureCard>(), p.getField());
 		
 		p.addCardToHand(c);
-		p.playCardToField(c);
+		p.addField(c);
 		
 		assertEquals(Arrays.asList(c), p.getField());
 		

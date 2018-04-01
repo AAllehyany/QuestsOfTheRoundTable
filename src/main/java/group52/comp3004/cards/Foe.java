@@ -126,9 +126,9 @@ public class Foe extends AdventureCard{
     		logger.info("INVALID ALLY\n");
     		return false;
     	}
-    	adventureDeck.discardCard(state.getPlayerByIndex(player).removeAlly(ally));
+    	adventureDeck.discard(state.getPlayerByIndex(player).removeAlly(ally));
     	owner.discard(this);
-    	adventureDeck.discardCard(this);
+    	adventureDeck.discard(this);
     	adventureDeck.discard(state.getPlayerByIndex(player).removeAlly(ally));
     	adventureDeck.discard(this);
     	owner.getHand().remove(this);
