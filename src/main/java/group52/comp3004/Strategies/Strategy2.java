@@ -162,10 +162,8 @@ public class Strategy2 extends AbstractAI{
 							weapons.add(p.getHand().get(i));
 				}
 				AdventureCard wep = this.getWeakestWeapon(state, p, weapons);
-				if(wep!=null) {
 					stageCards.add(wep);
-					stagebp += wep.getBp();
-				}else break;
+				stagebp += wep.getBp();
 			}
 		}
 		prevbp = stagebp;
