@@ -43,6 +43,7 @@ public class Player {
 	private boolean stoppedBidding;
 	private int offeredBids;
 	private AbstractAI strategy;
+	private boolean ready;
 	
 	static final private Logger logger = Logger.getLogger(Player.class);
 	
@@ -328,6 +329,17 @@ public class Player {
 	}
 	
 	/**
+	 * Sets the player as ready to play
+	 * 
+	 * 
+	 */
+	public void setReady() {
+		this.ready = true;
+	}
+	
+	public boolean isReady() {return this.ready;}
+	
+	/**
 	 * Determine if a player can add a card to their temp container
 	 * @param card
 	 * @return
@@ -523,6 +535,22 @@ public class Player {
 		return card;
 	}
 	
+	/**
+	 * Gets a card from the player's hand. 
+	 * 
+	 * @returns  the card from hand or null if it does not exist
+	 */
+	public AdventureCard getCard(String name) {
+		logger.info("Looking for card " + name + " in player " + id + "'s hand");
+				
+		for(AdventureCard card : hand) {
+			if(card.getName().equals(name)) {
+				return card;
+			}
+		}
+		
+		return null;
+	}
 	
 	/**
 	 * Tests if there is a test card in the hand.
