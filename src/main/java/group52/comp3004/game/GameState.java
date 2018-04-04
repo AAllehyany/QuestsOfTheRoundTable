@@ -344,6 +344,7 @@ public class GameState {
 	public List<Player> getAllPlayers() { return this.players; }
 	
 	public Deck<AdventureCard> getAdventureDeck() { return adventureDeck; }
+	public Deck<StoryCard> getStoryDeck() {return storyDeck;}
 	
 	public List<Player> getWinners() {
 		return this.players.stream().filter(player -> player.getRank() == Rank.KnightOfTheRoundTable).collect(Collectors.toList());
