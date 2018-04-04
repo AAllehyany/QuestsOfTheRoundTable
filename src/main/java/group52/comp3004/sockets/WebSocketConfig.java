@@ -1,4 +1,4 @@
-package comp3004.group52.Group52;
+package group52.comp3004.sockets;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;

@@ -1,13 +1,13 @@
-package comp3004.group52.Group52;
+package group52.comp3004;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class Hello {
+public class MainPage {
 
 	@RequestMapping("/")
-	public String xD() {
-		return "HEY";
+	public String mainPage() {
+		return "Hello world!";
 	}
 }

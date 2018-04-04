@@ -1,4 +1,4 @@
-package comp3004.group52.Group52;
+package group52.comp3004.sockets;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +10,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 @Component
 public class SocketHandler extends TextWebSocketHandler{
 	
