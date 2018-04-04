@@ -76,6 +76,16 @@ import group52.comp3004.cards.Card;
 		}
 		
 		/**
+		 * Removes a card from the deck. Used for game rigging and testing
+		 * @param card
+		 */
+		public void remove(T card) {
+			logger.info("Removed " + card + " from Deck");
+			this.draw.remove(card);
+			size--;
+		}
+		
+		/**
 		 * Draw a card from the deck. The draw is from a random position in the deck so there is no need to worry about shuffle function.
 		 * <p>If there are no more cards to draw the discard list is moved back to the draw deck
 		 * @return
@@ -88,7 +98,7 @@ import group52.comp3004.cards.Card;
 			}
 			int index = rand.nextInt(draw.size());
 			obj = draw.remove(index);
-			logger.info("Removed one object from deck");
+			logger.info("Removed " + obj + " from deck");
 			size--;
 			return obj;
 		}
