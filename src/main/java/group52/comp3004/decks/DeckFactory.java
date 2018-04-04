@@ -56,6 +56,7 @@ public class DeckFactory {
 		for(int i=0;i<5;i++) cards.add(CardFactory.createFoe("Saxons",  10, 20, "Repel_Saxon_Raiders"));
 		for(int i=0;i<4;i++) cards.add(CardFactory.createFoe("Boar",  5, 15, "Boar_Hunt"));
 		for(int i=0;i<8;i++) cards.add(CardFactory.createFoe("Thieves",  5));
+		for(int i=0;i<8;i++) cards.add(CardFactory.createAmour("Amour", 10, 1));
 		for(int i=0;i<2;i++) cards.add(CardFactory.createTests("Valor", 3));
 		for(int i=0;i<2;i++) cards.add(CardFactory.createTests("Temptation", 3));
 		for(int i=0;i<2;i++) cards.add(CardFactory.createTests("Moran_Le_Fey", 4));
