@@ -187,6 +187,7 @@ public class GameQuest {
 				this.players.clear();
 				this.players.add(remaining);
 			}
+			for(int i=0;i<players.size();i++) players.get(i).addCardToHand(state.getAdventureDeck().draw());
 			
 			advanceStage();
 			
@@ -206,6 +207,7 @@ public class GameQuest {
 			logger.info("No players or we played all stages! Quest is over.");
 			this.over = true;
 		}
+		for(int i=0;i<players.size();i++) players.get(i).addCardToHand(state.getAdventureDeck().draw());
 		advanceStage();	
 	}
 	
