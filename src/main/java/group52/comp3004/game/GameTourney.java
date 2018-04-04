@@ -18,7 +18,6 @@ public class GameTourney {
 	private final Tourneys tourney;
 	private List<Player> players;
 	private List<Player> count,count1;
-	private int bonus;
 	private List<Player> winner;
 	private boolean over;
 	static final private Logger logger = Logger.getLogger(GameTourney.class);
@@ -107,7 +106,7 @@ public class GameTourney {
 	 * Award shields to winner equal to number of players in tourney plus the bonus provided by the card.
 	 */
 	public void awardShields() {
-		 this.winner.forEach(p -> p.addShields(players.size()+tourney.getShields() + bonus));
+		 this.winner.forEach(p -> p.addShields(players.size()+tourney.getShields()));
 	}
 
 	/**
@@ -162,8 +161,7 @@ public class GameTourney {
 	 */
 	public void end(GameState state) {
 		for(int i =0;i<this.players.size();i++) {
-			state.getAdventureDeck().discard(this.getPlayers().get(i).getTemp());
-			this.getPlayers().get(i).getTemp().clear();
+			state.getAdventureDeck().discard(this.getPlayers().get(i).emptyTemp());
 		}
 		this.over = true;
 		this.count.clear();
