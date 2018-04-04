@@ -32,6 +32,36 @@ public class SocketHandler extends TextWebSocketHandler{
 		case "JOIN_GAME":
 			joinGame(session, payload);
 			break;
+			
+		/*********Game phase handlers***********************/
+		case "START_GAME":
+			startGame(session, payload);
+			break;
+		case "TURN_START":
+			turnStart(session, payload);
+			break;
+		case "REVEAL_STORY":
+			revealStory(session, payload);
+			break;
+		case "HANDLE_EVENT":
+			handleEvent(session, payload);
+			break;
+		case "SPONSOR_TOURNEY":
+			sponsorTourney(session, payload);
+			break;
+		case "JOIN_TOURNEY":
+			joinTourney(session, payload);
+			break;
+		case "RUN_TOURNEY":
+			runTourney(session, payload);
+			break;
+		case "TURN_END":
+			turnEnd(session, payload);
+			break;
+		case "GAME_OVER":
+			gameOver(session, payload);
+			break;
+		/********************************************************/
 		default:
 			invalidEvent(session, payload);
 		}
@@ -46,6 +76,7 @@ public class SocketHandler extends TextWebSocketHandler{
 		session.sendMessage(new TextMessage(gson.toJson(message)));
 		
 	}
+	
 	private void joinGame(WebSocketSession session, Map<String, String> payload) throws Exception {
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();
@@ -69,6 +100,42 @@ public class SocketHandler extends TextWebSocketHandler{
 		
 	}
 	
+	private void startGame(WebSocketSession session, Map<String, String> payload) throws Exception {
+		
+	}
+	
+	private void turnStart(WebSocketSession session, Map<String, String> payload) throws Exception {
+		
+	}
+	
+	private void revealStory(WebSocketSession session, Map<String, String> payload) throws Exception {
+		
+	}
+	
+	private void handleEvent(WebSocketSession session, Map<String, String> payload) throws Exception {
+		
+	}
+	
+	private void sponsorTourney(WebSocketSession session, Map<String, String> payload) throws Exception {
+		
+	}
+	
+	private void joinTourney(WebSocketSession session, Map<String, String> payload) throws Exception {
+		
+	}
+	
+	private void runTourney(WebSocketSession session, Map<String, String> payload) throws Exception {
+		
+	}
+	
+	private void turnEnd(WebSocketSession session, Map<String, String> payload) throws Exception {
+		
+	}
+	
+	private void gameOver(WebSocketSession session, Map<String, String> payload) throws Exception {
+		
+	}
+
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) {
 		logger.info("Player connected to the websocket");
