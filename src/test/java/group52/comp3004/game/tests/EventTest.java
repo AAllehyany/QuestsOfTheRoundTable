@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import group52.comp3004.cards.Ally;
+import group52.comp3004.cards.Arms;
 import group52.comp3004.cards.Camelot;
+import group52.comp3004.cards.CardFactory;
 import group52.comp3004.cards.Deed;
 import group52.comp3004.cards.EventCard;
 import group52.comp3004.cards.Favor;
@@ -34,6 +36,7 @@ class EventTest {
 		assertEquals(13, (int) b.getShields());
 		assertEquals(13, (int) c.getShields());
 	}
+	
 	@Test
 	public void testPox() {
 		model = new GameState();
@@ -49,9 +52,18 @@ class EventTest {
 		assertEquals(10, (int) a.getShields());
 		assertEquals(10, (int) b.getShields());
 		assertEquals(10, (int) c.getShields());
+		
+		a.addShields(3);
+		b.addShields(1);
+		c.addShields(2);
+		Pox.run(model);
+		
+		assertEquals(13, (int) a.getShields());
+		assertEquals(10, (int) b.getShields());
+		assertEquals(11, (int) c.getShields());
 	}
 	@Test
-	public void testPlugue() {
+	public void testPlague() {
 		model = new GameState();
 		Player a = new Player(1);
 		Player b = new Player(2);
@@ -65,6 +77,14 @@ class EventTest {
 		assertEquals(10, (int) a.getShields());
 		assertEquals(10, (int) b.getShields());
 		assertEquals(10, (int) c.getShields());
+		
+		a.addShields(3);
+		Plague.run(model);
+		assertEquals(11, (int) a.getShields());
+		
+		a.addShields(5);
+		Plague.run(model);
+		assertEquals(15, (int) a.getShields());
 	}
 
 	@Test
@@ -81,6 +101,19 @@ class EventTest {
 	
 		assertEquals(2, (int) model.getBonusShields());
 	}
+	
+	@Test
+	public void testArms() {
+		model = new GameState();
+		Player a = new Player(1);
+		Player b = new Player(2);
+		Player c = new Player(3);
+		model.addPlayer(a);
+		model.addPlayer(b);
+		model.addPlayer(c);
+		EventCard Arms = CardFactory.createEvent("Call_to_Arms", new Arms());
+	}
+	
 	@Test
 	public void testFavor() {
 		model = new GameState();
@@ -96,6 +129,14 @@ class EventTest {
 		assertEquals(2, (int) a.getHand().size());
 		assertEquals(2, (int) b.getHand().size());
 		assertEquals(2, (int) c.getHand().size());
+		
+		a.addShields(3);
+		b.addShields(7);
+		Favor.run(model);
+		
+		assertEquals(2, (int) a.getHand().size());
+		assertEquals(2, (int) b.getHand().size());
+		assertEquals(4, (int) c.getHandSize());
 	}
 	@Test
 	public void testCamelot() {
@@ -121,23 +162,6 @@ class EventTest {
 		assertEquals(0, (int) b.getField().size());
 		assertEquals(0, (int) c.getHand().size());
 	}
-	
-	@Test
-	public void testArms() {
-		model = new GameState();
-		Player a = new Player(1);
-		Player b = new Player(2);
-		Player c = new Player(3);
-		model.addPlayer(a);
-		model.addPlayer(b);
-		model.addPlayer(c);
-		EventCard Favor =  new EventCard("Queen's_Favor",new Favor());
-		Favor.run(model);
-		
-		assertEquals(2, (int) a.getHand().size());
-		assertEquals(2, (int) b.getHand().size());
-		assertEquals(2, (int) c.getHand().size());
-	}
 
 	@Test
 	public void testRealm() {
@@ -148,7 +172,7 @@ class EventTest {
 		model.addPlayer(a);
 		model.addPlayer(b);
 		model.addPlayer(c);
-		EventCard Realm =  new EventCard("Queen's_Favor",new Realm());
+		EventCard Realm =  new EventCard("Prosperity",new Realm());
 		Realm.run(model);
 		
 		assertEquals(2, (int) a.getHand().size());

@@ -1,7 +1,6 @@
 package group52.comp3004.players;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import org.apache.log4j.Logger;
 
@@ -153,6 +152,7 @@ public class Player {
 	 * @return
 	 */
 	public Integer getShields() {
+		logger.info("Player " + id + " has " + shields + " shields");
 		return shields;
 	}
 	

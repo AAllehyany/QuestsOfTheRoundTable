@@ -115,7 +115,7 @@ public class AITest {
 			
 			assertEquals(2, (int) p1.countFoes());
 			
-			assertEquals(10, (int) a.getBp());
+			assertEquals(10, (int) a.getBp(state));
 		}
 		
 		@Test
