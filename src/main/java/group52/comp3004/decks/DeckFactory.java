@@ -29,11 +29,12 @@ public class DeckFactory {
 		
 		Deck<AdventureCard> aDeck = new Deck<AdventureCard>();
 		ArrayList<AdventureCard> cards = new ArrayList<AdventureCard>();
+		cards.add(CardFactory.createAlly("Sir_Percival", 5, 0, "Holy_Grail", 20, 0));
 		cards.add(CardFactory.createAlly("Sir_Galahad", 15, 0));
 		cards.add(CardFactory.createAlly("Sir_Lancelot", 15, 0, "Queens_Honor", 25, 0));
 		cards.add(CardFactory.createAlly("King_Arthur", 10, 2));
 		cards.add(CardFactory.createAlly("Sir_Tristan", 10, 0, "Queen_Iseult", 20, 0));
-		cards.add(CardFactory.createAlly("King_Pellinore", 10, 0, "Questing_Beast_Search", 0, 4));
+		cards.add(CardFactory.createAlly("King_Pellinore", 10, 0, "Questing_Beast_Search", 10, 4));
 		cards.add(CardFactory.createAlly("Sir_Gawain", 10, 0, "Green_Knight_Quest", 20, 0));
 		cards.add(CardFactory.createAlly("Queen_Guinevere", 0, 3));
 		cards.add(CardFactory.createAlly("Queen_Iseult", 0, 2, "Sir_Tristan", 0, 4));

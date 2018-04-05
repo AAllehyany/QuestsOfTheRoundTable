@@ -27,12 +27,12 @@ public class Amour extends AdventureCard{
 		this.bids = bids;
 	}
 	
-	public int getBp() {
+	public int getBp(GameState state) {
 		logger.info(super.getName() + " has battle power " + this.bp);
 		return this.bp;
 	}
 	
-	public int getBids() {
+	public int getBids(GameState state) {
 		logger.info(super.getName() + " adds " + this.bids + " bids");
 		return this.bids;
 	}

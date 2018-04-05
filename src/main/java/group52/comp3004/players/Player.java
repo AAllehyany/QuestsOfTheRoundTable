@@ -202,7 +202,7 @@ public class Player {
 	 * @return total bids
 	 */
 	public Integer getBidPoints(GameState state) {
-		logger.info("Player " + id + " offers " + bidPoints + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum() + " bids");
+		logger.info("Player " + id + " offers " + (bidPoints + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum()) + " bids");
 		return bidPoints + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum();
 	}
 	
@@ -236,8 +236,8 @@ public class Player {
 	 * @return ?
 	 */
 	public Integer getBattlePoints(GameState state) {
-		logger.info("Player: " + id + " has " + (battlePoints + temp.stream().mapToInt(c -> c.getBp()).sum() + field.stream().mapToInt(c -> c.getBp(state)).sum()) + " battle points");
-		return battlePoints + temp.stream().mapToInt(c -> c.getBp()).sum() + field.stream().mapToInt(c -> c.getBp(state)).sum();
+		logger.info("Player: " + id + " has " + (battlePoints + temp.stream().mapToInt(c -> c.getBp(state)).sum() + field.stream().mapToInt(c -> c.getBp(state)).sum()) + " battle points");
+		return battlePoints + temp.stream().mapToInt(c -> c.getBp(state)).sum() + field.stream().mapToInt(c -> c.getBp(state)).sum();
 	}
 
 	/**
