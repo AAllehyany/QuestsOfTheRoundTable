@@ -61,7 +61,7 @@ public class DeckFactory {
 		for(int i=0;i<2;i++) cards.add(CardFactory.createTests("Valor", 3));
 		for(int i=0;i<2;i++) cards.add(CardFactory.createTests("Temptation", 3));
 		for(int i=0;i<2;i++) cards.add(CardFactory.createTests("Moran_Le_Fey", 4));
-		for(int i=0;i<2;i++) cards.add(CardFactory.createTests("Questing_Beast", 4));
+		for(int i=0;i<2;i++) cards.add(CardFactory.createTests("Questing_Beast", 3));
 		
 		for(int i=0;i<cards.size();i++) {
 			cards.get(i).setID(i);
