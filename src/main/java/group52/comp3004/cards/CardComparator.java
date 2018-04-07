@@ -26,7 +26,7 @@ public class CardComparator implements Comparator<AdventureCard>{
 	}
 	
 	/**
-	 * ?
+	 * Compare two cards to see if which one has the higher battle power
 	 */
 	public int compare(AdventureCard a, AdventureCard b) {
 		if(this.state!=null) {
