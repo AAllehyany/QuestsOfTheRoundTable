@@ -110,6 +110,7 @@ import group52.comp3004.cards.Card;
 			Random rand = new Random();
 			if(this.size<=0) {
 				this.setCards(this.discard);
+				logger.info("Moved discard pile to deck");
 			}
 			int index = rand.nextInt(draw.size());
 			obj = draw.remove(index);

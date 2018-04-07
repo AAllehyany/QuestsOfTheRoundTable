@@ -55,6 +55,17 @@ public class DeckTest {
 	}
 	
 	@Test
+	public void testDrawEmpty() {
+		Deck<Card> aDeck = new Deck<Card>();
+		aDeck.discard(excalibur);
+		aDeck.discard(horse);
+		aDeck.discard(lance);
+		assertEquals(0, (int) aDeck.getSize());
+		aDeck.draw();
+		assertEquals(2, (int) aDeck.getSize());
+	}
+	
+	@Test
 	public void testDiscardCard() {
 		Deck<Card> aDeck = new Deck<Card>();
 		aDeck.addCard(excalibur);
