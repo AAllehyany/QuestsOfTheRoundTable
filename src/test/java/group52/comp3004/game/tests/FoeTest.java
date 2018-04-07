@@ -13,7 +13,6 @@ import group52.comp3004.players.Player;
 import javafx.embed.swing.JFXPanel;
 
 public class FoeTest {
-	JFXPanel jfxPanel = new JFXPanel();
 	
 	@Test
 	public void testMordred() {	
@@ -26,8 +25,6 @@ public class FoeTest {
 		state.addPlayer(p2);
 		state.addPlayer(p3);
 		
-		Deck<AdventureCard> aDeck = new Deck<AdventureCard>();
-		
 		Foe mordred = new Foe("Mordred", 30);
 		Ally merlin = new Ally("Merlin");
 		Ally arthur = new Ally("King_Arthur", 10, 2);
@@ -38,7 +35,7 @@ public class FoeTest {
 		p2.addCardToHand(mordred);
 		p3.addCardToHand(mordred);
 		
-		boolean result = mordred.MordredSpecial(state, p2, 0, arthur, aDeck);
+		boolean result = mordred.MordredSpecial(state, p2, 0, arthur);
 		
 		assertEquals(true, (boolean) result);
 		assertEquals(false, (boolean) p1.getField().contains(arthur));

@@ -110,17 +110,15 @@ public class Foe extends AdventureCard{
         this.weapons.clear();
     }
     
-    // spaghetti code to implement Mordred's special ability
     /**
-     * ?
-     * @param state
-     * @param owner
-     * @param player
-     * @param ally
-     * @param adventureDeck
-     * @return
+     * Use Mordred's special ability to force another player to discard an ally from their field
+     * @param state the current game conditions
+     * @param owner the player who uses Mordred's special ability
+     * @param player the player who is the target of Mordred's special ability
+     * @param ally the ally to be removed from the player
+     * @return whether the ally removal was successful or not
      */
-    public boolean MordredSpecial(GameState state, Player owner, int player, Ally ally, Deck<AdventureCard> adventureDeck) {
+    public boolean MordredSpecial(GameState state, Player owner, int player, Ally ally) {
     	if(!this.getName().equals("Mordred")) {
     		logger.info("NOT MORDRED\n");
     		return false;
@@ -133,11 +131,11 @@ public class Foe extends AdventureCard{
     		logger.info("INVALID ALLY\n");
     		return false;
     	}
-    	adventureDeck.discard(state.getPlayerByIndex(player).removeAlly(ally));
+    	state.getAdventureDeck().discard(state.getPlayerByIndex(player).removeAlly(ally));
     	owner.discard(this);
-    	adventureDeck.discard(this);
-    	adventureDeck.discard(state.getPlayerByIndex(player).removeAlly(ally));
-    	adventureDeck.discard(this);
+    	state.getAdventureDeck().discard(this);
+    	state.getAdventureDeck().discard(state.getPlayerByIndex(player).removeAlly(ally));
+    	state.getAdventureDeck().discard(this);
     	owner.getHand().remove(this);
     	return true;
     }
