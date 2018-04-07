@@ -51,7 +51,6 @@ public class GameTourney {
 		return this.players;
 	}
 	
-	//Why need to add tourney inside player?
 	/**
 	 * Adds a player to the tourney. Needs a separate list because not all players may have joined the tourney.
 	 * @param player
@@ -81,8 +80,9 @@ public class GameTourney {
 	}
 	
 	/**
-	 * ?
-	 * @return
+	 * Determine who the winners of a tournament are, by playing either a second round of battles or 
+	 * directly determining the winner
+	 * @return the players who won the tournament
 	 */
 	public List<Player> winner(GameState state) {
 		List<Player> win= battle(state, this.players);
@@ -110,9 +110,11 @@ public class GameTourney {
 	}
 
 	/**
-	 * ?
-	 * @param player
-	 * @return
+	 * Determine the winner/s of the second round in a tournament if there is a tie in the first round of 
+	 * the tournament
+	 * @param the current conditions of the game
+	 * @param player the list of players taking part in the second battle
+	 * @return the list of players who won the tournament
 	 */
 	public List<Player> secondBattle(GameState state, List<Player> player) {
 	    this.count1.clear();
@@ -135,6 +137,12 @@ public class GameTourney {
 		return this.count1;
 	}
 	
+	/**
+	 * Determine the winner/s of the initial tournament round
+	 * @param state the current conditions of the game
+	 * @param player the list of players taking part in the tournament
+	 * @return the list of players who won the first round of the tournament
+	 */
 	public List<Player> battle(GameState state, List<Player> player) {
 		this.count.clear();
 		int highest = 0;

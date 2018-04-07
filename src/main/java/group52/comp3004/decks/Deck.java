@@ -33,6 +33,11 @@ import group52.comp3004.cards.Card;
 			size = 0;
 		}
 	
+		/**
+		 * Add an object to the discard pile of the deck
+		 * @param c the object to be added
+		 * @return the object that was discarded
+		 */
 		public T discard(T c) {
 			Card card = (Card) c;
 			logger.info("Discarded: " + card.getName());
@@ -40,6 +45,11 @@ import group52.comp3004.cards.Card;
 			return c;
 		}
 	
+		/**
+		 * Add multiple objects to the discard pile of the deck
+		 * @param cards the objects to be added
+		 * @return the objects that were discarded
+		 */
 		public ArrayList<T> discard(ArrayList<T> cards){
 			cards.stream().forEach(c -> this.discard(c));
 			return cards;
@@ -52,6 +62,7 @@ import group52.comp3004.cards.Card;
 		public Deck(List<T> cards) {
 			setCards(cards);
 		}
+		
 		/**
 		 * Replace the current deck with a new one.
 		 * @param draw The deck of cards
@@ -69,6 +80,10 @@ import group52.comp3004.cards.Card;
 			return size;
 		}
 		
+		/**
+		 * Add an object to the deck
+		 * @param card the object to be added
+		 */
 		public void addCard(T card) {
 			logger.info("Added " + card + " to Deck");
 			this.draw.add(card);

@@ -25,6 +25,10 @@ public class DeckFactory {
 	
 	static final private Logger logger = Logger.getLogger(DeckFactory.class);
 	
+	/**
+	 * Create the predetermined Adventure Deck for the game
+	 * @return the base Adventure Deck
+	 */
 	public static Deck<AdventureCard> createAdventureDeck() {
 		
 		Deck<AdventureCard> aDeck = new Deck<AdventureCard>();
@@ -71,6 +75,10 @@ public class DeckFactory {
 		return aDeck;
 	}
 	
+	/**
+	 * Create the predetermined Story Deck for the game
+	 * @return the base Story Deck
+	 */
 	public static Deck<StoryCard> createStoryDeck(){
 		Deck<StoryCard> sDeck = new Deck<StoryCard>();
 		ArrayList<StoryCard> cards = new ArrayList<StoryCard>();
@@ -107,6 +115,11 @@ public class DeckFactory {
 		return sDeck;
 	}
 	
+	/**
+	 * Create the deck of cards specified by a file
+	 * @param name the name of the file
+	 * @return
+	 */
 	public static Deck<Card> createDeckFromFile(String name){
 		Deck<Card> deck = new Deck<Card>();
 		ArrayList<Card> cards = new ArrayList<Card>();

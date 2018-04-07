@@ -231,9 +231,9 @@ public class Player {
 	}
 
 	/**
-	 * ?what does second part do?
-	 * @param state ?
-	 * @return ?
+	 * Determine the battle points of a player taking into consideration all allies, amour, and weapons
+	 * @param state the current conditions of the game
+	 * @return the player's total battle points
 	 */
 	public Integer getBattlePoints(GameState state) {
 		logger.info("Player: " + id + " has " + (battlePoints + temp.stream().mapToInt(c -> c.getBp(state)).sum() + field.stream().mapToInt(c -> c.getBp(state)).sum()) + " battle points");
@@ -284,6 +284,10 @@ public class Player {
 		return hand.size();
 	}
 	
+	/**
+	 * Determine if a player's hand has more than 12 cards and must thus discard cards
+	 * @return
+	 */
 	public boolean isHandFull() {
 		if(hand.size()<=12) return false;
 		logger.info("Player has " + (hand.size()-12) + " too many cards");
@@ -303,7 +307,7 @@ public class Player {
 	}
 	
 	/**
-	 * ?
+	 * Add a card to a player's hand
 	 * @param card
 	 */
 	public void addCardToHand(AdventureCard card) {
@@ -312,7 +316,7 @@ public class Player {
 	}
 	
 	/**
-	 * ?
+	 * Move a card from the player's temporary area to their hand
 	 */
 	public void tempToHand() {
 		temp.forEach(c -> {addCardToHand(c);
@@ -350,7 +354,7 @@ public class Player {
 	}
 	
 	/**
-	 * ?
+	 * Move a card from the player's hand to their temp container
 	 * @param card
 	 */
 	public void playToTemp(AdventureCard card) {//whats this for
@@ -362,7 +366,7 @@ public class Player {
 	}
 	
 	/**
-	 * ?
+	 * Move a card from the player's hand to their field
 	 * @param card
 	 */
 	public void addField(Ally card) {//why only ally
@@ -373,7 +377,7 @@ public class Player {
 	}
 	
 	/**
-	 * ?
+	 * Move a card from the player's hand to their temp container
 	 * @param card
 	 */
 	public void addTemp(AdventureCard card) {//why all adventure cards
@@ -382,7 +386,7 @@ public class Player {
 	}
 	
 	/**
-	 * ?
+	 * Move multiple card from the player's hand to their temp container
 	 */
 	public void addTemp(ArrayList<AdventureCard> cards) {
 		for(int i=0;i<cards.size();i++) this.addTemp(cards.get(i));
@@ -404,6 +408,10 @@ public class Player {
 		return allies;
 	}
 	
+	/**
+	 * Move a card from the player's temp container to their feild container
+	 * @param c the card to be moved
+	 */
 	public void tempToField(AdventureCard c) {
 		logger.info(c.getName() + " moved from temp to field");
 		field.add(c);
@@ -411,7 +419,8 @@ public class Player {
 	}
 	
 	/**
-	 * ?
+	 * Remove all cards except for amours from a player's temp container at the end of a quest stage or
+	 * tournament round and move all allies to the field
 	 * @return
 	 */
 	public ArrayList<AdventureCard> clearTemp() {
@@ -432,6 +441,11 @@ public class Player {
 		return weps;
 	}
 	
+	/**
+	 * Remove all cards from a player's temp container at the end of a quest or tournament and move all allies
+	 * to the field
+	 * @return
+	 */
 	public ArrayList<AdventureCard> emptyTemp(){
 		ArrayList<AdventureCard> cards = new ArrayList<AdventureCard>();
 		for(int i=0;i<this.temp.size();i++) {
@@ -475,7 +489,7 @@ public class Player {
 	}
 	
 	/**
-	 * ?
+	 * Get the list of cards that are in the player's temp container
 	 * @return
 	 */
 	public ArrayList<AdventureCard> getTemp() {
@@ -483,8 +497,8 @@ public class Player {
 	}
 	
 	/**
-	 * ? duplicate?
-	 * @param ally
+	 * Remove an ally from the player's field, to be used in conjunction with the Mordred special ability
+	 * @param ally the ally to be removed
 	 * @return
 	 */
 	public AdventureCard removeAlly(Ally ally) {
@@ -527,7 +541,7 @@ public class Player {
 	}
 
 	/**
-	 * Discard an adventure card from hand
+	 * Remove an adventure card from hand
 	 */
 	public AdventureCard discard(AdventureCard card) {
 		logger.info("Removed " + card.getName() + " form player " + this.id + "'s hand");
@@ -590,7 +604,7 @@ public class Player {
 
 	/**
 	 * Remove the player's shields. Can not remove more shield then the minimum. Minimum represents the zero value of each rank.
-	 * @param i number of sheilds to be removed
+	 * @param i number of shields to be removed
 	 */
 	public void removeShield(int i) {
 		logger.info("Player: " + this.id + " lost " + i + " shields");

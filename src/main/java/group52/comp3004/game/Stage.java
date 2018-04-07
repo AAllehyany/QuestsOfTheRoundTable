@@ -79,8 +79,9 @@ public class Stage {
 	}
 	
 	/**
-	 * ?
-	 * @return
+	 * Determine the total number of cards in the stage to implement the cheat function and to help
+	 * with determining the number of cards to deal to the sponsor at the end of the quest
+	 * @return the number of cards in the stage
 	 */
 	public int totalCardsPlayed() {
 		return (testStage) ? 1 : 1 + this.foe.getWeapons().size();

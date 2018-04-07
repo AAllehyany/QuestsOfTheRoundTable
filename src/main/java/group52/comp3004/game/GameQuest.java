@@ -166,7 +166,8 @@ public class GameQuest {
 	}
 	
 	/**
-	 * ?
+	 * Execute the logic to determine which players can move on in the quest and which players are removed
+	 * from the quest. Handles both foe and test stages
 	 * @param state The current conditions of the game.
 	 */
 	public void playStage(GameState state) {
