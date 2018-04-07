@@ -57,7 +57,12 @@ public class Strategy1 extends AbstractAI{
 		return dcards;
 	}
 
-	
+	/**
+	 * Determine if any other player participating in the tournament can gain a rank after the end of the
+	 * tournament
+	 * @param state the current conditions of the game
+	 * @return True if someone could evolve from participating in the tournament
+	 */
 	private boolean tourneyEvolve(GameState state) {
 		GameTourney t = state.getCurrentTourney();
 		ArrayList<Player> players = new ArrayList<Player>(t.getPlayers());
@@ -143,6 +148,15 @@ public class Strategy1 extends AbstractAI{
 		return quest;
 	}
 	
+	/**
+	 * Give a weapon to a foe from the player's hand, making sure it's battle points do not exceed the
+	 * battle points of the foes following it
+	 * @param state the current conditions of the game
+	 * @param p the player who is implementing the AI strategy
+	 * @param f the foe to give the weapon to
+	 * @param weps the list of weapons from which the foe can get their weapon
+	 * @param last the battle power of the next foe stage in the quest
+	 */
 	private void giveWeapon(GameState state, Player p, Foe f, ArrayList<AdventureCard> weps, int last) {
 		for(int i=0;i<weps.size();i++) {
 			if(f.getBp(state)+weps.get(i).getBp()<last) {

@@ -103,6 +103,9 @@ public class Strategy2 extends AbstractAI{
 		return discards;
 	}
 	
+	/**
+	 * Reset the AI's have bid value to false so they can regain their original behavior for a new quest
+	 */
 	private void resetBid() {
 		this.havebid = false;
 	}
