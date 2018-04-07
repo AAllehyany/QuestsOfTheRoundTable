@@ -23,14 +23,16 @@ class TourneyTest {
 		Ally a1 = new Ally("Sir_Gawain", 20, 0, "Green_Knight", 20, 0);
 		Ally a2 = new Ally("King_Arthur", 10, 2);
 
-		Player p1 = new Player(2);
-		Player p2 = new Player(3);
-		Player p3 = new Player(4);
+		Player p1 = new Player(1);
+		Player p2 = new Player(2);
+		Player p3 = new Player(3);
 		
 		
 		tournament.addPlayer(p1);
 		tournament.addPlayer(p2);
 		tournament.addPlayer(p3);
+		p1.addCardToHand(a1);
+		p2.addCardToHand(a2);
 		p1.addField(a1);
 		p2.addField(a2);
 		System.out.println(p2.getBattlePoints(state));
@@ -55,14 +57,16 @@ class TourneyTest {
 		Ally a1 = new Ally("Sir_Gawain", 20, 0, "Green_Knight", 20, 0);
 		Ally a2 = new Ally("Sir_Gawain", 20, 0, "Green_Knight", 20, 0);
 
-		Player p1 = new Player(2);
-		Player p2 = new Player(3);
-		Player p3 = new Player(4);
+		Player p1 = new Player(1);
+		Player p2 = new Player(2);
+		Player p3 = new Player(3);
 		
 		
 		tournament.addPlayer(p1);
 		tournament.addPlayer(p2);
 		tournament.addPlayer(p3);
+		p1.addCardToHand(a1);
+		p2.addCardToHand(a2);
 		p1.addField(a1);
 		p2.addField(a2);
 		System.out.println(p2.getBattlePoints(state));

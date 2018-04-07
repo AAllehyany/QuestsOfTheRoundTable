@@ -134,7 +134,7 @@ class EventTest {
 		b.addShields(7);
 		Favor.run(model);
 		
-		assertEquals(2, (int) a.getHand().size());
+		assertEquals(4, (int) a.getHand().size());
 		assertEquals(2, (int) b.getHand().size());
 		assertEquals(4, (int) c.getHandSize());
 	}
