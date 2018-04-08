@@ -35,9 +35,9 @@ public class Player {
 	private ArrayList<AdventureCard> hand;
 	private ArrayList<AdventureCard> field;
 	private ArrayList<AdventureCard> temp;
-	private GameState game;
-	private GameQuest quest;
-	private GameTourney tourney;
+	private transient GameState game;
+	private transient GameQuest quest;
+	private transient GameTourney tourney;
 	private Integer bidPoints;
 	private boolean stoppedBidding;
 	private int offeredBids;
