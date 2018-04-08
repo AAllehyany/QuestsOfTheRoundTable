@@ -119,8 +119,7 @@ public class GameTourney {
 	public List<Player> secondBattle(GameState state, List<Player> player) {
 	    this.count1.clear();
 		int highest = 0;
-		this.count1.add(player.get(0));
-		for(int i=1;i<player.size();i++) {
+		for(int i=0;i<player.size();i++) {
 			if(player.get(i).getBattlePoints(state)>highest) {
 				highest =player.get(i).getBattlePoints(state);
 				this.count1.clear();
