@@ -199,6 +199,7 @@ public class GameState {
 	public void setQuest() {
 		if(revealedCard != null && revealedCard instanceof QuestCard)
 		{
+			logger.info("The quest is now " + revealedCard.getName());
 			currentSponsor = currentPlayer;
 			currentQuest = new GameQuest((QuestCard) revealedCard, getPlayerByIndex(currentSponsor));
 			this.players.get(currentPlayer).setQuest(currentQuest);
@@ -214,6 +215,7 @@ public class GameState {
 	public void setTourney() {
 		if(revealedCard != null && revealedCard instanceof Tourneys)
 		{
+			logger.info("The tournament is now " + revealedCard.getName());
 			currentSponsor = currentPlayer;
 			currentTourney = new GameTourney((Tourneys) revealedCard);
 			this.players.get(currentPlayer).setTourney(currentTourney);

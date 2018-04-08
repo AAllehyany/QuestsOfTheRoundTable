@@ -31,6 +31,7 @@ public class Card{
 	 * Set the card to face up position
 	 */
 	public void flipUp() {
+		logger.info(name + " has been flipped up");
 			isFaceUp = true;
 	}
 	
@@ -38,6 +39,7 @@ public class Card{
 	 * Set the card to face down position
 	 */
 	public void flipDown() {
+		logger.info(name + " has been flipped down");
 		isFaceUp = false;
 	}
 	
@@ -81,28 +83,12 @@ public class Card{
 	}
 	
 	/**
-	 * Set a card to face up
-	 */
-	public void setFaceUp() {
-		this.isFaceUp = true;
-		return;
-	}
-	
-	/**
-	 * Set a card to face down
-	 */
-	public void setFaceDown() {
-		this.isFaceUp = false;
-		return;
-	}
-	
-	/**
 	 * Set card ID to input value
 	 * @param id ID of the card
 	 */
 	public void setID(int id) {
-		logger.info("Card: " + this.name + " ID set to " + this.id);
 		this.id = id;
+		logger.info("Card: " + this.name + " ID set to " + this.id);
 	}
 	
 	/**
