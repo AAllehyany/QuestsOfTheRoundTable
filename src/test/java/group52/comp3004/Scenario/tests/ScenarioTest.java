@@ -116,8 +116,8 @@ public class ScenarioTest {
 		for(int i=0;i<state.getCurrentQuest().getPlayers().size();i++) {
 			state.getCurrentQuest().getPlayers().get(i).addCardToHand(state.getAdventureDeck().draw());
 		}
-		assertEquals(12, p3.getHand().size());
-		assertEquals(12, p4.getHand().size());
+		assertEquals(13, p3.getHand().size());
+		assertEquals(13, p4.getHand().size());
 		p3.playToTemp(excalibur);
 		p4.playToTemp(lance);
 		assertEquals(30, state.getCurrentQuest().getStage(1).getTotalPower(state));
