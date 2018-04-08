@@ -577,6 +577,30 @@ public class Player {
 	}
 	
 	/**
+	 * Determine if a player has an ally in play
+	 * @param name the name of the ally to check
+	 * @return
+	 */
+	public boolean hasAlly(String name) {
+		for(int i=0;i<this.field.size();i++) {
+			if(this.field.get(i).getName().equals(name)) return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Determine if a player has a card in their hand
+	 * @param name the name of the card
+	 * @return
+	 */
+	public boolean hasFoe(String name) {
+		for(int i=0;i<this.hand.size();i++) {
+			if(this.hand.get(i).getName().equals(name)) return true;
+		}
+		return false;
+	}
+	
+	/**
 	 * Get the number of foe cards in the player's hand. Used to judge if a player can set up a quest.
 	 */
 	public int countFoes() {
