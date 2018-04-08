@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Hello {
 
 	@Autowired
-	private List<Server> newServer;
+	//private List<Server> newServer;
 	
 	@RequestMapping("/")
 	public String xD() {
