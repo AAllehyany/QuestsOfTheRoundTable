@@ -149,8 +149,16 @@ public class SocketHandler extends TextWebSocketHandler{
 		GameQuest quest = game.getCurrentQuest();
 		
 		if(current.getId() != sponsor.getId() || quest.getPlayers().stream().anyMatch(p -> !p.isReady())) {
-			
+			logger.info("Cannot play stage yet");
+			message.put("event", "ERROR");
+			message.put("data", "Players not ready yet.");
+			session.sendMessage(new TextMessage(gson.toJson(message)));
+			return;
 		}
+		
+		game.playCurrentQuestStage();
+		
+		
 		
 	}
 
