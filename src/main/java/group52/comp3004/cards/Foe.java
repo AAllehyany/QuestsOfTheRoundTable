@@ -15,7 +15,6 @@ import group52.comp3004.players.Player;
  */
 public class Foe extends AdventureCard{
 
-	private final int bp;
 	private final int highBp;
 	private HashSet<Weapon> weapons;
 	private HashSet<String> quests = new HashSet<String>();

@@ -14,7 +14,6 @@ import group52.comp3004.players.Player;
  */
 public class Ally extends AdventureCard
 {
-	private int bids;
 	private String prereq;
 	private int bonusbp;
 	private int bonusbid;

@@ -10,9 +10,6 @@ import group52.comp3004.game.GameState;
  *
  */
 public class Amour extends AdventureCard{
-	public String name;
-	private int bp;
-	private int bids;
 	private final static Logger logger = Logger.getLogger(Amour.class);
 	
 	/**
