@@ -206,12 +206,12 @@ public class SocketHandler extends TextWebSocketHandler{
 			game.setPhase(Phase.HandleEvent);
 		}
 		else if(game.getRevealedCard() instanceof Tourneys) {
-			game.setTourney();
+			//game.setTourney();
 			nextPhase = "SponsorTourney";
 			game.setPhase(Phase.SponsorTourney);
 		}
 		else if(game.getRevealedCard() instanceof QuestCard) {
-			game.setQuest();
+			//game.setQuest();
 			nextPhase = "SponsorQuest";
 			game.setPhase(Phase.SponsorQuest);
 		}
@@ -297,22 +297,30 @@ public class SocketHandler extends TextWebSocketHandler{
 			message.put("data", "Cannot sponsor quest"); 
 			session.sendMessage(new TextMessage(gson.toJson(message))); 
 			return; 
-		} 		 
+		} 	
+		
 		if(game.getPlayerByIndex(game.getCurrentPlayer()).getId() != players.get(session).getId()) {  
-		logger.info("Player attempting to sponsor quest illegally");  
-		message.put("event", "ERROR");  
-		message.put("data", "Cannot sponsor quest"); 
-		session.sendMessage(new TextMessage(gson.toJson(message)));
-		return;
+			logger.info("Player attempting to sponsor quest illegally");  
+			message.put("event", "ERROR");  
+			message.put("data", "Cannot sponsor quest"); 
+			session.sendMessage(new TextMessage(gson.toJson(message)));
+			return;
 		}
+		
+		logger.info("Player can successfully sponsor the quest");
+		
 		game.setQuest(); 
 		game.setPhase(Phase.SetupQuest); 
+		
+		logger.info("Quest successfully sposnored by the player");
+		message.put("event", "QUEST_SPONSORED"); 	
+		
+		message.put("data", gson.toJson(game)); 
+		
 		for(WebSocketSession user : players.keySet()) { 
-			message.put("event", "QUEST_SPONSORED"); 	 
-			message.put("data", gson.toJson(game.getAllPlayers())); 
 		 	user.sendMessage(new TextMessage(gson.toJson(message))); 
-		 	} 
 		} 
+	} 
 	
 	private void playStage(WebSocketSession session, Map<String, String> payload) throws Exception {
 		Gson gson = new GsonBuilder().create();
