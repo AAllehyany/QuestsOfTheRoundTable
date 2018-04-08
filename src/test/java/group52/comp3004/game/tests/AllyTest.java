@@ -121,7 +121,7 @@ public class AllyTest {
 		Player p3 = new Player(3);
 		Player p4 = new Player(4);
 		state.addPlayer(p3);
-		state.addPlayer(p3);
+		state.addPlayer(p4);
 		p3.addCardToHand(qi);
 		p3.addField(qi);
 		assertEquals(0, (int) qi.getBp(state));
