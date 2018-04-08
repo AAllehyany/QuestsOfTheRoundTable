@@ -230,6 +230,7 @@ public class SocketHandler extends TextWebSocketHandler{
 		}
 	}
 	
+
 	/**
 	 * Handles the HandleEvent phase
 	 * @param session current session
@@ -287,6 +288,31 @@ public class SocketHandler extends TextWebSocketHandler{
 		
 		
 	}
+	private void sponsorQuest(WebSocketSession session, Map<String, String> payload) throws Exception { 
+		Gson gson = new GsonBuilder().create(); 
+		Map<String, String> message = new HashMap<>(); 
+		if(game.getPhase() != Phase.SponsorQuest || game.getCurrentSponsor() != null) { 
+			logger.info("Player attempting to sponsor quest outside sponsor quest phase or when there is already a sponsor."); 
+			message.put("event", "ERROR"); 
+			message.put("data", "Cannot sponsor quest"); 
+			session.sendMessage(new TextMessage(gson.toJson(message))); 
+			return; 
+		} 		 
+		if(game.getPlayerByIndex(game.getCurrentPlayer()).getId() != players.get(session).getId()) {  
+		logger.info("Player attempting to sponsor quest illegally");  
+		message.put("event", "ERROR");  
+		message.put("data", "Cannot sponsor quest"); 
+		session.sendMessage(new TextMessage(gson.toJson(message)));
+		return;
+		}
+		game.setQuest(); 
+		game.setPhase(Phase.SetupQuest); 
+		for(WebSocketSession user : players.keySet()) { 
+			message.put("event", "QUEST_SPONSORED"); 	 
+			message.put("data", gson.toJson(game.getAllPlayers())); 
+		 	user.sendMessage(new TextMessage(gson.toJson(message))); 
+		 	} 
+		} 
 	
 	private void playStage(WebSocketSession session, Map<String, String> payload) throws Exception {
 		Gson gson = new GsonBuilder().create();
