@@ -116,6 +116,7 @@ public class Ally extends AdventureCard
 			for(int i=0;i<cards.size();i++) {
 				cards.get(i).flipUp();
 			}
+			logger.info("Merlin's effect has been used");
 			return cards;
 		}
 	}
@@ -133,6 +134,7 @@ public class Ally extends AdventureCard
 		for(int i=0;i<cards.size();i++) {
 			cards.get(i).flipDown();
 		}
+		logger.info("Merlin's effect has ended");
 		return true;
 	}
 
