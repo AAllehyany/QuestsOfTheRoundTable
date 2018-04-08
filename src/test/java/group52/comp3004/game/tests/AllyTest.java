@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
+import group52.comp3004.cards.CardFactory;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.QuestCard;
 import group52.comp3004.cards.Weapon;
@@ -17,58 +18,181 @@ import group52.comp3004.game.Stage;
 import group52.comp3004.players.Player;
 
 public class AllyTest {	
+	
+	QuestCard gk = CardFactory.createQuest("Green_Knight_Quest", 4);
+	QuestCard qb = CardFactory.createQuest("Questing_Beast_Search", 4);
+	QuestCard hg = CardFactory.createQuest("Holy_Grail", 5);
+	QuestCard qh = CardFactory.createQuest("Queens_Honor", 4);
+	
+	Ally galahad = CardFactory.createAlly("Sir_Galahad", 15, 0);
+	Ally sl = CardFactory.createAlly("Sir_Lancelot", 15, 0, "Queens_Honor", 25, 0);
+	Ally ka = CardFactory.createAlly("King_Arthur", 10, 2);
+	Ally st = CardFactory.createAlly("Sir_Tristan", 10, 0, "Queen_Iseult", 20, 0);
+	Ally kp = CardFactory.createAlly("King_Pellinore", 10, 0, "Questing_Beast_Search", 10, 4);
+	Ally gawain = CardFactory.createAlly("Sir_Gawain", 10, 0, "Green_Knight_Quest", 20, 0);
+	Ally qg = CardFactory.createAlly("Queen_Guinever", 0, 3);
+	Ally qi = CardFactory.createAlly("Queen_Iseult", 0, 2, "Sir_Tristan", 0, 4);
+	Ally sp = CardFactory.createAlly("Sir_Percival", 5, 0, "Holy_Grail", 20, 0);
+	Ally m = CardFactory.createAlly("Merlin");
+	
+	
 	@Test
-	public void testAllyStats() {
+	public void testGawain() {
 		GameState state = new GameState();
-		Ally a1 = new Ally("Sir_Gawain", 10, 0, "Green_Knight_Quest", 20, 0);
-		assertEquals(0, (int) a1.getBids(state));
-		assertEquals(10, (int) a1.getBp(state));
-		Ally a2 = new Ally("King_Arthur", 10, 2);
-		assertEquals(2, (int) a2.getBids(state));
-		assertEquals(10, (int) a2.getBp(state));
-	}
-
-	@Test
-	public void testQuestBonus() {
-		Player p = new Player(0);
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(p);
-		QuestCard q = new QuestCard("Green_Knight_Quest", 4);
-		Ally a1 = new Ally("Sir_Gawain", 10, 0, "Green_Knight_Quest", 20, 0);
-		Ally a2 = new Ally("King_Arthur", 10, 2);
-		Ally a3 = new Ally("King_Pellinore", 10, 0, "Questing_Beast_Search", 0, 4);
-		GameState state = new GameState(players);
-		state.setRevealedCard(q);
+		Player p1 = new Player(1);
+		state.addPlayer(p1);
+		p1.addCardToHand(gawain);
+		p1.addField(gawain);
+		assertEquals(10, (int) gawain.getBp(state));
+		assertEquals(15, (int) p1.getBattlePoints(state));
+		assertEquals(0, (int) gawain.getBids(state));
+		assertEquals(0, (int) p1.getBidPoints(state));
+		state.setRevealedCard(gk);
 		state.setQuest();
-		assertEquals(true, (boolean) a1.bonusSatisfied(state));
-		assertEquals(false, (boolean) a2.bonusSatisfied(state));
-		assertEquals(false, (boolean) a3.bonusSatisfied(state));
-		assertEquals(20, (int) a1.getBp(state));
-		assertEquals(10, (int) a2.getBp(state));
-		assertEquals(2, (int) a2.getBids(state));
-		assertEquals(0, (int) a3.getBids(state));
-		
-		QuestCard hg = new QuestCard("Holy_Grail", 5);
-		Ally sp = new Ally("Sir_Percival", 5, 0, "Holy_Grail", 20, 0);
-		state.setRevealedCard(hg);
-		state.setQuest();
-		assertEquals(20, (int) sp.getBp(state));
+		assertEquals(20, (int) gawain.getBp(state));
+		assertEquals(25, (int) p1.getBattlePoints(state));
+		assertEquals(0, (int) gawain.getBids(state));
+		assertEquals(0, (int) p1.getBidPoints(state));
 	}
 	
 	@Test
-	public void testAllyBonus() {
-		Player p1 = new Player(0);
-		ArrayList<Player> players = new ArrayList<Player> ();
-		players.add(p1);
-		Ally a1 = new Ally("Sir_Tristan", 10, 0, "Queen_Iseult", 20, 0);
-		Ally a2 = new Ally("Queen_Iseult", 0, 2, "Sir_Tristan", 0, 2);
-		p1.addCardToHand(a1);
-		p1.addCardToHand(a2);
-		p1.addField(a1);
-		p1.addField(a2);
-		GameState state = new GameState(players);
-		assertEquals(true, (boolean) a1.bonusSatisfied(state));
+	public void testPellinore() {
+		GameState state = new GameState();
+		Player p1 = new Player(1);
+		state.addPlayer(p1);
+		p1.addCardToHand(kp);
+		p1.addField(kp);
+		assertEquals(10, (int) kp.getBp(state));
+		assertEquals(15, (int) p1.getBattlePoints(state));
+		assertEquals(0, (int) kp.getBids(state));
+		assertEquals(0, (int) p1.getBidPoints(state));
+		state.setRevealedCard(qb);
+		state.setQuest();
+		assertEquals(10, (int) kp.getBp(state));
+		assertEquals(15, (int) p1.getBattlePoints(state));
+		assertEquals(4, (int) kp.getBids(state));
+		assertEquals(4, (int) p1.getBidPoints(state));
+	}
+	
+	@Test
+	public void testPercival() {
+		GameState state = new GameState();
+		Player p1 = new Player(1);
+		state.addPlayer(p1);
+		p1.addCardToHand(sp);
+		p1.addField(sp);
+		assertEquals(5, (int) sp.getBp(state));
+		assertEquals(10, (int) p1.getBattlePoints(state));
+		assertEquals(0, (int) sp.getBids(state));
+		assertEquals(0, (int) p1.getBidPoints(state));
+		state.setRevealedCard(hg);
+		state.setQuest();
+		assertEquals(20, (int) sp.getBp(state));
 		assertEquals(25, (int) p1.getBattlePoints(state));
+		assertEquals(0, (int) sp.getBids(state));
+		assertEquals(0, (int) p1.getBidPoints(state));
+	}
+	
+	@Test
+	public void testTristan() {
+		GameState state = new GameState();
+		Player p1 = new Player(1);
+		Player p2 = new Player(2);
+		state.addPlayer(p1);
+		state.addPlayer(p2);
+		p1.addCardToHand(st);
+		p1.addField(st);
+		assertEquals(10, (int) st.getBp(state));
+		assertEquals(15, (int) p1.getBattlePoints(state));
+		assertEquals(0, (int) st.getBids(state));
+		assertEquals(0, (int) p1.getBidPoints(state));
+		p2.addCardToHand(qi);
+		p2.addField(qi);
+		assert(st.bonusSatisfied(state));
+		assertEquals(20, (int) st.getBp(state));
+		assertEquals(25, (int) p1.getBattlePoints(state));
+		assertEquals(0, (int) st.getBids(state));
+		assertEquals(0, (int) p1.getBidPoints(state));
+	}
+	
+	@Test
+	public void testIseult() {
+		GameState state = new GameState();
+		Player p3 = new Player(3);
+		Player p4 = new Player(4);
+		state.addPlayer(p3);
+		state.addPlayer(p3);
+		p3.addCardToHand(qi);
+		p3.addField(qi);
+		assertEquals(0, (int) qi.getBp(state));
+		assertEquals(5, (int) p3.getBattlePoints(state));
+		assertEquals(2, (int) qi.getBids(state));
+		assertEquals(2, (int) p3.getBidPoints(state));
+		p4.addCardToHand(st);
+		p4.addField(st);
+		assert(qi.bonusSatisfied(state));
+		assertEquals(0, (int) qi.getBp(state));
+		assertEquals(5, (int) p3.getBattlePoints(state));
+		assertEquals(4, (int) qi.getBids(state));
+		assertEquals(4, (int) p3.getBidPoints(state));
+	}
+	
+	@Test
+	public void testGuinevere() {
+		GameState state = new GameState();
+		Player p1 = new Player(1);
+		state.addPlayer(p1);
+		p1.addCardToHand(qg);
+		p1.addField(qg);
+		assertEquals(0, (int) qg.getBp(state));
+		assertEquals(5, (int) p1.getBattlePoints(state));
+		assertEquals(3, (int) qg.getBids(state));
+		assertEquals(3, (int) p1.getBidPoints(state));
+	}
+	
+	@Test
+	public void testArthur() {
+		GameState state = new GameState();
+		Player p1 = new Player(1);
+		state.addPlayer(p1);
+		p1.addCardToHand(ka);
+		p1.addField(ka);
+		assertEquals(10, (int) ka.getBp(state));
+		assertEquals(15, (int) p1.getBattlePoints(state));
+		assertEquals(2, (int) ka.getBids(state));
+		assertEquals(2, (int) p1.getBidPoints(state));
+	}
+	
+	@Test
+	public void testLancelot() {
+		GameState state = new GameState();
+		Player p1 = new Player(1);
+		state.addPlayer(p1);
+		p1.addCardToHand(sl);
+		p1.addField(sl);
+		assertEquals(15, (int) sl.getBp(state));
+		assertEquals(20, (int) p1.getBattlePoints(state));
+		assertEquals(0, (int) sl.getBids(state));
+		assertEquals(0, (int) p1.getBidPoints(state));
+		state.setRevealedCard(qh);
+		state.setQuest();
+		assertEquals(25, (int) sl.getBp(state));
+		assertEquals(30, (int) p1.getBattlePoints(state));
+		assertEquals(0, (int) sl.getBids(state));
+		assertEquals(0, (int) p1.getBidPoints(state));
+	}
+	
+	@Test
+	public void testGalahad() {
+		GameState state = new GameState();
+		Player p1 = new Player(1);
+		state.addPlayer(p1);
+		p1.addCardToHand(galahad);
+		p1.addField(galahad);
+		assertEquals(15, (int) sl.getBp(state));
+		assertEquals(20, (int) p1.getBattlePoints(state));
+		assertEquals(0, (int) sl.getBids(state));
+		assertEquals(0, (int) p1.getBidPoints(state));
 	}
 	
 	@Test

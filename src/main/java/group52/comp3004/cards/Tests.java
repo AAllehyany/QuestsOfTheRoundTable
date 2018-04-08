@@ -1,5 +1,7 @@
 package group52.comp3004.cards;
 
+import group52.comp3004.game.GameState;
+
 public class Tests extends AdventureCard {
 
 	private final int minimalBid;
@@ -17,7 +19,10 @@ public class Tests extends AdventureCard {
 	/**
 	 * Gets the minimalBid property.
 	 */
-	public int getMinBid() {
+	public int getMinBid(GameState state) {
+		if(this.getName().equals("Questing_Beast") && 
+				state.getCurrentQuest().getQuest().getName().equals("Questing_Beast_Quest"))
+			return this.minimalBid+1;
 		return this.minimalBid;
 	}
 }

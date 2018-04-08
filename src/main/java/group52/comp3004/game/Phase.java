@@ -45,5 +45,7 @@ public enum Phase {
 	PlayQuest, // Playing in the quest
 	SecondRound, //?
 	Arms, //?
-	DiscardForTest //?
+	DiscardForTest, //?
+	
+	GameOver //Game is over a player has won
 }

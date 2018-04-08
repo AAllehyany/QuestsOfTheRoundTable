@@ -349,4 +349,5 @@ public class GameState {
 	public List<Player> getWinners() {
 		return this.players.stream().filter(player -> player.getRank() == Rank.KnightOfTheRoundTable).collect(Collectors.toList());
 	}
+	public void setCurrentSponsor(int player){ this.currentSponsor = player;}
 }

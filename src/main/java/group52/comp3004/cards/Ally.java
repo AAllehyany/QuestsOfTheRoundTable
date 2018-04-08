@@ -155,7 +155,7 @@ public class Ally extends AdventureCard
 	public int getBids(GameState state) {
 		if (bonusSatisfied(state)) {
 			logger.info(super.getName() + " adds " + (bonusbid) + " bids");
-			return bids+bonusbid;
+			return bonusbid;
 		}
 		logger.info(super.getName() + " adds " + bids + " bids");
 		return bids;

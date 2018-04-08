@@ -145,8 +145,12 @@ public class GameQuest {
 	/**
 	 * Move on to the next stage
 	 */
-	public void advanceStage() {
-		if(currentStage < (quest.getStages() - 1)) currentStage += 1;
+	public boolean advanceStage() {
+		if(currentStage < (quest.getStages() - 1)) {
+			currentStage += 1;
+			return true;
+		}
+		return false;
 	}
 	
 	/**
@@ -162,7 +166,8 @@ public class GameQuest {
 	}
 	
 	/**
-	 * ?
+	 * Execute the logic to determine which players can move on in the quest and which players are removed
+	 * from the quest. Handles both foe and test stages
 	 * @param state The current conditions of the game.
 	 */
 	public void playStage(GameState state) {
@@ -187,9 +192,10 @@ public class GameQuest {
 				this.players.clear();
 				this.players.add(remaining);
 			}
-			for(int i=0;i<players.size();i++) players.get(i).addCardToHand(state.getAdventureDeck().draw());
 			
-			advanceStage();
+			if(advanceStage())
+				for(int i=0;i<players.size();i++) 
+					players.get(i).addCardToHand(state.getAdventureDeck().draw());
 			
 			return;
 		}
@@ -309,6 +315,7 @@ public class GameQuest {
 		for(int i=0;i<this.getNumStages();i++) {
 			state.getAdventureDeck().discard(this.stages.get(i).getCards());
 		}
+		state.getStoryDeck().discard(this.getQuest());
 		awardShields(bonus);
 	}
 	

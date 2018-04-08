@@ -18,7 +18,6 @@ public class GameTourney {
 	private final Tourneys tourney;
 	private List<Player> players;
 	private List<Player> count,count1;
-	private int bonus;
 	private List<Player> winner;
 	private boolean over;
 	static final private Logger logger = Logger.getLogger(GameTourney.class);
@@ -52,7 +51,6 @@ public class GameTourney {
 		return this.players;
 	}
 	
-	//Why need to add tourney inside player?
 	/**
 	 * Adds a player to the tourney. Needs a separate list because not all players may have joined the tourney.
 	 * @param player
@@ -82,8 +80,9 @@ public class GameTourney {
 	}
 	
 	/**
-	 * ?
-	 * @return
+	 * Determine who the winners of a tournament are, by playing either a second round of battles or 
+	 * directly determining the winner
+	 * @return the players who won the tournament
 	 */
 	public List<Player> winner(GameState state) {
 		List<Player> win= battle(state, this.players);
@@ -107,13 +106,15 @@ public class GameTourney {
 	 * Award shields to winner equal to number of players in tourney plus the bonus provided by the card.
 	 */
 	public void awardShields() {
-		 this.winner.forEach(p -> p.addShields(players.size()+tourney.getShields() + bonus));
+		 this.winner.forEach(p -> p.addShields(players.size()+tourney.getShields()));
 	}
 
 	/**
-	 * ?
-	 * @param player
-	 * @return
+	 * Determine the winner/s of the second round in a tournament if there is a tie in the first round of 
+	 * the tournament
+	 * @param the current conditions of the game
+	 * @param player the list of players taking part in the second battle
+	 * @return the list of players who won the tournament
 	 */
 	public List<Player> secondBattle(GameState state, List<Player> player) {
 	    this.count1.clear();
@@ -136,10 +137,16 @@ public class GameTourney {
 		return this.count1;
 	}
 	
+	/**
+	 * Determine the winner/s of the initial tournament round
+	 * @param state the current conditions of the game
+	 * @param player the list of players taking part in the tournament
+	 * @return the list of players who won the first round of the tournament
+	 */
 	public List<Player> battle(GameState state, List<Player> player) {
 		this.count.clear();
 		int highest = 0;
-		for(int i=0;i<this.players.size();i++) {
+		for(int i=0;i<player.size();i++) {
 			if(player.get(i).getBattlePoints(state)>highest) {
 				highest = player.get(i).getBattlePoints(state);
 				this.count.clear();
@@ -162,8 +169,7 @@ public class GameTourney {
 	 */
 	public void end(GameState state) {
 		for(int i =0;i<this.players.size();i++) {
-			state.getAdventureDeck().discard(this.getPlayers().get(i).getTemp());
-			this.getPlayers().get(i).getTemp().clear();
+			state.getAdventureDeck().discard(this.getPlayers().get(i).emptyTemp());
 		}
 		this.over = true;
 		this.count.clear();

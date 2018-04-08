@@ -25,15 +25,20 @@ public class DeckFactory {
 	
 	static final private Logger logger = Logger.getLogger(DeckFactory.class);
 	
+	/**
+	 * Create the predetermined Adventure Deck for the game
+	 * @return the base Adventure Deck
+	 */
 	public static Deck<AdventureCard> createAdventureDeck() {
 		
 		Deck<AdventureCard> aDeck = new Deck<AdventureCard>();
 		ArrayList<AdventureCard> cards = new ArrayList<AdventureCard>();
+		cards.add(CardFactory.createAlly("Sir_Percival", 5, 0, "Holy_Grail", 20, 0));
 		cards.add(CardFactory.createAlly("Sir_Galahad", 15, 0));
 		cards.add(CardFactory.createAlly("Sir_Lancelot", 15, 0, "Queens_Honor", 25, 0));
 		cards.add(CardFactory.createAlly("King_Arthur", 10, 2));
 		cards.add(CardFactory.createAlly("Sir_Tristan", 10, 0, "Queen_Iseult", 20, 0));
-		cards.add(CardFactory.createAlly("King_Pellinore", 10, 0, "Questing_Beast_Search", 0, 4));
+		cards.add(CardFactory.createAlly("King_Pellinore", 10, 0, "Questing_Beast_Search", 10, 4));
 		cards.add(CardFactory.createAlly("Sir_Gawain", 10, 0, "Green_Knight_Quest", 20, 0));
 		cards.add(CardFactory.createAlly("Queen_Guinevere", 0, 3));
 		cards.add(CardFactory.createAlly("Queen_Iseult", 0, 2, "Sir_Tristan", 0, 4));
@@ -56,10 +61,11 @@ public class DeckFactory {
 		for(int i=0;i<5;i++) cards.add(CardFactory.createFoe("Saxons",  10, 20, "Repel_Saxon_Raiders"));
 		for(int i=0;i<4;i++) cards.add(CardFactory.createFoe("Boar",  5, 15, "Boar_Hunt"));
 		for(int i=0;i<8;i++) cards.add(CardFactory.createFoe("Thieves",  5));
+		for(int i=0;i<8;i++) cards.add(CardFactory.createAmour("Amour", 10, 1));
 		for(int i=0;i<2;i++) cards.add(CardFactory.createTests("Valor", 3));
 		for(int i=0;i<2;i++) cards.add(CardFactory.createTests("Temptation", 3));
 		for(int i=0;i<2;i++) cards.add(CardFactory.createTests("Moran_Le_Fey", 4));
-		for(int i=0;i<2;i++) cards.add(CardFactory.createTests("Questing_Beast", 4));
+		for(int i=0;i<2;i++) cards.add(CardFactory.createTests("Questing_Beast", 3));
 		
 		for(int i=0;i<cards.size();i++) {
 			cards.get(i).setID(i);
@@ -69,6 +75,10 @@ public class DeckFactory {
 		return aDeck;
 	}
 	
+	/**
+	 * Create the predetermined Story Deck for the game
+	 * @return the base Story Deck
+	 */
 	public static Deck<StoryCard> createStoryDeck(){
 		Deck<StoryCard> sDeck = new Deck<StoryCard>();
 		ArrayList<StoryCard> cards = new ArrayList<StoryCard>();
@@ -105,6 +115,11 @@ public class DeckFactory {
 		return sDeck;
 	}
 	
+	/**
+	 * Create the deck of cards specified by a file
+	 * @param name the name of the file
+	 * @return
+	 */
 	public static Deck<Card> createDeckFromFile(String name){
 		Deck<Card> deck = new Deck<Card>();
 		ArrayList<Card> cards = new ArrayList<Card>();

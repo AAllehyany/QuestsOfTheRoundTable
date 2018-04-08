@@ -115,7 +115,7 @@ public class AITest {
 			
 			assertEquals(2, (int) p1.countFoes());
 			
-			assertEquals(10, (int) a.getBp());
+			assertEquals(10, (int) a.getBp(state));
 		}
 		
 		@Test
@@ -364,6 +364,7 @@ public class AITest {
 			p1.sortHand(state);
 			
 			ArrayList<AdventureCard> tCards1 = s2.playTourney(state, p1);
+			for(int i=0;i<tCards1.size();i++) System.out.println("i: " + tCards1.get(i).getName());
 			assertEquals(3, tCards1.size());
 			
 			p2.addCardToHand(qb);
@@ -503,15 +504,15 @@ public class AITest {
 			p1.addCardToHand(excalibur);
 			ArrayList<AdventureCard> stageCards = s2.playStage(state, p1);
 			assertEquals(1, stageCards.size());
+			assertEquals(2, p1.getHandSize());
 			assert(stageCards.contains(a));
 			p1.addTemp(stageCards);
 			p1.clearTemp();
 			state.getCurrentQuest().advanceStage();
 			stageCards = s2.playStage(state, p1);
-			for(int i=0;i<stageCards.size();i++) System.out.println(stageCards.get(i).getName());
-//			assertEquals(2, stageCards.size());
-//			assert(stageCards.contains(dagger));
-//			assert(stageCards.contains(excalibur));
+			assertEquals(2, stageCards.size());
+			assert(stageCards.contains(dagger));
+			assert(stageCards.contains(excalibur));
 			
 			state.setRevealedCard(hg);
 			state.setQuest();

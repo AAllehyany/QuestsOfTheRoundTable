@@ -154,26 +154,9 @@ public abstract class AbstractAI{
 	}
 	
 	/**
-	 * get the foes of unique battle powers in a player's hand depending on the GameState. ?Duplicate?
-	 * @param state the current conditions of the game 
-	 * @return
-	 */
-	protected ArrayList<AdventureCard> getUniqueFoes(GameState state, Player p){
-		ArrayList<AdventureCard> uFoes = new ArrayList<AdventureCard>();
-		HashSet<Integer> bps = new HashSet<Integer>();
-		for(int i=0;i<p.getHand().size();i++) {
-			if(p.getHand().get(i) instanceof Foe) {
-				Foe f;
-				f = (Foe) p.getHand().get(i);
-				if(bps.add(f.getBp(state))) uFoes.add(p.getHand().get(i));
-			}
-		}
-		return uFoes;
-	}
-	
-	/**
-	 * ?Duplicate?
+	 * Count the foes of unique battle power in a player's hand
 	 * @param state the current conditions of the game
+	 * @param p the player from whose hand to count the foes
 	 * @return
 	 */
 	protected int numUniqueFoes(GameState state, Player p) {
@@ -188,7 +171,11 @@ public abstract class AbstractAI{
 		return numUFoes;
 	}
 	
-	// Determine if a player has an amour in their hand
+	/**
+	 * Determine if a player has an amour in play
+	 * @param p the player to examine
+	 * @return
+	 */
 	protected boolean hasAmour(Player p) {
 		for(int i=0;i<p.getTemp().size();i++) {
 			if (p.getTemp().get(i) instanceof Amour) return true;
@@ -197,7 +184,9 @@ public abstract class AbstractAI{
 	}
 	
 	/**
-	 * Test for whether there is an amour in the player's hand.
+	 * Determine if a player has an amour in their hand
+	 * @param p the player to examine
+	 * @return
 	 */
 	protected boolean hasAmourInHand(Player p) {
 		for(int i=0;i<p.getHand().size();i++) {
@@ -207,7 +196,8 @@ public abstract class AbstractAI{
 	}
 	
 	/**
-	 * ?What is it used for?
+	 * Remove an amour from a player's hand
+	 * @param p the player to remove the Amour from
 	 * @return
 	 */
 	protected AdventureCard getAmourInHand(Player p) {
@@ -231,7 +221,8 @@ public abstract class AbstractAI{
 	}
 	
 	/**
-	 * ?What is this used for?
+	 * Remove the ally with the highest battle power according to the game state from a player's hand
+	 * so that they can play it
 	 * @param state the current conditions of the game
 	 * @return
 	 */
@@ -295,7 +286,7 @@ public abstract class AbstractAI{
 	}
 	
 	/**
-	 * Utility method for removing 
+	 * Utility method for removing a test from a player's hand to play it
 	 * @param p The ai player is using this strategy
 	 * @return If a test is in ai player's hand the test card found otherwise null
 	 */
@@ -307,7 +298,7 @@ public abstract class AbstractAI{
 	}
 	
 	/**
-	 * 
+	 * Remove the strongest foe in a player's hand so they can play it
 	 * @param state the current conditions of the game
 	 * @param p The ai player is using this strategy
 	 * @return the strongest foe card in ai player's hand. If no foe cards are in the hand then null
@@ -321,8 +312,9 @@ public abstract class AbstractAI{
 	}
 	
 	/**
-	 * 
-	 * @param cards list of cards ?used for both hand and field?
+	 * Determine if a list of cards contains an amour, used to examine any list of cards
+	 * @param cards list of cards that can be used for the field, hand, or a list of cards to play that
+	 * is being built
 	 * @return True if there is an amour in cards
 	 */
 	public boolean containsAmour(ArrayList<AdventureCard> cards) {
@@ -333,7 +325,7 @@ public abstract class AbstractAI{
 	}
 	
 	/**
-	 * 
+	 * Remove the weakest foe from a player's hand so that they can play or discadrd it
 	 * @param state the current conditions of the game
 	 * @param p The ai player is using this strategy
 	 * @return the weakest foe card in ai player's hand. If no foe cards are in the hand then null 
@@ -347,11 +339,11 @@ public abstract class AbstractAI{
 	}
 	
 	/**
-	 * 
+	 * Create a foe of a given battle power for use in a quest
 	 * @param state the current conditions of the game
 	 * @param p The ai player is using this strategy
-	 * @param bp ?
-	 * @return ?the foe to be added to a stage?
+	 * @param bp the desired battle power to reach
+	 * @return the foe to be added to a stage
 	 */
 	protected Foe makeFoe(GameState state, Player p, int bp) {
 		Foe f = getStrongestFoe(state, p);
@@ -372,11 +364,11 @@ public abstract class AbstractAI{
 	}
 	
 	/**
-	 * 
+	 * Count the number of playable weapons, amour, and allies in a player's hand
 	 * @param state the current conditions of the game
 	 * @param p The ai player is using this strategy
-	 * @param stages ?
-	 * @return ?
+	 * @param stages the number of stages in a quest or tournament
+	 * @return the largest number of cards a player could play in a quest or tournament
 	 */
 	protected int countWAA(GameState state, Player p, int stages) {
 		int WAA = 0;
@@ -395,6 +387,13 @@ public abstract class AbstractAI{
 		return WAA;
 	}
 	
+	/**
+	 * Remove the weakest weapon from a player's hand so that they can play it
+	 * @param state the current conditions of the game
+	 * @param p the ai player using this strategy
+	 * @param weapons a list of weapons to compare against to make sure duplicates are not played
+	 * @return the weakest weapon in a player's hand that they can play
+	 */
 	protected AdventureCard getWeakestWeapon(GameState state, Player p, ArrayList<AdventureCard> weapons) {
 		p.sortHand(state);
 		for(int i=p.getHand().size()-1;i>=0;i--) {

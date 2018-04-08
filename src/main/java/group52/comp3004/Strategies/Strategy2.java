@@ -103,6 +103,9 @@ public class Strategy2 extends AbstractAI{
 		return discards;
 	}
 	
+	/**
+	 * Reset the AI's have bid value to false so they can regain their original behavior for a new quest
+	 */
 	private void resetBid() {
 		this.havebid = false;
 	}
@@ -157,13 +160,16 @@ public class Strategy2 extends AbstractAI{
 			while(stagebp<prevbp+10){
 				ArrayList<AdventureCard> weapons = new ArrayList<AdventureCard>();
 				for(int i=0;i<p.getHand().size();i++) {
-					if(!(weapons.contains(p.getHand().get(i)) && stageCards.contains(p.getHand().get(i))) &&
+					if(!(weapons.contains(p.getHand().get(i)) || stageCards.contains(p.getHand().get(i))) &&
 							p.getHand().get(i) instanceof Weapon)
 							weapons.add(p.getHand().get(i));
 				}
-				AdventureCard wep = this.getWeakestWeapon(state, p, weapons);
+				if(weapons.isEmpty()) break;
+				else {
+					Weapon wep = (Weapon) this.getWeakestWeapon(state, p, stageCards);
+					stagebp += wep.getBp(state);
 					stageCards.add(wep);
-				stagebp += wep.getBp();
+				}
 			}
 		}
 		prevbp = stagebp;
@@ -178,8 +184,7 @@ public class Strategy2 extends AbstractAI{
 		while(totalBP<50 && i<p.getHand().size()) {
 			if(!(p.getHand().get(i) instanceof Tests || p.getHand().get(i) instanceof Foe)) {
 				if(!(tourneyCards.contains(p.getHand().get(i)))) {
-					if(p.getHand().get(i) instanceof Ally) totalBP += p.getHand().get(i).getBp(state);
-					else totalBP += p.getHand().get(i).getBp();
+					totalBP += p.getHand().get(i).getBp(state);
 					tourneyCards.add(p.getHand().get(i));
 				}
 			}

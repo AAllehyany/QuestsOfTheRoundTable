@@ -18,8 +18,11 @@ import com.google.gson.GsonBuilder;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Amour;
+import group52.comp3004.cards.EventCard;
 import group52.comp3004.cards.Foe;
+import group52.comp3004.cards.QuestCard;
 import group52.comp3004.cards.Tests;
+import group52.comp3004.cards.Tourneys;
 import group52.comp3004.cards.Weapon;
 import group52.comp3004.game.GameQuest;
 import group52.comp3004.game.GameState;
@@ -47,7 +50,7 @@ public class SocketHandler extends TextWebSocketHandler{
 		/*********Game phase handlers***********************/
 		case "START_GAME":
 			startGame(session, payload);
-			break;
+			break;			
 		case "TURN_START":
 			turnStart(session, payload);
 			break;
@@ -56,12 +59,10 @@ public class SocketHandler extends TextWebSocketHandler{
 			break;
 		case "HANDLE_EVENT":
 			handleEvent(session, payload);
-			break;
-			
+			break;			
 		case "SPONSOR_QUEST":
 			sponsorQuest(session, payload);
-			break;
-		
+			break;		
 		case "JOIN_QUEST":
 			joinQuest(session, payload);
 			break;
@@ -78,9 +79,6 @@ public class SocketHandler extends TextWebSocketHandler{
 			playStage(session, payload);
 			break;
 		
-		case "SPONSOR_TOURNEY":
-			sponsorTourney(session, payload);
-			break;
 		case "JOIN_TOURNEY":
 			joinTourney(session, payload);
 			break;
@@ -98,6 +96,158 @@ public class SocketHandler extends TextWebSocketHandler{
 			invalidEvent(session, payload);
 		}
 		
+	}
+	
+	/**
+	 * Handles an invalid event being sent to the server
+	 * @param session current session
+	 * @param payload message to be sent to client 
+	 * @throws Exception error in sending message 
+	 */
+	private void invalidEvent(WebSocketSession session, Map<String, String> payload) throws Exception {
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		message.put("event", "INVALID_EVENT");
+		message.put("data", "Event invalid");
+		session.sendMessage(new TextMessage(gson.toJson(message)));
+		
+	}
+	
+	/**
+	 * Handles the players joining a game. No more than 4 players may join a single game.
+	 * @param session current session
+	 * @param payload message to be sent to client 
+	 * @throws Exception error in sending message 
+	 */
+	private void joinGame(WebSocketSession session, Map<String, String> payload) throws Exception {
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		
+		logger.info("Player attempting to join game");
+		Player player = players.get(session);
+		
+		if(game.getAllPlayers().size() >= 4) {
+			logger.info(message);
+			message.put("event", "JOIN_FAILED");
+			message.put("data", "Game has too many players.");
+			session.sendMessage(new TextMessage(gson.toJson(message)));
+			return;
+		}
+		
+		logger.info("Player joined game!");
+		game.addPlayer(player);
+		message.put("event", "JOIN_SUCCESS");
+		message.put("data", "Joined game!");
+		session.sendMessage(new TextMessage(gson.toJson(message)));
+		
+	}
+	
+	/**
+	 * Handles the StartGame phase
+	 * @param session current session
+	 * @param payload message to be sent to client 
+	 * @throws Exception error in sending message 
+	 */
+	private void startGame(WebSocketSession session, Map<String, String> payload) throws Exception {
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		
+		logger.info("Starting Game");
+		//add ai players when room are made
+		
+		game.dealCardsToPlayers();
+		game.setPhase(Phase.TurnStart);
+		
+		message.put("event", "GAME_STATE_UPDATE");
+		message.put("data", gson.toJson(game));
+		for(WebSocketSession user : players.keySet()){
+			user.sendMessage(new TextMessage(gson.toJson(message)));
+		}
+	}
+	
+	/**
+	 * Handles the TurnStart phase
+	 * @param session current session
+	 * @param payload message to be sent to client 
+	 * @throws Exception error in sending message 
+	 */
+	private void turnStart(WebSocketSession session, Map<String, String> payload) throws Exception {
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		Map<String, String> data = new HashMap<>();
+		
+		logger.info("New turn starts");
+		
+		game.setPhase(Phase.RevealStory);
+		
+		
+		message.put("event", "PHASE_CHANGE");
+		message.put("data", "");
+		session.sendMessage(new TextMessage(gson.toJson(message)));
+	}
+	
+	/**
+	 * Handles the RevealStory phase
+	 * @param session current session
+	 * @param payload message to be sent to client 
+	 * @throws Exception error in sending message 
+	 */
+	private void revealStory(WebSocketSession session, Map<String, String> payload) throws Exception {
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		Map<String, String> data = new HashMap<>();
+		
+		game.setRevealedCard(game.getStoryDeck().draw());
+		logger.info("Next story card: " + game.getRevealedCard().getName());
+
+		String nextPhase = "";
+		if(game.getRevealedCard() instanceof EventCard) {
+			nextPhase = "HandleEvent";
+			game.setPhase(Phase.HandleEvent);
+		}
+		else if(game.getRevealedCard() instanceof Tourneys) {
+			game.setTourney();
+			nextPhase = "SponsorTourney";
+			game.setPhase(Phase.SponsorTourney);
+		}
+		else if(game.getRevealedCard() instanceof QuestCard) {
+			game.setQuest();
+			nextPhase = "SponsorQuest";
+			game.setPhase(Phase.SponsorQuest);
+		}
+		else {
+			logger.info("Unknown card type added to story");
+			nextPhase = "Broken";
+			game.setPhase(Phase.Broken);
+		}
+	
+		data.put("CardID", String.valueOf(game.getRevealedCard().getID()));
+		data.put("Phase", nextPhase);
+		message.put("event", "REVEAL_STORY");
+		message.put("data", gson.toJson(data));
+		for(WebSocketSession user : players.keySet()){
+			user.sendMessage(new TextMessage(gson.toJson(message)));
+		}
+	}
+	
+
+	/**
+	 * Handles the HandleEvent phase
+	 * @param session current session
+	 * @param payload message to be sent to client 
+	 * @throws Exception error in sending message 
+	 */
+	private void handleEvent(WebSocketSession session, Map<String, String> payload) throws Exception {
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		logger.info("Handling event: " + game.getRevealedCard().getName());
+		
+		if(game.getRevealedCard() instanceof EventCard)
+			((EventCard)game.getRevealedCard()).run(game);
+		game.setPhase(Phase.TurnEnd);
+		
+		message.put("event", "GAME_STATE_UPDATE");
+		message.put("data", gson.toJson(game));
 	}
 	
 	private void joinQuest(WebSocketSession session, Map<String, String> payload) throws Exception {
@@ -138,6 +288,31 @@ public class SocketHandler extends TextWebSocketHandler{
 		
 		
 	}
+	private void sponsorQuest(WebSocketSession session, Map<String, String> payload) throws Exception { 
+		Gson gson = new GsonBuilder().create(); 
+		Map<String, String> message = new HashMap<>(); 
+		if(game.getPhase() != Phase.SponsorQuest || game.getCurrentSponsor() != null) { 
+			logger.info("Player attempting to sponsor quest outside sponsor quest phase or when there is already a sponsor."); 
+			message.put("event", "ERROR"); 
+			message.put("data", "Cannot sponsor quest"); 
+			session.sendMessage(new TextMessage(gson.toJson(message))); 
+			return; 
+		} 		 
+		if(game.getPlayerByIndex(game.getCurrentPlayer()).getId() != players.get(session).getId()) {  
+		logger.info("Player attempting to sponsor quest illegally");  
+		message.put("event", "ERROR");  
+		message.put("data", "Cannot sponsor quest"); 
+		session.sendMessage(new TextMessage(gson.toJson(message)));
+		return;
+		}
+		game.setQuest(); 
+		game.setPhase(Phase.SetupQuest); 
+		for(WebSocketSession user : players.keySet()) { 
+			message.put("event", "QUEST_SPONSORED"); 	 
+			message.put("data", gson.toJson(game.getAllPlayers())); 
+		 	user.sendMessage(new TextMessage(gson.toJson(message))); 
+		 	} 
+		} 
 	
 	private void playStage(WebSocketSession session, Map<String, String> payload) throws Exception {
 		Gson gson = new GsonBuilder().create();
@@ -162,7 +337,7 @@ public class SocketHandler extends TextWebSocketHandler{
 		
 	}
 
-	/*
+	/**
 	 * Set up Quest
 	 * @purpose Sets up the quest stages by the sponsor
 	 * 
@@ -251,7 +426,7 @@ public class SocketHandler extends TextWebSocketHandler{
 		
 	}
 	
-	/*
+	/**
 	 * Play quest
 	 * @purpose Plays the quest by setting up the fields of players.
 	 * 
@@ -331,105 +506,108 @@ public class SocketHandler extends TextWebSocketHandler{
 			}
 		}
 	}
-
-	private void invalidEvent(WebSocketSession session, Map<String, String> payload) throws Exception {
-		Gson gson = new GsonBuilder().create();
-		Map<String, String> message = new HashMap<>();
-		message.put("event", "INVALID_EVENT");
-		message.put("data", "Event invalid");
-		session.sendMessage(new TextMessage(gson.toJson(message)));
-		
-	}
 	
-	private void sponsorQuest(WebSocketSession session, Map<String, String> payload) throws Exception {
+	/**
+	 * Handles the JoinTourney phase
+	 * @param session current session
+	 * @param payload message to be sent to client 
+	 * @throws Exception error in sending message 
+	 */
+	private void joinTourney(WebSocketSession session, Map<String, String> payload) throws Exception {
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();
 		
-		if(game.getPhase() != Phase.SponsorQuest || game.getCurrentSponsor() != null) {
-			logger.info("Player attempting to sponsor quest outside sponsor quest phase or when there is already a sponsor.");
-			message.put("event", "ERROR");
-			message.put("data", "Cannot sponsor quest");
-			session.sendMessage(new TextMessage(gson.toJson(message)));
-			return;
+		int joined = 0;
+		for(int i = 0; i < game.getAllPlayers().size(); i++) {
+			if(game.getPlayerByIndex(i).getAI()==null) {
+				//Code for joining
+					logger.info(" player " + game.getCurrentPlayer()+ "joined the tournament");
+					game.getCurrentTourney().addPlayer(game.getPlayerByIndex(game.getCurrentPlayer()));
+					joined++;
+				}
+			else {
+				if(game.getPlayerByIndex(i).getAI().doIParticipateInTournament(game, game.getPlayerByIndex(i))) {
+					logger.info(" player " + game.getCurrentPlayer()+ "joined the tournament");
+					game.getCurrentTourney().addPlayer(game.getPlayerByIndex(game.getCurrentPlayer()));
+					joined++;
+				}
+			}
+			game.nextPlayer();
 		}
 		
-		if(game.getPlayerByIndex(game.getCurrentPlayer()).getId() != players.get(session).getId()) {
-			logger.info("Player attempting to sponsor quest illegally");
-			message.put("event", "ERROR");
-			message.put("data", "Cannot sponsor quest");
-			session.sendMessage(new TextMessage(gson.toJson(message)));
-			return;
+		if(joined < 1) {
+			game.setPhase(Phase.TurnEnd);
+			//this.discardBeforeEnd();
+			game.endTourney();
+			message.put("event", "PHASE_CHANGE");
+			message.put("data", "TurnEnd");
+		}
+		else if (joined >= 1){
+			game.setPhase(Phase.RunTourney);	
+			game.getCurrentTourney().dealCards();
+			//way to not send whole game state?
+			message.put("event", "GAME_STATE_UPDATE");
+			message.put("data", gson.toJson(game));
 		}
 		
-		game.setQuest();
-		game.setPhase(Phase.SetupQuest);
-		
-		for(WebSocketSession user : players.keySet()) {
-			message.put("event", "QUEST_SPONSORED");
-			message.put("data", gson.toJson(game.getAllPlayers()));
+		for(WebSocketSession user : players.keySet()){
 			user.sendMessage(new TextMessage(gson.toJson(message)));
 		}
-		
-		
 	}
 	
-	private void joinGame(WebSocketSession session, Map<String, String> payload) throws Exception {
+	/**
+	 * Handles the RunTourney phase
+	 * @param session current session
+	 * @param payload message to be sent to client 
+	 * @throws Exception error in sending message 
+	 */
+	private void runTourney(WebSocketSession session, Map<String, String> payload) throws Exception {
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();
 		
-		logger.info("Player attempting to join game");
-		Player player = players.get(session);
+		game.getCurrentTourney().winner(game);
 		
-		if(game.getAllPlayers().size() >= 4) {
-			logger.info(message);
-			message.put("event", "JOIN_FAILED");
-			message.put("data", "Game has too many players.");
-			session.sendMessage(new TextMessage(gson.toJson(message)));
-			return;
-		}
+		game.setPhase(Phase.TurnEnd);
+		//this.discardBeforeEnd();
 		
-		logger.info("Player joined game!");
-		game.addPlayer(player);
-		message.put("event", "JOIN_SUCCESS");
-		message.put("data", "Joined game!");
-		session.sendMessage(new TextMessage(gson.toJson(message)));
-		
+		message.put("event", "GAME_STATE_UPDATE");
+		message.put("data", gson.toJson(game));
 	}
 	
-	private void startGame(WebSocketSession session, Map<String, String> payload) throws Exception {
-		
-	}
-	
-	private void turnStart(WebSocketSession session, Map<String, String> payload) throws Exception {
-		
-	}
-	
-	private void revealStory(WebSocketSession session, Map<String, String> payload) throws Exception {
-		
-	}
-	
-	private void handleEvent(WebSocketSession session, Map<String, String> payload) throws Exception {
-		
-	}
-	
-	private void sponsorTourney(WebSocketSession session, Map<String, String> payload) throws Exception {
-		
-	}
-	
-	private void joinTourney(WebSocketSession session, Map<String, String> payload) throws Exception {
-		
-	}
-	
-	private void runTourney(WebSocketSession session, Map<String, String> payload) throws Exception {
-		
-	}
-	
+	/**
+	 * Handles the TurnEnd phase
+	 * @param session current session
+	 * @param payload message to be sent to client 
+	 * @throws Exception error in sending message 
+	 */
 	private void turnEnd(WebSocketSession session, Map<String, String> payload) throws Exception {
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
 		
+		logger.info("Turn Ends");
+		game.setPhase(Phase.TurnStart);
+		game.nextTurn();
+		
+		message.put("event", "PHASE_CHANGE");
+		message.put("data", "TurnStart");
 	}
 	
+	/**
+	 * Handles the GameOver phase
+	 * @param session current session
+	 * @param payload message to be sent to client 
+	 * @throws Exception error in sending message 
+	 */
 	private void gameOver(WebSocketSession session, Map<String, String> payload) throws Exception {
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
 		
+		logger.info("Game is finished.");
+		
+		game.setPhase(Phase.GameOver);
+		
+		message.put("event", "PHASE_CHANGE");
+		message.put("data", "GAME_END");
 	}
 
 	@Override
