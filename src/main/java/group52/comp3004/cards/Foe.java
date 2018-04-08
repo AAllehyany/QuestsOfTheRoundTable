@@ -133,9 +133,7 @@ public class Foe extends AdventureCard{
     	state.getAdventureDeck().discard(state.getPlayerByIndex(player).removeAlly(ally));
     	owner.discard(this);
     	state.getAdventureDeck().discard(this);
-    	state.getAdventureDeck().discard(state.getPlayerByIndex(player).removeAlly(ally));
-    	state.getAdventureDeck().discard(this);
-    	owner.getHand().remove(this);
+    	logger.info("Mordred ability was used");
     	return true;
     }
 }
