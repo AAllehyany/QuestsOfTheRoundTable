@@ -38,7 +38,6 @@ public class Player {
 	private transient GameState game;
 	private transient GameQuest quest;
 	private transient GameTourney tourney;
-	private Integer bidPoints;
 	private boolean stoppedBidding;
 	private int offeredBids;
 	private AbstractAI strategy;
@@ -64,7 +63,6 @@ public class Player {
 		quest = null;
 		tourney = null;
 		game = gs;
-		bidPoints = 0;
 		offeredBids = 0;
 		strategy = null;
 	}
@@ -88,7 +86,6 @@ public class Player {
 		quest = null;
 		tourney = null;
 		game = gs;
-		bidPoints = 0;
 		offeredBids = 0;
 		if(s==1) strategy = new Strategy1();
 		else if(s==2) strategy = new Strategy2();
@@ -112,7 +109,6 @@ public class Player {
 		temp = new ArrayList<>();
 		quest = null;
 		tourney = null;
-		bidPoints = 0;
 		offeredBids = 0;
 	}
 	
@@ -202,8 +198,8 @@ public class Player {
 	 * @return total bids
 	 */
 	public Integer getBidPoints(GameState state) {
-		logger.info("Player " + id + " offers " + (bidPoints + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum()) + " bids");
-		return bidPoints + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum();
+		logger.info("Player " + id + " offers " + (offeredBids + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum()) + " bids");
+		return offeredBids + temp.stream().mapToInt(c -> c.getBids(state)).sum() + field.stream().mapToInt(c -> c.getBids(state)).sum();
 	}
 	
 	/**

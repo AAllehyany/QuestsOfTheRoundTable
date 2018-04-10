@@ -13,6 +13,7 @@ import group52.comp3004.players.Player;
 public class Card{
 
 	private String name;
+	protected String type;
 	private boolean isFaceUp;
 	private int id;
 	

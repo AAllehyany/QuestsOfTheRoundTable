@@ -14,6 +14,7 @@ public class Tests extends AdventureCard {
 	public Tests(String name, int minimalBid) {
 		super(name);
 		this.minimalBid = minimalBid;
+		this.type = "test";
 	}
 
 	/**

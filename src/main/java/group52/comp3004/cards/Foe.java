@@ -31,6 +31,7 @@ public class Foe extends AdventureCard{
 		this.bp = bp;
 		this.highBp = bp;
 		this.weapons = new HashSet<Weapon>();
+		this.type = "foe";
 		quests.add("Holy_Grail");
 		quests.add("Queens_Honor");
 	}
@@ -49,6 +50,7 @@ public class Foe extends AdventureCard{
 		this.bp = bp;
 		this.highBp = highBp;
 		this.weapons = new HashSet<Weapon>();
+		this.type = "foe";
 		quests.add("Holy_Grail");
 		quests.add("Queens_Honor");
 		quests.add(quest);

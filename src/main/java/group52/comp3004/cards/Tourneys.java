@@ -13,6 +13,7 @@ public class Tourneys extends StoryCard{
 	public Tourneys(String name, int bonusShields) {
 		super(name);
 		this.bonusShields = bonusShields;
+		this.type = "tourney";
 	}
 	
 	/**

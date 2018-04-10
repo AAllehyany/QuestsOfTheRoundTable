@@ -19,6 +19,7 @@ public class EventCard extends StoryCard{
 	public EventCard(String name, EventBehaviour eventBehaviour) {
 		super(name);
 		this.eventBehaviour = eventBehaviour;
+		this.type = "event";
 	}
 	
 	/**
