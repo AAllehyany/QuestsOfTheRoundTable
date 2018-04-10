@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -622,5 +623,10 @@ public class SocketHandler extends TextWebSocketHandler{
 	public void afterConnectionEstablished(WebSocketSession session) {
 		logger.info("Player connected to the websocket");
 		players.put(session, new Player(2));
+	}
+	
+	@Override
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) {
+		players.remove(session);
 	}
 }
