@@ -83,6 +83,9 @@ public class GameQuest {
 		for(int i=0;i>stages.size();i++) {
 			cNum.add(stages.get(i).totalCardsPlayed());
 		}
+		for(int i=0;i<stages.size();i++) {
+			logger.info("Stage " + (i+1) + " has " + cNum.get(i) + " cards");
+		}
 		return cNum;
 	}
 	

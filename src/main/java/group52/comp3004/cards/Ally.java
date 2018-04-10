@@ -114,8 +114,9 @@ public class Ally extends AdventureCard
 			cards.add(f);
 			cards.addAll(f.getWeapons());
 			for(int i=0;i<cards.size();i++) {
-				cards.get(i).setFaceUp();
+				cards.get(i).flipUp();
 			}
+			logger.info("Merlin's effect has been used");
 			return cards;
 		}
 	}
@@ -131,8 +132,9 @@ public class Ally extends AdventureCard
 	public boolean EndMerlinSpecial(ArrayList<AdventureCard> cards) {
 		if(!this.merlin) return false;
 		for(int i=0;i<cards.size();i++) {
-			cards.get(i).setFaceDown();
+			cards.get(i).flipDown();
 		}
+		logger.info("Merlin's effect has ended");
 		return true;
 	}
 
