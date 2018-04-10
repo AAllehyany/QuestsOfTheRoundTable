@@ -308,6 +308,15 @@ public class SocketHandler extends TextWebSocketHandler{
 			return;
 		}
 		
+		if(game.getPlayerByIndex(game.getCurrentPlayer()).hasTest()) {
+			if(game.getPlayerByIndex(game.getCurrentPlayer()).countFoes()+1<game.getCurrentQuest().getNumStages())
+				logger.info("Player does not have enough cards to sponosr the quest");
+			return;
+		}else {
+			if(game.getPlayerByIndex(game.getCurrentPlayer()).countFoes()<game.getCurrentQuest().getNumStages())
+				return;
+		}
+		
 		logger.info("Player can successfully sponsor the quest");
 		
 		game.setQuest(); 
