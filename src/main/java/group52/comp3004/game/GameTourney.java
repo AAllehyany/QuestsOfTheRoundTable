@@ -91,6 +91,7 @@ public class GameTourney {
 		}else {
 			int count = win.size();
 			if(count>1) {
+					state.setPhase(Phase.SecondRound);
 					this.winner = secondBattle(state, win);
 				}
 			else {

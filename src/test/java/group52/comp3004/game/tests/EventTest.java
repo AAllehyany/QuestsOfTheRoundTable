@@ -112,6 +112,7 @@ class EventTest {
 		model.addPlayer(b);
 		model.addPlayer(c);
 		EventCard Arms = CardFactory.createEvent("Call_to_Arms", new Arms());
+		Arms.run(model);
 	}
 	
 	@Test
