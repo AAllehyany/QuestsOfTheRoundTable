@@ -22,6 +22,7 @@ public class Amour extends AdventureCard{
 		super(name);
 		this.bp = bp;
 		this.bids = bids;
+		this.type = "amour";
 	}
 	
 	public int getBp(GameState state) {

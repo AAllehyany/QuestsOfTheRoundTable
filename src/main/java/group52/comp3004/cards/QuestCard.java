@@ -12,6 +12,7 @@ public class QuestCard extends StoryCard {
 	public QuestCard(String name, int stages) {
 		super(name);
 		this.stages = stages;
+		this.type = "quest";
 	}
 	
 	/**

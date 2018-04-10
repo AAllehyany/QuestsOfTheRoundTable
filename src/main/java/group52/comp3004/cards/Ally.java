@@ -32,6 +32,7 @@ public class Ally extends AdventureCard
 		super(name);
 		this.bp = bp;
 		this.bids = bids;
+		this.type = "ally";
 		if(name.equals("Merlin")) this.merlin = true;	
 	}
 	
@@ -51,6 +52,7 @@ public class Ally extends AdventureCard
 		this.prereq = prereq;
 		this.bonusbp = bonusbp;
 		this.bonusbid = bonusbid;
+		this.type = "ally";
 		if(name.equals("Merlin")) this.merlin = true;
 	}
 	
@@ -60,6 +62,7 @@ public class Ally extends AdventureCard
 	 */
 	public Ally(String name) {
 		super(name);
+		this.type = "ally";
 		if(name.equals("Merlin")) this.merlin = true;
 	}
 	
