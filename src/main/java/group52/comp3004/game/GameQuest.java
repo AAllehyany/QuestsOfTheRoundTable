@@ -149,7 +149,7 @@ public class GameQuest {
 	 * Move on to the next stage
 	 */
 	public boolean advanceStage() {
-		if(currentStage < (quest.getStages() - 1) && players.size()>0) {
+		if(currentStage < (quest.getStages() - 1)) {
 			currentStage += 1;
 			return true;
 		}
