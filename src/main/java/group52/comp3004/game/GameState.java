@@ -328,6 +328,13 @@ public class GameState {
 		currentTourney = null;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public void removePlayer(Player player) {
+		players.remove(player);
+	}
 	//GETTERS and SETTERS
 	public StoryCard getRevealed() { return this.revealedCard; }
 	

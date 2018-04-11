@@ -602,4 +602,10 @@ public class SocketHandler extends TextWebSocketHandler{
 		logger.info("Player connected to the websocket");
 		players.put(session, new Player(2));
 	}
+	@Override
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) {
+		logger.info("Player disconnected to the websocket");
+		Player player = players.remove(session);
+		game.removePlayer(player);
+	}
 }

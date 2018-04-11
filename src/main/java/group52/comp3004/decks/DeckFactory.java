@@ -44,7 +44,7 @@ public class DeckFactory {
 		cards.add(CardFactory.createAlly("Queen_Iseult", 0, 2, "Sir_Tristan", 0, 4));
 		cards.add(CardFactory.createAlly("Merlin"));
 		
-		for(int i=0;i<2;i++) cards.add(CardFactory.createWeapon("Exaclibur", 30));
+		for(int i=0;i<2;i++) cards.add(CardFactory.createWeapon("Excalibur", 30));
 		for(int i=0;i<6;i++) cards.add(CardFactory.createWeapon("Lance", 20));
 		for(int i=0;i<8;i++) cards.add(CardFactory.createWeapon("Battle_Ax", 15));
 		for(int i=0;i<16;i++) cards.add(CardFactory.createWeapon("Sword", 10));
@@ -64,7 +64,7 @@ public class DeckFactory {
 		for(int i=0;i<8;i++) cards.add(CardFactory.createAmour("Amour", 10, 1));
 		for(int i=0;i<2;i++) cards.add(CardFactory.createTests("Valor", 3));
 		for(int i=0;i<2;i++) cards.add(CardFactory.createTests("Temptation", 3));
-		for(int i=0;i<2;i++) cards.add(CardFactory.createTests("Moran_Le_Fey", 4));
+		for(int i=0;i<2;i++) cards.add(CardFactory.createTests("Morgan_Le_Fey", 4));
 		for(int i=0;i<2;i++) cards.add(CardFactory.createTests("Questing_Beast", 3));
 		
 		for(int i=0;i<cards.size();i++) {
