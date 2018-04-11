@@ -1,5 +1,6 @@
 package group52.comp3004.sockets;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -125,7 +126,6 @@ public class SocketHandler extends TextWebSocketHandler{
 		
 		logger.info("Player " + id + " joined game!");
 		game.addPlayer(player);
-		id++;
 		message.put("type", "GAME_STATE_UPDATE");
 		message.put("data", gson.toJson(game));
 		session.sendMessage(new TextMessage(gson.toJson(message)));		
@@ -156,6 +156,8 @@ public class SocketHandler extends TextWebSocketHandler{
 		for(WebSocketSession user : players.keySet()){
 			user.sendMessage(new TextMessage(gson.toJson(message)));
 		}
+		
+		this.revealStory(session);
 	}
 	
 	/**
@@ -599,9 +601,17 @@ public class SocketHandler extends TextWebSocketHandler{
 	}
 
 	@Override
-	public void afterConnectionEstablished(WebSocketSession session) {
+	public void afterConnectionEstablished(WebSocketSession session) throws IOException {
 		logger.info("Player connected to the websocket");
 		players.put(session, new Player(id));	
+		
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		message.put("type", "RECEIVE_ID");
+		message.put("data", gson.toJson(id));
+		session.sendMessage(new TextMessage(gson.toJson(message)));
+		
+		id++;
 		try {
 			this.joinGame(session);
 		} catch (Exception e) {
