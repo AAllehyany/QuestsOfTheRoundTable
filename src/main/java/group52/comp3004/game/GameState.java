@@ -333,6 +333,9 @@ public class GameState {
 	 * @return
 	 */
 	public void removePlayer(Player player) {
+		this.adventureDeck.discard(player.getHand());
+		this.adventureDeck.discard(player.getField());
+		this.adventureDeck.discard(player.getTemp());
 		players.remove(player);
 	}
 	//GETTERS and SETTERS
