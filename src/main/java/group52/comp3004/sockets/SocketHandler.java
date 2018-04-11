@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -37,6 +37,7 @@ public class SocketHandler extends TextWebSocketHandler{
 	final static Logger logger = Logger.getLogger(SocketHandler.class);
 	private GameState game = new GameState();
 	private ConcurrentHashMap<WebSocketSession, Player> players = new ConcurrentHashMap();
+	private static int id = 0;
 	
 	@Override
 	public void handleTextMessage(WebSocketSession session, TextMessage mes) throws Exception{
@@ -44,14 +45,7 @@ public class SocketHandler extends TextWebSocketHandler{
 		String event = payload.get("event");
 				
 		switch(event) {
-		case "JOIN_GAME":
-			joinGame(session, payload);
-			break;
-			
-		/*********Game phase handlers***********************/
-		case "START_GAME":
-			startGame(session, payload);
-			break;			
+		/*********Game phase handlers***********************/			
 		case "TURN_START":
 			turnStart(session, payload);
 			break;
@@ -115,26 +109,31 @@ public class SocketHandler extends TextWebSocketHandler{
 	 * @param payload message to be sent to client 
 	 * @throws Exception error in sending message 
 	 */
-	private void joinGame(WebSocketSession session, Map<String, String> payload) throws Exception {
+	private void joinGame(WebSocketSession session) throws Exception {
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();
 		
-		logger.info("Player attempting to join game");
+		logger.info("Player " + id + " attempting to join game");
 		Player player = players.get(session);
 		
 		if(game.getAllPlayers().size() >= 4) {
-			logger.info(message);
+			logger.info("Game has too many players.");
 			message.put("type", "ERROR");
 			message.put("data", "Game has too many players.");
 			session.sendMessage(new TextMessage(gson.toJson(message)));
 			return;
 		}
 		
-		logger.info("Player joined game!");
+		logger.info("Player " + id + " joined game!");
 		game.addPlayer(player);
+		id++;
 		message.put("type", "GAME_STATE_UPDATE");
 		message.put("data", gson.toJson(game));
 		session.sendMessage(new TextMessage(gson.toJson(message)));		
+		if(game.getAllPlayers().size() == 4) {
+			this.startGame(session);
+		}
+		
 	}
 	
 	/**
@@ -143,7 +142,7 @@ public class SocketHandler extends TextWebSocketHandler{
 	 * @param payload message to be sent to client 
 	 * @throws Exception error in sending message 
 	 */
-	private void startGame(WebSocketSession session, Map<String, String> payload) throws Exception {
+	private void startGame(WebSocketSession session) throws Exception {
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();
 		
@@ -600,7 +599,13 @@ public class SocketHandler extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) {
 		logger.info("Player connected to the websocket");
-		players.put(session, new Player(2));
+		players.put(session, new Player(id));	
+		try {
+			this.joinGame(session);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) {
