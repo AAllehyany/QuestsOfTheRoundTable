@@ -125,7 +125,6 @@ public class SocketHandler extends TextWebSocketHandler{
 		
 		logger.info("Player " + id + " joined game!");
 		game.addPlayer(player);
-		id++;
 		message.put("type", "GAME_STATE_UPDATE");
 		message.put("data", gson.toJson(game));
 		session.sendMessage(new TextMessage(gson.toJson(message)));		
@@ -602,6 +601,7 @@ public class SocketHandler extends TextWebSocketHandler{
 	public void afterConnectionEstablished(WebSocketSession session) {
 		logger.info("Player connected to the websocket");
 		players.put(session, new Player(id));	
+		id++;
 		try {
 			this.joinGame(session);
 		} catch (Exception e) {
