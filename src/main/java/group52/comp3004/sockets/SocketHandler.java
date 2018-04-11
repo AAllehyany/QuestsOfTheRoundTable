@@ -50,7 +50,6 @@ public class SocketHandler extends TextWebSocketHandler{
 			turnStart(session, payload);
 			break;
 		case "REVEAL_STORY":
-			revealStory(session, payload);
 			break;
 		case "HANDLE_EVENT":
 			handleEvent(session, payload);
@@ -175,6 +174,9 @@ public class SocketHandler extends TextWebSocketHandler{
 		
 		message.put("type", "PHASE_CHANGE");
 		message.put("data", "RevealStory");
+		
+		this.revealStory(session);
+		
 		session.sendMessage(new TextMessage(gson.toJson(message)));
 	}
 	
@@ -184,7 +186,7 @@ public class SocketHandler extends TextWebSocketHandler{
 	 * @param payload message to be sent to client 
 	 * @throws Exception error in sending message 
 	 */
-	private void revealStory(WebSocketSession session, Map<String, String> payload) throws Exception {
+	private void revealStory(WebSocketSession session) throws Exception {
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();
 		
