@@ -75,7 +75,7 @@ public class GameState {
 		currentTurnId = -1;
 		currentPlayerId = -1;
 		currentSponsorId = -1;
-		ArrayList<AdventureCard> middleAreaPowers = new ArrayList<>();
+		middleAreaPowers = new ArrayList<>();
 		logger.info("Model loaded (void)");
 	}
 	
@@ -88,6 +88,30 @@ public class GameState {
 				player.addCardToHand(adventureDeck.draw());
 			}
 		});
+	}
+
+	public Integer getCurrentPlayerId() {
+		return currentPlayerId;
+	}
+
+	public void setCurrentPlayerId(Integer currentPlayerId) {
+		this.currentPlayerId = currentPlayerId;
+	}
+
+	public Integer getCurrentTurnId() {
+		return currentTurnId;
+	}
+
+	public void setCurrentTurnId(Integer currentTurnId) {
+		this.currentTurnId = currentTurnId;
+	}
+
+	public Integer getCurrentSponsorId() {
+		return currentSponsorId;
+	}
+
+	public void setCurrentSponsorId(Integer currentSponsorId) {
+		this.currentSponsorId = currentSponsorId;
 	}
 
 	/**

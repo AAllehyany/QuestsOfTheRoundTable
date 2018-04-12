@@ -47,7 +47,7 @@ public class GameController{
 		}
 			logger.info("cards discarded");
 			model.setPhase(Phase.TurnEnd);
-			this.endTurn();
+			//this.endTurn();
 
 	}
 
@@ -101,7 +101,7 @@ public class GameController{
 				//cards are moved into quest
 				current.getTemp().clear();
 				this.updateAll();
-				this.runQuest();
+				//this.runQuest();
 			}
 		} else if(phase == Phase.PlayQuest) {
 			logger.info("Playing in a Quest!");
@@ -118,7 +118,7 @@ public class GameController{
 				readyCounter = 0;
 				if(model.getCurrentQuest().isOver()) {
 					logger.info("No one left in the quest, quest over!");
-					this.endQuest();
+					//this.endQuest();
 					this.updateAll();
 					return;
 				}
@@ -127,7 +127,7 @@ public class GameController{
 			logger.info("Received player submission for quest!");
 			logger.info("Moving to next player in quest!");
 			model.nextPlayer();
-			this.playQuest();
+			//this.playQuest();
 			
 		}
 	}
@@ -139,7 +139,7 @@ public class GameController{
 			if(model.getCurrentTourney().getPlayers().size()==1) {
 				System.out.println("Only 1 player joined the tournament, he wins");
 				model.getCurrentTourney().awardShields();
-				this.endTourney();
+				//this.endTourney();
 			}else{
 				logger.info("Playing in a Tournament!");
 				logger.info("Num players ready: " + readyCounter1);
@@ -158,7 +158,7 @@ public class GameController{
 					this.updateAll();
 					if(model.getCurrentTourney().isOver()) {
 						logger.info("tournament over!");
-						this.endTourney();
+						//this.endTourney();
 						this.updateAll();
 						return;
 					}
