@@ -821,15 +821,11 @@ public class SocketHandler extends TextWebSocketHandler{
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();
 		System.out.println("Running the tournment");
-		if(game.getCurrentTourney().battle(game, game.getCurrentTourney().getPlayers()).size()>1 &&
-				game.getCurrentTourney().getRound()<2) {
-			game.setPhase(Phase.SetUpTourney);
+		if(game.getCurrentTourney().battle(game)) {
+			game.setPhase(Phase.TurnEnd);
 		}else {
-			game.getCurrentTourney().winner(game);
+			game.setPhase(Phase.SetUpTourney);
 		}
-		
-		game.setPhase(Phase.TurnEnd);
-		//this.discardBeforeEnd();
 		
 		message.put("type", "GAME_STATE_UPDATE");
 		message.put("data", gson.toJson(game));
