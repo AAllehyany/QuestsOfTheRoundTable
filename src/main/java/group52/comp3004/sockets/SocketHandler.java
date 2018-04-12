@@ -188,7 +188,6 @@ public class SocketHandler extends TextWebSocketHandler{
 			}
 		}
 		
-	}
 	
 	private void addCardTourney(WebSocketSession session, Map<String, String> payload) throws Exception {
 		Gson gson = new GsonBuilder().create();
@@ -669,6 +668,15 @@ public class SocketHandler extends TextWebSocketHandler{
 		}
 		else {
 			//cards are moved into quest
+			for(int i = 0; i < game.getCurrentQuest().getStages().size(); i++) {
+				Stage stage = stages.get(i);
+				if(stage.isTestStage()) {
+					game.addMiddleArea(stage.getTest());
+				}
+				else {
+					game.addMiddleArea(stage.getFoe());
+				}				
+			}
 			current.getTemp().clear();
 			game.setPhase(Phase.RunQuest);
 			message.put("type", "GAME_STATE_UPDATE");
