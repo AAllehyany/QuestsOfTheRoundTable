@@ -133,11 +133,8 @@ public class SocketHandler extends TextWebSocketHandler{
 				game.addPlayer(new Player(id, game, strategy));
 			}
 			game.setPhase(Phase.OpenJoin);
-			message.put("type",  "GAME_STATE_UPDATE");
-			message.put("data", gson.toJson(game));
-			for(WebSocketSession user : players.keySet()) {
-				user.sendMessage(new TextMessage(gson.toJson(message)));
-			}
+			
+			this.joinGame(session);
 	}
 	
 	private void addCardSponsor(WebSocketSession session, Map<String, String> payload) throws Exception {
@@ -361,7 +358,7 @@ public class SocketHandler extends TextWebSocketHandler{
 		logger.info("Player " + id + " attempting to join game");
 		Player player = players.get(session);
 		
-		if(game.getAllPlayers().size() >= 4) {
+		if(game.getAllPlayers().size() >= ps) {
 			logger.info("Game has too many players.");
 			message.put("type", "ERROR");
 			message.put("data", "Game has too many players.");
@@ -374,7 +371,7 @@ public class SocketHandler extends TextWebSocketHandler{
 		message.put("type", "GAME_STATE_UPDATE");
 		message.put("data", gson.toJson(game));
 		session.sendMessage(new TextMessage(gson.toJson(message)));		
-		if(game.getAllPlayers().size() == 4) {
+		if(game.getAllPlayers().size() == ps) {
 			this.startGame(session);
 		}
 		
@@ -937,7 +934,9 @@ public class SocketHandler extends TextWebSocketHandler{
 		
 		id++;
 		try {
-			this.joinGame(session);
+			if(game.getPhase() == Phase.OpenJoin) {
+				this.joinGame(session);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
