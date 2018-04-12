@@ -500,6 +500,8 @@ public class SocketHandler extends TextWebSocketHandler{
 			game.getCurrentQuest().incrementDeclined();
 		}
 		
+		System.out.println("Number of players in quest: "+ game.getCurrentQuest().getPlayers().size());
+		System.out.println("Sponsor: "+ game.getCurrentQuest().getSponsor().getId());
 		if(game.getCurrentQuest().getDeclined() == 4) {
 			game.setPhase(Phase.TurnEnd);
 			message.put("type", "PHASE_CHANGE");
@@ -508,8 +510,8 @@ public class SocketHandler extends TextWebSocketHandler{
 				user.sendMessage(new TextMessage(gson.toJson(message)));
 			}
 		}
-		else if (game.getCurrentQuest().getReceived() == 4){
-			game.setPhase(Phase.SetupTourney);
+		else if (game.getCurrentQuest().getReceived() == 3){
+			game.setPhase(Phase.PlayQuest);
 			message.put("type", "GAME_STATE_UPDATE");
 			message.put("data", gson.toJson(game));
 			for(WebSocketSession user : players.keySet()){

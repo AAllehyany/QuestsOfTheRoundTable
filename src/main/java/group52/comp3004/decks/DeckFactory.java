@@ -83,11 +83,11 @@ public class DeckFactory {
 		Deck<StoryCard> sDeck = new Deck<StoryCard>();
 		ArrayList<StoryCard> cards = new ArrayList<StoryCard>();
 		
-		cards.add(CardFactory.createEvent("Pox", new Pox()));
+		/*cards.add(CardFactory.createEvent("Pox", new Pox()));
 		cards.add(CardFactory.createEvent("Plague", new Plague()));
 		cards.add(CardFactory.createEvent("Chivalrous_Deed", new Deed()));
 		cards.add(CardFactory.createEvent("Prosperity", new Realm()));
-		cards.add(CardFactory.createEvent("Call_to_Arms", new Arms()));
+		cards.add(CardFactory.createEvent("Call_to_Arms", new Arms()));*/
 		cards.add(CardFactory.createQuest("Holy_Grail", 5));
 		cards.add(CardFactory.createQuest("Green_Knight_Quest", 4));
 		cards.add(CardFactory.createQuest("Questing_Beast_Search", 4));
@@ -95,18 +95,18 @@ public class DeckFactory {
 		cards.add(CardFactory.createQuest("Rescue_Maiden", 3));
 		cards.add(CardFactory.createQuest("Enchanted_Forest", 3));
 		cards.add(CardFactory.createQuest("Slay_the_Dragon", 3));
-		cards.add(CardFactory.createTourney("Camelot", 3));
+		/*cards.add(CardFactory.createTourney("Camelot", 3));
 		cards.add(CardFactory.createTourney("Orkney", 2));
 		cards.add(CardFactory.createTourney("Tintagel", 1));
-		cards.add(CardFactory.createTourney("York", 0));
+		cards.add(CardFactory.createTourney("York", 0));*/
 		
 		for(int i=0;i<2;i++) cards.add(CardFactory.createQuest("Arthurs_Enemy", 3));
 		for(int i=0;i<2;i++) cards.add(CardFactory.createQuest("Boar_Hunt", 2));
 		for(int i=0;i<2;i++) cards.add(CardFactory.createQuest("Repel_Saxon_Raiders", 2));
-		for(int i=0;i<2;i++) cards.add(CardFactory.createEvent("King's_Recognition", new Recognition()));
+		/*for(int i=0;i<2;i++) cards.add(CardFactory.createEvent("King's_Recognition", new Recognition()));
 		for(int i=0;i<2;i++) cards.add(CardFactory.createEvent("Queen's_Favor", new Favor()));
 		for(int i=0;i<2;i++) cards.add(CardFactory.createEvent("Called_to_Camelot", new Camelot()));
-		
+		*/
 		for(int i=0;i<cards.size();i++) {
 			cards.get(i).setID(i);
 			sDeck.addCard(cards.get(i));
