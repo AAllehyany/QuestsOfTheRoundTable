@@ -1,6 +1,7 @@
 package group52.comp3004.sockets;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -873,8 +874,10 @@ public class SocketHandler extends TextWebSocketHandler{
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws IOException {
-		logger.info("Player connected to the websocket");
+		InetSocketAddress address = session.getRemoteAddress();
+		logger.info("Player connected to the websocket from address: " + address);
 		players.put(session, new Player(id));	
+		
 		
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();

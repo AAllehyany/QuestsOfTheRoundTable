@@ -87,15 +87,15 @@ public class DeckFactory {
 		cards.add(CardFactory.createEvent("Plague", new Plague()));
 		cards.add(CardFactory.createEvent("Chivalrous_Deed", new Deed()));
 		cards.add(CardFactory.createEvent("Prosperity", new Realm()));
-		cards.add(CardFactory.createEvent("Call_to_Arms", new Arms()));
+		cards.add(CardFactory.createEvent("Call_to_Arms", new Arms()));*/
 		cards.add(CardFactory.createQuest("Holy_Grail", 5));
 		cards.add(CardFactory.createQuest("Green_Knight_Quest", 4));
 		cards.add(CardFactory.createQuest("Questing_Beast_Search", 4));
 		cards.add(CardFactory.createQuest("Queens_Honor", 4));
 		cards.add(CardFactory.createQuest("Rescue_Maiden", 3));
 		cards.add(CardFactory.createQuest("Enchanted_Forest", 3));
-		cards.add(CardFactory.createQuest("Slay_the_Dragon", 3));*/
-		cards.add(CardFactory.createTourney("Camelot", 3));
+		cards.add(CardFactory.createQuest("Slay_the_Dragon", 3));
+		/*cards.add(CardFactory.createTourney("Camelot", 3));
 		cards.add(CardFactory.createTourney("Orkney", 2));
 		cards.add(CardFactory.createTourney("Tintagel", 1));
 		cards.add(CardFactory.createTourney("York", 0));
