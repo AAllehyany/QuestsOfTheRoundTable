@@ -26,6 +26,8 @@ package group52.comp3004.game;
 public enum Phase {
 	Intro, //Intro screen for the game
 	
+	OpenJoin, //Allow for joining
+	
 	TurnStart, //Start of a new round
 	RevealStory, //story is added to field
 	TurnEnd, //Resets the board for the next round

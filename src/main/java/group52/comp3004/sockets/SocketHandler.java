@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -42,12 +43,18 @@ public class SocketHandler extends TextWebSocketHandler{
 	private static int id = 0;
 	private static int readyCounter = 0;
 	
+	private int ps;
+	private int ais;
+	
 	@Override
 	public void handleTextMessage(WebSocketSession session, TextMessage mes) throws Exception{
 		Map<String, String> payload = new Gson().fromJson(mes.getPayload(), Map.class);
 		String event = payload.get("event");
 				
 		switch(event) {
+		case "SETUP_GAME":
+			setupGame(session, payload);
+			break;
 		/*********Game phase handlers***********************/			
 		case "TURN_START":
 			turnStart(session, payload);
@@ -106,6 +113,30 @@ public class SocketHandler extends TextWebSocketHandler{
 		default:
 			invalidEvent(session, payload);
 		}	
+	}
+	
+	private void setupGame(WebSocketSession session, Map<String, String> payload) throws Exception{
+			Gson gson = new GsonBuilder().create();
+			Map<String, String> message = new HashMap<>();
+			logger.info("Creating the game");
+			ps = (int) Float.parseFloat(String.valueOf(payload.get("players")));
+			ais = (int) Float.parseFloat(String.valueOf(payload.get("AIs")));
+			
+			logger.info(ps + " players chosen with " + ais + " ais");
+			Random rand = new Random();
+			ArrayList<Player> AIplayers = new ArrayList<Player>();
+			while(AIplayers.size()<ais) {
+				int id = rand.nextInt(100)+100;
+				int strategy = rand.nextInt(3)+1;
+				AIplayers.add(new Player(id, game, strategy));
+				game.addPlayer(new Player(id, game, strategy));
+			}
+			game.setPhase(Phase.OpenJoin);
+			message.put("type",  "GAME_STATE_UPDATE");
+			message.put("data", gson.toJson(game));
+			for(WebSocketSession user : players.keySet()) {
+				user.sendMessage(new TextMessage(gson.toJson(message)));
+			}
 	}
 	
 	private void addCardSponsor(WebSocketSession session, Map<String, String> payload) throws Exception {
