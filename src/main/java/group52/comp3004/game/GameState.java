@@ -38,6 +38,7 @@ public class GameState {
 	private Integer currentPlayerId;
 	private Integer currentTurnId;
 	private Integer currentSponsorId;
+	private ArrayList<AdventureCard> middleAreaPowers;
 	
 	static final private Logger logger = Logger.getLogger(GameState.class);
 	/**
@@ -74,6 +75,7 @@ public class GameState {
 		currentTurnId = -1;
 		currentPlayerId = -1;
 		currentSponsorId = -1;
+		ArrayList<AdventureCard> middleAreaPowers = new ArrayList<>();
 		logger.info("Model loaded (void)");
 	}
 	
@@ -114,6 +116,10 @@ public class GameState {
 		
 		currentPlayerId = players.get(currentPlayer).getId();
 		currentTurnId = players.get(currentTurn).getId();
+	}
+	
+	public void addMiddleArea(AdventureCard card) {
+		middleAreaPowers.add(card);
 	}
 	
 	/**

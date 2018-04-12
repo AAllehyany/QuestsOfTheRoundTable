@@ -81,7 +81,7 @@ public class GameQuest {
 	 */
 	public ArrayList<Integer> getStageCardNum(){
 		ArrayList<Integer> cNum = new ArrayList<Integer>();
-		for(int i=0;i>stages.size();i++) {
+		for(int i=0;i<stages.size();i++) {
 			cNum.add(stages.get(i).totalCardsPlayed());
 		}
 		for(int i=0;i<stages.size();i++) {
