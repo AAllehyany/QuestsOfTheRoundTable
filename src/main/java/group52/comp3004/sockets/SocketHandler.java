@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-<<<<<<< HEAD
 import java.util.stream.Collectors;
-=======
->>>>>>> branch 'master' of https://github.com/AAllehyany/QuestsOfTheRoundTable
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
