@@ -20,6 +20,7 @@ public class GameTourney {
 	private List<Player> count,count1;
 	private List<Player> winner;
 	private boolean over;
+	private int round;
 	static final private Logger logger = Logger.getLogger(GameTourney.class);
 	
 	/**
@@ -33,6 +34,7 @@ public class GameTourney {
 		this.count1 = new ArrayList<Player>();
 		this.winner=new ArrayList<Player>();
 		this.over= false;
+		this.round=0;
 	}
 	
 	/**
@@ -49,6 +51,15 @@ public class GameTourney {
 	 */
 	public List<Player> getPlayers() {
 		return this.players;
+	}
+	
+	
+	/**
+	 * Get how many rounds have happened in the tourney
+	 * @return
+	 */
+	public int getRound() {
+		return this.round;
 	}
 	
 	/**
@@ -135,6 +146,7 @@ public class GameTourney {
 		}
 		for(int i=0;i<this.count1.size();i++) 
 			logger.info("Player: " + this.count.get(i).getId() + " won the second tournament round");
+		round++;
 		return this.count1;
 	}
 	
@@ -161,6 +173,8 @@ public class GameTourney {
 		}
 		for(int i=0;i<count.size();i++) 
 			logger.info("Player: " + this.count.get(i).getId() + " won the first tournament round");
+		this.players = this.count;
+		round++;
 		return this.count;
 	}
 	

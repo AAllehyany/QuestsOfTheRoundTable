@@ -628,8 +628,11 @@ public class SocketHandler extends TextWebSocketHandler{
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();
 		
-		if(game.getCurrentTourney().battle(game, game.getCurrentTourney().getPlayers()).size()>1) {
-			
+		if(game.getCurrentTourney().battle(game, game.getCurrentTourney().getPlayers()).size()>1 &&
+				game.getCurrentTourney().getRound()<2) {
+			game.setPhase(Phase.SetUpTourney);
+		}else {
+			game.getCurrentTourney().winner(game);
 		}
 		
 		game.setPhase(Phase.TurnEnd);
