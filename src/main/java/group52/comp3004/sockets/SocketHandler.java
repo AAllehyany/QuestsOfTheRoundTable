@@ -82,6 +82,12 @@ public class SocketHandler extends TextWebSocketHandler{
 		case "GAME_OVER":
 			gameOver(session, payload);
 			break;
+		case "MERLIN":
+			merlin(session, payload);
+			break;
+		case "CHEAT":
+			cheat(session, payload);
+			break;
 		/********************************************************/
 		default:
 			invalidEvent(session, payload);
@@ -318,6 +324,29 @@ public class SocketHandler extends TextWebSocketHandler{
 		 	user.sendMessage(new TextMessage(gson.toJson(message))); 
 		} 
 	} 
+	
+	private void merlin(WebSocketSession session, Map<String, String> payload) throws Exception{
+		Gson gson= new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		
+		logger.info("Revealing cards");
+		
+	}
+	
+	private void cheat(WebSocketSession session, Map<String, String> payload) throws Exception{
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		
+		if(game.getCurrentQuest()==null) {
+			logger.info("Not on a quest");
+			return;
+		}
+		
+		logger.info("Revealing number of cards");
+		message.put("type", "CHEAT_UPDATE");
+		message.put("data",  gson.toJson(game.getCurrentQuest().getStageCardNum()));
+		session.sendMessage(new TextMessage(gson.toJson(message)));
+	}
 	
 	private void playStage(WebSocketSession session, Map<String, String> payload) throws Exception {
 		Gson gson = new GsonBuilder().create();
