@@ -91,6 +91,11 @@ public class SocketHandler extends TextWebSocketHandler{
 			
 		case "ADD_CARD_QUEST":
 			addCardQuest(session, payload);
+			break;
+		
+		case "ADD_CARD_TOURNEY":
+			addCardTourney(session, payload);
+			break;
 		case "MERLIN":
 			merlin(session, payload);
 			break;
@@ -186,6 +191,44 @@ public class SocketHandler extends TextWebSocketHandler{
 		
 	}
 	
+	private void addCardTourney(WebSocketSession session, Map<String, String> payload) throws Exception {
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		logger.info("attempting to play in tourney...");
+		Player current = players.get(session);
+		
+		
+		String cardId = String.valueOf(payload.get("data"));
+		AdventureCard card = current.getCard((int) Float.parseFloat(cardId));
+		
+		if(!(card instanceof Ally) && !(card instanceof Amour) && !(card instanceof Weapon)) {
+			return;
+		}
+		
+		if(card instanceof Weapon) {
+			if(!current.canPlayTemp(card)) return;
+			logger.info(card.getName()+ " clicked");
+			current.getTemp().add(card);
+			current.getHand().remove(card);
+			message.put("type", "GAME_STATE_UPDATE");
+			message.put("data", gson.toJson(game));
+			session.sendMessage(new TextMessage(gson.toJson(message)));
+		}
+		else {
+			int countAmours = (int) current.getTemp().stream().filter(c -> c instanceof Amour).count();
+			if(card instanceof Amour && countAmours > 0) return;
+			
+			logger.info(card.getName()+ " clicked");
+			current.getTemp().add(card);
+			current.getHand().remove(card);
+			message.put("type", "GAME_STATE_UPDATE");
+			message.put("data", gson.toJson(game));
+			session.sendMessage(new TextMessage(gson.toJson(message)));
+		}
+		
+		
+	}
+	
 	private void addCardQuest(WebSocketSession session, Map<String, String> payload) throws Exception {
 		
 		Gson gson = new GsonBuilder().create();
@@ -196,7 +239,7 @@ public class SocketHandler extends TextWebSocketHandler{
 		Player current = players.get(session);
 		GameQuest quest = game.getCurrentQuest();
 		
-		if(sponsor.getId() == current.getId() || quest.isPlayer(current)) {
+		if(sponsor.getId() == current.getId() || !quest.isPlayer(current)) {
 			logger.info("Player attempting to play in quest illegally. Rejecting...");
 			message.put("type", "ERROR");
 			message.put("data", "Cannot play in quest.");
