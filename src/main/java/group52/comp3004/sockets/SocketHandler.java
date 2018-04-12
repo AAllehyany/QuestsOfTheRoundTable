@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+<<<<<<< HEAD
 import java.util.stream.Collectors;
+=======
+>>>>>>> branch 'master' of https://github.com/AAllehyany/QuestsOfTheRoundTable
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -20,6 +23,7 @@ import com.google.gson.GsonBuilder;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Amour;
+import group52.comp3004.cards.CardFactory;
 import group52.comp3004.cards.EventCard;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.QuestCard;
@@ -75,22 +79,26 @@ public class SocketHandler extends TextWebSocketHandler{
 		case "JOIN_TOURNEY":
 			joinTourney(session, payload);
 			break;
-		case "RUN_TOURNEY":
-			runTourney(session, payload);
+		case "SETUP_TOURNEY":
+			setupTourney(session);
 			break;
 		case "TURN_END":
 			turnEnd(session, payload);
 			break;
 		case "GAME_OVER":
 			gameOver(session, payload);
-			break;
-			
+			break;			
 		case "ADD_CARD_SPONSOR":
 			addCardSponsor(session, payload);
 			break;
 			
 		case "ADD_CARD_QUEST":
 			addCardQuest(session, payload);
+		case "MERLIN":
+			merlin(session, payload);
+			break;
+		case "CHEAT":
+			cheat(session, payload);
 			break;
 		/********************************************************/
 		default:
@@ -366,9 +374,9 @@ public class SocketHandler extends TextWebSocketHandler{
 			game.setPhase(Phase.HandleEvent);
 		}
 		else if(game.getRevealedCard() instanceof Tourneys) {
-			//game.setTourney();
-			nextPhase = "SponsorTourney";
-			game.setPhase(Phase.SponsorTourney);
+			game.setTourney();
+			nextPhase = "JoinTourney";
+			game.setPhase(Phase.JoinTourney);
 		}
 		else if(game.getRevealedCard() instanceof QuestCard) {
 			//game.setQuest();
@@ -481,6 +489,63 @@ public class SocketHandler extends TextWebSocketHandler{
 		 	user.sendMessage(new TextMessage(gson.toJson(message))); 
 		} 
 	} 
+	
+	private void mordred(WebSocketSession session, Map<String, String> payload) throws Exception{
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		
+		Integer a = Integer.parseInt(payload.get("ally"));
+		Integer p = Integer.parseInt(payload.get("player"));
+		Integer o = Integer.parseInt(payload.get("owner"));
+		
+		Player owner = null;
+		Player player = null;
+		Ally ally = null;
+		
+		for(int i=0;i<game.getAllPlayers().size();i++) {
+			if(game.getAllPlayers().get(i).getId()==p) player = game.getAllPlayers().get(i);
+			if(game.getAllPlayers().get(i).getId()==o) owner = game.getAllPlayers().get(i);
+		}
+		
+		for(int i=0;i<player.getField().size();i++) {
+			if(player.getField().get(i).getID()==a) ally = (Ally) player.getField().get(i);
+		}
+		
+		Foe m = CardFactory.createFoe("Mordred", 30);
+		m.MordredSpecial(game, owner, p, ally);
+		
+		logger.info("Mordred successfully removed an ally");
+		message.put("type", "GAME_STATE_UPDATE");
+		message.put("data",  gson.toJson(game));
+		for(WebSocketSession user : players.keySet()) 
+			user.sendMessage(new TextMessage(gson.toJson(message)));
+	}
+	
+	private void merlin(WebSocketSession session, Map<String, String> payload) throws Exception{
+		Gson gson= new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		
+		Integer s = Integer.parseInt(payload.get("stage"));
+		
+		logger.info("Revealing cards");
+		Ally m = CardFactory.createAlly("Merlin");
+		m.StartMerlinSpecial(game, s);
+	}
+	
+	private void cheat(WebSocketSession session, Map<String, String> payload) throws Exception{
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		
+		if(game.getCurrentQuest()==null) {
+			logger.info("Not on a quest");
+			return;
+		}
+		
+		logger.info("Revealing number of cards");
+		message.put("type", "CHEAT_UPDATE");
+		message.put("data",  gson.toJson(game.getCurrentQuest().getStageCardNum()));
+		session.sendMessage(new TextMessage(gson.toJson(message)));
+	}
 	
 	private void playStage(WebSocketSession session, Map<String, String> payload) throws Exception {
 		Gson gson = new GsonBuilder().create();
@@ -654,8 +719,35 @@ public class SocketHandler extends TextWebSocketHandler{
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();
 		
-		int joined = 0;
-		for(int i = 0; i < game.getAllPlayers().size(); i++) {
+		System.out.println(payload);
+		
+		String joined = String.valueOf(payload.get("joined"));
+		
+		if(joined.equals("true")) {
+			String playerId = String.valueOf(payload.get("playerId"));
+			int id = (int)Float.parseFloat(playerId);
+			
+			game.getCurrentTourney().addPlayer(game.getPlayerById(id));
+			game.getCurrentTourney().incrementResponded();
+		}
+		else {
+			logger.info("Player: " + id + " declined the tourney");
+			game.getCurrentTourney().incrementResponded();
+		}
+		
+		if(game.getCurrentTourney().getResponded() == 4) {
+			game.setPhase(Phase.RunTourney);
+			message.put("type", "GAME_STATE_UPDATE");
+			message.put("data", gson.toJson(game));
+			for(WebSocketSession user : players.keySet()){
+				user.sendMessage(new TextMessage(gson.toJson(message)));
+			}
+			
+			this.runTourney(session);
+		}
+			
+		//int joined = 0;
+		/*for(int i = 0; i < game.getAllPlayers().size(); i++) {
 			if(game.getPlayerByIndex(i).getAI()==null) {
 				//Code for joining
 					logger.info(" player " + game.getCurrentPlayer()+ "joined the tournament");
@@ -664,15 +756,15 @@ public class SocketHandler extends TextWebSocketHandler{
 				}
 			else {
 				if(game.getPlayerByIndex(i).getAI().doIParticipateInTournament(game, game.getPlayerByIndex(i))) {
-					logger.info(" player " + game.getCurrentPlayer()+ "joined the tournament");
+					logger.info(" player " + game.getCurrentPlayer()+ " joined the tournament");
 					game.getCurrentTourney().addPlayer(game.getPlayerByIndex(game.getCurrentPlayer()));
 					joined++;
 				}
 			}
 			game.nextPlayer();
-		}
+		}*/
 		
-		if(joined < 1) {
+		/*if(joined < 1) {
 			game.setPhase(Phase.TurnEnd);
 			//this.discardBeforeEnd();
 			game.endTourney();
@@ -683,32 +775,59 @@ public class SocketHandler extends TextWebSocketHandler{
 			game.setPhase(Phase.RunTourney);	
 			game.getCurrentTourney().dealCards();
 			//way to not send whole game state?
-			message.put("type", "GAME_STATE_UPDATE");
-			message.put("data", gson.toJson(game));
+			
 		}
 		
 		for(WebSocketSession user : players.keySet()){
 			user.sendMessage(new TextMessage(gson.toJson(message)));
-		}
+		}*/
+	}
+	
+	/**Handles tournament setup
+	 * @param session current session
+	 */
+	private void setupTourney(WebSocketSession session) {
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		
+		
+	}
+	
+	private void setupTourney(WebSocketSession session, Map<String, String> payload) throws Exception{
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		
+		
+		
+		message.put("type",  "GAME_STATE_UPDATE");
+		message.put("data", gson.toJson(game));
 	}
 	
 	/**
 	 * Handles the RunTourney phase
 	 * @param session current session
-	 * @param payload message to be sent to client 
 	 * @throws Exception error in sending message 
 	 */
-	private void runTourney(WebSocketSession session, Map<String, String> payload) throws Exception {
+	private void runTourney(WebSocketSession session) throws Exception {
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();
-		
-		game.getCurrentTourney().winner(game);
+		System.out.println("Running the tournment");
+		if(game.getCurrentTourney().battle(game, game.getCurrentTourney().getPlayers()).size()>1 &&
+				game.getCurrentTourney().getRound()<2) {
+			game.setPhase(Phase.SetUpTourney);
+		}else {
+			game.getCurrentTourney().winner(game);
+		}
 		
 		game.setPhase(Phase.TurnEnd);
 		//this.discardBeforeEnd();
 		
 		message.put("type", "GAME_STATE_UPDATE");
 		message.put("data", gson.toJson(game));
+		for(WebSocketSession user : players.keySet()){
+			user.sendMessage(new TextMessage(gson.toJson(message)));
+		}
+		
 	}
 	
 	/**

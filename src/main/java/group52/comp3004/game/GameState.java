@@ -153,6 +153,19 @@ public class GameState {
 	public Player getPlayerByIndex(int index) {
 		return this.players.get(index);
 	}
+
+	/**
+	 * Get a player in the of all players by their id
+	 * @param id the player's id
+	 * @return a player or null if there is no player with in id number
+	 */
+	public Player getPlayerById(int id) {
+		for(int i = 0; i < players.size(); i++) {
+			if(players.get(i).getId() == id)
+				return this.players.get(i);			
+		}
+		return null;
+	}
 	
 	/**
 	 * deal a single card to a player

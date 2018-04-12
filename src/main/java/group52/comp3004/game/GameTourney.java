@@ -20,6 +20,8 @@ public class GameTourney {
 	private List<Player> count,count1;
 	private List<Player> winner;
 	private boolean over;
+	private int responded;
+	private int round;
 	static final private Logger logger = Logger.getLogger(GameTourney.class);
 	
 	/**
@@ -56,7 +58,7 @@ public class GameTourney {
 	 * @param player
 	 */
 	public void addPlayer(Player player) {
-		logger.info("Player: " + player.getId() + " joined the quest");
+		logger.info("Player: " + player.getId() + " joined the tourney");
 		this.players.add(player);
 		player.setTourney(this);
 	}
@@ -185,4 +187,9 @@ public class GameTourney {
 	public boolean isPlayer(Player player) {
 		return this.players.contains(player); // || player == sponsor;
 	}
+	
+	public int getResponded() { return responded; }
+	public void incrementResponded() { responded++; }
+
+	public int getRound() { return round; }	
 }
