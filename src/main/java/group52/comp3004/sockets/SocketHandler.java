@@ -73,8 +73,8 @@ public class SocketHandler extends TextWebSocketHandler{
 		case "JOIN_TOURNEY":
 			joinTourney(session, payload);
 			break;
-		case "RUN_TOURNEY":
-			runTourney(session, payload);
+		case "SETUP_TOURNEY":
+			setupTourney(session);
 			break;
 		case "TURN_END":
 			turnEnd(session, payload);
@@ -201,9 +201,9 @@ public class SocketHandler extends TextWebSocketHandler{
 			game.setPhase(Phase.HandleEvent);
 		}
 		else if(game.getRevealedCard() instanceof Tourneys) {
-			//game.setTourney();
-			nextPhase = "SponsorTourney";
-			game.setPhase(Phase.SponsorTourney);
+			game.setTourney();
+			nextPhase = "JoinTourney";
+			game.setPhase(Phase.JoinTourney);
 		}
 		else if(game.getRevealedCard() instanceof QuestCard) {
 			//game.setQuest();
@@ -507,8 +507,35 @@ public class SocketHandler extends TextWebSocketHandler{
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();
 		
-		int joined = 0;
-		for(int i = 0; i < game.getAllPlayers().size(); i++) {
+		System.out.println(payload);
+		
+		String joined = String.valueOf(payload.get("joined"));
+		
+		if(joined.equals("true")) {
+			String playerId = String.valueOf(payload.get("playerId"));
+			int id = (int)Float.parseFloat(playerId);
+			
+			game.getCurrentTourney().addPlayer(game.getPlayerById(id));
+			game.getCurrentTourney().incrementResponded();
+		}
+		else {
+			logger.info("Player: " + id + " declined the tourney");
+			game.getCurrentTourney().incrementResponded();
+		}
+		
+		if(game.getCurrentTourney().getResponded() == 4) {
+			game.setPhase(Phase.RunTourney);
+			message.put("type", "GAME_STATE_UPDATE");
+			message.put("data", gson.toJson(game));
+			for(WebSocketSession user : players.keySet()){
+				user.sendMessage(new TextMessage(gson.toJson(message)));
+			}
+			
+			this.runTourney(session);
+		}
+			
+		//int joined = 0;
+		/*for(int i = 0; i < game.getAllPlayers().size(); i++) {
 			if(game.getPlayerByIndex(i).getAI()==null) {
 				//Code for joining
 					logger.info(" player " + game.getCurrentPlayer()+ "joined the tournament");
@@ -517,15 +544,15 @@ public class SocketHandler extends TextWebSocketHandler{
 				}
 			else {
 				if(game.getPlayerByIndex(i).getAI().doIParticipateInTournament(game, game.getPlayerByIndex(i))) {
-					logger.info(" player " + game.getCurrentPlayer()+ "joined the tournament");
+					logger.info(" player " + game.getCurrentPlayer()+ " joined the tournament");
 					game.getCurrentTourney().addPlayer(game.getPlayerByIndex(game.getCurrentPlayer()));
 					joined++;
 				}
 			}
 			game.nextPlayer();
-		}
+		}*/
 		
-		if(joined < 1) {
+		/*if(joined < 1) {
 			game.setPhase(Phase.TurnEnd);
 			//this.discardBeforeEnd();
 			game.endTourney();
@@ -536,25 +563,33 @@ public class SocketHandler extends TextWebSocketHandler{
 			game.setPhase(Phase.RunTourney);	
 			game.getCurrentTourney().dealCards();
 			//way to not send whole game state?
-			message.put("type", "GAME_STATE_UPDATE");
-			message.put("data", gson.toJson(game));
+			
 		}
 		
 		for(WebSocketSession user : players.keySet()){
 			user.sendMessage(new TextMessage(gson.toJson(message)));
-		}
+		}*/
+	}
+	
+	/**Handles tournament setup
+	 * @param session current session
+	 */
+	private void setupTourney(WebSocketSession session) {
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		
+		
 	}
 	
 	/**
 	 * Handles the RunTourney phase
 	 * @param session current session
-	 * @param payload message to be sent to client 
 	 * @throws Exception error in sending message 
 	 */
-	private void runTourney(WebSocketSession session, Map<String, String> payload) throws Exception {
+	private void runTourney(WebSocketSession session) throws Exception {
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();
-		
+		System.out.println("Running the tournment");
 		game.getCurrentTourney().winner(game);
 		
 		game.setPhase(Phase.TurnEnd);
@@ -562,6 +597,10 @@ public class SocketHandler extends TextWebSocketHandler{
 		
 		message.put("type", "GAME_STATE_UPDATE");
 		message.put("data", gson.toJson(game));
+		for(WebSocketSession user : players.keySet()){
+			user.sendMessage(new TextMessage(gson.toJson(message)));
+		}
+		
 	}
 	
 	/**
