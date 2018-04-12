@@ -98,15 +98,15 @@ public class DeckFactory {
 		/*cards.add(CardFactory.createTourney("Camelot", 3));
 		cards.add(CardFactory.createTourney("Orkney", 2));
 		cards.add(CardFactory.createTourney("Tintagel", 1));
-		cards.add(CardFactory.createTourney("York", 0));
+		cards.add(CardFactory.createTourney("York", 0));*/
 		
-		/*for(int i=0;i<2;i++) cards.add(CardFactory.createQuest("Arthurs_Enemy", 3));
+		for(int i=0;i<2;i++) cards.add(CardFactory.createQuest("Arthurs_Enemy", 3));
 		for(int i=0;i<2;i++) cards.add(CardFactory.createQuest("Boar_Hunt", 2));
 		for(int i=0;i<2;i++) cards.add(CardFactory.createQuest("Repel_Saxon_Raiders", 2));
-		for(int i=0;i<2;i++) cards.add(CardFactory.createEvent("King's_Recognition", new Recognition()));
+		/*for(int i=0;i<2;i++) cards.add(CardFactory.createEvent("King's_Recognition", new Recognition()));
 		for(int i=0;i<2;i++) cards.add(CardFactory.createEvent("Queen's_Favor", new Favor()));
-		for(int i=0;i<2;i++) cards.add(CardFactory.createEvent("Called_to_Camelot", new Camelot()));*/
-		
+		for(int i=0;i<2;i++) cards.add(CardFactory.createEvent("Called_to_Camelot", new Camelot()));
+		*/
 		for(int i=0;i<cards.size();i++) {
 			cards.get(i).setID(i);
 			sDeck.addCard(cards.get(i));
