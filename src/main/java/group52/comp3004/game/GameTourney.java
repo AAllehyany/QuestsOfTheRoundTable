@@ -71,6 +71,33 @@ public class GameTourney {
 		return this.over;
 	}
 	
+	public boolean battle(GameState state){
+		ArrayList<Player> winners = new ArrayList<Player>();
+		int highest = 0;
+		for(int i=0;i<this.players.size();i++) {
+			if(this.players.get(i).getBattlePoints(state)>highest) {
+				highest = this.players.get(i).getBattlePoints(state);
+				winners.clear();
+				winners.add(this.players.get(i));
+			}else if(this.players.get(i).getBattlePoints(state)==highest) {
+				winners.add(this.players.get(i));
+			}
+		}
+		this.players.clear();
+		for(int i=0;i<winners.size();i++) this.players.add(winners.get(i));
+		this.round++;
+		if(winners.size()==1) {
+			this.winner = winners;
+			awardShields();
+			return true;
+		}else if(round==2) {
+			this.winner = winners;
+			awardShields();
+			return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * Each player gets a card dealt to them at the start of a tourney.
 	 */
