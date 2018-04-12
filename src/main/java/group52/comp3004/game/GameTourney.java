@@ -20,6 +20,7 @@ public class GameTourney {
 	private List<Player> count,count1;
 	private List<Player> winner;
 	private boolean over;
+	private int declined;
 	private int round;
 	static final private Logger logger = Logger.getLogger(GameTourney.class);
 	
@@ -34,7 +35,6 @@ public class GameTourney {
 		this.count1 = new ArrayList<Player>();
 		this.winner=new ArrayList<Player>();
 		this.over= false;
-		this.round=0;
 	}
 	
 	/**
@@ -53,21 +53,12 @@ public class GameTourney {
 		return this.players;
 	}
 	
-	
-	/**
-	 * Get how many rounds have happened in the tourney
-	 * @return
-	 */
-	public int getRound() {
-		return this.round;
-	}
-	
 	/**
 	 * Adds a player to the tourney. Needs a separate list because not all players may have joined the tourney.
 	 * @param player
 	 */
 	public void addPlayer(Player player) {
-		logger.info("Player: " + player.getId() + " joined the quest");
+		logger.info("Player: " + player.getId() + " joined the tourney");
 		this.players.add(player);
 		player.setTourney(this);
 	}
@@ -146,7 +137,6 @@ public class GameTourney {
 		}
 		for(int i=0;i<this.count1.size();i++) 
 			logger.info("Player: " + this.count.get(i).getId() + " won the second tournament round");
-		round++;
 		return this.count1;
 	}
 	
@@ -173,8 +163,6 @@ public class GameTourney {
 		}
 		for(int i=0;i<count.size();i++) 
 			logger.info("Player: " + this.count.get(i).getId() + " won the first tournament round");
-		this.players = this.count;
-		round++;
 		return this.count;
 	}
 	
@@ -199,4 +187,12 @@ public class GameTourney {
 	public boolean isPlayer(Player player) {
 		return this.players.contains(player); // || player == sponsor;
 	}
+	
+	public int getReceived() {
+		return declined + this.players.size();
+	}
+	public int getDeclined() { return declined; }
+	public void incrementDeclined() { declined++; }
+
+	public int getRound() { return round; }	
 }

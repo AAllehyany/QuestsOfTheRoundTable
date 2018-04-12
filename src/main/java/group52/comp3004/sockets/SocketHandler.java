@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+<<<<<<< HEAD
+import java.util.stream.Collectors;
+=======
+>>>>>>> branch 'master' of https://github.com/AAllehyany/QuestsOfTheRoundTable
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -39,6 +43,7 @@ public class SocketHandler extends TextWebSocketHandler{
 	private GameState game = new GameState();
 	private ConcurrentHashMap<WebSocketSession, Player> players = new ConcurrentHashMap();
 	private static int id = 0;
+	private static int readyCounter = 0;
 	
 	@Override
 	public void handleTextMessage(WebSocketSession session, TextMessage mes) throws Exception{
@@ -62,6 +67,7 @@ public class SocketHandler extends TextWebSocketHandler{
 			joinQuest(session, payload);
 			break;			
 		case "SETUP_QUEST":
+			logger.info(payload.get("data"));
 			setupQuest(session, payload);
 			break;
 		case "PLAY_QUEST":
@@ -73,15 +79,21 @@ public class SocketHandler extends TextWebSocketHandler{
 		case "JOIN_TOURNEY":
 			joinTourney(session, payload);
 			break;
-		case "RUN_TOURNEY":
-			runTourney(session, payload);
+		case "SETUP_TOURNEY":
+			setupTourney(session, payload);
 			break;
 		case "TURN_END":
 			turnEnd(session, payload);
 			break;
 		case "GAME_OVER":
 			gameOver(session, payload);
+			break;			
+		case "ADD_CARD_SPONSOR":
+			addCardSponsor(session, payload);
 			break;
+			
+		case "ADD_CARD_QUEST":
+			addCardQuest(session, payload);
 		case "MERLIN":
 			merlin(session, payload);
 			break;
@@ -94,6 +106,161 @@ public class SocketHandler extends TextWebSocketHandler{
 		}	
 	}
 	
+	private void addCardSponsor(WebSocketSession session, Map<String, String> payload) throws Exception {
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		logger.info("attempting to set up quest stages...");
+		Player sponsor = game.getCurrentSponsor();
+		Player current = players.get(session);
+		
+		if(sponsor.getId() != current.getId()) {
+			logger.info("Player attempting to set up quest is not the sponsor. Rejecting...");
+			message.put("type", "ERROR");
+			message.put("data", "Cannot set up quest stages because you are not the sponsor");
+			session.sendMessage(new TextMessage(gson.toJson(message)));
+			return;
+		}
+		
+		String cardId = String.valueOf(payload.get("data"));
+		AdventureCard card = current.getCard((int) Float.parseFloat(cardId));
+		
+		if(game.getPhase() == Phase.SetupQuest) {
+			if(!(card instanceof Foe) && !(card instanceof Tests) && !(card instanceof Weapon)) {
+				logger.info("Clicking illegal card for setting quest");
+				message.put("type", "ERROR");
+				message.put("data", "Illegal card type in quest");
+				session.sendMessage(new TextMessage(gson.toJson(message)));
+			}
+			else {
+				int numFoes = (int) current.getTemp().stream().filter(c -> c instanceof Foe).count();
+				int numTests = (int) current.getTemp().stream().filter(c -> c instanceof Tests).count();
+				
+				if(card instanceof Tests && numTests > 0) {
+					message.put("type", "ERROR");
+					message.put("data", "Illegal card type in quest");
+					session.sendMessage(new TextMessage(gson.toJson(message)));
+					return;
+				}
+				
+				if(!(card instanceof Weapon)) {
+					
+					if((numFoes + numTests) >= game.getCurrentQuest().getNumStages()) {
+						message.put("type", "ERROR");
+						message.put("data", "Too many cards in stage");
+						session.sendMessage(new TextMessage(gson.toJson(message)));
+						return;
+					}
+				}
+				
+				
+				// check for adding weapons.
+				if( card instanceof Weapon ) {
+					if(current.getTempWeapons().stream().map(c -> c.getName()).collect(Collectors.toList()).contains(card.getName())) {
+						message.put("type", "ERROR");
+						message.put("data", "Too many weapons of same type");
+						session.sendMessage(new TextMessage(gson.toJson(message)));
+						return;
+					}
+					
+					if(current.getTemp().size() > 0 && !(current.getTemp().get(current.getTemp().size() - 1) instanceof Tests)) {
+						logger.info(card.getName()+ " clicked");
+						current.getTemp().add(card);
+						current.addTempWeapon(card);
+						current.getHand().remove(card);
+						
+						message.put("type", "GAME_STATE_UPDATE");
+						message.put("data", gson.toJson(game));
+						session.sendMessage(new TextMessage(gson.toJson(message)));
+					}
+						
+				}
+				else {
+					current.getTempWeapons().clear();
+					logger.info(card.getName()+ " clicked");
+					current.getTemp().add(card);
+					current.getHand().remove(card);
+					message.put("type", "GAME_STATE_UPDATE");
+					message.put("data", gson.toJson(game));
+					session.sendMessage(new TextMessage(gson.toJson(message)));
+				}
+				
+			}
+		}
+		
+	}
+	
+	private void addCardQuest(WebSocketSession session, Map<String, String> payload) throws Exception {
+		
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		
+		logger.info("attempting to participate in quest...");
+		Player sponsor = game.getCurrentSponsor();
+		Player current = players.get(session);
+		GameQuest quest = game.getCurrentQuest();
+		
+		if(sponsor.getId() == current.getId() || quest.isPlayer(current)) {
+			logger.info("Player attempting to play in quest illegally. Rejecting...");
+			message.put("type", "ERROR");
+			message.put("data", "Cannot play in quest.");
+			session.sendMessage(new TextMessage(gson.toJson(message)));
+			return;
+		}
+		
+		if(current.isReady()) {
+			logger.info("Player already set up the quest and tries to set up again.");
+			message.put("type", "ERROR");
+			message.put("data", "Already set up your cards for this stage!");
+			session.sendMessage(new TextMessage(gson.toJson(message)));
+			return;
+		}
+		
+		String cardId = String.valueOf(payload.get("data"));
+		AdventureCard card = current.getCard((int) Float.parseFloat(cardId));
+		
+		if(!(card instanceof Ally) && !(card instanceof Amour) && !(card instanceof Weapon)) {
+			logger.info("Player attempting to play in quest illegally. Rejecting...");
+			message.put("type", "ERROR");
+			message.put("data", "Illegal card type in quest.");
+			session.sendMessage(new TextMessage(gson.toJson(message)));
+			return;
+		}
+		
+		if(card instanceof Weapon) {
+			if(!current.canPlayTemp(card)) {
+				logger.info("Player attempting to play in quest illegally. Rejecting...");
+				message.put("type", "ERROR");
+				message.put("data", "Too many weapons in same quest.");
+				session.sendMessage(new TextMessage(gson.toJson(message)));
+				return;
+			}
+			logger.info(card.getName()+ " clicked");
+			current.getTemp().add(card);
+			current.getHand().remove(card);
+			message.put("type", "GAME_STATE_UPDATE");
+			message.put("data", gson.toJson(game));
+			session.sendMessage(new TextMessage(gson.toJson(message)));
+		}
+		else {
+			int countAmours = (int) current.getTemp().stream().filter(c -> c instanceof Amour).count();
+			if(card instanceof Amour && countAmours > 0) {
+				logger.info("Player attempting to play in quest illegally. Rejecting...");
+				message.put("type", "ERROR");
+				message.put("data", "too many amours.");
+				session.sendMessage(new TextMessage(gson.toJson(message)));
+				return;
+			}
+			
+			logger.info(card.getName()+ " clicked");
+			current.getTemp().add(card);
+			current.getHand().remove(card);
+			message.put("type", "GAME_STATE_UPDATE");
+			message.put("data", gson.toJson(game));
+			session.sendMessage(new TextMessage(gson.toJson(message)));
+		}
+				
+	}
+
 	/**
 	 * Handles an invalid event being sent to the server
 	 * @param session current session
@@ -207,9 +374,9 @@ public class SocketHandler extends TextWebSocketHandler{
 			game.setPhase(Phase.HandleEvent);
 		}
 		else if(game.getRevealedCard() instanceof Tourneys) {
-			//game.setTourney();
-			nextPhase = "SponsorTourney";
-			game.setPhase(Phase.SponsorTourney);
+			game.setTourney();
+			nextPhase = "JoinTourney";
+			game.setPhase(Phase.JoinTourney);
 		}
 		else if(game.getRevealedCard() instanceof QuestCard) {
 			//game.setQuest();
@@ -247,6 +414,10 @@ public class SocketHandler extends TextWebSocketHandler{
 		
 		message.put("type", "GAME_STATE_UPDATE");
 		message.put("data", gson.toJson(game));
+		
+		for(WebSocketSession user : players.keySet()) {
+			user.sendMessage(new TextMessage(gson.toJson(message)));
+		}
 	}
 	
 	private void joinQuest(WebSocketSession session, Map<String, String> payload) throws Exception {
@@ -298,26 +469,16 @@ public class SocketHandler extends TextWebSocketHandler{
 			return; 
 		} 	
 		
-		if(game.getPlayerByIndex(game.getCurrentPlayer()).getId() != players.get(session).getId()) {  
-			logger.info("Player attempting to sponsor quest illegally");  
-			message.put("type", "ERROR");  
-			message.put("data", "Cannot sponsor quest"); 
-			session.sendMessage(new TextMessage(gson.toJson(message)));
-			return;
-		}
+		Player current = players.get(session);
 		
-		if(game.getPlayerByIndex(game.getCurrentPlayer()).hasTest()) {
-			if(game.getPlayerByIndex(game.getCurrentPlayer()).countFoes()+1<game.getCurrentQuest().getNumStages())
-				logger.info("Player does not have enough cards to sponosr the quest");
+		if(!game.canSponsorQuest(current)) {
+			logger.info("Player does not have enough cards to sponosr the quest");
 			return;
-		}else {
-			if(game.getPlayerByIndex(game.getCurrentPlayer()).countFoes()<game.getCurrentQuest().getNumStages())
-				return;
 		}
 		
 		logger.info("Player can successfully sponsor the quest");
 		
-		game.setQuest(); 
+		game.setQuest(current); 
 		game.setPhase(Phase.SetupQuest); 
 		
 		logger.info("Quest successfully sposnored by the player");
@@ -415,9 +576,9 @@ public class SocketHandler extends TextWebSocketHandler{
 	 * 
 	 */
 	private void setupQuest(WebSocketSession session, Map<String, String> payload) throws Exception {
+		
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();
-		
 		logger.info("attempting to set up quest stages...");
 		Player sponsor = game.getCurrentSponsor();
 		Player current = players.get(session);
@@ -430,24 +591,7 @@ public class SocketHandler extends TextWebSocketHandler{
 			return;
 		}
 		
-		ArrayList<AdventureCard> cards = new ArrayList<>();
-		
-		ArrayList<String> names = gson.fromJson(payload.get("data"), ArrayList.class);
-		
-		for(String name : names) {
-			AdventureCard card = current.getCard(name);
-			
-			if(card == null) {
-				logger.info("Attempting to set up quest with cards not in hand");
-				message.put("type", "ERROR");
-				message.put("data", "Card " + name + " does not exist in your hand!");
-				session.sendMessage(new TextMessage(gson.toJson(message)));
-				return;
-			}
-			
-			cards.add(card);
-		}
-		
+		ArrayList<AdventureCard> cards = current.getTemp();
 		ArrayList<Stage> stages = new ArrayList<>();
 		Foe currentFoe = null;
 		
@@ -476,14 +620,27 @@ public class SocketHandler extends TextWebSocketHandler{
 		stages.forEach(s -> game.getCurrentQuest().addStage(game, s));
 		logger.info("Stages in the quest: " + game.getCurrentQuest().getStages().size());
 		logger.info("Prepared stages for the quest: " + stages.size());
+		if(game.getCurrentQuest().getStages().size() < stages.size() ||
+				stages.size() != game.getCurrentQuest().getQuest().getStages()) {
+			current.tempToHand();
+			game.getCurrentQuest().clearAllStages();
+			message.put("type", "GAME_STATE_UPDATE");
+			message.put("data", gson.toJson(game));
+			session.sendMessage(new TextMessage(gson.toJson(message)));
+		}
+		else {
+			//cards are moved into quest
+			current.getTemp().clear();
+			game.setPhase(Phase.RunQuest);
+			message.put("type", "GAME_STATE_UPDATE");
+			message.put("data", gson.toJson(game));
+			
+			logger.info("Sending quest information to players");
+			for(WebSocketSession user : players.keySet()) {
+				user.sendMessage(new TextMessage(gson.toJson(message)));
+			}		
+		}
 		
-		message.put("type", "GAME_STATE_UPDATE");
-		message.put("data", gson.toJson(game));
-		
-		logger.info("Sending quest information to players");
-		for(WebSocketSession user : players.keySet()) {
-			user.sendMessage(new TextMessage(gson.toJson(message)));
-		}		
 	}
 	
 	/**
@@ -516,38 +673,17 @@ public class SocketHandler extends TextWebSocketHandler{
 			return;
 		}
 		
-		ArrayList<AdventureCard> cards = new ArrayList<>();
+		logger.info("Playing in a Quest!");
+		logger.info("Num players ready: " + readyCounter);
+		readyCounter++;
+		logger.info("Num players ready: " + readyCounter);
+		int numPlayers = quest.getPlayers().size();
 		
-		ArrayList<String> names = gson.fromJson(payload.get("data"), ArrayList.class);
+		logger.info("Num players in quest so far: " + numPlayers);
 		
-		for(String name : names) {
-			AdventureCard card = current.getCard(name);
-			
-			if(card == null) {
-				logger.info("Attempting to play in quest with cards not in hand");
-				message.put("type", "ERROR");
-				message.put("data", "Card " + name + " does not exist in your hand!");
-				session.sendMessage(new TextMessage(gson.toJson(message)));
-				return;
-			}
-			
-			cards.add(card);
-		}
-				
-		for(AdventureCard card : cards) {
-			if(!current.canPlayTemp(card) || 
-					(!(card instanceof Ally) && !(card instanceof Amour) && !(card instanceof Weapon))) {
-				message.put("type", "ERROR");
-				message.put("data", "Illegal card type to play in quest");
-				session.sendMessage(new TextMessage(gson.toJson(message)));
-				return;
-			}
-			
-			current.playToTemp(card);
-		}
-
-		current.setReady();
-		
+		logger.info("Received player submission for quest!");
+		logger.info("Moving to next player in quest!");
+		//this.playQuest();
 		message.put("type", "GAME_STATE_UPDATE");
 		message.put("data", gson.toJson(game));
 		
@@ -558,6 +694,19 @@ public class SocketHandler extends TextWebSocketHandler{
 				user.sendMessage(new TextMessage(gson.toJson(message)));
 			}
 		}
+		
+//		if(numPlayers == readyCounter) {
+//			System.out.println("Everyone is ready!");
+//			game.playCurrentQuestStage();
+//			readyCounter = 0;
+//			if(game.getCurrentQuest().isOver()) {
+//				logger.info("No one left in the quest, quest over!");
+//				//this.endQuest();
+//				return;
+//			}
+//			//middleController.setStageArrow(model.getCurrentQuest().getCurrentStage());
+//			
+//		}
 	}
 	
 	/**
@@ -570,49 +719,47 @@ public class SocketHandler extends TextWebSocketHandler{
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();
 		
-		int joined = 0;
-		for(int i = 0; i < game.getAllPlayers().size(); i++) {
-			if(game.getPlayerByIndex(i).getAI()==null) {
-				//Code for joining
-					logger.info(" player " + game.getCurrentPlayer()+ "joined the tournament");
-					game.getCurrentTourney().addPlayer(game.getPlayerByIndex(game.getCurrentPlayer()));
-					joined++;
-				}
-			else {
-				if(game.getPlayerByIndex(i).getAI().doIParticipateInTournament(game, game.getPlayerByIndex(i))) {
-					logger.info(" player " + game.getCurrentPlayer()+ "joined the tournament");
-					game.getCurrentTourney().addPlayer(game.getPlayerByIndex(game.getCurrentPlayer()));
-					joined++;
-				}
-			}
-			game.nextPlayer();
+		System.out.println(payload);
+		
+		String joined = String.valueOf(payload.get("joined"));
+		String playerId = String.valueOf(payload.get("playerId"));
+		int id = (int)Float.parseFloat(playerId);
+		
+		if(joined.equals("true")) {	
+			game.getCurrentTourney().addPlayer(game.getPlayerById(id));
+		}
+		else {
+			logger.info("Player: " + id + " declined the tourney");
+			game.getCurrentTourney().incrementDeclined();
 		}
 		
-		if(joined < 1) {
+		if(game.getCurrentTourney().getDeclined() == 4) {
 			game.setPhase(Phase.TurnEnd);
-			//this.discardBeforeEnd();
-			game.endTourney();
 			message.put("type", "PHASE_CHANGE");
-			message.put("data", "TurnEnd");
+			message.put("data", "TURN_END");
+			for(WebSocketSession user : players.keySet()){
+				user.sendMessage(new TextMessage(gson.toJson(message)));
+			}
 		}
-		else if (joined >= 1){
-			game.setPhase(Phase.RunTourney);	
-			game.getCurrentTourney().dealCards();
-			//way to not send whole game state?
+		else if (game.getCurrentTourney().getReceived() == 4){
+			game.setPhase(Phase.SetupTourney);
 			message.put("type", "GAME_STATE_UPDATE");
 			message.put("data", gson.toJson(game));
-		}
-		
-		for(WebSocketSession user : players.keySet()){
-			user.sendMessage(new TextMessage(gson.toJson(message)));
+			for(WebSocketSession user : players.keySet()){
+				user.sendMessage(new TextMessage(gson.toJson(message)));
+			}
 		}
 	}
 	
-	private void setupTourney(WebSocketSession session, Map<String, String> payload) throws Exception{
+	/**Handles tournament setup
+	 * @param session current session
+	 */
+	private void setupTourney(WebSocketSession session, Map<String, String> payload) {
+		logger.info("Players setting up tourney");
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();
 		
-		
+		System.out.println(payload);
 		
 		message.put("type",  "GAME_STATE_UPDATE");
 		message.put("data", gson.toJson(game));
@@ -621,13 +768,12 @@ public class SocketHandler extends TextWebSocketHandler{
 	/**
 	 * Handles the RunTourney phase
 	 * @param session current session
-	 * @param payload message to be sent to client 
 	 * @throws Exception error in sending message 
 	 */
-	private void runTourney(WebSocketSession session, Map<String, String> payload) throws Exception {
+	private void runTourney(WebSocketSession session) throws Exception {
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();
-		
+		System.out.println("Running the tournment");
 		if(game.getCurrentTourney().battle(game, game.getCurrentTourney().getPlayers()).size()>1 &&
 				game.getCurrentTourney().getRound()<2) {
 			game.setPhase(Phase.SetUpTourney);
@@ -640,6 +786,10 @@ public class SocketHandler extends TextWebSocketHandler{
 		
 		message.put("type", "GAME_STATE_UPDATE");
 		message.put("data", gson.toJson(game));
+		for(WebSocketSession user : players.keySet()){
+			user.sendMessage(new TextMessage(gson.toJson(message)));
+		}
+		
 	}
 	
 	/**

@@ -42,6 +42,7 @@ public class Player {
 	private int offeredBids;
 	private AbstractAI strategy;
 	private boolean ready;
+	private ArrayList<AdventureCard> tempWeapons;
 	
 	static final private Logger logger = Logger.getLogger(Player.class);
 	
@@ -65,6 +66,8 @@ public class Player {
 		game = gs;
 		offeredBids = 0;
 		strategy = null;
+		tempWeapons = new ArrayList<>();
+
 	}
 	
 	/**
@@ -91,6 +94,15 @@ public class Player {
 		else if(s==2) strategy = new Strategy2();
 		else if(s==3) strategy = new Strategy3();
 		else strategy = null;
+		
+	}
+	
+	public ArrayList<AdventureCard> getTempWeapons() {
+		return this.tempWeapons;
+	}
+	
+	public void addTempWeapon(AdventureCard card) {
+		this.tempWeapons.add(card);
 	}
 	
 	/**
@@ -110,6 +122,7 @@ public class Player {
 		quest = null;
 		tourney = null;
 		offeredBids = 0;
+		tempWeapons = new ArrayList<>();
 	}
 	
 	/**
@@ -117,6 +130,10 @@ public class Player {
 	 */
 	public Integer getId() {
 		return id;
+	}
+	
+	public boolean equals(Player other) {
+		return this.id==other.getId();
 	}
 	
 	/**
@@ -551,11 +568,12 @@ public class Player {
 	 * 
 	 * @returns  the card from hand or null if it does not exist
 	 */
-	public AdventureCard getCard(String name) {
+	public AdventureCard getCard(Integer name) {
 		logger.info("Looking for card " + name + " in player " + id + "'s hand");
 				
 		for(AdventureCard card : hand) {
-			if(card.getName().equals(name)) {
+			if(card.getID() == name) {
+				logger.info("Found the card in player's hand " + card.getName());
 				return card;
 			}
 		}
