@@ -1,0 +1,9 @@
+1.Player is asked if he wants to sponsor the quest.
+2.Once a player decides to sponsor the quest, he has the choice of playing cards to the field to set up the quest.
+3.Players are asked if they want to join the quest, if they decide to join the quest, he is able to play cards to the field to defeat
+the quest that the sponsor set up.
+4.Once the quest is over, players get cards from the deck.
+5.Players are asked if they want to join the tournement. If they decide to join the tournement,they will each get a card from the deck and
+they are able to play cards to the field to battle with each others.
+6.Events happen in between some of the tournement and quest, where players have a chance to discard cards, draw cards, earn extra shields 
+after the events take place.
