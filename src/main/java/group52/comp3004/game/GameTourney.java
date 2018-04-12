@@ -35,6 +35,7 @@ public class GameTourney {
 		this.count1 = new ArrayList<Player>();
 		this.winner=new ArrayList<Player>();
 		this.over= false;
+		this.round=0;
 	}
 	
 	/**
