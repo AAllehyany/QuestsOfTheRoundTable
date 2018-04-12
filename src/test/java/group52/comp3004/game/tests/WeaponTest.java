@@ -71,6 +71,7 @@ class WeaponTest {
 		state = new GameState();
 		Foe giant = new Foe("Giant", 40);
 		giant.addWeapon(dagger);
+		giant.hasWeapon(dagger);
 		boolean result = giant.addWeapon(dagger);
 		assertEquals(false, (boolean) result);
 		assertEquals(45, (int) giant.getBp(state));

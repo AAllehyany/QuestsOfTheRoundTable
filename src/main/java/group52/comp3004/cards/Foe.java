@@ -92,6 +92,7 @@ public class Foe extends AdventureCard{
 	 * @return true if weapon is in the set
 	 */
     public boolean hasWeapon(Weapon wep){
+    	if(this.weapons.contains(wep)) logger.info("Foe already has " + wep.getName());
         return this.weapons.contains(wep);
     }
 
