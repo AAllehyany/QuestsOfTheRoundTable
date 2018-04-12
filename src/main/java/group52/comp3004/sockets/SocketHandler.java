@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-<<<<<<< HEAD
 import java.util.stream.Collectors;
-=======
->>>>>>> branch 'master' of https://github.com/AAllehyany/QuestsOfTheRoundTable
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -472,6 +469,10 @@ public class SocketHandler extends TextWebSocketHandler{
 		Player current = players.get(session);
 		GameQuest quest = game.getCurrentQuest();
 		
+		String joined = String.valueOf(payload.get("joined"));
+		String playerId = String.valueOf(payload.get("playerId"));
+		int id = (int)Float.parseFloat(playerId);
+		
 		if(quest == null || quest.isPlayer(current)) {
 			logger.info("Attempting to join a quest illegally.");
 			message.put("type", "ERROR");
@@ -491,16 +492,32 @@ public class SocketHandler extends TextWebSocketHandler{
 		quest.addPlayer(current);
 		current.setQuest(quest);
 		
-		logger.info("Player " + current.getId() + " joined quest");
-		message.put("type", "GAME_STATE_UPDATE");
-		message.put("data", gson.toJson(game));
-		
-		for(WebSocketSession user : players.keySet()) {
-			user.sendMessage(new TextMessage(gson.toJson(message)));
+		if(joined.equals("true")) {	
+			game.getCurrentQuest().addPlayer(game.getPlayerById(id));
+		}
+		else {
+			logger.info("Player: " + id + " declined the quest");
+			game.getCurrentQuest().incrementDeclined();
 		}
 		
-		
+		if(game.getCurrentQuest().getDeclined() == 4) {
+			game.setPhase(Phase.TurnEnd);
+			message.put("type", "PHASE_CHANGE");
+			message.put("data", "TURN_END");
+			for(WebSocketSession user : players.keySet()){
+				user.sendMessage(new TextMessage(gson.toJson(message)));
+			}
+		}
+		else if (game.getCurrentQuest().getReceived() == 4){
+			game.setPhase(Phase.SetupTourney);
+			message.put("type", "GAME_STATE_UPDATE");
+			message.put("data", gson.toJson(game));
+			for(WebSocketSession user : players.keySet()){
+				user.sendMessage(new TextMessage(gson.toJson(message)));
+			}
+		}
 	}
+	
 	private void sponsorQuest(WebSocketSession session, Map<String, String> payload) throws Exception { 
 		Gson gson = new GsonBuilder().create(); 
 		Map<String, String> message = new HashMap<>(); 

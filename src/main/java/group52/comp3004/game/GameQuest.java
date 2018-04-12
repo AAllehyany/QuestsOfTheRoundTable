@@ -26,6 +26,7 @@ public class GameQuest {
 	private int currentStage;
 	private Player sponsor;
 	private boolean over;
+	private int declined;
 
 	static final private Logger logger = Logger.getLogger(GameQuest.class);
 	
@@ -354,4 +355,10 @@ public class GameQuest {
 		dealCardsToSponsor();
 		awardShields(bonus);
 	}
+	
+	public int getReceived() {
+		return declined + this.players.size();
+	}
+	public int getDeclined() { return declined; }
+	public void incrementDeclined() { declined++; }
 }
