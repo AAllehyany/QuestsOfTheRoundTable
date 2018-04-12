@@ -20,7 +20,7 @@ public class GameTourney {
 	private List<Player> count,count1;
 	private List<Player> winner;
 	private boolean over;
-	private int responded;
+	private int declined;
 	private int round;
 	static final private Logger logger = Logger.getLogger(GameTourney.class);
 	
@@ -188,8 +188,11 @@ public class GameTourney {
 		return this.players.contains(player); // || player == sponsor;
 	}
 	
-	public int getResponded() { return responded; }
-	public void incrementResponded() { responded++; }
+	public int getReceived() {
+		return declined + this.players.size();
+	}
+	public int getDeclined() { return declined; }
+	public void incrementDeclined() { declined++; }
 
 	public int getRound() { return round; }	
 }

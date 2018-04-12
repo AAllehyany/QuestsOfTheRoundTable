@@ -1,0 +1,1097 @@
+2018-04-11 22:30:29 INFO  CardFactory:45 - Ally: Sir_Percival created
+2018-04-11 22:30:29 INFO  CardFactory:30 - Ally: Sir_Galahad created
+2018-04-11 22:30:29 INFO  CardFactory:45 - Ally: Sir_Lancelot created
+2018-04-11 22:30:29 INFO  CardFactory:30 - Ally: King_Arthur created
+2018-04-11 22:30:29 INFO  CardFactory:45 - Ally: Sir_Tristan created
+2018-04-11 22:30:29 INFO  CardFactory:45 - Ally: King_Pellinore created
+2018-04-11 22:30:29 INFO  CardFactory:45 - Ally: Sir_Gawain created
+2018-04-11 22:30:29 INFO  CardFactory:30 - Ally: Queen_Guinevere created
+2018-04-11 22:30:29 INFO  CardFactory:45 - Ally: Queen_Iseult created
+2018-04-11 22:30:29 INFO  CardFactory:55 - Ally: Merlin created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Excalibur created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Excalibur created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Lance created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Lance created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Lance created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Lance created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Lance created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Lance created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Battle_Ax created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Battle_Ax created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Battle_Ax created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Battle_Ax created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Battle_Ax created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Battle_Ax created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Battle_Ax created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Battle_Ax created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Sword created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Sword created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Sword created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Sword created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Sword created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Sword created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Sword created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Sword created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Sword created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Sword created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Sword created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Sword created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Sword created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Sword created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Sword created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Sword created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Horse created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Horse created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Horse created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Horse created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Horse created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Horse created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Horse created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Horse created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Horse created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Horse created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Horse created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Dagger created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Dagger created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Dagger created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Dagger created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Dagger created
+2018-04-11 22:30:29 INFO  CardFactory:18 - Weapon: Dagger created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Dragon created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Giant created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Giant created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Mordred created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Mordred created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Mordred created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Mordred created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Green_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Green_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Black_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Black_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Black_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Evil_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Evil_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Evil_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Evil_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Evil_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Evil_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Saxon_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Saxon_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Saxon_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Saxon_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Saxon_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Saxon_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Saxon_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Saxon_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Robber_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Robber_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Robber_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Robber_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Robber_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Robber_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Robber_Knight created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Saxons created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Saxons created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Saxons created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Saxons created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Saxons created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Boar created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Boar created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Boar created
+2018-04-11 22:30:29 INFO  CardFactory:91 - Foe: Boar created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Thieves created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Thieves created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Thieves created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Thieves created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Thieves created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Thieves created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Thieves created
+2018-04-11 22:30:29 INFO  CardFactory:78 - Foe: Thieves created
+2018-04-11 22:30:29 INFO  CardFactory:67 - Amour: Amour created
+2018-04-11 22:30:29 INFO  CardFactory:67 - Amour: Amour created
+2018-04-11 22:30:29 INFO  CardFactory:67 - Amour: Amour created
+2018-04-11 22:30:29 INFO  CardFactory:67 - Amour: Amour created
+2018-04-11 22:30:29 INFO  CardFactory:67 - Amour: Amour created
+2018-04-11 22:30:29 INFO  CardFactory:67 - Amour: Amour created
+2018-04-11 22:30:29 INFO  CardFactory:67 - Amour: Amour created
+2018-04-11 22:30:29 INFO  CardFactory:67 - Amour: Amour created
+2018-04-11 22:30:29 INFO  CardFactory:102 - Test: Valor created
+2018-04-11 22:30:29 INFO  CardFactory:102 - Test: Valor created
+2018-04-11 22:30:29 INFO  CardFactory:102 - Test: Temptation created
+2018-04-11 22:30:29 INFO  CardFactory:102 - Test: Temptation created
+2018-04-11 22:30:29 INFO  CardFactory:102 - Test: Morgan_Le_Fey created
+2018-04-11 22:30:29 INFO  CardFactory:102 - Test: Morgan_Le_Fey created
+2018-04-11 22:30:29 INFO  CardFactory:102 - Test: Questing_Beast created
+2018-04-11 22:30:29 INFO  CardFactory:102 - Test: Questing_Beast created
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sir_Percival ID set to 0
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sir_Percival to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sir_Galahad ID set to 1
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sir_Galahad to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sir_Lancelot ID set to 2
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sir_Lancelot to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: King_Arthur ID set to 3
+2018-04-11 22:30:29 INFO  Deck:88 - Added King_Arthur to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sir_Tristan ID set to 4
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sir_Tristan to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: King_Pellinore ID set to 5
+2018-04-11 22:30:29 INFO  Deck:88 - Added King_Pellinore to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sir_Gawain ID set to 6
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sir_Gawain to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Queen_Guinevere ID set to 7
+2018-04-11 22:30:29 INFO  Deck:88 - Added Queen_Guinevere to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Queen_Iseult ID set to 8
+2018-04-11 22:30:29 INFO  Deck:88 - Added Queen_Iseult to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Merlin ID set to 9
+2018-04-11 22:30:29 INFO  Deck:88 - Added Merlin to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Excalibur ID set to 10
+2018-04-11 22:30:29 INFO  Deck:88 - Added Excalibur to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Excalibur ID set to 11
+2018-04-11 22:30:29 INFO  Deck:88 - Added Excalibur to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Lance ID set to 12
+2018-04-11 22:30:29 INFO  Deck:88 - Added Lance to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Lance ID set to 13
+2018-04-11 22:30:29 INFO  Deck:88 - Added Lance to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Lance ID set to 14
+2018-04-11 22:30:29 INFO  Deck:88 - Added Lance to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Lance ID set to 15
+2018-04-11 22:30:29 INFO  Deck:88 - Added Lance to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Lance ID set to 16
+2018-04-11 22:30:29 INFO  Deck:88 - Added Lance to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Lance ID set to 17
+2018-04-11 22:30:29 INFO  Deck:88 - Added Lance to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Battle_Ax ID set to 18
+2018-04-11 22:30:29 INFO  Deck:88 - Added Battle_Ax to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Battle_Ax ID set to 19
+2018-04-11 22:30:29 INFO  Deck:88 - Added Battle_Ax to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Battle_Ax ID set to 20
+2018-04-11 22:30:29 INFO  Deck:88 - Added Battle_Ax to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Battle_Ax ID set to 21
+2018-04-11 22:30:29 INFO  Deck:88 - Added Battle_Ax to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Battle_Ax ID set to 22
+2018-04-11 22:30:29 INFO  Deck:88 - Added Battle_Ax to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Battle_Ax ID set to 23
+2018-04-11 22:30:29 INFO  Deck:88 - Added Battle_Ax to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Battle_Ax ID set to 24
+2018-04-11 22:30:29 INFO  Deck:88 - Added Battle_Ax to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Battle_Ax ID set to 25
+2018-04-11 22:30:29 INFO  Deck:88 - Added Battle_Ax to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sword ID set to 26
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sword to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sword ID set to 27
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sword to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sword ID set to 28
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sword to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sword ID set to 29
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sword to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sword ID set to 30
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sword to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sword ID set to 31
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sword to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sword ID set to 32
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sword to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sword ID set to 33
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sword to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sword ID set to 34
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sword to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sword ID set to 35
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sword to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sword ID set to 36
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sword to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sword ID set to 37
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sword to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sword ID set to 38
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sword to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sword ID set to 39
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sword to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sword ID set to 40
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sword to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Sword ID set to 41
+2018-04-11 22:30:29 INFO  Deck:88 - Added Sword to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Horse ID set to 42
+2018-04-11 22:30:29 INFO  Deck:88 - Added Horse to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Horse ID set to 43
+2018-04-11 22:30:29 INFO  Deck:88 - Added Horse to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Horse ID set to 44
+2018-04-11 22:30:29 INFO  Deck:88 - Added Horse to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Horse ID set to 45
+2018-04-11 22:30:29 INFO  Deck:88 - Added Horse to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Horse ID set to 46
+2018-04-11 22:30:29 INFO  Deck:88 - Added Horse to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Horse ID set to 47
+2018-04-11 22:30:29 INFO  Deck:88 - Added Horse to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Horse ID set to 48
+2018-04-11 22:30:29 INFO  Deck:88 - Added Horse to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Horse ID set to 49
+2018-04-11 22:30:29 INFO  Deck:88 - Added Horse to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Horse ID set to 50
+2018-04-11 22:30:29 INFO  Deck:88 - Added Horse to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Horse ID set to 51
+2018-04-11 22:30:29 INFO  Deck:88 - Added Horse to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Horse ID set to 52
+2018-04-11 22:30:29 INFO  Deck:88 - Added Horse to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Dagger ID set to 53
+2018-04-11 22:30:29 INFO  Deck:88 - Added Dagger to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Dagger ID set to 54
+2018-04-11 22:30:29 INFO  Deck:88 - Added Dagger to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Dagger ID set to 55
+2018-04-11 22:30:29 INFO  Deck:88 - Added Dagger to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Dagger ID set to 56
+2018-04-11 22:30:29 INFO  Deck:88 - Added Dagger to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Dagger ID set to 57
+2018-04-11 22:30:29 INFO  Deck:88 - Added Dagger to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Dagger ID set to 58
+2018-04-11 22:30:29 INFO  Deck:88 - Added Dagger to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Dragon ID set to 59
+2018-04-11 22:30:29 INFO  Deck:88 - Added Dragon to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Giant ID set to 60
+2018-04-11 22:30:29 INFO  Deck:88 - Added Giant to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Giant ID set to 61
+2018-04-11 22:30:29 INFO  Deck:88 - Added Giant to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Mordred ID set to 62
+2018-04-11 22:30:29 INFO  Deck:88 - Added Mordred to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Mordred ID set to 63
+2018-04-11 22:30:29 INFO  Deck:88 - Added Mordred to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Mordred ID set to 64
+2018-04-11 22:30:29 INFO  Deck:88 - Added Mordred to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Mordred ID set to 65
+2018-04-11 22:30:29 INFO  Deck:88 - Added Mordred to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Green_Knight ID set to 66
+2018-04-11 22:30:29 INFO  Deck:88 - Added Green_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Green_Knight ID set to 67
+2018-04-11 22:30:29 INFO  Deck:88 - Added Green_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Black_Knight ID set to 68
+2018-04-11 22:30:29 INFO  Deck:88 - Added Black_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Black_Knight ID set to 69
+2018-04-11 22:30:29 INFO  Deck:88 - Added Black_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Black_Knight ID set to 70
+2018-04-11 22:30:29 INFO  Deck:88 - Added Black_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Evil_Knight ID set to 71
+2018-04-11 22:30:29 INFO  Deck:88 - Added Evil_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Evil_Knight ID set to 72
+2018-04-11 22:30:29 INFO  Deck:88 - Added Evil_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Evil_Knight ID set to 73
+2018-04-11 22:30:29 INFO  Deck:88 - Added Evil_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Evil_Knight ID set to 74
+2018-04-11 22:30:29 INFO  Deck:88 - Added Evil_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Evil_Knight ID set to 75
+2018-04-11 22:30:29 INFO  Deck:88 - Added Evil_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Evil_Knight ID set to 76
+2018-04-11 22:30:29 INFO  Deck:88 - Added Evil_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Saxon_Knight ID set to 77
+2018-04-11 22:30:29 INFO  Deck:88 - Added Saxon_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Saxon_Knight ID set to 78
+2018-04-11 22:30:29 INFO  Deck:88 - Added Saxon_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Saxon_Knight ID set to 79
+2018-04-11 22:30:29 INFO  Deck:88 - Added Saxon_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Saxon_Knight ID set to 80
+2018-04-11 22:30:29 INFO  Deck:88 - Added Saxon_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Saxon_Knight ID set to 81
+2018-04-11 22:30:29 INFO  Deck:88 - Added Saxon_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Saxon_Knight ID set to 82
+2018-04-11 22:30:29 INFO  Deck:88 - Added Saxon_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Saxon_Knight ID set to 83
+2018-04-11 22:30:29 INFO  Deck:88 - Added Saxon_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Saxon_Knight ID set to 84
+2018-04-11 22:30:29 INFO  Deck:88 - Added Saxon_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Robber_Knight ID set to 85
+2018-04-11 22:30:29 INFO  Deck:88 - Added Robber_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Robber_Knight ID set to 86
+2018-04-11 22:30:29 INFO  Deck:88 - Added Robber_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Robber_Knight ID set to 87
+2018-04-11 22:30:29 INFO  Deck:88 - Added Robber_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Robber_Knight ID set to 88
+2018-04-11 22:30:29 INFO  Deck:88 - Added Robber_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Robber_Knight ID set to 89
+2018-04-11 22:30:29 INFO  Deck:88 - Added Robber_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Robber_Knight ID set to 90
+2018-04-11 22:30:29 INFO  Deck:88 - Added Robber_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Robber_Knight ID set to 91
+2018-04-11 22:30:29 INFO  Deck:88 - Added Robber_Knight to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Saxons ID set to 92
+2018-04-11 22:30:29 INFO  Deck:88 - Added Saxons to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Saxons ID set to 93
+2018-04-11 22:30:29 INFO  Deck:88 - Added Saxons to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Saxons ID set to 94
+2018-04-11 22:30:29 INFO  Deck:88 - Added Saxons to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Saxons ID set to 95
+2018-04-11 22:30:29 INFO  Deck:88 - Added Saxons to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Saxons ID set to 96
+2018-04-11 22:30:29 INFO  Deck:88 - Added Saxons to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Boar ID set to 97
+2018-04-11 22:30:29 INFO  Deck:88 - Added Boar to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Boar ID set to 98
+2018-04-11 22:30:29 INFO  Deck:88 - Added Boar to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Boar ID set to 99
+2018-04-11 22:30:29 INFO  Deck:88 - Added Boar to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Boar ID set to 100
+2018-04-11 22:30:29 INFO  Deck:88 - Added Boar to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Thieves ID set to 101
+2018-04-11 22:30:29 INFO  Deck:88 - Added Thieves to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Thieves ID set to 102
+2018-04-11 22:30:29 INFO  Deck:88 - Added Thieves to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Thieves ID set to 103
+2018-04-11 22:30:29 INFO  Deck:88 - Added Thieves to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Thieves ID set to 104
+2018-04-11 22:30:29 INFO  Deck:88 - Added Thieves to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Thieves ID set to 105
+2018-04-11 22:30:29 INFO  Deck:88 - Added Thieves to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Thieves ID set to 106
+2018-04-11 22:30:29 INFO  Deck:88 - Added Thieves to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Thieves ID set to 107
+2018-04-11 22:30:29 INFO  Deck:88 - Added Thieves to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Thieves ID set to 108
+2018-04-11 22:30:29 INFO  Deck:88 - Added Thieves to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Amour ID set to 109
+2018-04-11 22:30:29 INFO  Deck:88 - Added Amour to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Amour ID set to 110
+2018-04-11 22:30:29 INFO  Deck:88 - Added Amour to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Amour ID set to 111
+2018-04-11 22:30:29 INFO  Deck:88 - Added Amour to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Amour ID set to 112
+2018-04-11 22:30:29 INFO  Deck:88 - Added Amour to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Amour ID set to 113
+2018-04-11 22:30:29 INFO  Deck:88 - Added Amour to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Amour ID set to 114
+2018-04-11 22:30:29 INFO  Deck:88 - Added Amour to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Amour ID set to 115
+2018-04-11 22:30:29 INFO  Deck:88 - Added Amour to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Amour ID set to 116
+2018-04-11 22:30:29 INFO  Deck:88 - Added Amour to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Valor ID set to 117
+2018-04-11 22:30:29 INFO  Deck:88 - Added Valor to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Valor ID set to 118
+2018-04-11 22:30:29 INFO  Deck:88 - Added Valor to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Temptation ID set to 119
+2018-04-11 22:30:29 INFO  Deck:88 - Added Temptation to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Temptation ID set to 120
+2018-04-11 22:30:29 INFO  Deck:88 - Added Temptation to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Morgan_Le_Fey ID set to 121
+2018-04-11 22:30:29 INFO  Deck:88 - Added Morgan_Le_Fey to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Morgan_Le_Fey ID set to 122
+2018-04-11 22:30:29 INFO  Deck:88 - Added Morgan_Le_Fey to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Questing_Beast ID set to 123
+2018-04-11 22:30:29 INFO  Deck:88 - Added Questing_Beast to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Questing_Beast ID set to 124
+2018-04-11 22:30:29 INFO  Deck:88 - Added Questing_Beast to Deck
+2018-04-11 22:30:29 INFO  CardFactory:124 - Event: Pox created
+2018-04-11 22:30:29 INFO  CardFactory:124 - Event: Plague created
+2018-04-11 22:30:29 INFO  CardFactory:124 - Event: Chivalrous_Deed created
+2018-04-11 22:30:29 INFO  CardFactory:124 - Event: Prosperity created
+2018-04-11 22:30:29 INFO  CardFactory:124 - Event: Call_to_Arms created
+2018-04-11 22:30:29 INFO  CardFactory:113 - Quest: Holy_Grail created
+2018-04-11 22:30:29 INFO  CardFactory:113 - Quest: Green_Knight_Quest created
+2018-04-11 22:30:29 INFO  CardFactory:113 - Quest: Questing_Beast_Search created
+2018-04-11 22:30:29 INFO  CardFactory:113 - Quest: Queens_Honor created
+2018-04-11 22:30:29 INFO  CardFactory:113 - Quest: Rescue_Maiden created
+2018-04-11 22:30:29 INFO  CardFactory:113 - Quest: Enchanted_Forest created
+2018-04-11 22:30:29 INFO  CardFactory:113 - Quest: Slay_the_Dragon created
+2018-04-11 22:30:29 INFO  CardFactory:135 - Tourney: Camelot created
+2018-04-11 22:30:29 INFO  CardFactory:135 - Tourney: Orkney created
+2018-04-11 22:30:29 INFO  CardFactory:135 - Tourney: Tintagel created
+2018-04-11 22:30:29 INFO  CardFactory:135 - Tourney: York created
+2018-04-11 22:30:29 INFO  CardFactory:113 - Quest: Arthurs_Enemy created
+2018-04-11 22:30:29 INFO  CardFactory:113 - Quest: Arthurs_Enemy created
+2018-04-11 22:30:29 INFO  CardFactory:113 - Quest: Boar_Hunt created
+2018-04-11 22:30:29 INFO  CardFactory:113 - Quest: Boar_Hunt created
+2018-04-11 22:30:29 INFO  CardFactory:113 - Quest: Repel_Saxon_Raiders created
+2018-04-11 22:30:29 INFO  CardFactory:113 - Quest: Repel_Saxon_Raiders created
+2018-04-11 22:30:29 INFO  CardFactory:124 - Event: King's_Recognition created
+2018-04-11 22:30:29 INFO  CardFactory:124 - Event: King's_Recognition created
+2018-04-11 22:30:29 INFO  CardFactory:124 - Event: Queen's_Favor created
+2018-04-11 22:30:29 INFO  CardFactory:124 - Event: Queen's_Favor created
+2018-04-11 22:30:29 INFO  CardFactory:124 - Event: Called_to_Camelot created
+2018-04-11 22:30:29 INFO  CardFactory:124 - Event: Called_to_Camelot created
+2018-04-11 22:30:29 INFO  Card:92 - Card: Pox ID set to 0
+2018-04-11 22:30:29 INFO  Deck:88 - Added Pox to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Plague ID set to 1
+2018-04-11 22:30:29 INFO  Deck:88 - Added Plague to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Chivalrous_Deed ID set to 2
+2018-04-11 22:30:29 INFO  Deck:88 - Added Chivalrous_Deed to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Prosperity ID set to 3
+2018-04-11 22:30:29 INFO  Deck:88 - Added Prosperity to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Call_to_Arms ID set to 4
+2018-04-11 22:30:29 INFO  Deck:88 - Added Call_to_Arms to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Holy_Grail ID set to 5
+2018-04-11 22:30:29 INFO  Deck:88 - Added Holy_Grail to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Green_Knight_Quest ID set to 6
+2018-04-11 22:30:29 INFO  Deck:88 - Added Green_Knight_Quest to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Questing_Beast_Search ID set to 7
+2018-04-11 22:30:29 INFO  Deck:88 - Added Questing_Beast_Search to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Queens_Honor ID set to 8
+2018-04-11 22:30:29 INFO  Deck:88 - Added Queens_Honor to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Rescue_Maiden ID set to 9
+2018-04-11 22:30:29 INFO  Deck:88 - Added Rescue_Maiden to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Enchanted_Forest ID set to 10
+2018-04-11 22:30:29 INFO  Deck:88 - Added Enchanted_Forest to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Slay_the_Dragon ID set to 11
+2018-04-11 22:30:29 INFO  Deck:88 - Added Slay_the_Dragon to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Camelot ID set to 12
+2018-04-11 22:30:29 INFO  Deck:88 - Added Camelot to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Orkney ID set to 13
+2018-04-11 22:30:29 INFO  Deck:88 - Added Orkney to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Tintagel ID set to 14
+2018-04-11 22:30:29 INFO  Deck:88 - Added Tintagel to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: York ID set to 15
+2018-04-11 22:30:29 INFO  Deck:88 - Added York to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Arthurs_Enemy ID set to 16
+2018-04-11 22:30:29 INFO  Deck:88 - Added Arthurs_Enemy to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Arthurs_Enemy ID set to 17
+2018-04-11 22:30:29 INFO  Deck:88 - Added Arthurs_Enemy to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Boar_Hunt ID set to 18
+2018-04-11 22:30:29 INFO  Deck:88 - Added Boar_Hunt to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Boar_Hunt ID set to 19
+2018-04-11 22:30:29 INFO  Deck:88 - Added Boar_Hunt to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Repel_Saxon_Raiders ID set to 20
+2018-04-11 22:30:29 INFO  Deck:88 - Added Repel_Saxon_Raiders to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Repel_Saxon_Raiders ID set to 21
+2018-04-11 22:30:29 INFO  Deck:88 - Added Repel_Saxon_Raiders to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: King's_Recognition ID set to 22
+2018-04-11 22:30:29 INFO  Deck:88 - Added King's_Recognition to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: King's_Recognition ID set to 23
+2018-04-11 22:30:29 INFO  Deck:88 - Added King's_Recognition to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Queen's_Favor ID set to 24
+2018-04-11 22:30:29 INFO  Deck:88 - Added Queen's_Favor to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Queen's_Favor ID set to 25
+2018-04-11 22:30:29 INFO  Deck:88 - Added Queen's_Favor to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Called_to_Camelot ID set to 26
+2018-04-11 22:30:29 INFO  Deck:88 - Added Called_to_Camelot to Deck
+2018-04-11 22:30:29 INFO  Card:92 - Card: Called_to_Camelot ID set to 27
+2018-04-11 22:30:29 INFO  Deck:88 - Added Called_to_Camelot to Deck
+2018-04-11 22:30:29 INFO  GameState:71 - Model loaded (void)
+2018-04-11 22:30:29 INFO  Player:260 - Player: 0 received 4 shields
+2018-04-11 22:30:29 INFO  Strategy2:27 - Player 0 is participating in the tournament
+2018-04-11 22:30:29 INFO  Player:310 - Adding Green_Knight to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Mordred to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Excalibur to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Amour to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Sir_Gawain to hand
+2018-04-11 22:30:29 INFO  Foe:70 - Green_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:70 - Mordred has battle power 30
+2018-04-11 22:30:29 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Excalibur adds 30 battle points
+2018-04-11 22:30:29 INFO  Player:235 - Player: 0 has 5 battle points
+2018-04-11 22:30:29 INFO  Ally:152 - Sir_Gawain adds 10 battle points
+2018-04-11 22:30:29 INFO  Amour:29 - Amour has battle power 10
+2018-04-11 22:30:29 INFO  Amour:29 - Amour has battle power 10
+2018-04-11 22:30:29 INFO  Card:30 - Excalibur adds 30 battle points
+2018-04-11 22:30:29 INFO  Amour:29 - Amour has battle power 10
+2018-04-11 22:30:29 INFO  Card:30 - Excalibur adds 30 battle points
+2018-04-11 22:30:29 INFO  Ally:152 - Sir_Gawain adds 10 battle points
+2018-04-11 22:30:29 INFO  Card:30 - Excalibur adds 30 battle points
+2018-04-11 22:30:29 INFO  Ally:152 - Sir_Gawain adds 10 battle points
+2018-04-11 22:30:29 INFO  Card:30 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Amour:29 - Amour has battle power 10
+2018-04-11 22:30:29 INFO  Card:30 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Amour:29 - Amour has battle power 10
+2018-04-11 22:30:29 INFO  Foe:70 - Mordred has battle power 30
+2018-04-11 22:30:29 INFO  Ally:152 - Sir_Gawain adds 10 battle points
+2018-04-11 22:30:29 INFO  Foe:70 - Mordred has battle power 30
+2018-04-11 22:30:29 INFO  Card:30 - Excalibur adds 30 battle points
+2018-04-11 22:30:29 INFO  Foe:70 - Mordred has battle power 30
+2018-04-11 22:30:29 INFO  Ally:152 - Sir_Gawain adds 10 battle points
+2018-04-11 22:30:29 INFO  Foe:70 - Green_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:70 - Mordred has battle power 30
+2018-04-11 22:30:29 INFO  Foe:70 - Green_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Card:30 - Excalibur adds 30 battle points
+2018-04-11 22:30:29 INFO  Ally:152 - Sir_Gawain adds 10 battle points
+2018-04-11 22:30:29 INFO  Amour:29 - Amour has battle power 10
+2018-04-11 22:30:29 INFO  Player:543 - Removed Excalibur form player 0's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Sir_Gawain form player 0's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Amour form player 0's hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Questing_Beast to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Green_Knight to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Excalibur to hand
+2018-04-11 22:30:29 INFO  Player:235 - Player: 1 has 5 battle points
+2018-04-11 22:30:29 INFO  Card:30 - Questing_Beast adds 0 battle points
+2018-04-11 22:30:29 INFO  Foe:70 - Green_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:70 - Green_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Card:30 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Card:30 - Questing_Beast adds 0 battle points
+2018-04-11 22:30:29 INFO  Card:30 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Foe:70 - Green_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Card:30 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Card:30 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Card:30 - Excalibur adds 30 battle points
+2018-04-11 22:30:29 INFO  Foe:70 - Green_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Card:30 - Excalibur adds 30 battle points
+2018-04-11 22:30:29 INFO  Card:30 - Excalibur adds 30 battle points
+2018-04-11 22:30:29 INFO  Card:30 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Player:543 - Removed Excalibur form player 1's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Dagger form player 1's hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Boar to hand
+2018-04-11 22:30:29 INFO  Strategy2:87 - Player 0 bids 1 cards for its first bid
+2018-04-11 22:30:29 INFO  Player:543 - Removed Boar form player 0's hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Boar to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Boar to hand
+2018-04-11 22:30:29 INFO  Strategy2:87 - Player 0 bids 2 cards for its first bid
+2018-04-11 22:30:29 INFO  Player:543 - Removed Boar form player 0's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Boar form player 0's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Dagger form player 0's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Boar form player 0's hand
+2018-04-11 22:30:29 INFO  GameState:202 - The quest is now Queens_Honor
+2018-04-11 22:30:29 INFO  Player:310 - Adding Green_Knight to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Mordred to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Excalibur to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Amour to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Sir_Gawain to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding King_Pellinore to hand
+2018-04-11 22:30:29 INFO  Player:151 - Player 0 has 14 shields
+2018-04-11 22:30:29 INFO  AbstractAI:53 - Player: 2 will not sponsor the quest, because another player might rank up
+2018-04-11 22:30:29 INFO  Player:260 - Player: 0 received -4 shields
+2018-04-11 22:30:29 INFO  Player:151 - Player 0 has 10 shields
+2018-04-11 22:30:29 INFO  Player:151 - Player 1 has 10 shields
+2018-04-11 22:30:29 INFO  Player:151 - Player 3 has 10 shields
+2018-04-11 22:30:29 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:29 INFO  Foe:67 - Mordred has battle power 30
+2018-04-11 22:30:29 INFO  AbstractAI:59 - Player: 2 will not sponsor the quest, because it does not have enough cards
+2018-04-11 22:30:29 INFO  Player:310 - Adding Questing_Beast to hand
+2018-04-11 22:30:29 INFO  Player:151 - Player 0 has 10 shields
+2018-04-11 22:30:29 INFO  Player:151 - Player 1 has 10 shields
+2018-04-11 22:30:29 INFO  Player:151 - Player 3 has 10 shields
+2018-04-11 22:30:29 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:29 INFO  Foe:67 - Mordred has battle power 30
+2018-04-11 22:30:29 INFO  AbstractAI:59 - Player: 2 will not sponsor the quest, because it does not have enough cards
+2018-04-11 22:30:29 INFO  Player:310 - Adding Black_Knight to hand
+2018-04-11 22:30:29 INFO  Player:151 - Player 0 has 10 shields
+2018-04-11 22:30:29 INFO  Player:151 - Player 1 has 10 shields
+2018-04-11 22:30:29 INFO  Player:151 - Player 3 has 10 shields
+2018-04-11 22:30:29 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:29 INFO  Foe:67 - Mordred has battle power 30
+2018-04-11 22:30:29 INFO  Foe:67 - Black_Knight has battle power 35
+2018-04-11 22:30:29 INFO  AbstractAI:62 - Player: 2 will sponsor the quest
+2018-04-11 22:30:29 INFO  Player:310 - Adding Saxons to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Excalibur to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Amour to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding King_Pellinore to hand
+2018-04-11 22:30:29 INFO  Strategy2:33 - Player 3 does not have enough foes to discard for tests, so wil not participate in the quest
+2018-04-11 22:30:29 INFO  Player:310 - Adding Sir_Gawain to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Strategy2:33 - Player 3 does not have enough foes to discard for tests, so wil not participate in the quest
+2018-04-11 22:30:29 INFO  Player:310 - Adding Boar to hand
+2018-04-11 22:30:29 INFO  Foe:67 - Saxons has battle power 20
+2018-04-11 22:30:29 INFO  Foe:67 - Boar has battle power 15
+2018-04-11 22:30:29 INFO  Card:39 - Excalibur adds 30 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Ally:152 - King_Pellinore adds 10 battle points
+2018-04-11 22:30:29 INFO  Ally:152 - Sir_Gawain adds 10 battle points
+2018-04-11 22:30:29 INFO  Card:39 - King_Pellinore adds 10 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Sir_Gawain adds 10 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Amour adds 10 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Excalibur adds 30 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Excalibur adds 30 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Excalibur adds 30 battle points
+2018-04-11 22:30:29 INFO  Player:235 - Player: 3 has 5 battle points
+2018-04-11 22:30:29 INFO  Strategy2:77 - Player 3 will partcipate in the quest
+2018-04-11 22:30:29 INFO  Player:543 - Removed King_Pellinore form player 3's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Sir_Gawain form player 3's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Amour form player 3's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Excalibur form player 3's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Dagger form player 3's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Saxons form player 3's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Boar form player 3's hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Strategy2:33 - Player 3 does not have enough foes to discard for tests, so wil not participate in the quest
+2018-04-11 22:30:29 INFO  Player:543 - Removed Mordred form player 0's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Green_Knight form player 0's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Dagger form player 0's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Green_Knight form player 1's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Questing_Beast form player 1's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Green_Knight form player 2's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Mordred form player 2's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Dagger form player 2's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Excalibur form player 2's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Amour form player 2's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Sir_Gawain form player 2's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed King_Pellinore form player 2's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Questing_Beast form player 2's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Black_Knight form player 2's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Dagger form player 3's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Dagger form player 3's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Dagger form player 3's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Dagger form player 3's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Dagger form player 3's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Dagger form player 3's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Dagger form player 3's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Dagger form player 3's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Dagger form player 3's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Dagger form player 3's hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Boar to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Saxons to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Black_Knight to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Green_Knight to hand
+2018-04-11 22:30:29 INFO  GameState:202 - The quest is now Green_Knight_Quest
+2018-04-11 22:30:29 INFO  Foe:70 - Boar has battle power 5
+2018-04-11 22:30:29 INFO  Foe:70 - Saxons has battle power 10
+2018-04-11 22:30:29 INFO  Foe:70 - Saxons has battle power 10
+2018-04-11 22:30:29 INFO  Foe:70 - Black_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:70 - Black_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:29 INFO  Player:543 - Removed Boar form player 0's hand
+2018-04-11 22:30:29 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:29 INFO  Foe:70 - Black_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:70 - Black_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:70 - Saxons has battle power 10
+2018-04-11 22:30:29 INFO  Player:543 - Removed Saxons form player 0's hand
+2018-04-11 22:30:29 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:29 INFO  Foe:70 - Black_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Player:543 - Removed Green_Knight form player 0's hand
+2018-04-11 22:30:29 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:29 INFO  Strategy2:138 - Stage 01: Boar
+2018-04-11 22:30:29 INFO  Strategy2:138 - Stage 11: Saxons
+2018-04-11 22:30:29 INFO  Strategy2:138 - Stage 21: Green_Knight
+2018-04-11 22:30:29 INFO  Player:543 - Removed Dagger form player 0's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Black_Knight form player 0's hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Boar to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Saxons to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Black_Knight to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Green_Knight to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Questing_Beast to hand
+2018-04-11 22:30:29 INFO  Foe:70 - Boar has battle power 5
+2018-04-11 22:30:29 INFO  Foe:70 - Saxons has battle power 10
+2018-04-11 22:30:29 INFO  Foe:70 - Saxons has battle power 10
+2018-04-11 22:30:29 INFO  Foe:70 - Black_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:70 - Black_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:29 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:29 INFO  Foe:70 - Black_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:70 - Black_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:70 - Saxons has battle power 10
+2018-04-11 22:30:29 INFO  Foe:70 - Saxons has battle power 10
+2018-04-11 22:30:29 INFO  Foe:70 - Boar has battle power 5
+2018-04-11 22:30:29 INFO  Player:543 - Removed Boar form player 0's hand
+2018-04-11 22:30:29 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:29 INFO  Foe:70 - Black_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:70 - Black_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:70 - Saxons has battle power 10
+2018-04-11 22:30:29 INFO  Player:543 - Removed Green_Knight form player 0's hand
+2018-04-11 22:30:29 INFO  Foe:70 - Black_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:70 - Saxons has battle power 10
+2018-04-11 22:30:29 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:29 INFO  Strategy2:138 - Stage 01: Boar
+2018-04-11 22:30:29 INFO  Strategy2:136 - Stage 11: Questing_Beast
+2018-04-11 22:30:29 INFO  Strategy2:138 - Stage 21: Green_Knight
+2018-04-11 22:30:29 INFO  GameState:202 - The quest is now Boar_Hunt
+2018-04-11 22:30:29 INFO  Player:543 - Removed Dagger form player 0's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Black_Knight form player 0's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Saxons form player 0's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Questing_Beast form player 0's hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Boar to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Saxons to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Black_Knight to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Green_Knight to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Questing_Beast to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Horse to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Horse to hand
+2018-04-11 22:30:29 INFO  Foe:67 - Boar has battle power 15
+2018-04-11 22:30:29 INFO  Foe:70 - Saxons has battle power 10
+2018-04-11 22:30:29 INFO  Foe:70 - Saxons has battle power 10
+2018-04-11 22:30:29 INFO  Foe:70 - Black_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:70 - Saxons has battle power 10
+2018-04-11 22:30:29 INFO  Foe:70 - Black_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:67 - Boar has battle power 15
+2018-04-11 22:30:29 INFO  Foe:70 - Black_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:67 - Boar has battle power 15
+2018-04-11 22:30:29 INFO  Foe:70 - Green_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:70 - Black_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:70 - Green_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:29 INFO  Player:543 - Removed Black_Knight form player 0's hand
+2018-04-11 22:30:29 INFO  Foe:70 - Green_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Foe:67 - Boar has battle power 15
+2018-04-11 22:30:29 INFO  Foe:67 - Boar has battle power 15
+2018-04-11 22:30:29 INFO  Foe:70 - Saxons has battle power 10
+2018-04-11 22:30:29 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Foe:70 - Black_Knight has battle power 25
+2018-04-11 22:30:29 INFO  Player:543 - Removed Horse form player 0's hand
+2018-04-11 22:30:29 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:29 INFO  Player:543 - Removed Dagger form player 0's hand
+2018-04-11 22:30:29 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Strategy2:136 - Stage 01: Questing_Beast
+2018-04-11 22:30:29 INFO  Strategy2:138 - Stage 11: Black_Knight
+2018-04-11 22:30:29 INFO  Strategy2:140 - with weapons: java.util.stream.ReferencePipeline$3@38bc8ab5
+2018-04-11 22:30:29 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:29 INFO  Foe:70 - Black_Knight has battle power 40
+2018-04-11 22:30:29 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:29 INFO  GameState:202 - The quest is now Holy_Grail
+2018-04-11 22:30:29 INFO  Player:260 - Player: 0 received 6 shields
+2018-04-11 22:30:29 INFO  Player:463 - Player: 0 moved up to rank: Knight
+2018-04-11 22:30:29 INFO  Player:260 - Player: 1 received 6 shields
+2018-04-11 22:30:29 INFO  Player:463 - Player: 1 moved up to rank: Knight
+2018-04-11 22:30:29 INFO  Player:260 - Player: 2 received 6 shields
+2018-04-11 22:30:29 INFO  Player:463 - Player: 2 moved up to rank: Knight
+2018-04-11 22:30:29 INFO  Player:260 - Player: 3 received 6 shields
+2018-04-11 22:30:29 INFO  Player:463 - Player: 3 moved up to rank: Knight
+2018-04-11 22:30:29 INFO  Player:543 - Removed Horse form player 0's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Green_Knight form player 0's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Boar form player 0's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Saxons form player 0's hand
+2018-04-11 22:30:29 INFO  Player:543 - Removed Questing_Beast form player 0's hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Boar to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Saxons to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Black_Knight to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Green_Knight to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Mordred to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Questing_Beast to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Excalibur to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Giant to hand
+2018-04-11 22:30:29 INFO  Player:310 - Adding Dragon to hand
+2018-04-11 22:30:29 INFO  Player:151 - Player 1 has 16 shields
+2018-04-11 22:30:29 INFO  Player:151 - Player 2 has 16 shields
+2018-04-11 22:30:29 INFO  Player:151 - Player 3 has 16 shields
+2018-04-11 22:30:29 INFO  Foe:67 - Boar has battle power 15
+2018-04-11 22:30:29 INFO  Foe:67 - Saxons has battle power 20
+2018-04-11 22:30:29 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:29 INFO  Foe:67 - Black_Knight has battle power 50
+2018-04-11 22:30:29 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:29 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:29 INFO  Foe:67 - Mordred has battle power 30
+2018-04-11 22:30:29 INFO  Foe:67 - Giant has battle power 40
+2018-04-11 22:30:29 INFO  Foe:67 - Dragon has battle power 70
+2018-04-11 22:30:29 INFO  AbstractAI:62 - Player: 0 will sponsor the quest
+2018-04-11 22:30:29 INFO  Foe:67 - Boar has battle power 15
+2018-04-11 22:30:29 INFO  Foe:67 - Saxons has battle power 20
+2018-04-11 22:30:29 INFO  Foe:67 - Saxons has battle power 20
+2018-04-11 22:30:29 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:29 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Black_Knight has battle power 50
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Black_Knight has battle power 50
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Saxons has battle power 20
+2018-04-11 22:30:30 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Black_Knight has battle power 50
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Saxons has battle power 20
+2018-04-11 22:30:30 INFO  Foe:67 - Mordred has battle power 30
+2018-04-11 22:30:30 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Mordred has battle power 30
+2018-04-11 22:30:30 INFO  Foe:67 - Mordred has battle power 30
+2018-04-11 22:30:30 INFO  Foe:67 - Giant has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Giant has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Mordred has battle power 30
+2018-04-11 22:30:30 INFO  Foe:67 - Dragon has battle power 70
+2018-04-11 22:30:30 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Dragon has battle power 70
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Black_Knight has battle power 50
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Dragon has battle power 70
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Excalibur adds 30 battle points
+2018-04-11 22:30:30 INFO  Player:543 - Removed Boar form player 0's hand
+2018-04-11 22:30:30 INFO  Foe:67 - Dragon has battle power 70
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Black_Knight has battle power 50
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Black_Knight has battle power 50
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Giant has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Giant has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Mordred has battle power 30
+2018-04-11 22:30:30 INFO  Foe:67 - Mordred has battle power 30
+2018-04-11 22:30:30 INFO  Foe:67 - Saxons has battle power 20
+2018-04-11 22:30:30 INFO  Card:39 - Excalibur adds 30 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Player:543 - Removed Saxons form player 0's hand
+2018-04-11 22:30:30 INFO  Foe:67 - Dragon has battle power 70
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Black_Knight has battle power 50
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Black_Knight has battle power 50
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Giant has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Giant has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Mordred has battle power 30
+2018-04-11 22:30:30 INFO  Card:39 - Excalibur adds 30 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Player:543 - Removed Mordred form player 0's hand
+2018-04-11 22:30:30 INFO  Foe:67 - Dragon has battle power 70
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Black_Knight has battle power 50
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Black_Knight has battle power 50
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Giant has battle power 40
+2018-04-11 22:30:30 INFO  Card:39 - Excalibur adds 30 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Player:543 - Removed Dragon form player 0's hand
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Black_Knight has battle power 50
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Green_Knight has battle power 40
+2018-04-11 22:30:30 INFO  Foe:67 - Giant has battle power 40
+2018-04-11 22:30:30 INFO  Card:39 - Excalibur adds 30 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Foe:67 - Dragon has battle power 70
+2018-04-11 22:30:30 INFO  Strategy2:138 - Stage 01: Boar
+2018-04-11 22:30:30 INFO  Strategy2:138 - Stage 11: Saxons
+2018-04-11 22:30:30 INFO  Strategy2:138 - Stage 21: Mordred
+2018-04-11 22:30:30 INFO  Strategy2:136 - Stage 31: Questing_Beast
+2018-04-11 22:30:30 INFO  Strategy2:138 - Stage 41: Dragon
+2018-04-11 22:30:30 INFO  GameState:202 - The quest is now Boar_Hunt
+2018-04-11 22:30:30 INFO  Player:543 - Removed Excalibur form player 0's hand
+2018-04-11 22:30:30 INFO  Player:543 - Removed Dagger form player 0's hand
+2018-04-11 22:30:30 INFO  Player:543 - Removed Black_Knight form player 0's hand
+2018-04-11 22:30:30 INFO  Player:543 - Removed Green_Knight form player 0's hand
+2018-04-11 22:30:30 INFO  Player:543 - Removed Giant form player 0's hand
+2018-04-11 22:30:30 INFO  Player:543 - Removed Questing_Beast form player 0's hand
+2018-04-11 22:30:30 INFO  Player:310 - Adding Amour to hand
+2018-04-11 22:30:30 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:30 INFO  Player:310 - Adding Excalibur to hand
+2018-04-11 22:30:30 INFO  Player:235 - Player: 0 has 10 battle points
+2018-04-11 22:30:30 INFO  Player:235 - Player: 0 has 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Excalibur adds 30 battle points
+2018-04-11 22:30:30 INFO  Player:543 - Removed Amour form player 0's hand
+2018-04-11 22:30:30 INFO  Player:380 - Amour added to temp
+2018-04-11 22:30:30 INFO  Amour:29 - Amour has battle power 10
+2018-04-11 22:30:30 INFO  Player:235 - Player: 0 has 20 battle points
+2018-04-11 22:30:30 INFO  Amour:29 - Amour has battle power 10
+2018-04-11 22:30:30 INFO  Card:39 - Excalibur adds 30 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Excalibur adds 30 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Player:543 - Removed Dagger form player 0's hand
+2018-04-11 22:30:30 INFO  Card:30 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Player:543 - Removed Excalibur form player 0's hand
+2018-04-11 22:30:30 INFO  Card:30 - Excalibur adds 30 battle points
+2018-04-11 22:30:30 INFO  GameState:202 - The quest is now Holy_Grail
+2018-04-11 22:30:30 INFO  Player:310 - Adding Amour to hand
+2018-04-11 22:30:30 INFO  Player:310 - Adding King_Pellinore to hand
+2018-04-11 22:30:30 INFO  Player:310 - Adding Sir_Gawain to hand
+2018-04-11 22:30:30 INFO  Player:310 - Adding Horse to hand
+2018-04-11 22:30:30 INFO  Player:310 - Adding Horse to hand
+2018-04-11 22:30:30 INFO  Player:310 - Adding Sword to hand
+2018-04-11 22:30:30 INFO  Player:310 - Adding Sword to hand
+2018-04-11 22:30:30 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:30 INFO  Player:310 - Adding Dagger to hand
+2018-04-11 22:30:30 INFO  Player:235 - Player: 1 has 10 battle points
+2018-04-11 22:30:30 INFO  Player:235 - Player: 1 has 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Ally:152 - King_Pellinore adds 10 battle points
+2018-04-11 22:30:30 INFO  Ally:152 - Sir_Gawain adds 10 battle points
+2018-04-11 22:30:30 INFO  Player:543 - Removed Amour form player 1's hand
+2018-04-11 22:30:30 INFO  Player:380 - Amour added to temp
+2018-04-11 22:30:30 INFO  Amour:29 - Amour has battle power 10
+2018-04-11 22:30:30 INFO  Player:235 - Player: 1 has 20 battle points
+2018-04-11 22:30:30 INFO  Amour:29 - Amour has battle power 10
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Ally:152 - King_Pellinore adds 10 battle points
+2018-04-11 22:30:30 INFO  Ally:152 - Sir_Gawain adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Ally:152 - King_Pellinore adds 10 battle points
+2018-04-11 22:30:30 INFO  Ally:152 - Sir_Gawain adds 10 battle points
+2018-04-11 22:30:30 INFO  Player:543 - Removed King_Pellinore form player 1's hand
+2018-04-11 22:30:30 INFO  Card:39 - King_Pellinore adds 10 battle points
+2018-04-11 22:30:30 INFO  Player:380 - King_Pellinore added to temp
+2018-04-11 22:30:30 INFO  Player:412 - King_Pellinore moved from temp to field
+2018-04-11 22:30:30 INFO  Amour:29 - Amour has battle power 10
+2018-04-11 22:30:30 INFO  Ally:152 - King_Pellinore adds 10 battle points
+2018-04-11 22:30:30 INFO  Player:235 - Player: 1 has 30 battle points
+2018-04-11 22:30:30 INFO  Amour:29 - Amour has battle power 10
+2018-04-11 22:30:30 INFO  Ally:152 - King_Pellinore adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Player:543 - Removed Sir_Gawain form player 1's hand
+2018-04-11 22:30:30 INFO  Card:39 - Sir_Gawain adds 10 battle points
+2018-04-11 22:30:30 INFO  Player:380 - Sir_Gawain added to temp
+2018-04-11 22:30:30 INFO  Player:412 - Sir_Gawain moved from temp to field
+2018-04-11 22:30:30 INFO  Amour:29 - Amour has battle power 10
+2018-04-11 22:30:30 INFO  Ally:152 - King_Pellinore adds 10 battle points
+2018-04-11 22:30:30 INFO  Ally:152 - Sir_Gawain adds 10 battle points
+2018-04-11 22:30:30 INFO  Player:235 - Player: 1 has 40 battle points
+2018-04-11 22:30:30 INFO  Amour:29 - Amour has battle power 10
+2018-04-11 22:30:30 INFO  Ally:152 - King_Pellinore adds 10 battle points
+2018-04-11 22:30:30 INFO  Ally:152 - Sir_Gawain adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Player:543 - Removed Dagger form player 1's hand
+2018-04-11 22:30:30 INFO  Card:30 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Player:543 - Removed Horse form player 1's hand
+2018-04-11 22:30:30 INFO  Card:30 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Player:380 - Dagger added to temp
+2018-04-11 22:30:30 INFO  Player:380 - Horse added to temp
+2018-04-11 22:30:30 INFO  Player:436 - Dagger removed from player 1's temp
+2018-04-11 22:30:30 INFO  Player:436 - Horse removed from player 1's temp
+2018-04-11 22:30:30 INFO  Amour:29 - Amour has battle power 10
+2018-04-11 22:30:30 INFO  Ally:152 - King_Pellinore adds 10 battle points
+2018-04-11 22:30:30 INFO  Ally:152 - Sir_Gawain adds 10 battle points
+2018-04-11 22:30:30 INFO  Player:235 - Player: 1 has 40 battle points
+2018-04-11 22:30:30 INFO  Amour:29 - Amour has battle power 10
+2018-04-11 22:30:30 INFO  Ally:152 - King_Pellinore adds 10 battle points
+2018-04-11 22:30:30 INFO  Ally:152 - Sir_Gawain adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Player:543 - Removed Dagger form player 1's hand
+2018-04-11 22:30:30 INFO  Card:30 - Dagger adds 5 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Player:543 - Removed Horse form player 1's hand
+2018-04-11 22:30:30 INFO  Card:30 - Horse adds 10 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Card:39 - Sword adds 15 battle points
+2018-04-11 22:30:30 INFO  Player:543 - Removed Sword form player 1's hand
+2018-04-11 22:30:30 INFO  Card:30 - Sword adds 15 battle points

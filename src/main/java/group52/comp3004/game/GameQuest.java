@@ -118,6 +118,7 @@ public class GameQuest {
 		if(stage.isTestStage() && !withTest) {
 			withTest = true;
 			stages.add(stage);
+			logger.info("Added a test stage");
 			return true;
 		}
 		
@@ -125,9 +126,11 @@ public class GameQuest {
 		
 		if((highestStage == null || stage.getTotalPower(state) >= highestStage.getTotalPower(state)) && stages.size() < quest.getStages()) {
 			stages.add(stage);
+			logger.info("Added a foe stage");
 			return true;
 		}
 		
+		logger.info("Could not add stage");
 		return false;
 	}
 	

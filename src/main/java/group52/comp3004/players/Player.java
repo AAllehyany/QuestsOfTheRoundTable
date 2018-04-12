@@ -363,6 +363,7 @@ public class Player {
 	 */
 	public boolean canPlayTemp(AdventureCard card) {
 		if(this.hasCardInHand(card) && !this.temp.contains(card)) return true;
+		logger.info("Cannot play " + card.getName());
 		return false;
 	}
 	

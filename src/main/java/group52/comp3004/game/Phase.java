@@ -13,7 +13,7 @@ package group52.comp3004.game;
  * <p>RunQuest -> Players interact witht the quest</p>
  * <p>EndQuest -> Shields are dealt out</p>
  * <p>HandleEvent -> Handle a story event</p>
- * <p>SponsorTourney -> Player choose to sponsor the quest</p>
+ * <p>SetupTourney -> Participating players pick cards to play</p>
  * <p>JoinTourney -> Players play their adventure cards for tourneys</p>
  * <p>RunTourney -> Compare bids and hand out shields to the winner</p>
  * <p>SetUpTourney -> ?</p>
@@ -37,10 +37,10 @@ public enum Phase {
 	
 	HandleEvent, //Handle a story event
 	
-	SponsorTourney, //Player choose to sponsor the quest
+	SetupTourney, //Player choose to sponsor the quest
 	JoinTourney, //Players play their adventure cards for tourneys
 	RunTourney, //Compare bids and hand out shields to the winner
-	SetUpTourney,
+	SetUpTourney, //Participating players pick cards to play
 	Broken, //The game is broken, despair
 	PlayQuest, // Playing in the quest
 	SecondRound, //?
