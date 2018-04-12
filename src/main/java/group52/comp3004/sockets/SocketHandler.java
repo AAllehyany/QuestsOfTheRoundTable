@@ -126,7 +126,6 @@ public class SocketHandler extends TextWebSocketHandler{
 		String cardId = String.valueOf(payload.get("data"));
 		AdventureCard card = current.getCard((int) Float.parseFloat(cardId));
 		
-		if(game.getPhase() == Phase.SetupQuest) {
 			if(!(card instanceof Foe) && !(card instanceof Tests) && !(card instanceof Weapon)) {
 				logger.info("Clicking illegal card for setting quest");
 				message.put("type", "ERROR");
