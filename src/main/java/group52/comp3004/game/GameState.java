@@ -35,6 +35,9 @@ public class GameState {
 	private StoryCard revealedCard;
 	private Integer maxBid;
 	private Integer bonusShields;
+	private Integer currentPlayerId;
+	private Integer currentTurnId;
+	private Integer currentSponsorId;
 	
 	static final private Logger logger = Logger.getLogger(GameState.class);
 	/**
@@ -68,6 +71,9 @@ public class GameState {
 		revealedCard = null;
 		maxBid = 0;
 		bonusShields = 0;
+		currentTurnId = -1;
+		currentPlayerId = -1;
+		currentSponsorId = -1;
 		logger.info("Model loaded (void)");
 	}
 	
@@ -105,6 +111,9 @@ public class GameState {
 	public void nextTurn() {
 		currentTurn = (currentTurn + 1) % players.size();
 		currentPlayer = currentTurn;
+		
+		currentPlayerId = players.get(currentPlayer).getId();
+		currentTurnId = players.get(currentTurn).getId();
 	}
 	
 	/**
@@ -116,7 +125,10 @@ public class GameState {
 		while(phase == Phase.SetupQuest 
 				&& this.currentQuest != null && !this.currentQuest.isPlayer(this.players.get(currentPlayer))) {
 			currentPlayer = (currentPlayer + 1) % players.size();
+			
 		}
+		
+		currentPlayerId = players.get(currentPlayer).getId();
 	}
 	
 	/**
@@ -206,6 +218,24 @@ public class GameState {
 	}
 	
 	/**
+	 * Judges whether a player is able to sponsor a quest. Checks to make sure that a story card was dealt and then insures 
+	 * <p>that the current player has enough cards to create the quest.</p>
+	 * @return true if the current player is capable of creating the quest.
+	 */
+	public boolean canSponsorQuest(Player player) {
+		if(revealedCard == null || !(revealedCard instanceof QuestCard)) return false;
+		
+		Player current = player;
+		QuestCard quest = (QuestCard) revealedCard;
+		int numFoes = current.countFoes();
+		int numFoesMinusOne = numFoes - 1;
+		int numTests = current.hasTest() ? 1 : 0;
+		int stages = quest.getStages();
+		
+		return numFoes >= stages || numFoesMinusOne + numTests >= stages;
+	}
+	
+	/**
 	 * Called if the story card drawn at start of new turn is a quest. 
 	 * <p>Moves to SponsorQuest phase when finished.</p>
 	 */
@@ -214,6 +244,27 @@ public class GameState {
 		{
 			logger.info("The quest is now " + revealedCard.getName());
 			currentSponsor = currentPlayer;
+			currentPlayerId = players.get(currentPlayer).getId();
+			currentSponsorId = players.get(currentSponsor).getId();
+			currentQuest = new GameQuest((QuestCard) revealedCard, getPlayerByIndex(currentSponsor));
+			this.players.get(currentPlayer).setQuest(currentQuest);
+//			this.revealedCard = null;
+			this.phase = Phase.SponsorQuest;
+		}
+	}
+	
+	/**
+	 * Called if the story card drawn at start of new turn is a quest. 
+	 * <p>Moves to SponsorQuest phase when finished.</p>
+	 */
+	public void setQuest(Player player) {
+		if(revealedCard != null && revealedCard instanceof QuestCard)
+		{
+			
+			logger.info("The quest is now " + revealedCard.getName());
+			currentSponsor = players.indexOf(player);
+			currentPlayerId = player.getId();
+			currentSponsorId = player.getId();
 			currentQuest = new GameQuest((QuestCard) revealedCard, getPlayerByIndex(currentSponsor));
 			this.players.get(currentPlayer).setQuest(currentQuest);
 //			this.revealedCard = null;
