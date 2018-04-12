@@ -21,6 +21,7 @@ public class GameTourney {
 	private List<Player> winner;
 	private boolean over;
 	private int responded;
+	private int round;
 	static final private Logger logger = Logger.getLogger(GameTourney.class);
 	
 	/**
@@ -188,5 +189,7 @@ public class GameTourney {
 	}
 	
 	public int getResponded() { return responded; }
-	public void incrementResponded() { responded++; }	
+	public void incrementResponded() { responded++; }
+
+	public int getRound() { return round; }	
 }

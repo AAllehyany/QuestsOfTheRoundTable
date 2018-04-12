@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -20,6 +19,7 @@ import com.google.gson.GsonBuilder;
 import group52.comp3004.cards.AdventureCard;
 import group52.comp3004.cards.Ally;
 import group52.comp3004.cards.Amour;
+import group52.comp3004.cards.CardFactory;
 import group52.comp3004.cards.EventCard;
 import group52.comp3004.cards.Foe;
 import group52.comp3004.cards.QuestCard;
@@ -81,6 +81,12 @@ public class SocketHandler extends TextWebSocketHandler{
 			break;
 		case "GAME_OVER":
 			gameOver(session, payload);
+			break;
+		case "MERLIN":
+			merlin(session, payload);
+			break;
+		case "CHEAT":
+			cheat(session, payload);
 			break;
 		/********************************************************/
 		default:
@@ -322,6 +328,63 @@ public class SocketHandler extends TextWebSocketHandler{
 		 	user.sendMessage(new TextMessage(gson.toJson(message))); 
 		} 
 	} 
+	
+	private void mordred(WebSocketSession session, Map<String, String> payload) throws Exception{
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		
+		Integer a = Integer.parseInt(payload.get("ally"));
+		Integer p = Integer.parseInt(payload.get("player"));
+		Integer o = Integer.parseInt(payload.get("owner"));
+		
+		Player owner = null;
+		Player player = null;
+		Ally ally = null;
+		
+		for(int i=0;i<game.getAllPlayers().size();i++) {
+			if(game.getAllPlayers().get(i).getId()==p) player = game.getAllPlayers().get(i);
+			if(game.getAllPlayers().get(i).getId()==o) owner = game.getAllPlayers().get(i);
+		}
+		
+		for(int i=0;i<player.getField().size();i++) {
+			if(player.getField().get(i).getID()==a) ally = (Ally) player.getField().get(i);
+		}
+		
+		Foe m = CardFactory.createFoe("Mordred", 30);
+		m.MordredSpecial(game, owner, p, ally);
+		
+		logger.info("Mordred successfully removed an ally");
+		message.put("type", "GAME_STATE_UPDATE");
+		message.put("data",  gson.toJson(game));
+		for(WebSocketSession user : players.keySet()) 
+			user.sendMessage(new TextMessage(gson.toJson(message)));
+	}
+	
+	private void merlin(WebSocketSession session, Map<String, String> payload) throws Exception{
+		Gson gson= new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		
+		Integer s = Integer.parseInt(payload.get("stage"));
+		
+		logger.info("Revealing cards");
+		Ally m = CardFactory.createAlly("Merlin");
+		m.StartMerlinSpecial(game, s);
+	}
+	
+	private void cheat(WebSocketSession session, Map<String, String> payload) throws Exception{
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		
+		if(game.getCurrentQuest()==null) {
+			logger.info("Not on a quest");
+			return;
+		}
+		
+		logger.info("Revealing number of cards");
+		message.put("type", "CHEAT_UPDATE");
+		message.put("data",  gson.toJson(game.getCurrentQuest().getStageCardNum()));
+		session.sendMessage(new TextMessage(gson.toJson(message)));
+	}
 	
 	private void playStage(WebSocketSession session, Map<String, String> payload) throws Exception {
 		Gson gson = new GsonBuilder().create();
@@ -581,6 +644,16 @@ public class SocketHandler extends TextWebSocketHandler{
 		
 	}
 	
+	private void setupTourney(WebSocketSession session, Map<String, String> payload) throws Exception{
+		Gson gson = new GsonBuilder().create();
+		Map<String, String> message = new HashMap<>();
+		
+		
+		
+		message.put("type",  "GAME_STATE_UPDATE");
+		message.put("data", gson.toJson(game));
+	}
+	
 	/**
 	 * Handles the RunTourney phase
 	 * @param session current session
@@ -590,7 +663,12 @@ public class SocketHandler extends TextWebSocketHandler{
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();
 		System.out.println("Running the tournment");
-		game.getCurrentTourney().winner(game);
+		if(game.getCurrentTourney().battle(game, game.getCurrentTourney().getPlayers()).size()>1 &&
+				game.getCurrentTourney().getRound()<2) {
+			game.setPhase(Phase.SetUpTourney);
+		}else {
+			game.getCurrentTourney().winner(game);
+		}
 		
 		game.setPhase(Phase.TurnEnd);
 		//this.discardBeforeEnd();
