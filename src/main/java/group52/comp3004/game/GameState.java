@@ -75,7 +75,7 @@ public class GameState {
 		currentTurnId = -1;
 		currentPlayerId = -1;
 		currentSponsorId = -1;
-		ArrayList<AdventureCard> middleAreaPowers = new ArrayList<>();
+		middleAreaPowers = new ArrayList<>();
 		logger.info("Model loaded (void)");
 	}
 	
