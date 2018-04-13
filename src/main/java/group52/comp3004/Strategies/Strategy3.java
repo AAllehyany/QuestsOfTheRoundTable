@@ -23,7 +23,7 @@ public class Strategy3 extends AbstractAI{
 		int WAA = countWAA(state, p, 1);
 		ArrayList<Player> players = new ArrayList<Player>(state.getAllPlayers());
 		for(int i=0;i<players.size();i++) {
-			if(players.get(i).getHandSize()/2>WAA) {
+			if(!players.get(i).equals(p) && players.get(i).getHandSize()/2>WAA) {
 				logger.info("Player " + p.getId() + " does not have enough cards, so will not participate in the tournament");
 				return false;
 			}
@@ -94,7 +94,7 @@ public class Strategy3 extends AbstractAI{
 		int max = 0;
 		for(int i=0;i<state.getAllPlayers().size();i++) {
 			if(state.getAllPlayers().get(i)!=p) 
-				max = Math.max(state.getAllPlayers().get(i).getHandSize(), max);
+				max = Math.max(state.getAllPlayers().get(i).getHandSize()/2, max);
 		}
 		p.sortHand(state);
 		GameQuest q = state.getCurrentQuest();
@@ -111,7 +111,7 @@ public class Strategy3 extends AbstractAI{
 					stages.add(stage);
 				}
 			}else {
-				Foe f = makeFoe(state, p, max*10);
+				Foe f = makeFoe(state, p, max*10-(q.getNumStages()-1));
 				Stage stage = new Stage(f);
 				stages.add(stage);
 			}
@@ -130,14 +130,16 @@ public class Strategy3 extends AbstractAI{
 	
 	public ArrayList<AdventureCard> playStage(GameState state, Player p){
 		HashSet<AdventureCard> sCards = new HashSet<AdventureCard>();
-		Stage current = state.getCurrentQuest().getStage(state.getCurrentQuest().getCurrentStage());
-		int stage = current.getFoe().getWeapons().size()+1;
+		ArrayList<Integer> stages = state.getCurrentQuest().getStageCardNum();
+		int stage = stages.get(state.getCurrentQuest().getCurrentStage());
 		int pos = 0;
-		while(sCards.size()<=stage && pos<p.getHandSize()) {
+		p.sortHand(state);
+		while(sCards.size()<stage && pos<p.getHandSize()) {
 			if(p.getHand().get(pos) instanceof Ally || p.getHand().get(pos) instanceof Weapon)
 				sCards.add(p.getHand().get(pos));
 			else if(p.getHand().get(pos) instanceof Amour && !this.hasAmour(p))
 				sCards.add(p.getHand().get(pos));
+			pos++;
 		}
 		ArrayList<AdventureCard> cards = new ArrayList<AdventureCard>(sCards);
 		for(int i=0;i<cards.size();i++) p.discard(cards.get(i));
