@@ -224,7 +224,13 @@ public class Player {
 	 * @param bids Number of cards bids
 	 */
 	public void bidCards(int bids) {
-		if(validBid(bids) && !stoppedBidding) this.offeredBids = bids;
+		if(validBid(bids) && !stoppedBidding) {
+			logger.info("Player " + id + " can bid " + bids + " cards. Changing offered bids for player...");
+			this.offeredBids = bids;
+		}
+		else {
+			logger.info("Player " + id + " cannot bid " + bids + " cards. Not enough cards in hand.");
+		}
 	}
 	
 	/**
