@@ -59,7 +59,7 @@ public class BidTest {
 		
 		p1.bidCards(2);
 		p2.bidCards(3);
-		p3.bidCards(3);
+		p3.bidCards(4);
 		quest.playStage(state);
 		assertFalse(quest.isOver());
 		assertEquals(1, quest.getCurrentStage());
@@ -68,6 +68,6 @@ public class BidTest {
 		quest.playStage(state);
 		assert(quest.isOver());
 		assertEquals(1, quest.getCurrentStage());
-		assertEquals(1, quest.getPlayers().size());
+		assertEquals(0, quest.getPlayers().size());
 	}
 }
