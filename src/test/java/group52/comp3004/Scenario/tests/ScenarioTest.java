@@ -135,5 +135,4 @@ public class ScenarioTest {
 		assertEquals(10, (int) p4.getShields());
 		assertEquals(14, p1.getHand().size());
 	}
-	
 }

@@ -378,8 +378,12 @@ public class GameState {
 	 */
 	public void bidCards(int bids) {
 		if(canBidCards(bids)) {
+			logger.info("Player " + currentPlayer + " can bid " + bids + " cards. Changing offered bids for player...");
 			this.players.get(currentPlayer).bidCards(bids);
 			this.maxBid = bids;
+		}
+		else {
+			logger.info("Player " + currentPlayer + " cannot bid " + bids + " cards. Either this is less than the max bid or not enough cards.");
 		}
 	}
 	
