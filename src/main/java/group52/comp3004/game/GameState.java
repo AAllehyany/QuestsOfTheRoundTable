@@ -90,6 +90,30 @@ public class GameState {
 		});
 	}
 
+	public Integer getCurrentPlayerId() {
+		return currentPlayerId;
+	}
+
+	public void setCurrentPlayerId(Integer currentPlayerId) {
+		this.currentPlayerId = currentPlayerId;
+	}
+
+	public Integer getCurrentTurnId() {
+		return currentTurnId;
+	}
+
+	public void setCurrentTurnId(Integer currentTurnId) {
+		this.currentTurnId = currentTurnId;
+	}
+
+	public Integer getCurrentSponsorId() {
+		return currentSponsorId;
+	}
+
+	public void setCurrentSponsorId(Integer currentSponsorId) {
+		this.currentSponsorId = currentSponsorId;
+	}
+
 	/**
 	 * Deal a story card into play
 	 * @return The story card dealt

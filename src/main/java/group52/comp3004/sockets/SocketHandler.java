@@ -1,9 +1,11 @@
 package group52.comp3004.sockets;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -42,12 +44,18 @@ public class SocketHandler extends TextWebSocketHandler{
 	private static int id = 0;
 	private static int readyCounter = 0;
 	
+	private int ps;
+	private int ais;
+	
 	@Override
 	public void handleTextMessage(WebSocketSession session, TextMessage mes) throws Exception{
 		Map<String, String> payload = new Gson().fromJson(mes.getPayload(), Map.class);
 		String event = payload.get("event");
 				
 		switch(event) {
+		case "SETUP_GAME":
+			setupGame(session, payload);
+			break;
 		/*********Game phase handlers***********************/			
 		case "TURN_START":
 			turnStart(session, payload);
@@ -106,6 +114,27 @@ public class SocketHandler extends TextWebSocketHandler{
 		default:
 			invalidEvent(session, payload);
 		}	
+	}
+	
+	private void setupGame(WebSocketSession session, Map<String, String> payload) throws Exception{
+			Gson gson = new GsonBuilder().create();
+			Map<String, String> message = new HashMap<>();
+			logger.info("Creating the game");
+			ps = (int) Float.parseFloat(String.valueOf(payload.get("players")));
+			ais = (int) Float.parseFloat(String.valueOf(payload.get("AIs")));
+			
+			logger.info(ps + " players chosen with " + ais + " ais");
+			Random rand = new Random();
+			ArrayList<Player> AIplayers = new ArrayList<Player>();
+			while(AIplayers.size()<ais) {
+				int id = rand.nextInt(100)+100;
+				int strategy = rand.nextInt(3)+1;
+				AIplayers.add(new Player(id, game, strategy));
+				game.addPlayer(new Player(id, game, strategy));
+			}
+			game.setPhase(Phase.OpenJoin);
+			
+			this.joinGame(session);
 	}
 	
 	private void addCardSponsor(WebSocketSession session, Map<String, String> payload) throws Exception {
@@ -329,7 +358,7 @@ public class SocketHandler extends TextWebSocketHandler{
 		logger.info("Player " + id + " attempting to join game");
 		Player player = players.get(session);
 		
-		if(game.getAllPlayers().size() >= 4) {
+		if(game.getAllPlayers().size() >= ps) {
 			logger.info("Game has too many players.");
 			message.put("type", "ERROR");
 			message.put("data", "Game has too many players.");
@@ -342,7 +371,7 @@ public class SocketHandler extends TextWebSocketHandler{
 		message.put("type", "GAME_STATE_UPDATE");
 		message.put("data", gson.toJson(game));
 		session.sendMessage(new TextMessage(gson.toJson(message)));		
-		if(game.getAllPlayers().size() == 4) {
+		if(game.getAllPlayers().size() == ps) {
 			this.startGame(session);
 		}
 		
@@ -902,8 +931,10 @@ public class SocketHandler extends TextWebSocketHandler{
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws IOException {
-		logger.info("Player connected to the websocket");
+		InetSocketAddress address = session.getRemoteAddress();
+		logger.info("Player connected to the websocket from address: " + address);
 		players.put(session, new Player(id));	
+		
 		
 		Gson gson = new GsonBuilder().create();
 		Map<String, String> message = new HashMap<>();
@@ -913,7 +944,9 @@ public class SocketHandler extends TextWebSocketHandler{
 		
 		id++;
 		try {
-			this.joinGame(session);
+			if(game.getPhase() == Phase.OpenJoin) {
+				this.joinGame(session);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
