@@ -47,6 +47,11 @@ public class BidTest {
 		quest.addPlayer(p2);
 		quest.addPlayer(p3);
 		
+		p1.setGame(state);
+		p2.setGame(state);
+		p3.setGame(state);
+		
+		
 		assertEquals(3, quest.getPlayers().size());
 		assertEquals(0, quest.getCurrentStage());
 		assertFalse(quest.isOver());
@@ -57,9 +62,10 @@ public class BidTest {
 		}
 		System.out.println("Player 0 card num: "+ p1.getHandSize());
 		
-		p1.bidCards(2);
-		p2.bidCards(3);
-		p3.bidCards(4);
+		p1.bidCards(2, evilKanevil);
+		p2.bidCards(3, evilKanevil);
+		p3.bidCards(4, evilKanevil);
+		p1.bidCards(5, evilKanevil);
 		quest.playStage(state);
 		assertFalse(quest.isOver());
 		assertEquals(1, quest.getCurrentStage());

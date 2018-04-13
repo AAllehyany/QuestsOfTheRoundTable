@@ -242,6 +242,28 @@ public class Player {
 	}
 	
 	/**
+	 * ?offered bids does what?
+	 * @param bids Number of cards bids
+	 */
+	public void bidCards(int bids, Tests test) {
+		if(validBid(bids, test) && !stoppedBidding) {
+			logger.info("Player " + id + " can bid " + bids + " cards. Changing offered bids for player...");
+			this.offeredBids = bids;
+		}
+		else {
+			logger.info("Player " + id + " cannot bid " + bids + " cards. Not enough cards in hand.");
+		}
+	}
+	
+	/**
+	 * Ensures that the player has the number of cards bid or that the bid is not negative
+	 * @param num Number of cards bid
+	 */
+	public boolean validBid(int num, Tests test) {
+		return num <= this.hand.size() && num >= 0 && num >= test.getMinBid(game);
+	}
+	
+	/**
 	 * ?Offered bids does what?
 	 * @return
 	 */
