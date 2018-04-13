@@ -154,9 +154,11 @@ public class GameQuest {
 	 */
 	public boolean advanceStage() {
 		if(currentStage < (quest.getStages() - 1)) {
+			logger.info("We can advance quest stage! Advanding to next stage " + (currentStage + 2));
 			currentStage += 1;
 			return true;
 		}
+		logger.info("Reached max stage in quest, stage: " + (currentStage + 1));
 		return false;
 	}
 	
@@ -182,39 +184,30 @@ public class GameQuest {
 		
 		if(stages.get(currentStage).isTestStage()) {
 			logger.info("Playing in a test stage...");
-			ArrayList<Player> remaining = new ArrayList<Player>(players);
-			int i=0;
-			int highest;
-			if(remaining.size()>1) highest = 0;
-			else highest = stages.get(currentStage).getTest().getMinBid(state);
-			while(remaining.size()>1) {
-				Player p = remaining.get(i%remaining.size());
-				if(highest<p.getOfferedBids() + p.getBidPoints(state)) {
-					highest = p.getOfferedBids() + p.getBidPoints(state);
-					i++;
-				}
-				else {
-					remaining.remove(p);
-				}
-			}
+			Player remaining = players.stream().max((p1, p2) -> {
+				if(p1.getOfferedBids() > p2.getOfferedBids()) return -1;
+				if(p1.getOfferedBids() == p2.getOfferedBids()) return 0;
+				return 1;
+			}).get();
 			
-			Player last = remaining.get(0);
+			logger.info("Remaining player is " + remaining.getId());
 			
-			logger.info("Remaining player is " + last.getId());
-			
-			if(last.getOfferedBids()+last.getBidPoints(state) < highest) {
+			if(remaining.getOfferedBids() == 0) {
 				logger.info("Everyone dropped of the test!");
 				this.over = true;
 				this.players.clear();
 			}
 			else {
 				this.players.clear();
-				this.players.add(last);
+				this.players.add(remaining);
 			}
 			
-			if(advanceStage())
-				for(int j=0;i<players.size();j++) 
-					players.get(j).addCardToHand(state.getAdventureDeck().draw());
+			if(advanceStage()) {
+				for(int i=0;i<players.size();i++) 
+					players.get(i).addCardToHand(state.getAdventureDeck().draw());
+			} else {
+				this.over = true;
+			}
 			
 			return;
 		}
